@@ -3,8 +3,8 @@
 import os
 from flask import Flask, jsonify, request
 from flasgger import Swagger
-
-from service.analyzer import analyzer_bp, openapi_spec_analyzer
+from threading import Thread
+from service.parsers.tree_parser import TreeParser
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ swagger_template = {
     "swagger": "2.0",
     "info": {
         "title": "Analyzer Service API",
-        "description": "Language-agnostic code analyzer (functions, classes, imports, includes, child-components, etc.)",
+        "description": "Recursive tree analyzer that scans a project folder and pushes AST data into the Neo4j service.",
         "version": "1.0.0"
     },
     "basePath": "/",
@@ -30,10 +30,9 @@ swagger_template = {
 }
 
 swagger = Swagger(app, template=swagger_template)
-
 API_KEY = os.environ.get("API_KEY", "changeme")
 
-# Protect all /api/* routes; allow Swagger UI assets
+# Protect all /api/* routes except Swagger UI
 @app.before_request
 def _require_api_key():
     path = request.path
@@ -44,11 +43,48 @@ def _require_api_key():
         if not key or key != API_KEY:
             return jsonify({"error": "unauthorized"}), 401
 
-# Register blueprint and expose its OpenAPI paths in Swagger UI
-app.register_blueprint(analyzer_bp)
-swagger.template["paths"].update(openapi_spec_analyzer["paths"])
+# ------------------------------------------------------------------------------
 
-# Serve combined OpenAPI JSON (same as what UI renders)
+@app.route("/api/analyze", methods=["POST"])
+def start_tree_analysis():
+    """
+    Trigger a full project analysis
+    ---
+    tags:
+      - TreeAnalyzer
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          type: object
+          properties:
+            path:
+              type: string
+              example: "/project"
+    responses:
+      200:
+        description: Analysis started
+    """
+    data = request.get_json(force=True) if request.data else {}
+    path = data.get("path", "/project")
+
+    def run_analyzer(target_path):
+        print(f"[INFO] Starting tree analysis for {target_path}")
+        try:
+            parser = TreeParser(target_path)
+            parser.traverse()
+            print(f"[SUCCESS] Completed tree analysis for {target_path}")
+        except Exception as e:
+            print(f"[ERROR] Analyzer failed: {e}")
+
+    Thread(target=run_analyzer, args=(path,), daemon=True).start()
+    return jsonify({"status": "started", "path": path})
+
+# ------------------------------------------------------------------------------
+
 @app.route("/api/openapi.json", methods=["GET"])
 def openapi_json():
     return jsonify({
@@ -58,7 +94,7 @@ def openapi_json():
         "schemes": ["http"],
         "securityDefinitions": swagger_template["securityDefinitions"],
         "security": swagger_template["security"],
-        "paths": openapi_spec_analyzer["paths"]
+        "paths": swagger.template["paths"]
     })
 
 @app.route("/api/health", methods=["GET"])
