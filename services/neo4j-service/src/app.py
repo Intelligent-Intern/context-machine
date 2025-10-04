@@ -46,10 +46,10 @@ def require_api_key(f):
         return f(*args, **kwargs)
     return decorated
 
-NEO4J_URI = os.environ.get("NEO4J_URI")
-NEO4J_USER = os.environ.get("NEO4J_USER")
-NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD")
-NEO4J_DATABASE = os.environ.get("NEO4J_DATABASE", "neo4j")
+NEO4J_URI = os.environ.get("SERVICE_NEO4J_URI")
+auth = os.environ.get("SERVICE_NEO4J_AUTH", "neo4j/test12345").split("/")
+NEO4J_USER, NEO4J_PASSWORD = auth[0], auth[1] if len(auth) > 1 else None
+NEO4J_DATABASE = os.environ.get("SERVICE_NEO4J_DATABASE", "neo4j")
 
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 app.config["NEO4J_DRIVER"] = driver

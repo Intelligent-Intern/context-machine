@@ -22,45 +22,50 @@ All components run through Docker Compose and are automatically configured using
    ~~~bash
    # Change all credentials before deploying to any public environment
 
-   # API Authentication
-   API_KEY=dev-key-123
+    # change the api key and credentials before putting it online
 
-   # MinIO
-   MINIO_ROOT_USER=minioadmin
-   MINIO_ROOT_PASSWORD=minioadmin
-   MINIO_BUCKET=incoming
+    # API Authentication
+    API_KEY=dev-key-123 
 
-   # RabbitMQ
-   RABBITMQ_DEFAULT_USER=admin
-   RABBITMQ_DEFAULT_PASS=admin123
-   RABBITMQ_VHOST=/
-   RABBITMQ_EXCHANGE=file-events
-   RABBITMQ_QUEUE=file-processing
-   RABBITMQ_ROUTING_KEY=file.put
 
-   # n8n
-   N8N_BASIC_AUTH_ACTIVE=true
-   N8N_BASIC_AUTH_USER=admin
-   N8N_BASIC_AUTH_PASSWORD=admin123
-   N8N_ENCRYPTION_KEY=supersecretkey123
-   N8N_PORT=5678
-   N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
-   N8N_RUNNERS_ENABLED=true
+    # MinIO
+    MINIO_ROOT_USER=minioadmin
+    MINIO_ROOT_PASSWORD=minioadmin
+    MINIO_BUCKET=incoming
 
-   # Default n8n bootstrap user
-   N8N_BOOTSTRAP_EMAIL=foo@example.com
-   N8N_BOOTSTRAP_FIRSTNAME=bar
-   N8N_BOOTSTRAP_LASTNAME=foo
-   N8N_BOOTSTRAP_PASSWORD=A1234567
-   N8N_BOOTSTRAP_ROLE=global:owner
+    # RabbitMQ
+    RABBITMQ_DEFAULT_USER=admin
+    RABBITMQ_DEFAULT_PASS=admin123
+    RABBITMQ_VHOST=/
+    RABBITMQ_EXCHANGE=file-events
+    RABBITMQ_QUEUE=file-processing
+    RABBITMQ_ROUTING_KEY=file.put
 
-   # Neo4j credentials
-   NEO4J_URI=bolt://context-machine-neo4j:7687
-   NEO4J_USER=neo4j
-   NEO4J_AUTH=neo4j/test12345
-   NEO4J_DATABASE=neo4j
 
-   DB_SQLITE_POOL_SIZE=2
+    # n8n
+    N8N_BASIC_AUTH_ACTIVE=true
+    N8N_BASIC_AUTH_USER=admin
+    N8N_BASIC_AUTH_PASSWORD=admin123
+    N8N_ENCRYPTION_KEY=supersecretkey123
+    N8N_PORT=5678
+    N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+    N8N_RUNNERS_ENABLED=true
+
+
+    # Default n8n bootstrap user
+    N8N_BOOTSTRAP_EMAIL=foo@example.com
+    N8N_BOOTSTRAP_FIRSTNAME=bar
+    N8N_BOOTSTRAP_LASTNAME=foo
+    N8N_BOOTSTRAP_PASSWORD=A1234567
+    N8N_BOOTSTRAP_ROLE=global:owner
+
+    # Neo4j credentials
+    NEO4J_AUTH=neo4j/test12345
+
+    DB_SQLITE_POOL_SIZE=2
+
+    SERVICE_NEO4J_URI=bolt://context-machine-neo4j:7687
+    SERVICE_NEO4J_AUTH=neo4j/test12345
    ~~~
 
 2. **Start the infrastructure**
