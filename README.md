@@ -65,6 +65,27 @@ Alles wird über Docker Compose gestartet und mit ein paar Setup-Skripten automa
    - MinIO AMQP-Benachrichtigungen konfigurieren  
    - n8n mit Admin-User bootstrappen und Credentials (RabbitMQ, MinIO) importieren  
 
+
+3. **Infrastruktur stoppen**
+
+   ~~~bash
+   make down
+   ~~~
+
+   Das stoppt alle Container
+
+
+4. **Infrastruktur resetten**
+
+   ~~~bash
+   make reset
+   ~~~
+
+   Das löscht alle data Ordner / persistente volumes im infra Ordner und mit make up bekommt man wieder ein frisches System.
+
+<br>
+   
+
 ---
 
 ## 🧩 Skripte
@@ -93,10 +114,6 @@ Alle Skripte liegen unter `infra/scripts/utils/` und werden automatisch durch `m
   ~~~
 
 - Umgebung aufräumen:
-  ~~~bash
-  make clean
-  ~~~
-  oder:
   ~~~bash
   docker rm -f $(docker ps -aq --filter name=context-machine)
   docker volume prune -f
