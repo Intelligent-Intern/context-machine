@@ -56,6 +56,37 @@ services:
     networks:
       - context-machine-network
 
+  neo4j-service:
+    image: context-machine-neo4j-service:latest
+    container_name: context-machine-neo4j-service
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env.local
+    volumes:
+      - ./services/neo4j-service/src:/app/src
+    depends_on:
+      - neo4j
+    networks:
+      - context-machine-network
+    command: flask run --reload --host=0.0.0.0 --port=3001
+
+  analyzer-service:
+    image: context-machine-analyzer-service:latest
+    container_name: context-machine-analyzer-service
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    env_file:
+      - .env.local
+    volumes:
+      - ./services/analyzer-service/src:/app/src
+    depends_on:
+      - neo4j-service
+    networks:
+      - context-machine-network
+    command: flask run --reload --host=0.0.0.0 --port=3002
 
 networks:
   context-machine-network:

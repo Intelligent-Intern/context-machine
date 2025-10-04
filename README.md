@@ -1,28 +1,29 @@
 # Context Machine – Local Infrastructure Setup
 
-Dieses Projekt bringt eine kleine lokale Infrastruktur zum Laufen, bestehend aus:
+This project provides a complete **local infrastructure** for the Context Machine ecosystem, including:
 
-- **MinIO** – S3-kompatibler Objektspeicher  
-- **RabbitMQ** – Message Broker für Event-Weiterleitung  
-- **n8n** – Workflow-Automation  
-- **Neo4j** – Graphdatenbank  
-- **Neo4j Service (Flask API)** – REST-API für Nodes, Edges und Bulk-Operationen
+- **MinIO** – S3-compatible object storage  
+- **RabbitMQ** – Message broker for event routing  
+- **n8n** – Workflow automation engine  
+- **Neo4j** – Graph database for knowledge representation  
+- **Neo4j Service (Flask API)** – REST API for nodes, edges, and bulk operations  
+- **Analyzer Service** – Multi-language source code analyzer with AST parsing and symbol extraction  
 
-Alles wird über Docker Compose gestartet und mit Setup-Skripten automatisch konfiguriert.
+All components run through Docker Compose and are automatically configured using setup scripts.
 
 ---
 
-## 🚀 Schnellstart
+## 🚀 Quick Start
 
-1. **`.env.local` erstellen**
+1. **Create `.env.local`**
 
-   Beispiel:
+   Example configuration:
 
    ~~~bash
-   # change the api key and credentials before putting it online
+   # Change all credentials before deploying to any public environment
 
    # API Authentication
-   API_KEY=dev-key-123 
+   API_KEY=dev-key-123
 
    # MinIO
    MINIO_ROOT_USER=minioadmin
@@ -62,67 +63,72 @@ Alles wird über Docker Compose gestartet und mit Setup-Skripten automatisch kon
    DB_SQLITE_POOL_SIZE=2
    ~~~
 
-2. **Infrastruktur starten**
+2. **Start the infrastructure**
 
    ~~~bash
    make up
    ~~~
 
-   Das startet alle Container und führt automatisch:
-   - MinIO Bucket-Setup  
-   - RabbitMQ Setup (Exchange, Queue, Binding)  
-   - MinIO AMQP-Benachrichtigungen  
-   - n8n Bootstrap mit Admin-Benutzer  
-   - Neo4j-Service mit REST-API & Swagger UI  
+   This command:
+   - Builds local service containers  
+   - Initializes MinIO buckets  
+   - Configures RabbitMQ (exchange, queue, bindings)  
+   - Sets up MinIO → RabbitMQ AMQP notifications  
+   - Bootstraps n8n with an admin account  
+   - Starts Neo4j and Analyzer services with REST & Swagger UI  
 
-3. **Swagger UI aufrufen**
+3. **Access Swagger UIs**
 
-   [http://localhost:3001/apidocs](http://localhost:3001/apidocs)  
-   *(Authentifizierung per Header `X-API-Key`)*
+   - Neo4j Service: [http://localhost:3001/apidocs](http://localhost:3001/apidocs)  
+   - Analyzer Service: [http://localhost:3002/apidocs](http://localhost:3002/apidocs)  
+   *(Both require an `X-API-Key` header for authentication)*
 
-4. **Infrastruktur stoppen**
+4. **Stop the infrastructure**
 
    ~~~bash
    make down
    ~~~
 
-5. **Reset**
+5. **Reset the environment**
 
    ~~~bash
    make reset
    ~~~
 
+   This wipes all persistent data (volumes) and recreates a clean setup.
+
 ---
 
-## 🧩 Skripte
+## 🧩 Scripts
 
-| Script | Aufgabe |
+| Script | Purpose |
 |--------|----------|
-| `setup-minio.sh` | Erstellt Bucket in MinIO |
-| `setup-rabbitmq.sh` | Erstellt VHost, User, Exchange, Queue, Binding |
-| `setup-minio-event.sh` | Konfiguriert AMQP-Events in MinIO |
-| `setup-n8n.sh` | Bootstrapped n8n & importiert Credentials |
-| `messages.sh` | Logging Utilities |
-| `progress.sh` | Fortschrittsbalken |
-| `container-utils.sh` | Baut & startet lokale Container |
-| `make/up.sh` | Führt gesamten Startprozess durch |
+| `setup-minio.sh` | Creates MinIO buckets if missing |
+| `setup-rabbitmq.sh` | Sets up vhost, users, exchanges, queues, bindings |
+| `setup-minio-event.sh` | Configures AMQP notifications for MinIO |
+| `setup-n8n.sh` | Bootstraps n8n and imports credentials |
+| `container-utils.sh` | Builds Docker images for local services |
+| `messages.sh` | Provides colorized logging utilities |
+| `progress.sh` | Displays progress bars during waits |
+| `make/up.sh` | Executes the complete environment startup process |
 
-Alle Skripte liegen unter `infra/scripts/utils/`.
+All scripts are located under `infra/scripts/utils/`.
 
 ---
 
-## 🧰 Nützliche Befehle
+## 🧰 Useful Commands
 
+### Check logs
 ~~~bash
 docker logs context-machine-minio
 docker logs context-machine-rabbitmq
 docker logs context-machine-n8n
 docker logs context-machine-neo4j
 docker logs context-machine-neo4j-service
+docker logs context-machine-analyzer-service
 ~~~
 
-Aufräumen:
-
+### Clean up containers and volumes
 ~~~bash
 docker rm -f $(docker ps -aq --filter name=context-machine)
 docker volume prune -f
@@ -131,49 +137,53 @@ docker network prune -f
 
 ---
 
-## 🧠 Hinweise
+## 🧠 Notes
 
-- Skripte sind **idempotent**  
-- `.env.local` Änderungen greifen beim Neustart  
-- n8n: [http://localhost:5678](http://localhost:5678)  
-- MinIO Console: [http://localhost:9001](http://localhost:9001)  
-- RabbitMQ UI: [http://localhost:15672](http://localhost:15672)  
-- Neo4j Browser: [http://localhost:7474](http://localhost:7474)  
-- Neo4j-Service API: [http://localhost:3001/apidocs](http://localhost:3001/apidocs)
+- All scripts are **idempotent** – safe to re-run any time  
+- Changes to `.env.local` take effect on next startup  
+- Services:
+  - **n8n** → [http://localhost:5678](http://localhost:5678)
+  - **MinIO Console** → [http://localhost:9001](http://localhost:9001)
+  - **RabbitMQ UI** → [http://localhost:15672](http://localhost:15672)
+  - **Neo4j Browser** → [http://localhost:7474](http://localhost:7474)
+  - **Neo4j REST API** → [http://localhost:3001/apidocs](http://localhost:3001/apidocs)
+  - **Analyzer API** → [http://localhost:3002/apidocs](http://localhost:3002/apidocs)
 
 ---
 
 ## 🧼 Troubleshooting
 
-**Fehler:** `overlapping prefixes/suffixes for the same event types`  
-→ Alte Event-Regel, wird durch Skript automatisch gelöscht. Einfach nochmal ausführen.
+**Error:** `overlapping prefixes/suffixes for the same event types`  
+→ This occurs when an event rule already exists in MinIO.  
+The setup script automatically removes duplicates and re-applies the configuration.  
+Simply rerun the script or execute `make up` again.
 
 ---
 
-## 📜 Lizenz
+## 📜 License
 
-Business Source License 1.1 (BUSL 1.1)  
+**Business Source License 1.1 (BUSL 1.1)**  
 Copyright (c) 2025 Jochen Schultz  
 
 Licensed under the Business Source License 1.1 (the “License”).  
-You may obtain a copy at: [https://mariadb.com/bsl11/](https://mariadb.com/bsl11/)
+Full license text available at: [https://mariadb.com/bsl11/](https://mariadb.com/bsl11/)
 
-**Usage Terms**
-- Interne und kommerzielle Nutzung erlaubt, **solange die Organisation weniger als 50 Mitarbeitende** hat (einschließlich Praktikanten, Werkstudenten und externer Kräfte).  
-- Keine gehostete Bereitstellung als SaaS oder öffentlich zugänglicher Dienst.  
-- Keine Weitergabe oder Sub-Lizenzierung.  
-- Für größere Organisationen (> 50 Personen) ist eine Nutzung untersagt.  
+### Usage Terms
+- Internal and commercial use is permitted **for organizations with fewer than 50 total personnel**, including contractors, interns, and temporary staff.  
+- Hosted SaaS or publicly accessible deployments are **not allowed**.  
+- Redistribution, sublicensing, or resale is **prohibited**.  
+- Organizations with more than 50 personnel **must not** use this software.
+
+### Enforcement
+Companies exceeding the 50-person limit that use this software agree to a **usage fee equal to at least 50% of their annual revenue** as compensatory damages.  
+Further legal action may be pursued if necessary.
+
+Report license violations or unauthorized use to **js@intelligent-intern.com**  
+Substantial verified reports will receive a **generous reward**.
 
 **Change Date:** October 4, 2028  
-→ Automatisch Apache 2.0
+→ Automatically converts to **Apache License 2.0**
 
-✅ interne & kleine kommerzielle Nutzung (≤ 50 Personen) erlaubt  
-🚫 Nutzung durch größere Organisationen verboten
-
-Firmen mit mehr als 50 Mitarbeitern, die das System trotzdem einsetzen, erkennen eine Nutzungsgebühr von mindestens 50 % ihres Jahresumsatzes als Schadensersatzgrundlage an. Weitere rechtliche Schritte bleiben vorbehalten.
-
-Hinweise zu Verstößen oder unautorisierter Nutzung bitte an: js@intelligent-intern.com
-
-Für belegte Hinweise wird eine großzügige Belohnung ausgesetzt.
-
-🕒 wird 2028 Open Source (Apache 2.0)
+✅ Internal & small commercial use (≤ 50 people) permitted  
+🚫 Large-scale or hosted deployments prohibited  
+🕒 Becomes Open Source under Apache 2.0 in 2028
