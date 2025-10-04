@@ -6,23 +6,24 @@ Dieses Projekt bringt eine kleine lokale Infrastruktur zum Laufen, bestehend aus
 - **RabbitMQ** – Message Broker für Event-Weiterleitung  
 - **n8n** – Workflow-Automation  
 - **Neo4j** – Graphdatenbank  
+- **Neo4j Service (Flask API)** – REST-API für Nodes, Edges und Bulk-Operationen
 
-Alles wird über Docker Compose gestartet und mit ein paar Setup-Skripten automatisch konfiguriert.
-
-
-![alt text](screenshot.png)
-
+Alles wird über Docker Compose gestartet und mit Setup-Skripten automatisch konfiguriert.
 
 ---
 
 ## 🚀 Schnellstart
 
-1. **.env.local erstellen**
+1. **`.env.local` erstellen**
 
-   Erstelle im Projektverzeichnis eine Datei `.env.local` mit deinen Einstellungen.  
    Beispiel:
 
    ~~~bash
+   # change the api key and credentials before putting it online
+
+   # API Authentication
+   API_KEY=dev-key-123 
+
    # MinIO
    MINIO_ROOT_USER=minioadmin
    MINIO_ROOT_PASSWORD=minioadmin
@@ -42,15 +43,23 @@ Alles wird über Docker Compose gestartet und mit ein paar Setup-Skripten automa
    N8N_BASIC_AUTH_PASSWORD=admin123
    N8N_ENCRYPTION_KEY=supersecretkey123
    N8N_PORT=5678
+   N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+   N8N_RUNNERS_ENABLED=true
 
+   # Default n8n bootstrap user
    N8N_BOOTSTRAP_EMAIL=foo@example.com
-   N8N_BOOTSTRAP_FIRSTNAME=Bar
-   N8N_BOOTSTRAP_LASTNAME=Foo
+   N8N_BOOTSTRAP_FIRSTNAME=bar
+   N8N_BOOTSTRAP_LASTNAME=foo
    N8N_BOOTSTRAP_PASSWORD=A1234567
    N8N_BOOTSTRAP_ROLE=global:owner
 
-   # Neo4j
+   # Neo4j credentials
+   NEO4J_URI=bolt://context-machine-neo4j:7687
+   NEO4J_USER=neo4j
    NEO4J_AUTH=neo4j/test12345
+   NEO4J_DATABASE=neo4j
+
+   DB_SQLITE_POOL_SIZE=2
    ~~~
 
 2. **Infrastruktur starten**
@@ -59,32 +68,29 @@ Alles wird über Docker Compose gestartet und mit ein paar Setup-Skripten automa
    make up
    ~~~
 
-   Das startet alle Container und führt automatisch die folgenden Schritte aus:
-   - MinIO Bucket erstellen  
-   - RabbitMQ Exchange/Queue/Binding einrichten  
-   - MinIO AMQP-Benachrichtigungen konfigurieren  
-   - n8n mit Admin-User bootstrappen und Credentials (RabbitMQ, MinIO) importieren  
+   Das startet alle Container und führt automatisch:
+   - MinIO Bucket-Setup  
+   - RabbitMQ Setup (Exchange, Queue, Binding)  
+   - MinIO AMQP-Benachrichtigungen  
+   - n8n Bootstrap mit Admin-Benutzer  
+   - Neo4j-Service mit REST-API & Swagger UI  
 
+3. **Swagger UI aufrufen**
 
-3. **Infrastruktur stoppen**
+   [http://localhost:3001/apidocs](http://localhost:3001/apidocs)  
+   *(Authentifizierung per Header `X-API-Key`)*
+
+4. **Infrastruktur stoppen**
 
    ~~~bash
    make down
    ~~~
 
-   Das stoppt alle Container
-
-
-4. **Infrastruktur resetten**
+5. **Reset**
 
    ~~~bash
    make reset
    ~~~
-
-   Das löscht alle data Ordner / persistente volumes im infra Ordner und mit make up bekommt man wieder ein frisches System.
-
-<br>
-   
 
 ---
 
@@ -92,86 +98,82 @@ Alles wird über Docker Compose gestartet und mit ein paar Setup-Skripten automa
 
 | Script | Aufgabe |
 |--------|----------|
-| `setup-minio.sh` | Erstellt Bucket in MinIO falls nicht vorhanden |
+| `setup-minio.sh` | Erstellt Bucket in MinIO |
 | `setup-rabbitmq.sh` | Erstellt VHost, User, Exchange, Queue, Binding |
 | `setup-minio-event.sh` | Konfiguriert AMQP-Events in MinIO |
-| `setup-n8n.sh` | Bootstrapped n8n, setzt Admin-Account, importiert Credentials |
-| `messages.sh` | Logging-Utils für farbige Ausgabe |
-| `progress.sh` | Fortschrittsbalken für Wartezeiten |
+| `setup-n8n.sh` | Bootstrapped n8n & importiert Credentials |
+| `messages.sh` | Logging Utilities |
+| `progress.sh` | Fortschrittsbalken |
+| `container-utils.sh` | Baut & startet lokale Container |
+| `make/up.sh` | Führt gesamten Startprozess durch |
 
-Alle Skripte liegen unter `infra/scripts/utils/` und werden automatisch durch `make up` oder `infra/start.sh` ausgeführt.
+Alle Skripte liegen unter `infra/scripts/utils/`.
 
 ---
 
 ## 🧰 Nützliche Befehle
 
-- Logs prüfen:
-  ~~~bash
-  docker logs context-machine-minio
-  docker logs context-machine-rabbitmq
-  docker logs context-machine-n8n
-  docker logs context-machine-neo4j
-  ~~~
+~~~bash
+docker logs context-machine-minio
+docker logs context-machine-rabbitmq
+docker logs context-machine-n8n
+docker logs context-machine-neo4j
+docker logs context-machine-neo4j-service
+~~~
 
-- Umgebung aufräumen:
-  ~~~bash
-  docker rm -f $(docker ps -aq --filter name=context-machine)
-  docker volume prune -f
-  docker network prune -f
-  ~~~
+Aufräumen:
+
+~~~bash
+docker rm -f $(docker ps -aq --filter name=context-machine)
+docker volume prune -f
+docker network prune -f
+~~~
 
 ---
 
 ## 🧠 Hinweise
 
-- Skripte sind **idempotent** – du kannst `make up` beliebig oft ausführen.  
-- Änderungen an `.env.local` greifen beim nächsten Start automatisch.  
-- `n8n` wird nach der Einrichtung über [http://localhost:5678](http://localhost:5678) erreichbar.  
-- Die MinIO Console läuft auf [http://localhost:9001](http://localhost:9001) (Login mit `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD`).  
-- RabbitMQ Management UI: [http://localhost:15672](http://localhost:15672).  
-- Neo4j Browser: [http://localhost:7474](http://localhost:7474).
+- Skripte sind **idempotent**  
+- `.env.local` Änderungen greifen beim Neustart  
+- n8n: [http://localhost:5678](http://localhost:5678)  
+- MinIO Console: [http://localhost:9001](http://localhost:9001)  
+- RabbitMQ UI: [http://localhost:15672](http://localhost:15672)  
+- Neo4j Browser: [http://localhost:7474](http://localhost:7474)  
+- Neo4j-Service API: [http://localhost:3001/apidocs](http://localhost:3001/apidocs)
 
 ---
 
 ## 🧼 Troubleshooting
 
-Falls `setup-minio-event.sh` einmal den Fehler  
-`overlapping prefixes/suffixes for the same event types` wirft:  
-das passiert, wenn bereits eine Event-Regel existiert. Das Skript entfernt solche Regeln automatisch – einfach nochmal starten.
+**Fehler:** `overlapping prefixes/suffixes for the same event types`  
+→ Alte Event-Regel, wird durch Skript automatisch gelöscht. Einfach nochmal ausführen.
 
 ---
 
 ## 📜 Lizenz
 
-Business Source License 1.1 (BUSL 1.1)
-Copyright (c) 2025 Jochen Schultz
+Business Source License 1.1 (BUSL 1.1)  
+Copyright (c) 2025 Jochen Schultz  
 
-Licensed under the Business Source License 1.1 (the “License”).
-You may obtain a copy of the License at:
-https://mariadb.com/bsl11/
+Licensed under the Business Source License 1.1 (the “License”).  
+You may obtain a copy at: [https://mariadb.com/bsl11/](https://mariadb.com/bsl11/)
 
-Usage Terms
-------------
-- You may use, copy, modify, and run this software for internal purposes,
-  including local development, testing, and research.
-- You may NOT offer, host, provide, or sell this software (or any derivative work)
-  as a managed service, product, or any commercial solution — under no circumstances.
-- This software may only be used internally by organizations with
-  fewer than 50 total personnel, including employees, contractors, interns,
-  and temporary staff.
-  Got more employees? Don't use it!
-- Redistribution, sublicensing, or public deployment of this software
-  is strictly prohibited.
+**Usage Terms**
+- Interne und kommerzielle Nutzung erlaubt, **solange die Organisation weniger als 50 Mitarbeitende** hat (einschließlich Praktikanten, Werkstudenten und externer Kräfte).  
+- Keine gehostete Bereitstellung als SaaS oder öffentlich zugänglicher Dienst.  
+- Keine Weitergabe oder Sub-Lizenzierung.  
+- Für größere Organisationen (> 50 Personen) ist eine Nutzung untersagt.  
 
-Change Date
-------------
-On October 4, 2028, this license will automatically convert to the
-Apache License, Version 2.0, granting full open-source rights as defined
-in that license.
+**Change Date:** October 4, 2028  
+→ Automatisch Apache 2.0
 
-Summary
---------
-✅ Internal/local dev use (≤ 50 people) — permitted  
-🚫 Any commercial, hosted, or external use — prohibited  
-🚫 No option to purchase or obtain a commercial license  
-🕒 Converts to Apache 2.0 after 2028-10-04
+✅ interne & kleine kommerzielle Nutzung (≤ 50 Personen) erlaubt  
+🚫 Nutzung durch größere Organisationen verboten
+
+Firmen mit mehr als 50 Mitarbeitern, die das System trotzdem einsetzen, erkennen eine Nutzungsgebühr von mindestens 50 % ihres Jahresumsatzes als Schadensersatzgrundlage an. Weitere rechtliche Schritte bleiben vorbehalten.
+
+Hinweise zu Verstößen oder unautorisierter Nutzung bitte an: js@intelligent-intern.com
+
+Für belegte Hinweise wird eine großzügige Belohnung ausgesetzt.
+
+🕒 wird 2028 Open Source (Apache 2.0)
