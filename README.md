@@ -9,6 +9,10 @@ Dieses Projekt bringt eine kleine lokale Infrastruktur zum Laufen, bestehend aus
 
 Alles wird über Docker Compose gestartet und mit ein paar Setup-Skripten automatisch konfiguriert.
 
+
+![alt text](screenshot.png)
+
+
 ---
 
 ## 🚀 Schnellstart

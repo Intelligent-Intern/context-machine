@@ -1,0 +1,62 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: context-machine-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - .env.local
+    volumes:
+      - ./infra/minio/data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - context-machine-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: context-machine-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - .env.local
+    volumes:
+      - ./infra/rabbitmq/data:/var/lib/rabbitmq
+    networks:
+      - context-machine-network
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: context-machine-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    env_file:
+      - .env.local
+    volumes:
+      - ./infra/n8n/data:/home/node/.n8n
+    networks:
+      - context-machine-network
+
+  neo4j:
+    image: neo4j:5
+    container_name: context-machine-neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    env_file:
+      - .env.local
+    volumes:
+      - ./infra/neo4j/data:/data
+      - ./infra/neo4j/logs:/logs
+      - ./infra/neo4j/conf:/conf
+      - ./infra/neo4j/plugins:/plugins
+    networks:
+      - context-machine-network
+
+
+networks:
+  context-machine-network:
+    driver: bridge

@@ -1,0 +1,5 @@
+infra/n8n/data
+infra/neo4j/data
+infra/neo4j/logs
+infra/minio/data
+infra/rabbitmq/data
