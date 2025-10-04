@@ -143,5 +143,35 @@ das passiert, wenn bereits eine Event-Regel existiert. Das Skript entfernt solch
 
 ## 📜 Lizenz
 
-Interner Gebrauch. Kein öffentlicher Release, keine Gewähr.
+Business Source License 1.1 (BUSL 1.1)
+Copyright (c) 2025 Jochen Schultz
 
+Licensed under the Business Source License 1.1 (the “License”).
+You may obtain a copy of the License at:
+https://mariadb.com/bsl11/
+
+Usage Terms
+------------
+- You may use, copy, modify, and run this software for internal purposes,
+  including local development, testing, and research.
+- You may NOT offer, host, provide, or sell this software (or any derivative work)
+  as a managed service, product, or any commercial solution — under no circumstances.
+- This software may only be used internally by organizations with
+  fewer than 50 total personnel, including employees, contractors, interns,
+  and temporary staff.
+  Got more employees? Don't use it!
+- Redistribution, sublicensing, or public deployment of this software
+  is strictly prohibited.
+
+Change Date
+------------
+On October 4, 2028, this license will automatically convert to the
+Apache License, Version 2.0, granting full open-source rights as defined
+in that license.
+
+Summary
+--------
+✅ Internal/local dev use (≤ 50 people) — permitted  
+🚫 Any commercial, hosted, or external use — prohibited  
+🚫 No option to purchase or obtain a commercial license  
+🕒 Converts to Apache 2.0 after 2028-10-04
