@@ -4,3 +4,7 @@ infra/neo4j/logs
 infra/minio/data
 infra/rabbitmq/data
 __pycache__
+project
+.env.local
+.vscode
+legacy

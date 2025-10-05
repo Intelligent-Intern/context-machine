@@ -82,11 +82,28 @@ services:
       - .env.local
     volumes:
       - ./services/analyzer-service/src:/app/src
+      - ./project/:/project
     depends_on:
       - neo4j-service
     networks:
       - context-machine-network
     command: flask run --reload --host=0.0.0.0 --port=3002
+
+  websocket-service:
+    image: context-machine-websocket-service:latest
+    container_name: context-machine-websocket-service
+    restart: unless-stopped
+    ports:
+      - "3010:3010"
+      - "3011:3011"
+    env_file:
+      - .env.local
+    volumes:
+      - ./services/websocket-service/src:/app/src
+    networks:
+      - context-machine-network
+    command: python src/app.py
+
 
 networks:
   context-machine-network:
