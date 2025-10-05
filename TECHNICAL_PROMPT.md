@@ -114,6 +114,45 @@ ORDER BY import_count DESC
 MATCH (c:class)
 WHERE NOT (c)<-[:EXTENDS]-()
 RETURN c.name, c.file
+
+-- Find all exceptions a function can raise (direct + transitive)
+MATCH path = (f:function {name: $func_name})-[:CALLS*0..5]->(called)
+MATCH (called)-[:RAISES]->(exception)
+RETURN DISTINCT exception
+
+-- Find all async functions and what they await
+MATCH (f:function {is_async: true})-[:ASYNC_AWAITS]->(awaited)
+RETURN f.name, collect(awaited) as awaits
+
+-- Find decorator usage patterns
+MATCH (decorator)-[:DECORATES]->(target)
+RETURN decorator, labels(target), count(*) as usage_count
+ORDER BY usage_count DESC
+
+-- Find context managers used in functions
+MATCH (f:function)-[:WITH_CONTEXT]->(ctx)
+RETURN f.name, collect(ctx) as context_managers
+
+-- Find classes implementing Protocol/ABC
+MATCH (c:class)-[:IMPLEMENTS]->(protocol)
+RETURN c.name, c.file, protocol
+
+-- Find method overrides
+MATCH (c:class)-[:EXTENDS]->(parent)
+MATCH (method)-[:OVERRIDES]->(parent_method)
+WHERE method.file = c.file
+RETURN c.name, method.name, parent.name
+
+-- Find data flow: what functions instantiate a class
+MATCH (f:function)-[:INSTANTIATES]->(class_name)
+RETURN f.name, class_name
+
+-- Find attribute write/read patterns
+MATCH (f:function)-[:WRITES]->(attr)
+RETURN f.name, collect(DISTINCT attr) as writes
+UNION
+MATCH (f:function)-[:READS]->(attr)
+RETURN f.name, collect(DISTINCT attr) as reads
 ```
 
 ### `find_function` / `find_class`
@@ -307,11 +346,46 @@ Help users formulate graph-friendly questions:
 
 ---
 
+## Python Ontology - Complete Edge Types
+
+The Python parser now includes comprehensive edge detection:
+
+**Class & Inheritance:**
+- **EXTENDS** - Class inheritance
+- **IMPLEMENTS** - Protocol/ABC implementation
+
+**Decorators & Overriding:**
+- **DECORATES** - Decorator applied to function/class
+- **OVERRIDES** - Method overrides parent class method
+
+**Control Flow & Exceptions:**
+- **RAISES** - Function raises exception
+- **CATCHES** - Try/except exception handling
+- **YIELDS** - Generator yield relationships
+- **RETURNS** - Return values/types
+- **ASYNC_AWAITS** - Async/await relationships
+
+**Object Relationships:**
+- **INSTANTIATES** - Creates instance of class
+- **DEFINES** - Variable/constant definition
+- **READS** - Attribute/property read access
+- **WRITES** - Attribute/property write access
+- **WITH_CONTEXT** - Context manager usage (with statement)
+
+**Function Calls & Imports:**
+- **CALLS** - Function calls
+- **IMPORTS** - Module imports
+- **USES** - Variable usage
+
+**File Structure:**
+- **CONTAINS** - Folder/File hierarchy
+
 ## Future Extensions
 
-The graph can be extended with:
-- **More languages:** Add CALLS/EXTENDS for JS, Rust, etc.
-- **More edge types:** IMPLEMENTS (interfaces), DECORATES, OVERRIDES
+Additional capabilities to consider:
+- **More languages:** Add comprehensive edges for JS, Rust, Go, etc.
+- **Type system:** TYPE_ANNOTATED, TYPE_ALIAS, GENERIC_OF edges
+- **Advanced Python:** METACLASS, PROPERTY_OF, DATACLASS_FIELD, EXPORTS edges
 - **Annotations:** Add complexity metrics, test coverage to nodes
 - **Dynamic analysis:** Merge runtime traces into graph
 

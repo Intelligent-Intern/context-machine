@@ -2,16 +2,45 @@
 
 import re
 from typing import Optional
-from .base import BaseParser, ParseResult
+from .base import BaseParser, ParseResult, LanguageOntology
 
 try:
     from tree_sitter import Parser
 except Exception:
     Parser = None
 
+
 class RustParser(BaseParser):
+    """
+    Rust language parser.
+
+    Supports Rust-specific features:
+    - Function definitions (with pub visibility)
+    - Struct definitions
+    - Enum definitions
+    - Trait definitions
+    - Use declarations (imports)
+    """
     LANGUAGE = "rust"
     REQUIRES_TS = True
+
+    # Rust-specific graph ontology
+    ONTOLOGY = LanguageOntology(
+        language="rust",
+        node_types={
+            "function",   # Function definitions
+            "struct",     # Struct definitions
+            "enum",       # Enum definitions
+            "trait",      # Trait definitions
+        },
+        edge_types={
+            "IMPORTS",    # Use declarations
+            # Can be extended with:
+            # "IMPLEMENTS",  # Trait implementation
+            # "DERIVES",     # Derive macros
+        },
+        description="Rust language ontology with structs, enums, traits, and modules"
+    )
 
     def parse(self, content: str, path: Optional[str] = None) -> ParseResult:
         symbols, relations, diags = [], [], []

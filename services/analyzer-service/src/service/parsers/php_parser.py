@@ -2,16 +2,38 @@
 
 import re
 from typing import Optional
-from .base import BaseParser, ParseResult
+from .base import BaseParser, ParseResult, LanguageOntology
 
 try:
     from tree_sitter import Parser
 except Exception:
     Parser = None
 
-class PhpParser(BaseParser):
+
+class PHPParser(BaseParser):
+    """
+    PHP language parser.
+
+    Supports PHP-specific features:
+    - Function definitions
+    - Class declarations
+    - Include/require statements
+    """
     LANGUAGE = "php"
     REQUIRES_TS = True
+
+    # PHP-specific graph ontology
+    ONTOLOGY = LanguageOntology(
+        language="php",
+        node_types={
+            "function",   # Function definitions
+            "class",      # Class declarations
+        },
+        edge_types={
+            "INCLUDES",   # Include/require/include_once/require_once statements
+        },
+        description="PHP language ontology with OOP and include support"
+    )
 
     def parse(self, content: str, path: Optional[str] = None) -> ParseResult:
         symbols, relations, diags = [], [], []

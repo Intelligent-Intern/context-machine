@@ -2,16 +2,38 @@
 
 import re
 from typing import Optional
-from .base import BaseParser, ParseResult
+from .base import BaseParser, ParseResult, LanguageOntology
 
 try:
     from tree_sitter import Parser
 except Exception:
     Parser = None
 
+
 class CParser(BaseParser):
+    """
+    C language parser.
+
+    Supports C-specific features:
+    - Function definitions
+    - Struct definitions
+    - Preprocessor includes
+    """
     LANGUAGE = "c"
     REQUIRES_TS = True
+
+    # C-specific graph ontology
+    ONTOLOGY = LanguageOntology(
+        language="c",
+        node_types={
+            "function",   # Function definitions
+            "struct",     # Struct definitions
+        },
+        edge_types={
+            "INCLUDES",   # Preprocessor #include directives
+        },
+        description="C language ontology with structs and preprocessor includes"
+    )
 
     def parse(self, content: str, path: Optional[str] = None) -> ParseResult:
         symbols, relations, diags = [], [], []

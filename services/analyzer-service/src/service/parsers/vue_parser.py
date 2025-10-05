@@ -2,16 +2,40 @@
 
 import re
 from typing import Optional
-from .base import BaseParser, ParseResult
+from .base import BaseParser, ParseResult, LanguageOntology
 from .javascript_parser import JavaScriptParser
 
+
 class VueParser(BaseParser):
+    """
+    Vue.js Single File Component (SFC) parser.
+
+    Supports Vue-specific features:
+    - Component definitions (from name or filename)
+    - Child component usage (from template and script)
+    - JavaScript parsing for script blocks
+    """
     LANGUAGE = "vue"
     REQUIRES_TS = False  # we parse script via JS parser
 
-    def __init__(self, ts_lang_js=None):
+    # Vue-specific graph ontology
+    ONTOLOGY = LanguageOntology(
+        language="vue",
+        node_types={
+            "component",  # Vue component definitions
+        },
+        edge_types={
+            "CHILD_COMPONENT",  # Component uses child component
+            # Inherits from JavaScript parser:
+            # "IMPORTS", "REQUIRES", "CALLS", etc.
+        },
+        description="Vue.js SFC ontology with component composition support"
+    )
+
+    def __init__(self, ts_lang=None):
         super().__init__(ts_lang=None)
-        self.js_parser = JavaScriptParser(ts_lang=ts_lang_js)
+        # Vue uses JavaScript parser for script blocks
+        self.js_parser = JavaScriptParser(ts_lang=ts_lang)
 
     def parse(self, content: str, path: Optional[str] = None) -> ParseResult:
         symbols, relations, diags = [], [], []

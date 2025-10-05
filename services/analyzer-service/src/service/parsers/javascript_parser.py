@@ -2,16 +2,53 @@
 
 import re
 from typing import Optional
-from .base import BaseParser, ParseResult
+from .base import BaseParser, ParseResult, LanguageOntology
 
 try:
     from tree_sitter import Parser
 except Exception:
     Parser = None
 
+
 class JavaScriptParser(BaseParser):
+    """
+    JavaScript/TypeScript code parser.
+
+    Supports JavaScript-specific features:
+    - ES6+ module imports
+    - CommonJS require()
+    - Class declarations
+    - Function declarations
+    - Async/await (can be extended)
+    - Prototypal inheritance (can be extended)
+    """
     LANGUAGE = "javascript"
     REQUIRES_TS = True
+
+    # JavaScript-specific graph ontology
+    ONTOLOGY = LanguageOntology(
+        language="javascript",
+        node_types={
+            "function",   # Function declarations
+            "class",      # Class declarations
+            "module",     # JavaScript modules/files
+        },
+        edge_types={
+            # Basic relationships
+            "CALLS",      # Function A calls function B
+            "EXTENDS",    # Class A extends class B (inheritance)
+            "IMPORTS",    # ES6 import statements
+            "REQUIRES",   # CommonJS require() calls
+
+            # Can be extended with:
+            # "EXPORTS",       # Module exports
+            # "ASYNC_AWAITS",  # Async/await
+            # "PROMISES",      # Promise chains
+            # "DECORATES",     # TypeScript decorators
+            # "IMPLEMENTS",    # TypeScript interface implementation
+        },
+        description="JavaScript/TypeScript language ontology with ES6+ and CommonJS support"
+    )
 
     def parse(self, content: str, path: Optional[str] = None) -> ParseResult:
         symbols, relations, diags = [], [], []
