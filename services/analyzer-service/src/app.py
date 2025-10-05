@@ -12,8 +12,9 @@ swagger_template = {
     "swagger": "2.0",
     "info": {
         "title": "Analyzer Service API",
-        "description": "Recursive tree analyzer that scans a project folder and pushes AST data into the Neo4j service.",
-        "version": "1.0.0"
+        "description": "Scans the /project directory, builds a folder tree in Neo4j, "
+                       "and publishes progress updates to the WebSocket service.",
+        "version": "1.1.0"
     },
     "basePath": "/",
     "schemes": ["http"],
@@ -26,15 +27,52 @@ swagger_template = {
         }
     },
     "security": [{"ApiKeyAuth": []}],
-    "paths": {}
+    "paths": {
+        "/api/analyze": {
+            "post": {
+                "summary": "Trigger the full project analysis for /project",
+                "description": "Recursively scans the /project directory, builds a Neo4j folder tree, "
+                               "and sends progress updates to the WebSocket server.",
+                "tags": ["Analyzer"],
+                "security": [{"ApiKeyAuth": []}],
+                "responses": {
+                    "200": {
+                        "description": "Analysis started successfully",
+                        "examples": {"application/json": {"status": "started", "path": "/project"}}
+                    },
+                    "401": {"description": "Unauthorized"}
+                }
+            }
+        },
+        "/api/health": {
+            "get": {
+                "summary": "Health check",
+                "tags": ["System"],
+                "responses": {
+                    "200": {"description": "OK"},
+                    "500": {"description": "Error"}
+                }
+            }
+        },
+        "/api/openapi.json": {
+            "get": {
+                "summary": "Retrieve the OpenAPI specification",
+                "tags": ["System"],
+                "responses": {
+                    "200": {"description": "JSON spec returned"}
+                }
+            }
+        }
+    }
 }
 
 swagger = Swagger(app, template=swagger_template)
 API_KEY = os.environ.get("API_KEY", "changeme")
 
-# Protect all /api/* routes except Swagger UI
+
 @app.before_request
 def _require_api_key():
+    """Protect all /api/* routes except Swagger UI."""
     path = request.path
     if path.startswith("/apidocs") or path.startswith("/flasgger_static") or path == "/apispec_1.json":
         return None
@@ -43,63 +81,45 @@ def _require_api_key():
         if not key or key != API_KEY:
             return jsonify({"error": "unauthorized"}), 401
 
-# ------------------------------------------------------------------------------
 
 @app.route("/api/analyze", methods=["POST"])
 def start_tree_analysis():
     """
-    Trigger a full project analysis
+    Trigger full project analysis.
     ---
     tags:
-      - TreeAnalyzer
-    consumes:
-      - application/json
-    parameters:
-      - in: body
-        name: body
-        required: false
-        schema:
-          type: object
-          properties:
-            path:
-              type: string
-              example: "/project"
+      - Analyzer
+    security:
+      - ApiKeyAuth: []
     responses:
       200:
-        description: Analysis started
+        description: Analysis started successfully
     """
-    data = request.get_json(force=True) if request.data else {}
-    path = data.get("path", "/project")
-
-    def run_analyzer(target_path):
-        print(f"[INFO] Starting tree analysis for {target_path}")
+    def run_analyzer():
+        path = "/project"
+        print(f"[INFO] Starting analysis for {path}")
         try:
-            parser = TreeParser(target_path)
-            parser.traverse()
-            print(f"[SUCCESS] Completed tree analysis for {target_path}")
+            parser = TreeParser(path)
+            parser.traverse_tree()
+            print(f"[SUCCESS] Completed analysis for {path}")
         except Exception as e:
             print(f"[ERROR] Analyzer failed: {e}")
 
-    Thread(target=run_analyzer, args=(path,), daemon=True).start()
-    return jsonify({"status": "started", "path": path})
+    Thread(target=run_analyzer, daemon=True).start()
+    return jsonify({"status": "started", "path": "/project"})
 
-# ------------------------------------------------------------------------------
 
 @app.route("/api/openapi.json", methods=["GET"])
 def openapi_json():
-    return jsonify({
-        "swagger": "2.0",
-        "info": {"title": "Analyzer Service API", "version": "1.0.0"},
-        "basePath": "/",
-        "schemes": ["http"],
-        "securityDefinitions": swagger_template["securityDefinitions"],
-        "security": swagger_template["security"],
-        "paths": swagger.template["paths"]
-    })
+    """Expose OpenAPI specification as JSON."""
+    return jsonify(swagger.template)
+
 
 @app.route("/api/health", methods=["GET"])
 def health():
+    """Simple health endpoint."""
     return jsonify({"status": "ok"})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3002)

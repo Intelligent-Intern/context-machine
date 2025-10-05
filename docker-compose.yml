@@ -54,10 +54,14 @@ services:
       - ./infra/neo4j/conf:/conf
       - ./infra/neo4j/plugins:/plugins
     networks:
-      - context-machine-network
+      context-machine-network:
+        aliases:
+          - context-machine-neo4j-service
+          - neo4j-service
 
   neo4j-service:
-    image: context-machine-neo4j-service:latest
+    build:
+      context: ./services/neo4j-service
     container_name: context-machine-neo4j-service
     restart: unless-stopped
     ports:
@@ -70,7 +74,7 @@ services:
       - neo4j
     networks:
       - context-machine-network
-    command: flask run --reload --host=0.0.0.0 --port=3001
+    command: ["python", "-u", "src/app.py"]
 
   analyzer-service:
     image: context-machine-analyzer-service:latest
@@ -103,7 +107,6 @@ services:
     networks:
       - context-machine-network
     command: python src/app.py
-
 
 networks:
   context-machine-network:
