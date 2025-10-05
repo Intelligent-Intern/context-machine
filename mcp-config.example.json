@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "context-machine": {
+      "command": "python",
+      "args": ["${CONTEXT_MACHINE_PATH}/services/mcp-server/src/server.py"],
+      "env": {
+        "SERVICE_NEO4J_URI": "bolt://localhost:7687",
+        "SERVICE_NEO4J_AUTH": "neo4j/test12345",
+        "SERVICE_NEO4J_DATABASE": "neo4j"
+      }
+    }
+  }
+}

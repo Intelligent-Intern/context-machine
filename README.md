@@ -187,6 +187,30 @@ docker network prune -f
 
 ---
 
+## 🤖 Claude Integration (MCP)
+
+Context Machine can be integrated with Claude Desktop and Claude Code via the Model Context Protocol (MCP).
+
+This allows Claude to **query the code graph directly** instead of using RAG, enabling:
+- Structural queries: "What functions call X?"
+- Dependency analysis: "Show me the import chain"
+- Impact analysis: "What would break if I change this?"
+
+**Quick Setup:**
+```bash
+# Install MCP dependencies
+pip install mcp neo4j
+
+# Configure Claude Desktop
+./install-mcp.sh
+
+# Restart Claude Desktop
+```
+
+See **[CLAUDE_INTEGRATION.md](./CLAUDE_INTEGRATION.md)** for detailed setup instructions and **[TECHNICAL_PROMPT.md](./TECHNICAL_PROMPT.md)** for usage patterns.
+
+---
+
 ## 🧠 Notes
 
 - Scripts are **idempotent** – safe to re-run  

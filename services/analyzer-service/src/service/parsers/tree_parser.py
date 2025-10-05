@@ -50,8 +50,10 @@ class TreeParser:
                     "properties": s
                 })
             for r in result.relations:
+                # Use source from relation if provided, otherwise default to file path
+                source = r.get("source", str(file_path))
                 self.edges.append({
-                    "source": str(file_path),
+                    "source": source,
                     "target": r.get("target"),
                     "type": r.get("type"),
                     "properties": r
@@ -61,14 +63,90 @@ class TreeParser:
 
     def traverse(self):
         print(f"[INFO] Traversing project: {self.root_path}")
-        for dirpath, _, filenames in os.walk(self.root_path):
+
+        # Track directories and files for CONTAINS relationships
+        directories = set()
+        files_by_dir = {}
+
+        # First pass: collect directory structure and parse files
+        for dirpath, dirnames, filenames in os.walk(self.root_path):
+            dir_path = Path(dirpath)
+            directories.add(str(dir_path))
+
+            # Track subdirectories for CONTAINS edges
+            for dirname in dirnames:
+                subdir_path = dir_path / dirname
+                directories.add(str(subdir_path))
+
+            # Track files in this directory
+            if str(dir_path) not in files_by_dir:
+                files_by_dir[str(dir_path)] = []
+
             for filename in filenames:
+                file_path = dir_path / filename
+                files_by_dir[str(dir_path)].append(str(file_path))
+
+                # Parse supported file types
                 lang = self.detect_language(filename)
-                if not lang:
-                    continue
-                file_path = Path(dirpath) / filename
-                self.parse_file(file_path, lang)
-        print(f"[INFO] Parsed {len(self.nodes)} symbols and {len(self.edges)} relations.")
+                if lang:
+                    self.parse_file(file_path, lang)
+
+        # Create Folder nodes
+        for dir_path in directories:
+            self.nodes.append({
+                "label": "Folder",
+                "name": Path(dir_path).name or "root",
+                "path": dir_path,
+                "properties": {
+                    "type": "folder",
+                    "name": Path(dir_path).name or "root",
+                    "path": dir_path,
+                    "id": dir_path
+                }
+            })
+
+        # Create File nodes for ALL files (not just parsed ones)
+        for dir_path, file_list in files_by_dir.items():
+            for file_path in file_list:
+                self.nodes.append({
+                    "label": "File",
+                    "name": Path(file_path).name,
+                    "path": file_path,
+                    "properties": {
+                        "type": "file",
+                        "name": Path(file_path).name,
+                        "path": file_path,
+                        "id": file_path,
+                        "extension": Path(file_path).suffix
+                    }
+                })
+
+        # Create CONTAINS edges: Folder -> File
+        for dir_path, file_list in files_by_dir.items():
+            for file_path in file_list:
+                self.edges.append({
+                    "source": dir_path,
+                    "target": file_path,
+                    "type": "CONTAINS",
+                    "properties": {
+                        "type": "CONTAINS"
+                    }
+                })
+
+        # Create CONTAINS edges: Folder -> Folder (parent -> child)
+        for dir_path in directories:
+            parent_path = str(Path(dir_path).parent)
+            if parent_path != dir_path and parent_path in directories:
+                self.edges.append({
+                    "source": parent_path,
+                    "target": dir_path,
+                    "type": "CONTAINS",
+                    "properties": {
+                        "type": "CONTAINS"
+                    }
+                })
+
+        print(f"[INFO] Parsed {len(self.nodes)} nodes and {len(self.edges)} relations.")
         self.send_bulk()
 
     def send_bulk(self):
