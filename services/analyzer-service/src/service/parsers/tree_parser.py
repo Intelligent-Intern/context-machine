@@ -6,6 +6,7 @@ import uuid
 import socket
 import requests
 from pathlib import Path
+from service.parsers import build_registry
 
 NEO4J_SERVICE_URL = os.getenv("NEO4J_SERVICE_URL", "http://context-machine-neo4j-service:3001")
 API_KEY = os.getenv("API_KEY", "dev-key-123")
@@ -13,6 +14,20 @@ WS_HOST = os.getenv("WS_HOST", "context-machine-websocket-service")
 WS_PORT = int(os.getenv("WS_PORT", "3010"))
 EXCLUDE_DIRS = {d.strip() for d in os.getenv("ANALYZER_EXCLUDE_DIRS", "").split(",") if d.strip()}
 EXCLUDE_DIRS.add(".git")
+
+SUPPORTED_EXT = {
+    ".py": "python",
+    ".js": "javascript",
+    ".ts": "javascript",
+    ".vue": "vue",
+    ".php": "php",
+    ".sh": "bash",
+    ".c": "c",
+    ".h": "c",
+    ".rs": "rust",
+}
+
+BULK_BATCH_SIZE = 1000
 
 
 class TreeParser:
@@ -24,6 +39,7 @@ class TreeParser:
         self.total_items = 0
         self.processed_items = 0
         self.last_percent = -1
+        self.parsers = build_registry()
 
     def send_progress(self, percent: int):
         try:
@@ -84,57 +100,100 @@ class TreeParser:
             "properties": {"kind": kind}
         })
 
+    def detect_language(self, filename: str):
+        return SUPPORTED_EXT.get(Path(filename).suffix.lower())
+
+    def _send_bulk_batch(self, nodes_batch, edges_batch):
+        payload = {"nodes": nodes_batch, "edges": edges_batch}
+        headers = {"Content-Type": "application/json", "X-API-Key": API_KEY}
+        bulk_url = f"{NEO4J_SERVICE_URL}/api/graph/bulk"
+
+        try:
+            res = requests.post(bulk_url, headers=headers, data=json.dumps(payload), timeout=600)
+            if res.ok:
+                print(f"[BATCH SUCCESS] Sent {len(nodes_batch)} nodes, {len(edges_batch)} edges.")
+            else:
+                print(f"[BATCH ERROR] {res.status_code}: {res.text}")
+        except Exception as e:
+            print(f"[ERROR] Failed to send batch: {e}")
+
+    def _flush_batches(self, force=False):
+        if len(self.nodes) >= BULK_BATCH_SIZE or len(self.edges) >= BULK_BATCH_SIZE or force:
+            nodes_batch = self.nodes[:BULK_BATCH_SIZE]
+            edges_batch = self.edges[:BULK_BATCH_SIZE]
+            self._send_bulk_batch(nodes_batch, edges_batch)
+            self.nodes = self.nodes[BULK_BATCH_SIZE:]
+            self.edges = self.edges[BULK_BATCH_SIZE:]
+
     def traverse_tree(self):
         print(f"[INFO] Counting files and folders in {self.root_path} ...")
         self.total_items = self.count_items()
         print(f"[INFO] Found {self.total_items} total entries to process.")
-        print(f"[INFO] Building file tree for: {self.root_path}")
+        print(f"[INFO] Building file tree and parsing code...")
 
         for dirpath, dirnames, filenames in os.walk(self.root_path):
             dirnames[:] = [d for d in dirnames if d not in EXCLUDE_DIRS]
             parent = Path(dirpath)
 
-            # Folder node
             if str(parent) not in self.node_ids:
                 self._add_node("Folder", parent.name, parent, "folder")
 
-            # Subfolders -> connect with CONTAINS edges
             for sub in dirnames:
                 subpath = parent / sub
                 if str(subpath) not in self.node_ids:
                     self._add_node("Folder", sub, subpath, "folder")
                 self._add_edge(parent, subpath, "CONTAINS", "folder")
 
-            # Files -> connect to parent
             for f in filenames:
                 fpath = parent / f
                 if str(fpath) not in self.node_ids:
                     self._add_node("File", f, fpath, "file")
                 self._add_edge(parent, fpath, "CONTAINS", "file")
 
-        print(f"[INFO] Tree collected: {len(self.nodes)} nodes, {len(self.edges)} edges")
+                lang = self.detect_language(f)
+                if not lang or lang not in self.parsers:
+                    continue
+
+                try:
+                    with open(fpath, "r", encoding="utf-8", errors="ignore") as file:
+                        content = file.read()
+                    parser = self.parsers[lang]
+                    result = parser.parse(content, path=str(fpath))
+
+                    if result and result.symbols:
+                        for s in result.symbols:
+                            sid = str(uuid.uuid4())
+                            symbol_type = s.get("type", "Symbol").capitalize()
+                            self.nodes.append({
+                                "id": sid,
+                                "label": symbol_type,
+                                "name": s.get("name", ""),
+                                "path": str(fpath),
+                                "properties": s
+                            })
+                            file_id = self.node_ids.get(str(fpath))
+                            if file_id:
+                                self.edges.append({
+                                    "source_id": file_id,
+                                    "target_id": sid,
+                                    "type": "HAS_SYMBOL",
+                                    "properties": {"kind": symbol_type.lower()}
+                                })
+
+                    if result and result.relations:
+                        for r in result.relations:
+                            self.edges.append({
+                                "source": r.get("source"),
+                                "target": r.get("target"),
+                                "type": r.get("type", "RELATES_TO"),
+                                "properties": r
+                            })
+
+                    self._flush_batches()
+
+                except Exception as e:
+                    print(f"[WARN] Failed to parse {fpath}: {e}")
+
+        self._flush_batches(force=True)
+        print(f"[INFO] Tree + AST parsed and sent in batches.")
         self.send_progress(100)
-        self.send_bulk()
-
-    def send_bulk(self):
-        if not self.nodes and not self.edges:
-            print("[WARN] No tree data to send to Neo4j service.")
-            return
-
-        payload = {"nodes": self.nodes, "edges": self.edges}
-        headers = {"Content-Type": "application/json", "X-API-Key": API_KEY}
-        bulk_url = f"{NEO4J_SERVICE_URL}/api/graph/bulk"
-
-        try:
-            print(f"[INFO] Sending tree structure to {bulk_url} ({len(self.nodes)} nodes, {len(self.edges)} edges)")
-            res = requests.post(bulk_url, headers=headers, data=json.dumps(payload), timeout=600)
-            if res.ok:
-                print("[SUCCESS] Project tree imported into Neo4j.")
-            else:
-                print(f"[ERROR] Bulk insert failed: {res.status_code} - {res.text}")
-        except Exception as e:
-            print(f"[ERROR] Failed to send bulk data: {e}")
-
-
-if __name__ == "__main__":
-    TreeParser("/project").traverse_tree()

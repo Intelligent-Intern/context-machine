@@ -1,13 +1,12 @@
-# ./services/neo4j-service/src/app.py
-
 import os
 from flask import Flask, jsonify
 from neo4j import GraphDatabase
+
 from service.bulk import bulk_bp, openapi_spec_bulk
+from service.symbols import symbols_bp, openapi_spec_symbols
 
 app = Flask(__name__)
 
-# Neo4j-Verbindung
 NEO4J_URI = os.getenv("SERVICE_NEO4J_URI", "bolt://context-machine-neo4j:7687")
 auth = os.getenv("SERVICE_NEO4J_AUTH", "neo4j/test12345").split("/")
 NEO4J_USER, NEO4J_PASSWORD = auth[0], auth[1] if len(auth) > 1 else None
@@ -17,8 +16,8 @@ driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 app.config["NEO4J_DRIVER"] = driver
 app.config["NEO4J_DATABASE"] = NEO4J_DATABASE
 
-# Blueprint registrieren
 app.register_blueprint(bulk_bp)
+app.register_blueprint(symbols_bp)
 
 @app.route("/api/health", methods=["GET"])
 def health():

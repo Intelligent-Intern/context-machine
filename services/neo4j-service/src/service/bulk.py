@@ -29,10 +29,18 @@ def bulk_insert():
                 path = n.get("path", "")
                 props = n.get("properties", {})
 
-                q_node = f"""
-                MERGE (x:{label} {{id:$id}})
-                SET x.name=$name, x.path=$path, x += $props
-                """
+                # Wenn Symbol-Node, explizit Label :Symbol setzen
+                if label.lower() == "symbol":
+                    q_node = """
+                    MERGE (x:Symbol {id:$id})
+                    SET x.name=$name, x.path=$path, x += $props
+                    """
+                else:
+                    q_node = f"""
+                    MERGE (x:{label} {{id:$id}})
+                    SET x.name=$name, x.path=$path, x += $props
+                    """
+
                 session.run(q_node, id=node_id, name=name, path=path, props=props)
                 created_nodes += 1
 
