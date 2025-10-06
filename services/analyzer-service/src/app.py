@@ -5,7 +5,6 @@ from flask import Flask, jsonify, request
 from flasgger import Swagger
 from threading import Thread
 from service.parsers.tree_parser import TreeParser
-from service.parsers.resolve_calls import CallResolver
 
 app = Flask(__name__)
 
@@ -92,11 +91,6 @@ def start_analysis():
         try:
             tree = TreeParser(project_path)
             tree.traverse_tree()
-            print(f"[INFO] Phase 1 complete: tree + AST parsed.")
-            resolver = CallResolver(project_path)
-            resolver.load_symbols()
-            resolver.resolve_calls()
-            print(f"[SUCCESS] Phase 2 complete: CALL relationships resolved.")
         except Exception as e:
             print(f"[ERROR] Analyzer failed: {e}")
 

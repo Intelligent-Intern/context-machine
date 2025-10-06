@@ -60,8 +60,7 @@ services:
           - neo4j-service
 
   neo4j-service:
-    build:
-      context: ./services/neo4j-service
+    image: context-machine-neo4j-service:latest
     container_name: context-machine-neo4j-service
     restart: unless-stopped
     ports:
@@ -75,6 +74,7 @@ services:
     networks:
       - context-machine-network
     command: ["python", "-u", "src/app.py"]
+
 
   analyzer-service:
     image: context-machine-analyzer-service:latest
