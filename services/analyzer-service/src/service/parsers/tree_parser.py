@@ -36,6 +36,7 @@ class TreeParser:
         self.nodes = []
         self.edges = []
         self.node_ids = {}
+        self.symbols = {}  # name -> symbol_id
         self.total_items = 0
         self.processed_items = 0
         self.last_percent = -1
@@ -87,6 +88,7 @@ class TreeParser:
         })
         self.processed_items += 1
         self.update_progress()
+        return node_id
 
     def _add_edge(self, source_path: Path, target_path: Path, rel_type: str, kind: str):
         src_id = self.node_ids.get(str(source_path))
@@ -131,6 +133,7 @@ class TreeParser:
         print(f"[INFO] Found {self.total_items} total entries to process.")
         print(f"[INFO] Building file tree and parsing code...")
 
+        # Phase 1: Tree + Symbol nodes
         for dirpath, dirnames, filenames in os.walk(self.root_path):
             dirnames[:] = [d for d in dirnames if d not in EXCLUDE_DIRS]
             parent = Path(dirpath)
@@ -164,10 +167,11 @@ class TreeParser:
                         for s in result.symbols:
                             sid = str(uuid.uuid4())
                             symbol_type = s.get("type", "Symbol").capitalize()
+                            name = s.get("name", "")
                             self.nodes.append({
                                 "id": sid,
                                 "label": symbol_type,
-                                "name": s.get("name", ""),
+                                "name": name,
                                 "path": str(fpath),
                                 "properties": s
                             })
@@ -179,21 +183,40 @@ class TreeParser:
                                     "type": "HAS_SYMBOL",
                                     "properties": {"kind": symbol_type.lower()}
                                 })
-
-                    if result and result.relations:
-                        for r in result.relations:
-                            self.edges.append({
-                                "source": r.get("source"),
-                                "target": r.get("target"),
-                                "type": r.get("type", "RELATES_TO"),
-                                "properties": r
-                            })
+                            # map name to id
+                            if name:
+                                self.symbols[name] = sid
 
                     self._flush_batches()
 
                 except Exception as e:
                     print(f"[WARN] Failed to parse {fpath}: {e}")
 
+        # Phase 2: Detect symbol usage inside files
+        print(f"[INFO] Scanning files for symbol usage (Phase 2)...")
+        for dirpath, _, filenames in os.walk(self.root_path):
+            for f in filenames:
+                fpath = Path(dirpath) / f
+                if str(fpath) not in self.node_ids:
+                    continue
+
+                try:
+                    with open(fpath, "r", encoding="utf-8", errors="ignore") as file:
+                        content = file.read()
+                    for symbol_name, sid in self.symbols.items():
+                        if symbol_name and symbol_name in content:
+                            file_id = self.node_ids[str(fpath)]
+                            self.edges.append({
+                                "source_id": file_id,
+                                "target_id": sid,
+                                "type": "USES_SYMBOL",
+                                "properties": {"match": symbol_name}
+                            })
+                    self._flush_batches()
+                except Exception as e:
+                    print(f"[WARN] Usage scan failed for {fpath}: {e}")
+
+        # Final flush
         self._flush_batches(force=True)
-        print(f"[INFO] Tree + AST parsed and sent in batches.")
+        print(f"[INFO] Tree + AST + Symbol usage parsed and sent in batches.")
         self.send_progress(100)
