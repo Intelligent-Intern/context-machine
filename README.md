@@ -12,6 +12,15 @@ This project provides a complete **local infrastructure** for the Context Machin
 
 All components run through Docker Compose and are automatically configured using setup scripts.
 
+**For the moment the system basically enables you got get an AST graph from your code base.**
+
+Create a folder called project and put your code inside to get this:
+
+![alt text](code_graph.png)
+
+No code is send anywhere - it all happens on your local machine without any AI stuff involved (yet - there will be but it will also run locally on your machine).
+
+
 ---
 
 ## 🚀 Quick Start
