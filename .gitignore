@@ -3,6 +3,8 @@ infra/neo4j/data
 infra/neo4j/logs
 infra/minio/data
 infra/rabbitmq/data
+infra/gitea
+
 __pycache__
 project
 .env.local

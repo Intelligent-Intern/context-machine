@@ -108,6 +108,31 @@ services:
       - context-machine-network
     command: python src/app.py
 
+  gitea:
+    image: gitea/gitea:1.22
+    container_name: context-machine-gitea
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    ports:
+      - "3005:3005"
+      - "3022:22"
+    volumes:
+      - ./infra/gitea/data:/data
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__server__HTTP_PORT=3005
+      - GITEA__server__SSH_PORT=3022
+      - GITEA__database__DB_TYPE=sqlite3
+      - GITEA__database__PATH=/data/gitea/gitea.db
+      - GITEA__security__INSTALL_LOCK=true
+      - GITEA__security__SECRET_KEY=supersecretkey987654
+      - GITEA__service__DISABLE_REGISTRATION=true
+    networks:
+      - context-machine-network
+
+
 networks:
   context-machine-network:
     driver: bridge

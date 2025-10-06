@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+# -----------------------------------------------------------------------------
+# Context Machine – Usage Summary
+# -----------------------------------------------------------------------------
+
 # Colors
 RESET='\033[0m'
 BOLD='\033[1m'
@@ -17,21 +21,21 @@ echo ""
 
 # MinIO
 echo -e "${BOLD}${YELLOW}MinIO (Object Storage):${RESET}"
-echo -e "  URL:   ${BLUE}http://localhost:9001${RESET}"
-echo -e "  User:  ${GREEN}${MINIO_ROOT_USER:-minioadmin}${RESET}"
-echo -e "  Pass:  ${GREEN}${MINIO_ROOT_PASSWORD:-minioadmin}${RESET}"
-echo -e "  Bucket:${GREEN}${MINIO_BUCKET:-incoming}${RESET}"
+echo -e "  URL:     ${BLUE}http://localhost:9001${RESET}"
+echo -e "  User:    ${GREEN}${MINIO_ROOT_USER:-minioadmin}${RESET}"
+echo -e "  Pass:    ${GREEN}${MINIO_ROOT_PASSWORD:-minioadmin}${RESET}"
+echo -e "  Bucket:  ${GREEN}${MINIO_BUCKET:-incoming}${RESET}"
 echo ""
 
 # RabbitMQ
 echo -e "${BOLD}${YELLOW}RabbitMQ (Message Broker):${RESET}"
-echo -e "  URL:   ${BLUE}http://localhost:15672${RESET}"
-echo -e "  User:  ${GREEN}${RABBITMQ_DEFAULT_USER:-guest}${RESET}"
-echo -e "  Pass:  ${GREEN}${RABBITMQ_DEFAULT_PASS:-guest}${RESET}"
-echo -e "  VHost: ${GREEN}${RABBITMQ_VHOST:-/}${RESET}"
-echo -e "  Exchange: ${GREEN}${RABBITMQ_EXCHANGE:-file-events}${RESET}"
-echo -e "  Queue:    ${GREEN}${RABBITMQ_QUEUE:-file-processing}${RESET}"
-echo -e "  Routing:  ${GREEN}${RABBITMQ_ROUTING_KEY:-file.put}${RESET}"
+echo -e "  URL:     ${BLUE}http://localhost:15672${RESET}"
+echo -e "  User:    ${GREEN}${RABBITMQ_DEFAULT_USER:-guest}${RESET}"
+echo -e "  Pass:    ${GREEN}${RABBITMQ_DEFAULT_PASS:-guest}${RESET}"
+echo -e "  VHost:   ${GREEN}${RABBITMQ_VHOST:-/}${RESET}"
+echo -e "  Exchange:${GREEN}${RABBITMQ_EXCHANGE:-file-events}${RESET}"
+echo -e "  Queue:   ${GREEN}${RABBITMQ_QUEUE:-file-processing}${RESET}"
+echo -e "  Routing: ${GREEN}${RABBITMQ_ROUTING_KEY:-file.put}${RESET}"
 echo ""
 
 # Neo4j
@@ -45,10 +49,23 @@ echo ""
 
 # n8n
 echo -e "${BOLD}${YELLOW}n8n (Workflow Automation):${RESET}"
-echo -e "  URL:   ${BLUE}http://localhost:${N8N_PORT:-5678}${RESET}"
+echo -e "  URL:     ${BLUE}http://localhost:${N8N_PORT:-5678}${RESET}"
 if [ "${N8N_BASIC_AUTH_ACTIVE:-false}" = "true" ]; then
-  echo -e "  User:  ${GREEN}${N8N_BASIC_AUTH_USER:-admin}${RESET}"
-  echo -e "  Pass:  ${GREEN}${N8N_BASIC_AUTH_PASSWORD:-admin123}${RESET}"
+  echo -e "  User:    ${GREEN}${N8N_BASIC_AUTH_USER:-admin}${RESET}"
+  echo -e "  Pass:    ${GREEN}${N8N_BASIC_AUTH_PASSWORD:-admin123}${RESET}"
+fi
+echo ""
+
+# Gitea
+echo -e "${BOLD}${YELLOW}Gitea (Git Service):${RESET}"
+echo -e "  URL:     ${BLUE}http://localhost:3005${RESET}"
+echo -e "  SSH:     ${BLUE}ssh://git@localhost:3022${RESET}"
+echo -e "  User:    ${GREEN}${GITEA_ADMIN_USER:-admin}${RESET}"
+echo -e "  Pass:    ${GREEN}${GITEA_ADMIN_PASSWORD:-admin123}${RESET}"
+if [ -f "./infra/gitea/admin_token.txt" ]; then
+  echo -e "  Token:   ${GREEN}$(cat ./infra/gitea/admin_token.txt)${RESET}"
+else
+  echo -e "  Token:   ${YELLOW}<not yet generated>${RESET}"
 fi
 echo ""
 
@@ -76,6 +93,7 @@ echo -e "    3. Inspect events in RabbitMQ"
 echo -e "    4. Explore your graph via Neo4j Browser"
 echo -e "    5. Test API endpoints via Swagger UI"
 echo -e "    6. Automate workflows in n8n"
-echo -e "    7. Analyze code with the Analyzer Service"
+echo -e "    7. Manage repos and tokens in Gitea"
+echo -e "    8. Analyze code with the Analyzer Service"
 echo -e "${BOLD}${CYAN}============================================================${RESET}"
 echo ""

@@ -13,6 +13,10 @@ mkdir -p infra/minio/data
 mkdir -p infra/n8n/data
 mkdir -p infra/neo4j/data
 mkdir -p infra/rabbitmq/data
+sudo mkdir -p ./infra/gitea/data/git/.ssh
+touch ./infra/gitea/data/git/.ssh/authorized_keys.tmp
+sudo chown -R 1000:1000 ./infra/gitea/data
+sudo chmod -R 755 ./infra/gitea/data
 
 ./infra/scripts/utils/container-utils.sh
 
@@ -23,6 +27,7 @@ docker compose up -d --build
 ./infra/scripts/utils/setup-rabbitmq.sh
 ./infra/scripts/utils/setup-minio-event.sh
 ./infra/scripts/utils/setup-n8n.sh || true
+./infra/scripts/utils/setup-gitea.sh 
 
 system_up
 
