@@ -4,7 +4,8 @@ infra/neo4j/logs
 infra/minio/data
 infra/rabbitmq/data
 infra/gitea
-
+infra/ollama
+infra/openwebui
 __pycache__
 project
 .env.local

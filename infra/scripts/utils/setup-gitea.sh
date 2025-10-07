@@ -6,14 +6,14 @@ set -euo pipefail
 # Ensures Gitea is healthy, admin user exists, and API token is generated.
 # -----------------------------------------------------------------------------
 
-# Load helper messages if available
-source infra/scripts/utils/messages.sh 2>/dev/null || {
-  echo "[WARN] messages.sh missing - continuing without fancy logs."
-  info()    { echo "INFO: $*"; }
-  success() { echo "SUCCESS: $*"; }
-  warn()    { echo "WARN: $*"; }
-  error()   { echo "ERROR: $*"; }
-}
+# -----------------------------------------------------------------------------
+# Load logging helpers
+# -----------------------------------------------------------------------------
+if [ ! -f infra/scripts/utils/messages.sh ]; then
+  echo "ERROR: messages.sh missing — aborting setup."
+  exit 1
+fi
+source infra/scripts/utils/messages.sh
 
 # -----------------------------------------------------------------------------
 # Configuration
@@ -42,13 +42,18 @@ done
 success "Gitea is responding on ${GITEA_URL}"
 
 # -----------------------------------------------------------------------------
-# Ensure admin user exists (handle reserved-name fallback)
+# Ensure admin user exists (handles reserved/fallback correctly)
 # -----------------------------------------------------------------------------
 EFFECTIVE_USER="${ADMIN_USER}"
 
 info "Ensuring admin user '${EFFECTIVE_USER}' exists..."
+
+# Check if either primary or fallback already exists
 if exec_gitea gitea admin user list 2>/dev/null | awk 'NR>1{print $2}' | grep -Fxq "${EFFECTIVE_USER}"; then
   success "Admin user '${EFFECTIVE_USER}' already exists."
+elif exec_gitea gitea admin user list 2>/dev/null | awk 'NR>1{print $2}' | grep -Fxq "${ADMIN_USER_FALLBACK}"; then
+  EFFECTIVE_USER="${ADMIN_USER_FALLBACK}"
+  success "Fallback admin user '${EFFECTIVE_USER}' already exists."
 else
   info "Creating admin user '${EFFECTIVE_USER}'..."
   set +e
@@ -64,13 +69,18 @@ else
     if echo "${CREATE_OUT}" | grep -qi "name is reserved"; then
       warning "Username '${EFFECTIVE_USER}' is reserved. Falling back to '${ADMIN_USER_FALLBACK}'."
       EFFECTIVE_USER="${ADMIN_USER_FALLBACK}"
-      info "Creating admin user '${EFFECTIVE_USER}'..."
-      exec_gitea gitea admin user create \
-        --username "${EFFECTIVE_USER}" \
-        --password "${ADMIN_PASS}" \
-        --email "${ADMIN_MAIL}" \
-        --admin
-      success "Admin user '${EFFECTIVE_USER}' created (fallback)."
+      # Create fallback only if it doesn't exist
+      if exec_gitea gitea admin user list 2>/dev/null | awk 'NR>1{print $2}' | grep -Fxq "${EFFECTIVE_USER}"; then
+        success "Fallback admin user '${EFFECTIVE_USER}' already exists."
+      else
+        info "Creating fallback admin user '${EFFECTIVE_USER}'..."
+        exec_gitea gitea admin user create \
+          --username "${EFFECTIVE_USER}" \
+          --password "${ADMIN_PASS}" \
+          --email "${ADMIN_MAIL}" \
+          --admin
+        success "Fallback admin user '${EFFECTIVE_USER}' created."
+      fi
     elif echo "${CREATE_OUT}" | grep -qi "already exists"; then
       success "Admin user '${EFFECTIVE_USER}' already exists."
     else

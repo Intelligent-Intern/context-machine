@@ -10,6 +10,7 @@ This project provides a complete **local infrastructure** for the Context Machin
 - **Analyzer Service** – Multi-language source code analyzer with AST parsing and recursive tree analysis  
 - **WebSocket Service** – Publishes real-time progress updates for frontend dashboards  
 - **Gitea** – Local Git hosting, API access, and repository management  
+- **Ollama + OpenWebUI** – Local LLM runtime and chat interface for on-device AI code analysis  
 
 All components run through **Docker Compose** and are automatically configured using setup scripts.  
 
@@ -78,6 +79,10 @@ GITEA_HTTP_PORT=3005
 GITEA_ADMIN_USER=gitea-admin
 GITEA_ADMIN_PASSWORD=admin123
 GITEA_ADMIN_EMAIL=admin@example.com
+
+# Ollama + OpenWebUI
+OLLAMA_MODEL=codellama:7b
+OPENWEBUI_PORT=8080
 ~~~
 
 ---
@@ -90,8 +95,9 @@ make up
 
 This will:
 - Build all service containers  
-- Initialize MinIO, RabbitMQ, n8n, Neo4j, and Gitea  
+- Initialize MinIO, RabbitMQ, n8n, Neo4j, Gitea, Ollama, and OpenWebUI  
 - Automatically create users, queues, buckets, and tokens  
+- Pull and persist the configured Ollama model (`OLLAMA_MODEL`)  
 
 When setup completes, you’ll see a summary like:
 
@@ -135,6 +141,8 @@ Example WebSocket events:
 | **Analyzer Service API** | [http://localhost:3002/apidocs](http://localhost:3002/apidocs) | Header: `X-API-Key: dev-key-123` |
 | **WebSocket Progress** | `ws://localhost:3010/progress?api_key=dev-key-123` | — |
 | **Gitea** | [http://localhost:3005](http://localhost:3005) | `gitea-admin / admin123` |
+| **Ollama** | [http://localhost:11434](http://localhost:11434) | Model: `codellama:7b` |
+| **OpenWebUI** | [http://localhost:8080](http://localhost:8080) | Chat with your local model |
 
 The Gitea API token (used for integrations) is saved at:
 ~~~
@@ -166,6 +174,7 @@ make reset
 | `setup-minio-event.sh` | Configures AMQP notifications for MinIO |
 | `setup-n8n.sh` | Bootstraps n8n and imports credentials |
 | `setup-gitea.sh` | Ensures Gitea admin exists & generates API token |
+| `setup-ollama.sh` | Starts Ollama container, pulls & persists model |
 | `container-utils.sh` | Builds custom service containers |
 | `messages.sh` | Colorized logging utilities |
 | `progress.sh` | Displays progress bars during waits |
@@ -186,6 +195,8 @@ docker logs context-machine-neo4j-service
 docker logs context-machine-analyzer-service
 docker logs context-machine-websocket-service
 docker logs context-machine-gitea
+docker logs context-machine-ollama
+docker logs context-machine-openwebui
 ~~~
 
 ### Cleanup
@@ -202,6 +213,7 @@ docker network prune -f
 - Scripts are **idempotent** — safe to re-run anytime  
 - `.env.local` changes take effect on next `make up`  
 - Gitea now auto-provisions a token for API automation  
+- Ollama models persist under `infra/ollama/` and are only downloaded once  
 - All services run locally; nothing is sent to external servers  
 
 ---
@@ -216,6 +228,10 @@ docker network prune -f
 `CreateUser: name is reserved [admin]`  
 → Gitea already contains a default `admin` user.  
 The setup script automatically switches to use `gitea-admin`.  
+
+**Error:**  
+`failed to bind port 0.0.0.0:11434`  
+→ Ollama is already running locally. Either stop the host process or change the container port.  
 
 **Progress bar not updating?**  
 → Check WebSocket service and API key. Test manually:  

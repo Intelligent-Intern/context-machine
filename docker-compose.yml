@@ -132,6 +132,35 @@ services:
     networks:
       - context-machine-network
 
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: context-machine-openwebui
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - OPENAI_API_BASE_URL=http://context-machine-ollama:11434/v1
+      - DEFAULT_MODEL=llama3
+      - DATA_DIR=/app/backend/data
+      - TZ=Europe/Berlin
+    volumes:
+      - ./infra/openwebui/data:/app/backend/data
+    depends_on:
+      - ollama
+    networks:
+      - context-machine-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: context-machine-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./infra/ollama:/root/.ollama
+    networks:
+      - context-machine-network
+
 
 networks:
   context-machine-network:

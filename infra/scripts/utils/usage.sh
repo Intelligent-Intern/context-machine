@@ -5,6 +5,13 @@ set -euo pipefail
 # Context Machine – Usage Summary
 # -----------------------------------------------------------------------------
 
+# Load environment variables if available
+if [ -f .env.local ]; then
+  set -a
+  source .env.local
+  set +a
+fi
+
 # Colors
 RESET='\033[0m'
 BOLD='\033[1m'
@@ -60,13 +67,35 @@ echo ""
 echo -e "${BOLD}${YELLOW}Gitea (Git Service):${RESET}"
 echo -e "  URL:     ${BLUE}http://localhost:3005${RESET}"
 echo -e "  SSH:     ${BLUE}ssh://git@localhost:3022${RESET}"
-echo -e "  User:    ${GREEN}${GITEA_ADMIN_USER:-admin}${RESET}"
+echo -e "  User:    ${GREEN}${GITEA_ADMIN_USER:-gitea-admin}${RESET}"
 echo -e "  Pass:    ${GREEN}${GITEA_ADMIN_PASSWORD:-admin123}${RESET}"
 if [ -f "./infra/gitea/admin_token.txt" ]; then
   echo -e "  Token:   ${GREEN}$(cat ./infra/gitea/admin_token.txt)${RESET}"
 else
   echo -e "  Token:   ${YELLOW}<not yet generated>${RESET}"
 fi
+echo ""
+
+# Ollama + OpenWebUI
+echo -e "${BOLD}${YELLOW}Ollama (Local LLM Runtime):${RESET}"
+echo -e "  API:     ${BLUE}http://localhost:11434${RESET}"
+echo -e "  Model:   ${GREEN}${OLLAMA_MODEL:-codellama:7b}${RESET}"
+
+# Quick model check
+if docker ps --format '{{.Names}}' | grep -q "context-machine-ollama"; then
+  if docker exec context-machine-ollama ollama list 2>/dev/null | grep -q "${OLLAMA_MODEL:-codellama:7b}"; then
+    echo -e "  Status:  ${GREEN}✔ Model loaded and ready${RESET}"
+  else
+    echo -e "  Status:  ${YELLOW}↻ Model not yet pulled${RESET}"
+  fi
+else
+  echo -e "  Status:  ${YELLOW}⚠ Ollama container not running${RESET}"
+fi
+echo ""
+
+echo -e "${BOLD}${YELLOW}OpenWebUI (Chat Interface):${RESET}"
+echo -e "  URL:     ${BLUE}http://localhost:8080${RESET}"
+echo -e "  Backend: ${GREEN}Connected to Ollama on port 11434${RESET}"
 echo ""
 
 # Neo4j Service
@@ -94,6 +123,7 @@ echo -e "    4. Explore your graph via Neo4j Browser"
 echo -e "    5. Test API endpoints via Swagger UI"
 echo -e "    6. Automate workflows in n8n"
 echo -e "    7. Manage repos and tokens in Gitea"
-echo -e "    8. Analyze code with the Analyzer Service"
+echo -e "    8. Chat with ${OLLAMA_MODEL:-codellama:7b} via OpenWebUI"
+echo -e "    9. Analyze code with the Analyzer Service"
 echo -e "${BOLD}${CYAN}============================================================${RESET}"
 echo ""
