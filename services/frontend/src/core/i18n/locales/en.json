@@ -1,0 +1,19 @@
+{
+  "a11y": {
+    "skipToContent": "Skip to content"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "delete": "Delete",
+    "search": "Search",
+    "actions": "Actions"
+  },
+  "errors": {
+    "forbidden": "You do not have permission to perform this action.",
+    "notFound": "The requested resource was not found.",
+    "validation": "Validation failed. Please check your input.",
+    "network": "Network error. Please try again later."
+  }
+}

@@ -1,0 +1,76 @@
+/* src/styles/tailwind.css */
+
+/* Import Tailwind Layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Tokens – Basisfarben, Schriftgrößen, Abstände */
+:root {
+    --color-primary: 37 99 235;   /* blue-600 */
+    --color-primary-light: 59 130 246; /* blue-500 */
+    --color-danger: 220 38 38;    /* red-600 */
+    --color-success: 34 197 94;   /* green-500 */
+    --color-warning: 234 179 8;   /* yellow-500 */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.15);
+}
+
+/* Komponenten-Erweiterungen */
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+    .btn-primary {
+        @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-400;
+    }
+    .btn-secondary {
+        @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-400;
+    }
+    .btn-danger {
+        @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-400;
+    }
+
+    .card {
+        @apply bg-white border border-gray-200 rounded-lg shadow-sm;
+    }
+
+    .badge {
+        @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+    }
+    .badge-primary {
+        @apply bg-blue-100 text-blue-800;
+    }
+    .badge-danger {
+        @apply bg-red-100 text-red-800;
+    }
+}
+
+/* Utilities-Erweiterungen */
+@layer utilities {
+    .text-muted {
+        @apply text-gray-500;
+    }
+    .shadow-token-sm {
+        box-shadow: var(--shadow-sm);
+    }
+    .shadow-token-md {
+        box-shadow: var(--shadow-md);
+    }
+    .shadow-token-lg {
+        box-shadow: var(--shadow-lg);
+    }
+    .radius-sm {
+        border-radius: var(--radius-sm);
+    }
+    .radius-md {
+        border-radius: var(--radius-md);
+    }
+    .radius-lg {
+        border-radius: var(--radius-lg);
+    }
+}

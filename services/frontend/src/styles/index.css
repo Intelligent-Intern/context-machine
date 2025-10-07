@@ -1,0 +1,63 @@
+/* src/styles/index.css */
+
+/* Basis-Reset und generelle Projekt-Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Schriftarten & Farben global */
+html, body {
+    @apply h-full w-full bg-gray-50 text-gray-900 font-sans;
+}
+
+#app {
+    @apply h-full flex flex-col;
+}
+
+/* Scrollbar Styling (modern + fallback) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+}
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded;
+}
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+}
+
+/* Utility: Karten mit Shadow */
+.card {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm;
+}
+
+/* Utility: Button-Grunddesign */
+.btn {
+    @apply inline-flex items-center justify-center font-medium rounded-md px-4 py-2 transition-colors;
+}
+.btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
+.btn-secondary {
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400;
+}
+.btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400;
+}
+.btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+/* Utility: Badge */
+.badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700;
+}
+.badge-primary {
+    @apply bg-blue-100 text-blue-800;
+}
+.badge-danger {
+    @apply bg-red-100 text-red-800;
+}

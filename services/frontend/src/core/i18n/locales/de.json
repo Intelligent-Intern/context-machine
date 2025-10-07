@@ -1,0 +1,19 @@
+{
+  "a11y": {
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "delete": "Löschen",
+    "search": "Suche",
+    "actions": "Aktionen"
+  },
+  "errors": {
+    "forbidden": "Du hast keine Berechtigung, diese Aktion auszuführen.",
+    "notFound": "Die angeforderte Ressource wurde nicht gefunden.",
+    "validation": "Validierung fehlgeschlagen. Bitte Eingaben prüfen.",
+    "network": "Netzwerkfehler. Bitte später erneut versuchen."
+  }
+}

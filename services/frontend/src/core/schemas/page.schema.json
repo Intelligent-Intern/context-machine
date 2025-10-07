@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/page.schema.json",
+  "title": "PageManifest",
+  "description": "Schema for page manifests controlling bars, slots and modules",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "route": { "type": "string" },
+    "bars": {
+      "type": "object",
+      "properties": {
+        "top": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "bottom": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "left": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "right": { "type": "integer", "minimum": 0, "maximum": 4 }
+      },
+      "additionalProperties": false
+    },
+    "sizes": {
+      "type": "object",
+      "properties": {
+        "left": { "type": "integer", "minimum": 100, "maximum": 2000 },
+        "right": { "type": "integer", "minimum": 100, "maximum": 2000 }
+      },
+      "additionalProperties": false
+    },
+    "ports": {
+      "type": "object",
+      "properties": {
+        "top": { "$ref": "#/definitions/portSlots" },
+        "bottom": { "$ref": "#/definitions/portSlots" },
+        "left": { "$ref": "#/definitions/portSlots" },
+        "right": { "$ref": "#/definitions/portSlots" },
+        "main": { "$ref": "#/definitions/portSlots" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "route"],
+  "additionalProperties": false,
+
+  "definitions": {
+    "portSlots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slot": { "type": "integer", "minimum": 1 },
+          "widget": { "type": "string" },
+          "bind": { "type": "string" },
+          "visibleWhen": { "type": "string" }
+        },
+        "required": ["slot", "widget"],
+        "additionalProperties": true
+      }
+    }
+  }
+}

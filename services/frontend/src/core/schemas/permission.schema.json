@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/permission.schema.json",
+  "title": "PermissionDefinition",
+  "description": "Schema for permission entries used by modules, widgets and events",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "scope": { "type": "string", "enum": ["global", "module", "widget"] },
+    "default": { "type": "boolean" }
+  },
+  "required": ["name", "scope"],
+  "additionalProperties": false
+}
