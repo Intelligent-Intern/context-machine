@@ -1,25 +1,24 @@
 {
-  "ontology_extension": {
-    "name": "technical_service_spatial_extension",
-    "version": "1.2.0",
-    "namespace": "http://context-machine.org/ontology/technical-service/spatial#",
-    "description": "Spatial module: CRS/EPSG, geometries, features, collections, raster/coverages, tiles/tile matrix sets, topology, indexing, geocoding/routing, 3D/point clouds, OGC API alignments.",
+  "ontology": {
+    "name": "spatial_core_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/spatial#",
+    "description": "Pure spatial ontology: CRS/EPSG, geometries, features, collections, raster/coverages, tiles/tile matrix sets, topology, indexing, routing/network, 3D/point clouds, OGC API Features/STAC, quality metadata. No domain coupling.",
     "namespaces": {
-      "tss": "http://context-machine.org/ontology/technical-service/spatial#",
-      "ts": "http://context-machine.org/ontology/technical-service#",
-      "feat": "http://context-machine.org/ontology/technical-service/feature#",
-      "col": "http://context-machine.org/ontology/technical-service/collection#",
-      "raster": "http://context-machine.org/ontology/technical-service/raster#",
-      "tile": "http://context-machine.org/ontology/technical-service/tiles#",
-      "style": "http://context-machine.org/ontology/technical-service/style#",
-      "topo": "http://context-machine.org/ontology/technical-service/topology#",
-      "proc": "http://context-machine.org/ontology/technical-service/geoprocess#",
-      "idx": "http://context-machine.org/ontology/technical-service/spatialindex#",
-      "qa": "http://context-machine.org/ontology/technical-service/spatialquality#",
-      "stac": "http://context-machine.org/ontology/technical-service/stac#",
-      "pc": "http://context-machine.org/ontology/technical-service/pointcloud#",
-      "net": "http://context-machine.org/ontology/technical-service/network#",
-      "ogcapi": "http://context-machine.org/ontology/technical-service/ogcapi#",
+      "sp": "http://context-machine.org/ontology/spatial#",
+      "feat": "http://context-machine.org/ontology/spatial/feature#",
+      "col": "http://context-machine.org/ontology/spatial/collection#",
+      "raster": "http://context-machine.org/ontology/spatial/raster#",
+      "tile": "http://context-machine.org/ontology/spatial/tiles#",
+      "style": "http://context-machine.org/ontology/spatial/style#",
+      "topo": "http://context-machine.org/ontology/spatial/topology#",
+      "proc": "http://context-machine.org/ontology/spatial/geoprocess#",
+      "idx": "http://context-machine.org/ontology/spatial/spatialindex#",
+      "qa": "http://context-machine.org/ontology/spatial/spatialquality#",
+      "stac": "http://context-machine.org/ontology/spatial/stac#",
+      "pc": "http://context-machine.org/ontology/spatial/pointcloud#",
+      "net": "http://context-machine.org/ontology/spatial/network#",
+      "ogcapi": "http://context-machine.org/ontology/spatial/ogcapi#",
       "gsp": "http://www.opengis.net/ont/geosparql#",
       "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
       "time": "http://www.w3.org/2006/time#",
@@ -37,7 +36,7 @@
       "http://www.w3.org/ns/prov#"
     ],
     "frames": {
-      "Spatial_Geospatial": {
+      "Spatial_Core": {
         "collections": {
           "Spatial_Reference": {
             "entities": {
@@ -68,13 +67,13 @@
                     "uri": "http://www.opengis.net/def/crs/EPSG/0/4326",
                     "name": "WGS 84",
                     "type": "geographic2D",
-                    "area_of_use": "World",
-                    "axis_order": "lat,lon (per EPSG) / lon,lat (common GIS)",
+                    "area_of_use": "Area of use for EPSG:4326",
+                    "axis_order": "lat,lon",
                     "unit_linear": "metre",
                     "unit_angular": "degree",
                     "datum_name": "WGS_1984",
                     "ellipsoid_name": "WGS84",
-                    "wkt2": "GEOGCRS[\"WGS 84\", ...]",
+                    "wkt2": "PROJCRS[\"WGS 84\", ...]",
                     "proj_string": "+proj=longlat +datum=WGS84 +no_defs",
                     "default_transform_to_4326": "identity",
                     "deprecated": false
@@ -86,13 +85,13 @@
                     "uri": "http://www.opengis.net/def/crs/EPSG/0/4979",
                     "name": "WGS 84 (3D)",
                     "type": "geographic3D",
-                    "area_of_use": "World",
+                    "area_of_use": "Area of use for EPSG:4979",
                     "axis_order": "lat,lon,height",
                     "unit_linear": "metre",
                     "unit_angular": "degree",
                     "datum_name": "WGS_1984",
                     "ellipsoid_name": "WGS84",
-                    "wkt2": "GEOGCRS[\"WGS 84\", ...]",
+                    "wkt2": "PROJCRS[\"WGS 84 (3D)\", ...]",
                     "proj_string": "+proj=longlat +datum=WGS84 +no_defs +vunits=m",
                     "default_transform_to_4326": "drop height",
                     "deprecated": false
@@ -104,69 +103,15 @@
                     "uri": "http://www.opengis.net/def/crs/EPSG/0/3857",
                     "name": "WGS 84 / Pseudo-Mercator",
                     "type": "projected",
-                    "area_of_use": "World web mapping",
-                    "axis_order": "x,y → lon,lat",
+                    "area_of_use": "Area of use for EPSG:3857",
+                    "axis_order": "x,y",
                     "unit_linear": "metre",
                     "unit_angular": "",
                     "datum_name": "WGS_1984",
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / Pseudo-Mercator\", ...]",
                     "proj_string": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs",
-                    "default_transform_to_4326": "WebMercator→WGS84 spherical mercator inverse",
-                    "deprecated": false
-                  },
-                  "EPSG_25832": {
-                    "crs_id": "epsg:25832",
-                    "authority": "EPSG",
-                    "code": "25832",
-                    "uri": "http://www.opengis.net/def/crs/EPSG/0/25832",
-                    "name": "ETRS89 / UTM zone 32N",
-                    "type": "projected",
-                    "area_of_use": "Europe UTM zone 32N",
-                    "axis_order": "easting,northing",
-                    "unit_linear": "metre",
-                    "unit_angular": "",
-                    "datum_name": "ETRS89",
-                    "ellipsoid_name": "GRS80",
-                    "wkt2": "PROJCRS[\"ETRS89 / UTM zone 32N\", ...]",
-                    "proj_string": "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs",
-                    "default_transform_to_4326": "ETRS89≈WGS84 (null shift)",
-                    "deprecated": false
-                  },
-                  "EPSG_3035": {
-                    "crs_id": "epsg:3035",
-                    "authority": "EPSG",
-                    "code": "3035",
-                    "uri": "http://www.opengis.net/def/crs/EPSG/0/3035",
-                    "name": "ETRS89 / LAEA Europe",
-                    "type": "projected",
-                    "area_of_use": "Europe",
-                    "axis_order": "x,y",
-                    "unit_linear": "metre",
-                    "unit_angular": "",
-                    "datum_name": "ETRS89",
-                    "ellipsoid_name": "GRS80",
-                    "wkt2": "PROJCRS[\"ETRS89 / LAEA Europe\", ...]",
-                    "proj_string": "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs",
-                    "default_transform_to_4326": "ETRS89≈WGS84 (null shift)",
-                    "deprecated": false
-                  },
-                  "EPSG_3395": {
-                    "crs_id": "epsg:3395",
-                    "authority": "EPSG",
-                    "code": "3395",
-                    "uri": "http://www.opengis.net/def/crs/EPSG/0/3395",
-                    "name": "WGS 84 / World Mercator",
-                    "type": "projected",
-                    "area_of_use": "World",
-                    "axis_order": "x,y",
-                    "unit_linear": "metre",
-                    "unit_angular": "",
-                    "datum_name": "WGS_1984",
-                    "ellipsoid_name": "WGS84",
-                    "wkt2": "PROJCRS[\"WGS 84 / World Mercator\", ...]",
-                    "proj_string": "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "WebMercator→WGS84 inverse",
                     "deprecated": false
                   },
                   "EPSG_2154": {
@@ -184,7 +129,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"RGF93 / Lambert-93\", ...]",
                     "proj_string": "+proj=utm +zone=54 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_2193": {
@@ -202,7 +147,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"NZGD2000 / New Zealand Transverse Mercator 2000\", ...]",
                     "proj_string": "+proj=utm +zone=93 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_27700": {
@@ -220,7 +165,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"OSGB 1936 / British National Grid\", ...]",
                     "proj_string": "+proj=utm +zone=00 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_28992": {
@@ -238,7 +183,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"Amersfoort / RD New\", ...]",
                     "proj_string": "+proj=utm +zone=92 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_2056": {
@@ -252,11 +197,11 @@
                     "axis_order": "easting,northing",
                     "unit_linear": "metre",
                     "unit_angular": "",
-                    "datum_name": "WGS_1984",
-                    "ellipsoid_name": "WGS84",
+                    "datum_name": "ETRS89",
+                    "ellipsoid_name": "GRS80",
                     "wkt2": "PROJCRS[\"CH1903+ / LV95\", ...]",
                     "proj_string": "+proj=utm +zone=56 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_3414": {
@@ -274,7 +219,61 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"SVY21 / Singapore TM\", ...]",
                     "proj_string": "+proj=utm +zone=14 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
+                    "deprecated": false
+                  },
+                  "EPSG_3413": {
+                    "crs_id": "epsg:3413",
+                    "authority": "EPSG",
+                    "code": "3413",
+                    "uri": "http://www.opengis.net/def/crs/EPSG/0/3413",
+                    "name": "WGS 84 / NSIDC Sea Ice Polar Stereographic North",
+                    "type": "projected",
+                    "area_of_use": "Arctic",
+                    "axis_order": "x,y",
+                    "unit_linear": "metre",
+                    "unit_angular": "",
+                    "datum_name": "WGS_1984",
+                    "ellipsoid_name": "WGS84",
+                    "wkt2": "PROJCRS[\"WGS 84 / NSIDC Sea Ice Polar Stereographic North\", ...]",
+                    "proj_string": "+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs",
+                    "default_transform_to_4326": "to WGS84",
+                    "deprecated": false
+                  },
+                  "EPSG_3031": {
+                    "crs_id": "epsg:3031",
+                    "authority": "EPSG",
+                    "code": "3031",
+                    "uri": "http://www.opengis.net/def/crs/EPSG/0/3031",
+                    "name": "WGS 84 / Antarctic Polar Stereographic",
+                    "type": "projected",
+                    "area_of_use": "Antarctica",
+                    "axis_order": "x,y",
+                    "unit_linear": "metre",
+                    "unit_angular": "",
+                    "datum_name": "WGS_1984",
+                    "ellipsoid_name": "WGS84",
+                    "wkt2": "PROJCRS[\"WGS 84 / Antarctic Polar Stereographic\", ...]",
+                    "proj_string": "+proj=utm +zone=31 +datum=WGS84 +units=m +no_defs",
+                    "default_transform_to_4326": "to WGS84",
+                    "deprecated": false
+                  },
+                  "EPSG_3035": {
+                    "crs_id": "epsg:3035",
+                    "authority": "EPSG",
+                    "code": "3035",
+                    "uri": "http://www.opengis.net/def/crs/EPSG/0/3035",
+                    "name": "ETRS89 / LAEA Europe",
+                    "type": "projected",
+                    "area_of_use": "Europe",
+                    "axis_order": "x,y",
+                    "unit_linear": "metre",
+                    "unit_angular": "",
+                    "datum_name": "ETRS89",
+                    "ellipsoid_name": "GRS80",
+                    "wkt2": "PROJCRS[\"ETRS89 / LAEA Europe\", ...]",
+                    "proj_string": "+proj=utm +zone=35 +datum=WGS84 +units=m +no_defs",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_25831": {
@@ -292,6 +291,24 @@
                     "ellipsoid_name": "GRS80",
                     "wkt2": "PROJCRS[\"ETRS89 / UTM zone 31N\", ...]",
                     "proj_string": "+proj=utm +zone=31 +ellps=GRS80 +units=m +no_defs",
+                    "default_transform_to_4326": "ETRS89≈WGS84 (null shift)",
+                    "deprecated": false
+                  },
+                  "EPSG_25832": {
+                    "crs_id": "epsg:25832",
+                    "authority": "EPSG",
+                    "code": "25832",
+                    "uri": "http://www.opengis.net/def/crs/EPSG/0/25832",
+                    "name": "ETRS89 / UTM zone 32N",
+                    "type": "projected",
+                    "area_of_use": "Europe UTM zone 32N",
+                    "axis_order": "easting,northing",
+                    "unit_linear": "metre",
+                    "unit_angular": "",
+                    "datum_name": "ETRS89",
+                    "ellipsoid_name": "GRS80",
+                    "wkt2": "PROJCRS[\"ETRS89 / UTM zone 32N\", ...]",
+                    "proj_string": "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs",
                     "default_transform_to_4326": "ETRS89≈WGS84 (null shift)",
                     "deprecated": false
                   },
@@ -418,7 +435,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 1N\", ...]",
                     "proj_string": "+proj=utm +zone=1 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32701": {
@@ -436,7 +453,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 1S\", ...]",
                     "proj_string": "+proj=utm +zone=1 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32602": {
@@ -454,7 +471,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 2N\", ...]",
                     "proj_string": "+proj=utm +zone=2 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32702": {
@@ -472,7 +489,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 2S\", ...]",
                     "proj_string": "+proj=utm +zone=2 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32603": {
@@ -490,7 +507,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 3N\", ...]",
                     "proj_string": "+proj=utm +zone=3 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32703": {
@@ -508,7 +525,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 3S\", ...]",
                     "proj_string": "+proj=utm +zone=3 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32604": {
@@ -526,7 +543,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 4N\", ...]",
                     "proj_string": "+proj=utm +zone=4 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32704": {
@@ -544,7 +561,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 4S\", ...]",
                     "proj_string": "+proj=utm +zone=4 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32605": {
@@ -562,7 +579,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 5N\", ...]",
                     "proj_string": "+proj=utm +zone=5 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32705": {
@@ -580,7 +597,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 5S\", ...]",
                     "proj_string": "+proj=utm +zone=5 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32606": {
@@ -598,7 +615,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 6N\", ...]",
                     "proj_string": "+proj=utm +zone=6 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32706": {
@@ -616,7 +633,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 6S\", ...]",
                     "proj_string": "+proj=utm +zone=6 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32607": {
@@ -634,7 +651,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 7N\", ...]",
                     "proj_string": "+proj=utm +zone=7 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32707": {
@@ -652,7 +669,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 7S\", ...]",
                     "proj_string": "+proj=utm +zone=7 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32608": {
@@ -670,7 +687,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 8N\", ...]",
                     "proj_string": "+proj=utm +zone=8 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32708": {
@@ -688,7 +705,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 8S\", ...]",
                     "proj_string": "+proj=utm +zone=8 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32609": {
@@ -706,7 +723,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 9N\", ...]",
                     "proj_string": "+proj=utm +zone=9 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32709": {
@@ -724,7 +741,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 9S\", ...]",
                     "proj_string": "+proj=utm +zone=9 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32610": {
@@ -742,7 +759,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 10N\", ...]",
                     "proj_string": "+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32710": {
@@ -760,7 +777,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 10S\", ...]",
                     "proj_string": "+proj=utm +zone=10 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32611": {
@@ -778,7 +795,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 11N\", ...]",
                     "proj_string": "+proj=utm +zone=11 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32711": {
@@ -796,7 +813,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 11S\", ...]",
                     "proj_string": "+proj=utm +zone=11 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32612": {
@@ -814,7 +831,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 12N\", ...]",
                     "proj_string": "+proj=utm +zone=12 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32712": {
@@ -832,7 +849,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 12S\", ...]",
                     "proj_string": "+proj=utm +zone=12 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32613": {
@@ -850,7 +867,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 13N\", ...]",
                     "proj_string": "+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32713": {
@@ -868,7 +885,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 13S\", ...]",
                     "proj_string": "+proj=utm +zone=13 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32614": {
@@ -886,7 +903,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 14N\", ...]",
                     "proj_string": "+proj=utm +zone=14 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32714": {
@@ -904,7 +921,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 14S\", ...]",
                     "proj_string": "+proj=utm +zone=14 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32615": {
@@ -922,7 +939,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 15N\", ...]",
                     "proj_string": "+proj=utm +zone=15 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32715": {
@@ -940,7 +957,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 15S\", ...]",
                     "proj_string": "+proj=utm +zone=15 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32616": {
@@ -958,7 +975,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 16N\", ...]",
                     "proj_string": "+proj=utm +zone=16 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32716": {
@@ -976,7 +993,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 16S\", ...]",
                     "proj_string": "+proj=utm +zone=16 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32617": {
@@ -994,7 +1011,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 17N\", ...]",
                     "proj_string": "+proj=utm +zone=17 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32717": {
@@ -1012,7 +1029,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 17S\", ...]",
                     "proj_string": "+proj=utm +zone=17 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32618": {
@@ -1030,7 +1047,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 18N\", ...]",
                     "proj_string": "+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32718": {
@@ -1048,7 +1065,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 18S\", ...]",
                     "proj_string": "+proj=utm +zone=18 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32619": {
@@ -1066,7 +1083,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 19N\", ...]",
                     "proj_string": "+proj=utm +zone=19 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32719": {
@@ -1084,7 +1101,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 19S\", ...]",
                     "proj_string": "+proj=utm +zone=19 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32620": {
@@ -1102,7 +1119,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 20N\", ...]",
                     "proj_string": "+proj=utm +zone=20 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32720": {
@@ -1120,7 +1137,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 20S\", ...]",
                     "proj_string": "+proj=utm +zone=20 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32621": {
@@ -1138,7 +1155,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 21N\", ...]",
                     "proj_string": "+proj=utm +zone=21 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32721": {
@@ -1156,7 +1173,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 21S\", ...]",
                     "proj_string": "+proj=utm +zone=21 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32622": {
@@ -1174,7 +1191,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 22N\", ...]",
                     "proj_string": "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32722": {
@@ -1192,7 +1209,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 22S\", ...]",
                     "proj_string": "+proj=utm +zone=22 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32623": {
@@ -1210,7 +1227,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 23N\", ...]",
                     "proj_string": "+proj=utm +zone=23 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32723": {
@@ -1228,7 +1245,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 23S\", ...]",
                     "proj_string": "+proj=utm +zone=23 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32624": {
@@ -1246,7 +1263,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 24N\", ...]",
                     "proj_string": "+proj=utm +zone=24 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32724": {
@@ -1264,7 +1281,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 24S\", ...]",
                     "proj_string": "+proj=utm +zone=24 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32625": {
@@ -1282,7 +1299,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 25N\", ...]",
                     "proj_string": "+proj=utm +zone=25 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32725": {
@@ -1300,7 +1317,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 25S\", ...]",
                     "proj_string": "+proj=utm +zone=25 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32626": {
@@ -1318,7 +1335,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 26N\", ...]",
                     "proj_string": "+proj=utm +zone=26 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32726": {
@@ -1336,7 +1353,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 26S\", ...]",
                     "proj_string": "+proj=utm +zone=26 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32627": {
@@ -1354,7 +1371,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 27N\", ...]",
                     "proj_string": "+proj=utm +zone=27 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32727": {
@@ -1372,7 +1389,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 27S\", ...]",
                     "proj_string": "+proj=utm +zone=27 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32628": {
@@ -1390,7 +1407,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 28N\", ...]",
                     "proj_string": "+proj=utm +zone=28 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32728": {
@@ -1408,7 +1425,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 28S\", ...]",
                     "proj_string": "+proj=utm +zone=28 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32629": {
@@ -1426,7 +1443,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 29N\", ...]",
                     "proj_string": "+proj=utm +zone=29 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32729": {
@@ -1444,7 +1461,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 29S\", ...]",
                     "proj_string": "+proj=utm +zone=29 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32630": {
@@ -1462,7 +1479,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 30N\", ...]",
                     "proj_string": "+proj=utm +zone=30 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32730": {
@@ -1480,7 +1497,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 30S\", ...]",
                     "proj_string": "+proj=utm +zone=30 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32631": {
@@ -1498,7 +1515,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 31N\", ...]",
                     "proj_string": "+proj=utm +zone=31 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32731": {
@@ -1516,7 +1533,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 31S\", ...]",
                     "proj_string": "+proj=utm +zone=31 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32632": {
@@ -1534,7 +1551,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 32N\", ...]",
                     "proj_string": "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32732": {
@@ -1552,7 +1569,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 32S\", ...]",
                     "proj_string": "+proj=utm +zone=32 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32633": {
@@ -1570,7 +1587,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 33N\", ...]",
                     "proj_string": "+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32733": {
@@ -1588,7 +1605,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 33S\", ...]",
                     "proj_string": "+proj=utm +zone=33 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32634": {
@@ -1606,7 +1623,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 34N\", ...]",
                     "proj_string": "+proj=utm +zone=34 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32734": {
@@ -1624,7 +1641,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 34S\", ...]",
                     "proj_string": "+proj=utm +zone=34 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32635": {
@@ -1642,7 +1659,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 35N\", ...]",
                     "proj_string": "+proj=utm +zone=35 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32735": {
@@ -1660,7 +1677,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 35S\", ...]",
                     "proj_string": "+proj=utm +zone=35 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32636": {
@@ -1678,7 +1695,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 36N\", ...]",
                     "proj_string": "+proj=utm +zone=36 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32736": {
@@ -1696,7 +1713,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 36S\", ...]",
                     "proj_string": "+proj=utm +zone=36 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32637": {
@@ -1714,7 +1731,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 37N\", ...]",
                     "proj_string": "+proj=utm +zone=37 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32737": {
@@ -1732,7 +1749,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 37S\", ...]",
                     "proj_string": "+proj=utm +zone=37 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32638": {
@@ -1750,7 +1767,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 38N\", ...]",
                     "proj_string": "+proj=utm +zone=38 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32738": {
@@ -1768,7 +1785,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 38S\", ...]",
                     "proj_string": "+proj=utm +zone=38 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32639": {
@@ -1786,7 +1803,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 39N\", ...]",
                     "proj_string": "+proj=utm +zone=39 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32739": {
@@ -1804,7 +1821,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 39S\", ...]",
                     "proj_string": "+proj=utm +zone=39 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32640": {
@@ -1822,7 +1839,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 40N\", ...]",
                     "proj_string": "+proj=utm +zone=40 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32740": {
@@ -1840,7 +1857,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 40S\", ...]",
                     "proj_string": "+proj=utm +zone=40 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32641": {
@@ -1858,7 +1875,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 41N\", ...]",
                     "proj_string": "+proj=utm +zone=41 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32741": {
@@ -1876,7 +1893,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 41S\", ...]",
                     "proj_string": "+proj=utm +zone=41 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32642": {
@@ -1894,7 +1911,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 42N\", ...]",
                     "proj_string": "+proj=utm +zone=42 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32742": {
@@ -1912,7 +1929,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 42S\", ...]",
                     "proj_string": "+proj=utm +zone=42 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32643": {
@@ -1930,7 +1947,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 43N\", ...]",
                     "proj_string": "+proj=utm +zone=43 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32743": {
@@ -1948,7 +1965,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 43S\", ...]",
                     "proj_string": "+proj=utm +zone=43 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32644": {
@@ -1966,7 +1983,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 44N\", ...]",
                     "proj_string": "+proj=utm +zone=44 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32744": {
@@ -1984,7 +2001,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 44S\", ...]",
                     "proj_string": "+proj=utm +zone=44 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32645": {
@@ -2002,7 +2019,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 45N\", ...]",
                     "proj_string": "+proj=utm +zone=45 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32745": {
@@ -2020,7 +2037,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 45S\", ...]",
                     "proj_string": "+proj=utm +zone=45 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32646": {
@@ -2038,7 +2055,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 46N\", ...]",
                     "proj_string": "+proj=utm +zone=46 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32746": {
@@ -2056,7 +2073,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 46S\", ...]",
                     "proj_string": "+proj=utm +zone=46 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32647": {
@@ -2074,7 +2091,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 47N\", ...]",
                     "proj_string": "+proj=utm +zone=47 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32747": {
@@ -2092,7 +2109,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 47S\", ...]",
                     "proj_string": "+proj=utm +zone=47 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32648": {
@@ -2110,7 +2127,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 48N\", ...]",
                     "proj_string": "+proj=utm +zone=48 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32748": {
@@ -2128,7 +2145,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 48S\", ...]",
                     "proj_string": "+proj=utm +zone=48 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32649": {
@@ -2146,7 +2163,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 49N\", ...]",
                     "proj_string": "+proj=utm +zone=49 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32749": {
@@ -2164,7 +2181,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 49S\", ...]",
                     "proj_string": "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32650": {
@@ -2182,7 +2199,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 50N\", ...]",
                     "proj_string": "+proj=utm +zone=50 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32750": {
@@ -2200,7 +2217,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 50S\", ...]",
                     "proj_string": "+proj=utm +zone=50 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32651": {
@@ -2218,7 +2235,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 51N\", ...]",
                     "proj_string": "+proj=utm +zone=51 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32751": {
@@ -2236,7 +2253,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 51S\", ...]",
                     "proj_string": "+proj=utm +zone=51 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32652": {
@@ -2254,7 +2271,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 52N\", ...]",
                     "proj_string": "+proj=utm +zone=52 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32752": {
@@ -2272,7 +2289,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 52S\", ...]",
                     "proj_string": "+proj=utm +zone=52 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32653": {
@@ -2290,7 +2307,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 53N\", ...]",
                     "proj_string": "+proj=utm +zone=53 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32753": {
@@ -2308,7 +2325,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 53S\", ...]",
                     "proj_string": "+proj=utm +zone=53 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32654": {
@@ -2326,7 +2343,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 54N\", ...]",
                     "proj_string": "+proj=utm +zone=54 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32754": {
@@ -2344,7 +2361,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 54S\", ...]",
                     "proj_string": "+proj=utm +zone=54 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32655": {
@@ -2362,7 +2379,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 55N\", ...]",
                     "proj_string": "+proj=utm +zone=55 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32755": {
@@ -2380,7 +2397,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 55S\", ...]",
                     "proj_string": "+proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32656": {
@@ -2398,7 +2415,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 56N\", ...]",
                     "proj_string": "+proj=utm +zone=56 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32756": {
@@ -2416,7 +2433,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 56S\", ...]",
                     "proj_string": "+proj=utm +zone=56 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32657": {
@@ -2434,7 +2451,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 57N\", ...]",
                     "proj_string": "+proj=utm +zone=57 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32757": {
@@ -2452,7 +2469,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 57S\", ...]",
                     "proj_string": "+proj=utm +zone=57 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32658": {
@@ -2470,7 +2487,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 58N\", ...]",
                     "proj_string": "+proj=utm +zone=58 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32758": {
@@ -2488,7 +2505,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 58S\", ...]",
                     "proj_string": "+proj=utm +zone=58 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32659": {
@@ -2506,7 +2523,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 59N\", ...]",
                     "proj_string": "+proj=utm +zone=59 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32759": {
@@ -2524,7 +2541,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 59S\", ...]",
                     "proj_string": "+proj=utm +zone=59 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32660": {
@@ -2542,7 +2559,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 60N\", ...]",
                     "proj_string": "+proj=utm +zone=60 +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   },
                   "EPSG_32760": {
@@ -2560,7 +2577,7 @@
                     "ellipsoid_name": "WGS84",
                     "wkt2": "PROJCRS[\"WGS 84 / UTM zone 60S\", ...]",
                     "proj_string": "+proj=utm +zone=60 +south +datum=WGS84 +units=m +no_defs",
-                    "default_transform_to_4326": "UTM→WGS84 inverse",
+                    "default_transform_to_4326": "to WGS84",
                     "deprecated": false
                   }
                 }
@@ -2583,51 +2600,18 @@
                     "source_crs": "epsg:3857",
                     "target_crs": "epsg:4326",
                     "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 0.5,
                     "grid_file": "",
                     "area_of_use": "Region-specific",
                     "deprecated": false
                   },
-                  "TRANS_epsg_25832_TO_epsg_4326": {
-                    "transform_id": "TRANS_epsg_25832_TO_epsg_4326",
-                    "source_crs": "epsg:25832",
+                  "TRANS_epsg_3035_TO_epsg_4326": {
+                    "transform_id": "TRANS_epsg_3035_TO_epsg_4326",
+                    "source_crs": "epsg:3035",
                     "target_crs": "epsg:4326",
                     "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
-                    "accuracy_m": 0.5,
-                    "grid_file": "",
-                    "area_of_use": "Region-specific",
-                    "deprecated": false
-                  },
-                  "TRANS_epsg_2193_TO_epsg_4326": {
-                    "transform_id": "TRANS_epsg_2193_TO_epsg_4326",
-                    "source_crs": "epsg:2193",
-                    "target_crs": "epsg:4326",
-                    "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
-                    "accuracy_m": 0.5,
-                    "grid_file": "",
-                    "area_of_use": "Region-specific",
-                    "deprecated": false
-                  },
-                  "TRANS_epsg_27700_TO_epsg_4326": {
-                    "transform_id": "TRANS_epsg_27700_TO_epsg_4326",
-                    "source_crs": "epsg:27700",
-                    "target_crs": "epsg:4326",
-                    "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
-                    "accuracy_m": 0.5,
-                    "grid_file": "",
-                    "area_of_use": "Region-specific",
-                    "deprecated": false
-                  },
-                  "TRANS_epsg_28992_TO_epsg_4326": {
-                    "transform_id": "TRANS_epsg_28992_TO_epsg_4326",
-                    "source_crs": "epsg:28992",
-                    "target_crs": "epsg:4326",
-                    "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 0.5,
                     "grid_file": "",
                     "area_of_use": "Region-specific",
@@ -2638,7 +2622,7 @@
                     "source_crs": "epsg:2154",
                     "target_crs": "epsg:4326",
                     "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 0.5,
                     "grid_file": "",
                     "area_of_use": "Region-specific",
@@ -2649,7 +2633,40 @@
                     "source_crs": "epsg:2056",
                     "target_crs": "epsg:4326",
                     "method": "Inverse projection + datum shift",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
+                    "accuracy_m": 0.5,
+                    "grid_file": "",
+                    "area_of_use": "Region-specific",
+                    "deprecated": false
+                  },
+                  "TRANS_epsg_27700_TO_epsg_4326": {
+                    "transform_id": "TRANS_epsg_27700_TO_epsg_4326",
+                    "source_crs": "epsg:27700",
+                    "target_crs": "epsg:4326",
+                    "method": "Inverse projection + datum shift",
+                    "parameters": "default",
+                    "accuracy_m": 0.5,
+                    "grid_file": "",
+                    "area_of_use": "Region-specific",
+                    "deprecated": false
+                  },
+                  "TRANS_epsg_28992_TO_epsg_4326": {
+                    "transform_id": "TRANS_epsg_28992_TO_epsg_4326",
+                    "source_crs": "epsg:28992",
+                    "target_crs": "epsg:4326",
+                    "method": "Inverse projection + datum shift",
+                    "parameters": "default",
+                    "accuracy_m": 0.5,
+                    "grid_file": "",
+                    "area_of_use": "Region-specific",
+                    "deprecated": false
+                  },
+                  "TRANS_epsg_2193_TO_epsg_4326": {
+                    "transform_id": "TRANS_epsg_2193_TO_epsg_4326",
+                    "source_crs": "epsg:2193",
+                    "target_crs": "epsg:4326",
+                    "method": "Inverse projection + datum shift",
+                    "parameters": "default",
                     "accuracy_m": 0.5,
                     "grid_file": "",
                     "area_of_use": "Region-specific",
@@ -2660,7 +2677,7 @@
                     "source_crs": "epsg:32601",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 1N",
@@ -2671,7 +2688,7 @@
                     "source_crs": "epsg:32701",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 1S",
@@ -2682,7 +2699,7 @@
                     "source_crs": "epsg:32602",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 2N",
@@ -2693,7 +2710,7 @@
                     "source_crs": "epsg:32702",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 2S",
@@ -2704,7 +2721,7 @@
                     "source_crs": "epsg:32603",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 3N",
@@ -2715,7 +2732,7 @@
                     "source_crs": "epsg:32703",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 3S",
@@ -2726,7 +2743,7 @@
                     "source_crs": "epsg:32604",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 4N",
@@ -2737,7 +2754,7 @@
                     "source_crs": "epsg:32704",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 4S",
@@ -2748,7 +2765,7 @@
                     "source_crs": "epsg:32605",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 5N",
@@ -2759,7 +2776,7 @@
                     "source_crs": "epsg:32705",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 5S",
@@ -2770,7 +2787,7 @@
                     "source_crs": "epsg:32606",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 6N",
@@ -2781,7 +2798,7 @@
                     "source_crs": "epsg:32706",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 6S",
@@ -2792,7 +2809,7 @@
                     "source_crs": "epsg:32607",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 7N",
@@ -2803,7 +2820,7 @@
                     "source_crs": "epsg:32707",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 7S",
@@ -2814,7 +2831,7 @@
                     "source_crs": "epsg:32608",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 8N",
@@ -2825,7 +2842,7 @@
                     "source_crs": "epsg:32708",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 8S",
@@ -2836,7 +2853,7 @@
                     "source_crs": "epsg:32609",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 9N",
@@ -2847,7 +2864,7 @@
                     "source_crs": "epsg:32709",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 9S",
@@ -2858,7 +2875,7 @@
                     "source_crs": "epsg:32610",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 10N",
@@ -2869,7 +2886,7 @@
                     "source_crs": "epsg:32710",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 10S",
@@ -2880,7 +2897,7 @@
                     "source_crs": "epsg:32611",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 11N",
@@ -2891,7 +2908,7 @@
                     "source_crs": "epsg:32711",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 11S",
@@ -2902,7 +2919,7 @@
                     "source_crs": "epsg:32612",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 12N",
@@ -2913,7 +2930,7 @@
                     "source_crs": "epsg:32712",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 12S",
@@ -2924,7 +2941,7 @@
                     "source_crs": "epsg:32613",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 13N",
@@ -2935,7 +2952,7 @@
                     "source_crs": "epsg:32713",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 13S",
@@ -2946,7 +2963,7 @@
                     "source_crs": "epsg:32614",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 14N",
@@ -2957,7 +2974,7 @@
                     "source_crs": "epsg:32714",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 14S",
@@ -2968,7 +2985,7 @@
                     "source_crs": "epsg:32615",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 15N",
@@ -2979,7 +2996,7 @@
                     "source_crs": "epsg:32715",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 15S",
@@ -2990,7 +3007,7 @@
                     "source_crs": "epsg:32616",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 16N",
@@ -3001,7 +3018,7 @@
                     "source_crs": "epsg:32716",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 16S",
@@ -3012,7 +3029,7 @@
                     "source_crs": "epsg:32617",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 17N",
@@ -3023,7 +3040,7 @@
                     "source_crs": "epsg:32717",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 17S",
@@ -3034,7 +3051,7 @@
                     "source_crs": "epsg:32618",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 18N",
@@ -3045,7 +3062,7 @@
                     "source_crs": "epsg:32718",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 18S",
@@ -3056,7 +3073,7 @@
                     "source_crs": "epsg:32619",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 19N",
@@ -3067,7 +3084,7 @@
                     "source_crs": "epsg:32719",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 19S",
@@ -3078,7 +3095,7 @@
                     "source_crs": "epsg:32620",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 20N",
@@ -3089,7 +3106,7 @@
                     "source_crs": "epsg:32720",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 20S",
@@ -3100,7 +3117,7 @@
                     "source_crs": "epsg:32621",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 21N",
@@ -3111,7 +3128,7 @@
                     "source_crs": "epsg:32721",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 21S",
@@ -3122,7 +3139,7 @@
                     "source_crs": "epsg:32622",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 22N",
@@ -3133,7 +3150,7 @@
                     "source_crs": "epsg:32722",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 22S",
@@ -3144,7 +3161,7 @@
                     "source_crs": "epsg:32623",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 23N",
@@ -3155,7 +3172,7 @@
                     "source_crs": "epsg:32723",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 23S",
@@ -3166,7 +3183,7 @@
                     "source_crs": "epsg:32624",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 24N",
@@ -3177,7 +3194,7 @@
                     "source_crs": "epsg:32724",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 24S",
@@ -3188,7 +3205,7 @@
                     "source_crs": "epsg:32625",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 25N",
@@ -3199,7 +3216,7 @@
                     "source_crs": "epsg:32725",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 25S",
@@ -3210,7 +3227,7 @@
                     "source_crs": "epsg:32626",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 26N",
@@ -3221,7 +3238,7 @@
                     "source_crs": "epsg:32726",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 26S",
@@ -3232,7 +3249,7 @@
                     "source_crs": "epsg:32627",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 27N",
@@ -3243,7 +3260,7 @@
                     "source_crs": "epsg:32727",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 27S",
@@ -3254,7 +3271,7 @@
                     "source_crs": "epsg:32628",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 28N",
@@ -3265,7 +3282,7 @@
                     "source_crs": "epsg:32728",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 28S",
@@ -3276,7 +3293,7 @@
                     "source_crs": "epsg:32629",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 29N",
@@ -3287,7 +3304,7 @@
                     "source_crs": "epsg:32729",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 29S",
@@ -3298,7 +3315,7 @@
                     "source_crs": "epsg:32630",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 30N",
@@ -3309,7 +3326,7 @@
                     "source_crs": "epsg:32730",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 30S",
@@ -3320,7 +3337,7 @@
                     "source_crs": "epsg:32631",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 31N",
@@ -3331,7 +3348,7 @@
                     "source_crs": "epsg:32731",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 31S",
@@ -3342,7 +3359,7 @@
                     "source_crs": "epsg:32632",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 32N",
@@ -3353,7 +3370,7 @@
                     "source_crs": "epsg:32732",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 32S",
@@ -3364,7 +3381,7 @@
                     "source_crs": "epsg:32633",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 33N",
@@ -3375,7 +3392,7 @@
                     "source_crs": "epsg:32733",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 33S",
@@ -3386,7 +3403,7 @@
                     "source_crs": "epsg:32634",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 34N",
@@ -3397,7 +3414,7 @@
                     "source_crs": "epsg:32734",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 34S",
@@ -3408,7 +3425,7 @@
                     "source_crs": "epsg:32635",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 35N",
@@ -3419,7 +3436,7 @@
                     "source_crs": "epsg:32735",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 35S",
@@ -3430,7 +3447,7 @@
                     "source_crs": "epsg:32636",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 36N",
@@ -3441,7 +3458,7 @@
                     "source_crs": "epsg:32736",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 36S",
@@ -3452,7 +3469,7 @@
                     "source_crs": "epsg:32637",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 37N",
@@ -3463,7 +3480,7 @@
                     "source_crs": "epsg:32737",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 37S",
@@ -3474,7 +3491,7 @@
                     "source_crs": "epsg:32638",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 38N",
@@ -3485,7 +3502,7 @@
                     "source_crs": "epsg:32738",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 38S",
@@ -3496,7 +3513,7 @@
                     "source_crs": "epsg:32639",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 39N",
@@ -3507,7 +3524,7 @@
                     "source_crs": "epsg:32739",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 39S",
@@ -3518,7 +3535,7 @@
                     "source_crs": "epsg:32640",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 40N",
@@ -3529,7 +3546,7 @@
                     "source_crs": "epsg:32740",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 40S",
@@ -3540,7 +3557,7 @@
                     "source_crs": "epsg:32641",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 41N",
@@ -3551,7 +3568,7 @@
                     "source_crs": "epsg:32741",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 41S",
@@ -3562,7 +3579,7 @@
                     "source_crs": "epsg:32642",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 42N",
@@ -3573,7 +3590,7 @@
                     "source_crs": "epsg:32742",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 42S",
@@ -3584,7 +3601,7 @@
                     "source_crs": "epsg:32643",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 43N",
@@ -3595,7 +3612,7 @@
                     "source_crs": "epsg:32743",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 43S",
@@ -3606,7 +3623,7 @@
                     "source_crs": "epsg:32644",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 44N",
@@ -3617,7 +3634,7 @@
                     "source_crs": "epsg:32744",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 44S",
@@ -3628,7 +3645,7 @@
                     "source_crs": "epsg:32645",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 45N",
@@ -3639,7 +3656,7 @@
                     "source_crs": "epsg:32745",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 45S",
@@ -3650,7 +3667,7 @@
                     "source_crs": "epsg:32646",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 46N",
@@ -3661,7 +3678,7 @@
                     "source_crs": "epsg:32746",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 46S",
@@ -3672,7 +3689,7 @@
                     "source_crs": "epsg:32647",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 47N",
@@ -3683,7 +3700,7 @@
                     "source_crs": "epsg:32747",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 47S",
@@ -3694,7 +3711,7 @@
                     "source_crs": "epsg:32648",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 48N",
@@ -3705,7 +3722,7 @@
                     "source_crs": "epsg:32748",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 48S",
@@ -3716,7 +3733,7 @@
                     "source_crs": "epsg:32649",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 49N",
@@ -3727,7 +3744,7 @@
                     "source_crs": "epsg:32749",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 49S",
@@ -3738,7 +3755,7 @@
                     "source_crs": "epsg:32650",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 50N",
@@ -3749,7 +3766,7 @@
                     "source_crs": "epsg:32750",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 50S",
@@ -3760,7 +3777,7 @@
                     "source_crs": "epsg:32651",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 51N",
@@ -3771,7 +3788,7 @@
                     "source_crs": "epsg:32751",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 51S",
@@ -3782,7 +3799,7 @@
                     "source_crs": "epsg:32652",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 52N",
@@ -3793,7 +3810,7 @@
                     "source_crs": "epsg:32752",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 52S",
@@ -3804,7 +3821,7 @@
                     "source_crs": "epsg:32653",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 53N",
@@ -3815,7 +3832,7 @@
                     "source_crs": "epsg:32753",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 53S",
@@ -3826,7 +3843,7 @@
                     "source_crs": "epsg:32654",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 54N",
@@ -3837,7 +3854,7 @@
                     "source_crs": "epsg:32754",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 54S",
@@ -3848,7 +3865,7 @@
                     "source_crs": "epsg:32655",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 55N",
@@ -3859,7 +3876,7 @@
                     "source_crs": "epsg:32755",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 55S",
@@ -3870,7 +3887,7 @@
                     "source_crs": "epsg:32656",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 56N",
@@ -3881,7 +3898,7 @@
                     "source_crs": "epsg:32756",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 56S",
@@ -3892,7 +3909,7 @@
                     "source_crs": "epsg:32657",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 57N",
@@ -3903,7 +3920,7 @@
                     "source_crs": "epsg:32757",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 57S",
@@ -3914,7 +3931,7 @@
                     "source_crs": "epsg:32658",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 58N",
@@ -3925,7 +3942,7 @@
                     "source_crs": "epsg:32758",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 58S",
@@ -3936,7 +3953,7 @@
                     "source_crs": "epsg:32659",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 59N",
@@ -3947,7 +3964,7 @@
                     "source_crs": "epsg:32759",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 59S",
@@ -3958,7 +3975,7 @@
                     "source_crs": "epsg:32660",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 60N",
@@ -3969,7 +3986,7 @@
                     "source_crs": "epsg:32760",
                     "target_crs": "epsg:4326",
                     "method": "UTM inverse",
-                    "parameters": "dx=0;dy=0;dz=0;rx=0;ry=0;rz=0;ds=0",
+                    "parameters": "default",
                     "accuracy_m": 1.0,
                     "grid_file": "",
                     "area_of_use": "UTM zone 60S",
@@ -4219,22 +4236,22 @@
                 },
                 "instances": {
                   "WebMercatorQuad": {
-                    "tms_id": "tile:tms_webmercatorquad",
+                    "tms_id": "sp:tms_webmercatorquad",
                     "identifier": "WebMercatorQuad",
                     "crs": "epsg:3857",
                     "tile_width_px": 256,
                     "tile_height_px": 256,
                     "scale_denominators": "559082264.029, 279541132.015, 139770566.007, 69885283.004, 34942641.502, 17471320.751, 8735660.375, 4367830.188, 2183915.094, 1091957.547, 545978.773, 272989.387, 136494.693, 68247.347, 34123.673, 17061.837, 8530.918, 4265.459, 2132.730, 1066.365, 533.182, 266.591, 133.296",
-                    "matrix_defs_json": "{\"0\": {\"matrixWidth\": 1, \"matrixHeight\": 1, \"scaleDenominator\": 559082264.029, \"tileWidth\": 256, \"tileHeight\": 256}, \"1\": {\"matrixWidth\": 2, \"matrixHeight\": 2, \"scaleDenominator\": 279541132.0145, \"tileWidth\": 256, \"tileHeight\": 256}, \"2\": {\"matrixWidth\": 4, \"matrixHeight\": 4, \"scaleDenominator\": 139770566.00725, \"tileWidth\": 256, \"tileHeight\": 256}, \"3\": {\"matrixWidth\": 8, \"matrixHeight\": 8, \"scaleDenominator\": 69885283.003625, \"tileWidth\": 256, \"tileHeight\": 256}, \"4\": {\"matrixWidth\": 16, \"matrixHeight\": 16, \"scaleDenominator\": 34942641.5018125, \"tileWidth\": 256, \"tileHeight\": 256}, \"5\": {\"matrixWidth\": 32, \"matrixHeight\": 32, \"scaleDenominator\": 17471320.75090625, \"tileWidth\": 256, \"tileHeight\": 256}, \"6\": {\"matrixWidth\": 64, \"matrixHeight\": 64, \"scaleDenominator\": 8735660.375453126, \"tileWidth\": 256, \"tileHeight\": 256}, \"7\": {\"matrixWidth\": 128, \"matrixHeight\": 128, \"scaleDenominator\": 4367830.187726563, \"tileWidth\": 256, \"tileHeight\": 256}, \"8\": {\"matrixWidth\": 256, \"matrixHeight\": 256, \"scaleDenominator\": 2183915.0938632814, \"tileWidth\": 256, \"tileHeight\": 256}, \"9\": {\"matrixWidth\": 512, \"matrixHeight\": 512, \"scaleDenominator\": 1091957.5469316407, \"tileWidth\": 256, \"tileHeight\": 256}, \"10\": {\"matrixWidth\": 1024, \"matrixHeight\": 1024, \"scaleDenominator\": 545978.7734658204, \"tileWidth\": 256, \"tileHeight\": 256}, \"11\": {\"matrixWidth\": 2048, \"matrixHeight\": 2048, \"scaleDenominator\": 272989.3867329102, \"tileWidth\": 256, \"tileHeight\": 256}, \"12\": {\"matrixWidth\": 4096, \"matrixHeight\": 4096, \"scaleDenominator\": 136494.6933664551, \"tileWidth\": 256, \"tileHeight\": 256}, \"13\": {\"matrixWidth\": 8192, \"matrixHeight\": 8192, \"scaleDenominator\": 68247.34668322754, \"tileWidth\": 256, \"tileHeight\": 256}, \"14\": {\"matrixWidth\": 16384, \"matrixHeight\": 16384, \"scaleDenominator\": 34123.67334161377, \"tileWidth\": 256, \"tileHeight\": 256}, \"15\": {\"matrixWidth\": 32768, \"matrixHeight\": 32768, \"scaleDenominator\": 17061.836670806886, \"tileWidth\": 256, \"tileHeight\": 256}, \"16\": {\"matrixWidth\": 65536, \"matrixHeight\": 65536, \"scaleDenominator\": 8530.918335403443, \"tileWidth\": 256, \"tileHeight\": 256}, \"17\": {\"matrixWidth\": 131072, \"matrixHeight\": 131072, \"scaleDenominator\": 4265.4591677017215, \"tileWidth\": 256, \"tileHeight\": 256}, \"18\": {\"matrixWidth\": 262144, \"matrixHeight\": 262144, \"scaleDenominator\": 2132.7295838508608, \"tileWidth\": 256, \"tileHeight\": 256}, \"19\": {\"matrixWidth\": 524288, \"matrixHeight\": 524288, \"scaleDenominator\": 1066.3647919254304, \"tileWidth\": 256, \"tileHeight\": 256}, \"20\": {\"matrixWidth\": 1048576, \"matrixHeight\": 1048576, \"scaleDenominator\": 533.1823959627152, \"tileWidth\": 256, \"tileHeight\": 256}, \"21\": {\"matrixWidth\": 2097152, \"matrixHeight\": 2097152, \"scaleDenominator\": 266.5911979813576, \"tileWidth\": 256, \"tileHeight\": 256}, \"22\": {\"matrixWidth\": 4194304, \"matrixHeight\": 4194304, \"scaleDenominator\": 133.2955989906788, \"tileWidth\": 256, \"tileHeight\": 256}}"
+                    "matrix_defs_json": "{\"0\": {\"matrixWidth\": 1, \"matrixHeight\": 1, \"scaleDenominator\": 559082264.029, \"tileWidth\": 256, \"tileHeight\": 256}, \"1\": {\"matrixWidth\": 2, \"matrixHeight\": 2, \"scaleDenominator\": 279541132.0145, \"tileWidth\": 256, \"tileHeight\": 256}, \"2\": {\"matrixWidth\": 4, \"matrixHeight\": 4, \"scaleDenominator\": 139770566.00725, \"tileWidth\": 256, \"tileHeight\": 256}, \"3\": {\"matrixWidth\": 8, \"matrixHeight\": 8, \"scaleDenominator\": 69885283.003625, \"tileWidth\": 256, \"tileHeight\": 256}, \"4\": {\"matrixWidth\": 16, \"matrixHeight\": 16, \"scaleDenominator\": 34942641.501813, \"tileWidth\": 256, \"tileHeight\": 256}, \"5\": {\"matrixWidth\": 32, \"matrixHeight\": 32, \"scaleDenominator\": 17471320.750906, \"tileWidth\": 256, \"tileHeight\": 256}, \"6\": {\"matrixWidth\": 64, \"matrixHeight\": 64, \"scaleDenominator\": 8735660.375453, \"tileWidth\": 256, \"tileHeight\": 256}, \"7\": {\"matrixWidth\": 128, \"matrixHeight\": 128, \"scaleDenominator\": 4367830.187727, \"tileWidth\": 256, \"tileHeight\": 256}, \"8\": {\"matrixWidth\": 256, \"matrixHeight\": 256, \"scaleDenominator\": 2183915.093863, \"tileWidth\": 256, \"tileHeight\": 256}, \"9\": {\"matrixWidth\": 512, \"matrixHeight\": 512, \"scaleDenominator\": 1091957.546932, \"tileWidth\": 256, \"tileHeight\": 256}, \"10\": {\"matrixWidth\": 1024, \"matrixHeight\": 1024, \"scaleDenominator\": 545978.773466, \"tileWidth\": 256, \"tileHeight\": 256}, \"11\": {\"matrixWidth\": 2048, \"matrixHeight\": 2048, \"scaleDenominator\": 272989.386733, \"tileWidth\": 256, \"tileHeight\": 256}, \"12\": {\"matrixWidth\": 4096, \"matrixHeight\": 4096, \"scaleDenominator\": 136494.693366, \"tileWidth\": 256, \"tileHeight\": 256}, \"13\": {\"matrixWidth\": 8192, \"matrixHeight\": 8192, \"scaleDenominator\": 68247.346683, \"tileWidth\": 256, \"tileHeight\": 256}, \"14\": {\"matrixWidth\": 16384, \"matrixHeight\": 16384, \"scaleDenominator\": 34123.673342, \"tileWidth\": 256, \"tileHeight\": 256}, \"15\": {\"matrixWidth\": 32768, \"matrixHeight\": 32768, \"scaleDenominator\": 17061.836671, \"tileWidth\": 256, \"tileHeight\": 256}, \"16\": {\"matrixWidth\": 65536, \"matrixHeight\": 65536, \"scaleDenominator\": 8530.918335, \"tileWidth\": 256, \"tileHeight\": 256}, \"17\": {\"matrixWidth\": 131072, \"matrixHeight\": 131072, \"scaleDenominator\": 4265.459168, \"tileWidth\": 256, \"tileHeight\": 256}, \"18\": {\"matrixWidth\": 262144, \"matrixHeight\": 262144, \"scaleDenominator\": 2132.729584, \"tileWidth\": 256, \"tileHeight\": 256}, \"19\": {\"matrixWidth\": 524288, \"matrixHeight\": 524288, \"scaleDenominator\": 1066.364792, \"tileWidth\": 256, \"tileHeight\": 256}, \"20\": {\"matrixWidth\": 1048576, \"matrixHeight\": 1048576, \"scaleDenominator\": 533.182396, \"tileWidth\": 256, \"tileHeight\": 256}, \"21\": {\"matrixWidth\": 2097152, \"matrixHeight\": 2097152, \"scaleDenominator\": 266.591198, \"tileWidth\": 256, \"tileHeight\": 256}, \"22\": {\"matrixWidth\": 4194304, \"matrixHeight\": 4194304, \"scaleDenominator\": 133.295599, \"tileWidth\": 256, \"tileHeight\": 256}}"
                   },
                   "WorldCRS84Quad": {
-                    "tms_id": "tile:tms_worldcrs84quad",
+                    "tms_id": "sp:tms_worldcrs84quad",
                     "identifier": "WorldCRS84Quad",
                     "crs": "epsg:4326",
                     "tile_width_px": 256,
                     "tile_height_px": 256,
                     "scale_denominators": "279541132.015, 139770566.007, 69885283.004, 34942641.502, 17471320.751, 8735660.375, 4367830.188, 2183915.094, 1091957.547, 545978.773, 272989.387, 136494.693, 68247.347, 34123.673, 17061.837, 8530.918, 4265.459, 2132.730, 1066.365, 533.182, 266.591, 133.296, 66.648",
-                    "matrix_defs_json": "{\"0\": {\"matrixWidth\": 1, \"matrixHeight\": 1, \"scaleDenominator\": 279541132.015, \"tileWidth\": 256, \"tileHeight\": 256}, \"1\": {\"matrixWidth\": 2, \"matrixHeight\": 2, \"scaleDenominator\": 139770566.0075, \"tileWidth\": 256, \"tileHeight\": 256}, \"2\": {\"matrixWidth\": 4, \"matrixHeight\": 4, \"scaleDenominator\": 69885283.00375, \"tileWidth\": 256, \"tileHeight\": 256}, \"3\": {\"matrixWidth\": 8, \"matrixHeight\": 8, \"scaleDenominator\": 34942641.501875, \"tileWidth\": 256, \"tileHeight\": 256}, \"4\": {\"matrixWidth\": 16, \"matrixHeight\": 16, \"scaleDenominator\": 17471320.7509375, \"tileWidth\": 256, \"tileHeight\": 256}, \"5\": {\"matrixWidth\": 32, \"matrixHeight\": 32, \"scaleDenominator\": 8735660.37546875, \"tileWidth\": 256, \"tileHeight\": 256}, \"6\": {\"matrixWidth\": 64, \"matrixHeight\": 64, \"scaleDenominator\": 4367830.187734375, \"tileWidth\": 256, \"tileHeight\": 256}, \"7\": {\"matrixWidth\": 128, \"matrixHeight\": 128, \"scaleDenominator\": 2183915.0938671874, \"tileWidth\": 256, \"tileHeight\": 256}, \"8\": {\"matrixWidth\": 256, \"matrixHeight\": 256, \"scaleDenominator\": 1091957.5469335937, \"tileWidth\": 256, \"tileHeight\": 256}, \"9\": {\"matrixWidth\": 512, \"matrixHeight\": 512, \"scaleDenominator\": 545978.7734667968, \"tileWidth\": 256, \"tileHeight\": 256}, \"10\": {\"matrixWidth\": 1024, \"matrixHeight\": 1024, \"scaleDenominator\": 272989.3867333984, \"tileWidth\": 256, \"tileHeight\": 256}, \"11\": {\"matrixWidth\": 2048, \"matrixHeight\": 2048, \"scaleDenominator\": 136494.6933666992, \"tileWidth\": 256, \"tileHeight\": 256}, \"12\": {\"matrixWidth\": 4096, \"matrixHeight\": 4096, \"scaleDenominator\": 68247.3466833496, \"tileWidth\": 256, \"tileHeight\": 256}, \"13\": {\"matrixWidth\": 8192, \"matrixHeight\": 8192, \"scaleDenominator\": 34123.6733416748, \"tileWidth\": 256, \"tileHeight\": 256}, \"14\": {\"matrixWidth\": 16384, \"matrixHeight\": 16384, \"scaleDenominator\": 17061.8366708374, \"tileWidth\": 256, \"tileHeight\": 256}, \"15\": {\"matrixWidth\": 32768, \"matrixHeight\": 32768, \"scaleDenominator\": 8530.9183354187, \"tileWidth\": 256, \"tileHeight\": 256}, \"16\": {\"matrixWidth\": 65536, \"matrixHeight\": 65536, \"scaleDenominator\": 4265.45916770935, \"tileWidth\": 256, \"tileHeight\": 256}, \"17\": {\"matrixWidth\": 131072, \"matrixHeight\": 131072, \"scaleDenominator\": 2132.729583854675, \"tileWidth\": 256, \"tileHeight\": 256}, \"18\": {\"matrixWidth\": 262144, \"matrixHeight\": 262144, \"scaleDenominator\": 1066.3647919273376, \"tileWidth\": 256, \"tileHeight\": 256}, \"19\": {\"matrixWidth\": 524288, \"matrixHeight\": 524288, \"scaleDenominator\": 533.1823959636688, \"tileWidth\": 256, \"tileHeight\": 256}, \"20\": {\"matrixWidth\": 1048576, \"matrixHeight\": 1048576, \"scaleDenominator\": 266.5911979818344, \"tileWidth\": 256, \"tileHeight\": 256}, \"21\": {\"matrixWidth\": 2097152, \"matrixHeight\": 2097152, \"scaleDenominator\": 133.2955989909172, \"tileWidth\": 256, \"tileHeight\": 256}, \"22\": {\"matrixWidth\": 4194304, \"matrixHeight\": 4194304, \"scaleDenominator\": 66.6477994954586, \"tileWidth\": 256, \"tileHeight\": 256}}"
+                    "matrix_defs_json": "{\"0\": {\"matrixWidth\": 1, \"matrixHeight\": 1, \"scaleDenominator\": 279541132.015, \"tileWidth\": 256, \"tileHeight\": 256}, \"1\": {\"matrixWidth\": 2, \"matrixHeight\": 2, \"scaleDenominator\": 139770566.0075, \"tileWidth\": 256, \"tileHeight\": 256}, \"2\": {\"matrixWidth\": 4, \"matrixHeight\": 4, \"scaleDenominator\": 69885283.00375, \"tileWidth\": 256, \"tileHeight\": 256}, \"3\": {\"matrixWidth\": 8, \"matrixHeight\": 8, \"scaleDenominator\": 34942641.501875, \"tileWidth\": 256, \"tileHeight\": 256}, \"4\": {\"matrixWidth\": 16, \"matrixHeight\": 16, \"scaleDenominator\": 17471320.750937, \"tileWidth\": 256, \"tileHeight\": 256}, \"5\": {\"matrixWidth\": 32, \"matrixHeight\": 32, \"scaleDenominator\": 8735660.375469, \"tileWidth\": 256, \"tileHeight\": 256}, \"6\": {\"matrixWidth\": 64, \"matrixHeight\": 64, \"scaleDenominator\": 4367830.187734, \"tileWidth\": 256, \"tileHeight\": 256}, \"7\": {\"matrixWidth\": 128, \"matrixHeight\": 128, \"scaleDenominator\": 2183915.093867, \"tileWidth\": 256, \"tileHeight\": 256}, \"8\": {\"matrixWidth\": 256, \"matrixHeight\": 256, \"scaleDenominator\": 1091957.546934, \"tileWidth\": 256, \"tileHeight\": 256}, \"9\": {\"matrixWidth\": 512, \"matrixHeight\": 512, \"scaleDenominator\": 545978.773467, \"tileWidth\": 256, \"tileHeight\": 256}, \"10\": {\"matrixWidth\": 1024, \"matrixHeight\": 1024, \"scaleDenominator\": 272989.386733, \"tileWidth\": 256, \"tileHeight\": 256}, \"11\": {\"matrixWidth\": 2048, \"matrixHeight\": 2048, \"scaleDenominator\": 136494.693367, \"tileWidth\": 256, \"tileHeight\": 256}, \"12\": {\"matrixWidth\": 4096, \"matrixHeight\": 4096, \"scaleDenominator\": 68247.346683, \"tileWidth\": 256, \"tileHeight\": 256}, \"13\": {\"matrixWidth\": 8192, \"matrixHeight\": 8192, \"scaleDenominator\": 34123.673342, \"tileWidth\": 256, \"tileHeight\": 256}, \"14\": {\"matrixWidth\": 16384, \"matrixHeight\": 16384, \"scaleDenominator\": 17061.836671, \"tileWidth\": 256, \"tileHeight\": 256}, \"15\": {\"matrixWidth\": 32768, \"matrixHeight\": 32768, \"scaleDenominator\": 8530.918335, \"tileWidth\": 256, \"tileHeight\": 256}, \"16\": {\"matrixWidth\": 65536, \"matrixHeight\": 65536, \"scaleDenominator\": 4265.459168, \"tileWidth\": 256, \"tileHeight\": 256}, \"17\": {\"matrixWidth\": 131072, \"matrixHeight\": 131072, \"scaleDenominator\": 2132.729584, \"tileWidth\": 256, \"tileHeight\": 256}, \"18\": {\"matrixWidth\": 262144, \"matrixHeight\": 262144, \"scaleDenominator\": 1066.364792, \"tileWidth\": 256, \"tileHeight\": 256}, \"19\": {\"matrixWidth\": 524288, \"matrixHeight\": 524288, \"scaleDenominator\": 533.182396, \"tileWidth\": 256, \"tileHeight\": 256}, \"20\": {\"matrixWidth\": 1048576, \"matrixHeight\": 1048576, \"scaleDenominator\": 266.591198, \"tileWidth\": 256, \"tileHeight\": 256}, \"21\": {\"matrixWidth\": 2097152, \"matrixHeight\": 2097152, \"scaleDenominator\": 133.295599, \"tileWidth\": 256, \"tileHeight\": 256}, \"22\": {\"matrixWidth\": 4194304, \"matrixHeight\": 4194304, \"scaleDenominator\": 66.647799, \"tileWidth\": 256, \"tileHeight\": 256}}"
                   }
                 }
               },
@@ -4326,7 +4343,6 @@
               "Address": {
                 "properties": {
                   "address_id": "xsd:string",
-                  "site_id": "xsd:string",
                   "full_address": "xsd:string",
                   "street": "xsd:string",
                   "house_number": "xsd:string",
@@ -4343,7 +4359,6 @@
               "RouteGeometry": {
                 "properties": {
                   "route_id": "xsd:string",
-                  "work_order_id": "xsd:string",
                   "path_geometry_id": "xsd:string",
                   "total_distance_km": "xsd:double",
                   "total_travel_time_min": "xsd:double",
@@ -4354,7 +4369,6 @@
               "ServiceArea": {
                 "properties": {
                   "service_area_id": "xsd:string",
-                  "service_offering_id": "xsd:string",
                   "polygon_geometry_id": "xsd:string",
                   "coverage_rule": "xsd:string",
                   "max_travel_time_min": "xsd:integer",
@@ -4364,7 +4378,6 @@
               "HazardZone": {
                 "properties": {
                   "hazard_zone_id": "xsd:string",
-                  "work_order_id": "xsd:string",
                   "geometry_id": "xsd:string",
                   "hazard_type": "xsd:string",
                   "valid_from": "xsd:dateTime",
@@ -4582,30 +4595,6 @@
         "domain": "SpatialIndex",
         "range": "FeatureCollection"
       },
-      "SITE_BOUNDARY": {
-        "domain": "Site",
-        "range": "Geometry"
-      },
-      "ASSET_LOCATION_GEOM": {
-        "domain": "Asset",
-        "range": "Geometry"
-      },
-      "ROUTE_GEOMETRY": {
-        "domain": "RoutePlan",
-        "range": "Geometry"
-      },
-      "WORKAREA_HAZARD_ZONE": {
-        "domain": "PermitToWork",
-        "range": "HazardZone"
-      },
-      "SERVICE_OFFERING_AREA": {
-        "domain": "ServiceOffering",
-        "range": "ServiceArea"
-      },
-      "INVENTORY_LOCATION_GEOM": {
-        "domain": "InventoryLocation",
-        "range": "Geometry"
-      },
       "TOPOLOGICALLY_RELATES": {
         "domain": "Geometry",
         "range": "TopologyRelation"
@@ -4759,7 +4748,7 @@
           "WMS": {
             "name": "wms"
           },
-          "3D": {
+          "THREED": {
             "name": "3d"
           }
         }
