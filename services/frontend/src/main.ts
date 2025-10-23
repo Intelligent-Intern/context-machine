@@ -5,7 +5,6 @@ import App from './App.vue'
 import router from './core/routing'
 import { initCore } from './core/initCore'
 import { i18n } from '@/core/i18n'
-import { initSite } from '@/site/init'
 
 // Globale Styles
 import '@/styles/index.css'
@@ -25,10 +24,12 @@ app.use(i18n)
 
 // Core-System initialisieren (Stores, Handler, WS etc.)
 initCore()
-initSite()
 
-console.log('[router routes]', router.getRoutes())
-
+// Register essential widgets immediately for login page
+import('@/core/stores/discovery').then(({ useDiscoveryStore }) => {
+  const discovery = useDiscoveryStore()
+  discovery.registerBuiltInWidgets()
+})
 
 // App mounten
 app.mount('#app')

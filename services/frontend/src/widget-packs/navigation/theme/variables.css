@@ -1,0 +1,379 @@
+/* Navigation Widget Pack - Theme Variables */
+/* These variables can be customized by the Theme Designer */
+
+:root {
+  /* === NAVIGATION COLORS === */
+  
+  /* Background Colors */
+  --nav-bg-primary: #ffffff;
+  --nav-bg-secondary: #f8fafc;
+  --nav-bg-tertiary: #f1f5f9;
+  --nav-bg-elevated: #ffffff;
+  --nav-bg-overlay: rgba(0, 0, 0, 0.05);
+  
+  /* Text Colors */
+  --nav-text-primary: #1f2937;
+  --nav-text-secondary: #6b7280;
+  --nav-text-tertiary: #9ca3af;
+  --nav-text-inverse: #ffffff;
+  --nav-text-accent: #2563eb;
+  --nav-text-muted: #d1d5db;
+  
+  /* Border Colors */
+  --nav-border-primary: #e2e8f0;
+  --nav-border-secondary: #cbd5e1;
+  --nav-border-focus: #3b82f6;
+  --nav-border-hover: #94a3b8;
+  --nav-border-active: #2563eb;
+  
+  /* State Colors */
+  --nav-hover-bg: #f1f5f9;
+  --nav-hover-text: #374151;
+  --nav-active-bg: #eff6ff;
+  --nav-active-text: #2563eb;
+  --nav-focus-ring: rgba(59, 130, 246, 0.3);
+  --nav-selected-bg: #dbeafe;
+  --nav-selected-text: #1d4ed8;
+  
+  /* Badge Colors */
+  --nav-badge-primary: #3b82f6;
+  --nav-badge-success: #10b981;
+  --nav-badge-warning: #f59e0b;
+  --nav-badge-error: #ef4444;
+  --nav-badge-info: #06b6d4;
+  --nav-badge-neutral: #6b7280;
+  --nav-badge-new: #10b981;
+  --nav-badge-hot: #ef4444;
+  --nav-badge-beta: #f59e0b;
+  
+  /* === NAVIGATION SPACING === */
+  
+  /* Item Spacing */
+  --nav-item-height: 2.5rem;
+  --nav-item-padding-x: 0.75rem;
+  --nav-item-padding-y: 0.5rem;
+  --nav-item-gap: 0.75rem;
+  --nav-item-margin: 0.125rem;
+  
+  /* Indentation */
+  --nav-indent-base: 1rem;
+  --nav-indent-step: 1.5rem;
+  --nav-indent-max: 6rem;
+  
+  /* Container Spacing */
+  --nav-container-padding: 1rem;
+  --nav-section-gap: 1.5rem;
+  --nav-group-gap: 0.5rem;
+  
+  /* === NAVIGATION TYPOGRAPHY === */
+  
+  /* Font Families */
+  --nav-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --nav-font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  
+  /* Font Sizes */
+  --nav-font-size-xs: 0.75rem;
+  --nav-font-size-sm: 0.875rem;
+  --nav-font-size-base: 1rem;
+  --nav-font-size-lg: 1.125rem;
+  --nav-font-size-xl: 1.25rem;
+  
+  /* Font Weights */
+  --nav-font-weight-normal: 400;
+  --nav-font-weight-medium: 500;
+  --nav-font-weight-semibold: 600;
+  --nav-font-weight-bold: 700;
+  
+  /* Line Heights */
+  --nav-line-height-tight: 1.25;
+  --nav-line-height-normal: 1.5;
+  --nav-line-height-relaxed: 1.625;
+  
+  /* Letter Spacing */
+  --nav-letter-spacing-tight: -0.025em;
+  --nav-letter-spacing-normal: 0;
+  --nav-letter-spacing-wide: 0.025em;
+  
+  /* === NAVIGATION BORDERS & RADIUS === */
+  
+  /* Border Widths */
+  --nav-border-width: 1px;
+  --nav-border-width-thick: 2px;
+  --nav-focus-ring-width: 2px;
+  --nav-active-indicator-width: 3px;
+  
+  /* Border Radius */
+  --nav-radius-none: 0;
+  --nav-radius-sm: 0.25rem;
+  --nav-radius-md: 0.375rem;
+  --nav-radius-lg: 0.5rem;
+  --nav-radius-xl: 0.75rem;
+  --nav-radius-full: 9999px;
+  
+  /* === NAVIGATION SHADOWS === */
+  
+  /* Box Shadows */
+  --nav-shadow-none: none;
+  --nav-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --nav-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --nav-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --nav-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --nav-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  
+  /* Focus Shadows */
+  --nav-focus-shadow: 0 0 0 var(--nav-focus-ring-width) var(--nav-focus-ring);
+  --nav-focus-shadow-error: 0 0 0 var(--nav-focus-ring-width) rgba(239, 68, 68, 0.3);
+  --nav-focus-shadow-success: 0 0 0 var(--nav-focus-ring-width) rgba(16, 185, 129, 0.3);
+  
+  /* === NAVIGATION TRANSITIONS === */
+  
+  /* Timing Functions */
+  --nav-ease-linear: linear;
+  --nav-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --nav-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --nav-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Durations */
+  --nav-duration-fast: 150ms;
+  --nav-duration-normal: 250ms;
+  --nav-duration-slow: 350ms;
+  --nav-duration-slower: 500ms;
+  
+  /* Transitions */
+  --nav-transition-fast: all var(--nav-duration-fast) var(--nav-ease-out);
+  --nav-transition-normal: all var(--nav-duration-normal) var(--nav-ease-in-out);
+  --nav-transition-slow: all var(--nav-duration-slow) var(--nav-ease-in-out);
+  --nav-transition-colors: color var(--nav-duration-fast) var(--nav-ease-out),
+                           background-color var(--nav-duration-fast) var(--nav-ease-out),
+                           border-color var(--nav-duration-fast) var(--nav-ease-out);
+  --nav-transition-transform: transform var(--nav-duration-normal) var(--nav-ease-out);
+  
+  /* === NAVIGATION ICONS === */
+  
+  /* Icon Sizes */
+  --nav-icon-size-xs: 0.75rem;
+  --nav-icon-size-sm: 1rem;
+  --nav-icon-size-md: 1.25rem;
+  --nav-icon-size-lg: 1.5rem;
+  --nav-icon-size-xl: 2rem;
+  
+  /* Icon Colors */
+  --nav-icon-color: var(--nav-text-secondary);
+  --nav-icon-color-hover: var(--nav-text-primary);
+  --nav-icon-color-active: var(--nav-text-accent);
+  --nav-icon-color-disabled: var(--nav-text-muted);
+  
+  /* === NAVIGATION LAYOUT === */
+  
+  /* Widths */
+  --nav-width-collapsed: 4rem;
+  --nav-width-compact: 12rem;
+  --nav-width-default: 17.5rem;
+  --nav-width-wide: 20rem;
+  --nav-width-max: 24rem;
+  
+  /* Heights */
+  --nav-header-height: 4rem;
+  --nav-footer-height: 3rem;
+  --nav-search-height: 2.5rem;
+  
+  /* Z-Index */
+  --nav-z-base: 1;
+  --nav-z-dropdown: 10;
+  --nav-z-sticky: 20;
+  --nav-z-fixed: 30;
+  --nav-z-modal: 40;
+  --nav-z-popover: 50;
+  --nav-z-tooltip: 60;
+  
+  /* === NAVIGATION BREAKPOINTS === */
+  
+  /* Responsive Breakpoints */
+  --nav-breakpoint-sm: 640px;
+  --nav-breakpoint-md: 768px;
+  --nav-breakpoint-lg: 1024px;
+  --nav-breakpoint-xl: 1280px;
+  --nav-breakpoint-2xl: 1536px;
+}
+
+/* === DARK THEME OVERRIDES === */
+[data-theme="dark"] {
+  /* Background Colors */
+  --nav-bg-primary: #1f2937;
+  --nav-bg-secondary: #374151;
+  --nav-bg-tertiary: #4b5563;
+  --nav-bg-elevated: #374151;
+  --nav-bg-overlay: rgba(255, 255, 255, 0.05);
+  
+  /* Text Colors */
+  --nav-text-primary: #f9fafb;
+  --nav-text-secondary: #d1d5db;
+  --nav-text-tertiary: #9ca3af;
+  --nav-text-inverse: #1f2937;
+  --nav-text-accent: #60a5fa;
+  --nav-text-muted: #6b7280;
+  
+  /* Border Colors */
+  --nav-border-primary: #4b5563;
+  --nav-border-secondary: #6b7280;
+  --nav-border-focus: #3b82f6;
+  --nav-border-hover: #9ca3af;
+  --nav-border-active: #60a5fa;
+  
+  /* State Colors */
+  --nav-hover-bg: #4b5563;
+  --nav-hover-text: #f3f4f6;
+  --nav-active-bg: #1e40af;
+  --nav-active-text: #dbeafe;
+  --nav-focus-ring: rgba(96, 165, 250, 0.3);
+  --nav-selected-bg: #1e3a8a;
+  --nav-selected-text: #bfdbfe;
+}
+
+/* === MINIMAL THEME OVERRIDES === */
+[data-theme="minimal"] {
+  /* Remove shadows and borders */
+  --nav-shadow-xs: none;
+  --nav-shadow-sm: none;
+  --nav-shadow-md: none;
+  --nav-shadow-lg: none;
+  --nav-shadow-xl: none;
+  --nav-border-primary: transparent;
+  --nav-border-secondary: transparent;
+  
+  /* Simplified colors */
+  --nav-bg-secondary: transparent;
+  --nav-bg-tertiary: transparent;
+  --nav-hover-bg: rgba(0, 0, 0, 0.05);
+  --nav-active-bg: rgba(59, 130, 246, 0.1);
+}
+
+/* === ENTERPRISE THEME OVERRIDES === */
+[data-theme="enterprise"] {
+  /* Corporate colors */
+  --nav-text-accent: #1e40af;
+  --nav-active-text: #1e40af;
+  --nav-border-focus: #1e40af;
+  --nav-border-active: #1e40af;
+  --nav-active-bg: #dbeafe;
+  --nav-selected-bg: #bfdbfe;
+  --nav-selected-text: #1e3a8a;
+  
+  /* Professional spacing */
+  --nav-item-height: 2.75rem;
+  --nav-container-padding: 1.25rem;
+  
+  /* Enhanced shadows */
+  --nav-shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  --nav-shadow-md: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* === HIGH CONTRAST THEME === */
+[data-theme="high-contrast"] {
+  --nav-bg-primary: #ffffff;
+  --nav-text-primary: #000000;
+  --nav-text-secondary: #000000;
+  --nav-border-primary: #000000;
+  --nav-border-secondary: #000000;
+  --nav-hover-bg: #f0f0f0;
+  --nav-active-bg: #0066cc;
+  --nav-active-text: #ffffff;
+  --nav-focus-ring: #ff0000;
+}
+
+/* === COMPACT THEME === */
+[data-theme="compact"] {
+  --nav-item-height: 2rem;
+  --nav-item-padding-x: 0.5rem;
+  --nav-item-padding-y: 0.25rem;
+  --nav-container-padding: 0.75rem;
+  --nav-font-size-base: 0.875rem;
+  --nav-font-size-sm: 0.8125rem;
+  --nav-indent-step: 1rem;
+}
+
+/* === SPACIOUS THEME === */
+[data-theme="spacious"] {
+  --nav-item-height: 3rem;
+  --nav-item-padding-x: 1rem;
+  --nav-item-padding-y: 0.75rem;
+  --nav-container-padding: 1.5rem;
+  --nav-font-size-base: 1.125rem;
+  --nav-section-gap: 2rem;
+  --nav-indent-step: 2rem;
+}
+
+/* === RESPONSIVE OVERRIDES === */
+
+/* Mobile First Approach */
+@media (max-width: 767px) {
+  :root {
+    --nav-width-default: 100vw;
+    --nav-width-max: 100vw;
+    --nav-container-padding: 1rem;
+    --nav-item-height: 3rem;
+    --nav-font-size-base: 1rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --nav-width-default: 16rem;
+    --nav-container-padding: 1rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --nav-width-default: 17.5rem;
+    --nav-container-padding: 1.25rem;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1280px) {
+  :root {
+    --nav-width-default: 20rem;
+    --nav-container-padding: 1.5rem;
+  }
+}
+
+/* === ACCESSIBILITY OVERRIDES === */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nav-duration-fast: 0ms;
+    --nav-duration-normal: 0ms;
+    --nav-duration-slow: 0ms;
+    --nav-transition-fast: none;
+    --nav-transition-normal: none;
+    --nav-transition-slow: none;
+    --nav-transition-colors: none;
+    --nav-transition-transform: none;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  :root {
+    --nav-border-width: 2px;
+    --nav-focus-ring-width: 3px;
+    --nav-active-indicator-width: 4px;
+  }
+}
+
+/* Forced Colors (Windows High Contrast) */
+@media (forced-colors: active) {
+  :root {
+    --nav-bg-primary: Canvas;
+    --nav-text-primary: CanvasText;
+    --nav-border-primary: CanvasText;
+    --nav-active-bg: Highlight;
+    --nav-active-text: HighlightText;
+    --nav-focus-ring: Highlight;
+  }
+}

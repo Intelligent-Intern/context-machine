@@ -1,0 +1,9 @@
+Flask==3.0.3
+Flask-CORS==4.0.1
+Flasgger==0.9.7.1
+SQLAlchemy==2.0.36
+Alembic==1.13.3
+psycopg2-binary==2.9.9
+PyJWT==2.9.0
+bcrypt==4.2.1
+requests==2.32.3

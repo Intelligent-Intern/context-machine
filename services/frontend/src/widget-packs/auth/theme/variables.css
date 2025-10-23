@@ -1,0 +1,284 @@
+/* Authentication Widget Pack - Theme Variables */
+/* These variables can be customized by the Theme Designer */
+
+:root {
+  /* === AUTHENTICATION COLORS === */
+  
+  /* Primary Colors */
+  --auth-primary: #3b82f6;
+  --auth-primary-hover: #2563eb;
+  --auth-primary-active: #1d4ed8;
+  
+  /* Background Colors */
+  --auth-background: #ffffff;
+  --auth-surface: #f8fafc;
+  --auth-surface-hover: #f1f5f9;
+  
+  /* Text Colors */
+  --auth-text: #1f2937;
+  --auth-text-secondary: #6b7280;
+  --auth-text-muted: #9ca3af;
+  --auth-text-inverse: #ffffff;
+  
+  /* Border Colors */
+  --auth-border: #e2e8f0;
+  --auth-border-hover: #cbd5e1;
+  --auth-border-focus: #3b82f6;
+  
+  /* State Colors */
+  --auth-error: #ef4444;
+  --auth-error-bg: #fef2f2;
+  --auth-error-border: #fecaca;
+  --auth-success: #10b981;
+  --auth-success-bg: #f0fdf4;
+  --auth-success-border: #bbf7d0;
+  --auth-warning: #f59e0b;
+  --auth-warning-bg: #fffbeb;
+  --auth-warning-border: #fed7aa;
+  
+  /* === AUTHENTICATION SPACING === */
+  
+  /* Form Layout */
+  --auth-form-padding: 24px;
+  --auth-form-max-width: 400px;
+  --auth-form-gap: 20px;
+  
+  /* Field Spacing */
+  --auth-field-gap: 16px;
+  --auth-field-padding: 12px 16px;
+  --auth-label-margin: 0 0 6px 0;
+  
+  /* Component Sizes */
+  --auth-input-height: 44px;
+  --auth-button-height: 44px;
+  --auth-button-padding: 0 24px;
+  
+  /* === AUTHENTICATION TYPOGRAPHY === */
+  
+  /* Font Sizes */
+  --auth-font-size: 14px;
+  --auth-font-size-sm: 12px;
+  --auth-font-size-lg: 16px;
+  --auth-title-size: 24px;
+  --auth-subtitle-size: 16px;
+  --auth-label-size: 12px;
+  --auth-error-size: 12px;
+  
+  /* Font Weights */
+  --auth-font-weight: 400;
+  --auth-font-weight-medium: 500;
+  --auth-font-weight-semibold: 600;
+  --auth-title-weight: 600;
+  --auth-label-weight: 500;
+  
+  /* Line Heights */
+  --auth-line-height: 1.5;
+  --auth-title-line-height: 1.2;
+  --auth-label-line-height: 1.4;
+  
+  /* === AUTHENTICATION BORDERS === */
+  
+  /* Border Widths */
+  --auth-border-width: 1px;
+  --auth-border-width-focus: 2px;
+  
+  /* Border Radius */
+  --auth-border-radius: 8px;
+  --auth-border-radius-sm: 6px;
+  --auth-border-radius-lg: 12px;
+  
+  /* Focus Ring */
+  --auth-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  --auth-focus-ring-error: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  --auth-focus-ring-success: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  
+  /* === AUTHENTICATION SHADOWS === */
+  
+  /* Form Shadows */
+  --auth-form-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --auth-form-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Button Shadows */
+  --auth-button-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --auth-button-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  
+  /* Input Shadows */
+  --auth-input-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --auth-input-shadow-focus: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05), var(--auth-focus-ring);
+  
+  /* === AUTHENTICATION TRANSITIONS === */
+  
+  /* Transition Durations */
+  --auth-transition-fast: 150ms;
+  --auth-transition-normal: 250ms;
+  --auth-transition-slow: 350ms;
+  
+  /* Transition Easings */
+  --auth-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --auth-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Common Transitions */
+  --auth-transition-colors: color var(--auth-transition-fast) var(--auth-ease-out),
+                           background-color var(--auth-transition-fast) var(--auth-ease-out),
+                           border-color var(--auth-transition-fast) var(--auth-ease-out);
+  --auth-transition-shadow: box-shadow var(--auth-transition-normal) var(--auth-ease-out);
+  --auth-transition-transform: transform var(--auth-transition-normal) var(--auth-ease-out);
+  
+  /* === AUTHENTICATION LAYOUT === */
+  
+  /* Z-Index */
+  --auth-z-modal: 1000;
+  --auth-z-dropdown: 100;
+  --auth-z-tooltip: 200;
+  
+  /* Breakpoints (for reference) */
+  --auth-breakpoint-sm: 640px;
+  --auth-breakpoint-md: 768px;
+  --auth-breakpoint-lg: 1024px;
+}
+
+/* === DARK THEME OVERRIDES === */
+[data-theme="dark"] {
+  /* Background Colors */
+  --auth-background: #1f2937;
+  --auth-surface: #374151;
+  --auth-surface-hover: #4b5563;
+  
+  /* Text Colors */
+  --auth-text: #f9fafb;
+  --auth-text-secondary: #d1d5db;
+  --auth-text-muted: #9ca3af;
+  --auth-text-inverse: #1f2937;
+  
+  /* Border Colors */
+  --auth-border: #4b5563;
+  --auth-border-hover: #6b7280;
+  --auth-border-focus: #60a5fa;
+  
+  /* Primary Colors */
+  --auth-primary: #60a5fa;
+  --auth-primary-hover: #3b82f6;
+  --auth-primary-active: #2563eb;
+  
+  /* State Colors */
+  --auth-error-bg: #7f1d1d;
+  --auth-error-border: #dc2626;
+  --auth-success-bg: #064e3b;
+  --auth-success-border: #059669;
+  --auth-warning-bg: #78350f;
+  --auth-warning-border: #d97706;
+}
+
+/* === MINIMAL THEME OVERRIDES === */
+[data-theme="minimal"] {
+  /* Remove borders and shadows */
+  --auth-border-width: 0px;
+  --auth-form-shadow: none;
+  --auth-button-shadow: none;
+  --auth-input-shadow: none;
+  
+  /* Simplified surfaces */
+  --auth-surface: transparent;
+  --auth-surface-hover: rgba(0, 0, 0, 0.05);
+  
+  /* Enhanced focus rings */
+  --auth-focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.3);
+  --auth-border-radius: 4px;
+}
+
+/* === HIGH CONTRAST THEME === */
+[data-theme="high-contrast"] {
+  --auth-background: #ffffff;
+  --auth-text: #000000;
+  --auth-text-secondary: #000000;
+  --auth-border: #000000;
+  --auth-border-width: 2px;
+  --auth-primary: #0066cc;
+  --auth-error: #cc0000;
+  --auth-success: #006600;
+  --auth-focus-ring: 0 0 0 3px #ff0000;
+}
+
+/* === COMPACT THEME === */
+[data-theme="compact"] {
+  --auth-form-padding: 16px;
+  --auth-field-gap: 12px;
+  --auth-input-height: 36px;
+  --auth-button-height: 36px;
+  --auth-font-size: 13px;
+  --auth-title-size: 20px;
+  --auth-border-radius: 4px;
+}
+
+/* === SPACIOUS THEME === */
+[data-theme="spacious"] {
+  --auth-form-padding: 32px;
+  --auth-field-gap: 24px;
+  --auth-input-height: 52px;
+  --auth-button-height: 52px;
+  --auth-font-size: 16px;
+  --auth-title-size: 28px;
+  --auth-border-radius: 12px;
+}
+
+/* === RESPONSIVE OVERRIDES === */
+
+/* Mobile First */
+@media (max-width: 639px) {
+  :root {
+    --auth-form-padding: 20px;
+    --auth-form-max-width: 100%;
+    --auth-font-size: 16px; /* Prevent zoom on iOS */
+    --auth-input-height: 48px; /* Better touch targets */
+    --auth-button-height: 48px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root {
+    --auth-form-padding: 24px;
+    --auth-form-max-width: 400px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --auth-form-padding: 32px;
+    --auth-form-max-width: 420px;
+  }
+}
+
+/* === ACCESSIBILITY OVERRIDES === */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --auth-transition-fast: 0ms;
+    --auth-transition-normal: 0ms;
+    --auth-transition-slow: 0ms;
+    --auth-transition-colors: none;
+    --auth-transition-shadow: none;
+    --auth-transition-transform: none;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  :root {
+    --auth-border-width: 2px;
+    --auth-focus-ring: 0 0 0 3px #ff0000;
+  }
+}
+
+/* Forced Colors (Windows High Contrast) */
+@media (forced-colors: active) {
+  :root {
+    --auth-background: Canvas;
+    --auth-text: CanvasText;
+    --auth-border: CanvasText;
+    --auth-primary: Highlight;
+    --auth-focus-ring: Highlight;
+  }
+}

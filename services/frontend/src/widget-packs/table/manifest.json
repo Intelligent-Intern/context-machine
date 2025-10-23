@@ -1,0 +1,561 @@
+{
+  "id": "table",
+  "name": "Data Table Widgets",
+  "version": "1.0.0",
+  "description": "Enterprise-grade data table components with advanced features",
+  "author": "Context Machine",
+  "license": "MIT",
+  "components": {
+    "DataTable": {
+      "path": "./widgets/DataTable.vue",
+      "name": "Advanced Data Table",
+      "description": "Full-featured data table with sorting, filtering, pagination, and bulk actions",
+      "category": "data-display",
+      "tags": ["table", "data", "grid", "sorting", "filtering", "pagination"],
+      "props": {
+        "data": {
+          "type": "array",
+          "required": true,
+          "description": "Table data array"
+        },
+        "columns": {
+          "type": "array",
+          "required": true,
+          "description": "Column definitions with sorting, filtering, and formatting options"
+        },
+        "loading": {
+          "type": "boolean",
+          "default": false,
+          "description": "Loading state"
+        },
+        "pagination": {
+          "type": "object",
+          "description": "Pagination configuration"
+        },
+        "selection": {
+          "type": "object",
+          "description": "Row selection configuration"
+        },
+        "actions": {
+          "type": "array",
+          "description": "Bulk and row actions"
+        },
+        "theme": {
+          "type": "string",
+          "default": "default",
+          "enum": ["default", "compact", "comfortable", "enterprise"],
+          "description": "Table theme variant"
+        }
+      },
+      "events": {
+        "row-click": {
+          "description": "Row clicked",
+          "payload": { "row": "object", "index": "number" },
+          "permissions": ["table.row.view"]
+        },
+        "row-select": {
+          "description": "Row selection changed",
+          "payload": { "selected": "array", "row": "object" },
+          "permissions": ["table.row.select"]
+        },
+        "sort": {
+          "description": "Column sorted",
+          "payload": { "column": "string", "direction": "string" },
+          "permissions": ["table.sort"]
+        },
+        "filter": {
+          "description": "Table filtered",
+          "payload": { "filters": "object" },
+          "permissions": ["table.filter"]
+        },
+        "action": {
+          "description": "Action executed",
+          "payload": { "action": "string", "rows": "array" },
+          "permissions": ["table.action"]
+        },
+        "page-change": {
+          "description": "Page changed",
+          "payload": { "page": "number", "size": "number" },
+          "permissions": ["table.paginate"]
+        },
+        "export": {
+          "description": "Data export requested",
+          "payload": { "format": "string", "data": "array" },
+          "permissions": ["table.export"]
+        }
+      },
+      "permissions": {
+        "table.view": { "description": "View table data", "default": true },
+        "table.row.view": { "description": "View row details", "default": true },
+        "table.row.select": { "description": "Select rows", "default": true },
+        "table.sort": { "description": "Sort columns", "default": true },
+        "table.filter": { "description": "Filter data", "default": true },
+        "table.action": { "description": "Execute actions", "default": false },
+        "table.paginate": { "description": "Navigate pages", "default": true },
+        "table.export": { "description": "Export data", "default": false },
+        "table.edit": { "description": "Edit table data", "default": false },
+        "table.delete": { "description": "Delete rows", "default": false }
+      },
+      "slots": {
+        "header": "Table header content",
+        "footer": "Table footer content",
+        "empty": "Empty state content",
+        "loading": "Loading state content",
+        "cell": "Custom cell content",
+        "actions": "Custom action buttons"
+      }
+    },
+    "SimpleTable": {
+      "path": "./widgets/SimpleTable.vue",
+      "name": "Simple Data Table",
+      "description": "Lightweight table for basic data display",
+      "category": "data-display",
+      "tags": ["table", "simple", "lightweight"],
+      "props": {
+        "data": {
+          "type": "array",
+          "required": true,
+          "description": "Table data"
+        },
+        "columns": {
+          "type": "array",
+          "required": true,
+          "description": "Column definitions"
+        },
+        "striped": {
+          "type": "boolean",
+          "default": false,
+          "description": "Striped rows"
+        },
+        "bordered": {
+          "type": "boolean",
+          "default": true,
+          "description": "Table borders"
+        }
+      },
+      "events": {
+        "row-click": {
+          "description": "Row clicked",
+          "payload": { "row": "object", "index": "number" },
+          "permissions": ["table.row.view"]
+        }
+      },
+      "permissions": {
+        "table.view": { "description": "View table", "default": true },
+        "table.row.view": { "description": "View rows", "default": true }
+      }
+    },
+    "TreeTable": {
+      "path": "./widgets/TreeTable.vue",
+      "name": "Hierarchical Tree Table",
+      "description": "Table with expandable hierarchical data structure",
+      "category": "data-display",
+      "tags": ["table", "tree", "hierarchy", "expandable"],
+      "props": {
+        "data": {
+          "type": "array",
+          "required": true,
+          "description": "Hierarchical data with children"
+        },
+        "columns": {
+          "type": "array",
+          "required": true,
+          "description": "Column definitions"
+        },
+        "expandable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable row expansion"
+        },
+        "defaultExpanded": {
+          "type": "boolean",
+          "default": false,
+          "description": "Default expansion state"
+        }
+      },
+      "events": {
+        "expand": {
+          "description": "Row expanded/collapsed",
+          "payload": { "row": "object", "expanded": "boolean" },
+          "permissions": ["table.expand"]
+        },
+        "row-click": {
+          "description": "Row clicked",
+          "payload": { "row": "object", "level": "number" },
+          "permissions": ["table.row.view"]
+        }
+      },
+      "permissions": {
+        "table.view": { "description": "View tree table", "default": true },
+        "table.expand": { "description": "Expand/collapse rows", "default": true },
+        "table.row.view": { "description": "View row details", "default": true }
+      }
+    },
+    "VirtualTable": {
+      "path": "./widgets/VirtualTable.vue",
+      "name": "Virtual Scrolling Table",
+      "description": "High-performance table with virtual scrolling for large datasets",
+      "category": "data-display",
+      "tags": ["table", "virtual", "performance", "large-data"],
+      "props": {
+        "data": {
+          "type": "array",
+          "required": true,
+          "description": "Large dataset"
+        },
+        "columns": {
+          "type": "array",
+          "required": true,
+          "description": "Column definitions"
+        },
+        "itemHeight": {
+          "type": "number",
+          "default": 48,
+          "description": "Fixed row height for virtual scrolling"
+        },
+        "bufferSize": {
+          "type": "number",
+          "default": 10,
+          "description": "Number of buffer items"
+        }
+      },
+      "events": {
+        "scroll": {
+          "description": "Table scrolled",
+          "payload": { "scrollTop": "number", "visibleRange": "object" },
+          "permissions": ["table.scroll"]
+        },
+        "row-click": {
+          "description": "Row clicked",
+          "payload": { "row": "object", "index": "number" },
+          "permissions": ["table.row.view"]
+        }
+      },
+      "permissions": {
+        "table.view": { "description": "View virtual table", "default": true },
+        "table.scroll": { "description": "Scroll table", "default": true },
+        "table.row.view": { "description": "View rows", "default": true }
+      }
+    }
+  },
+  "theme": {
+    "designTokens": {
+      "colors": {
+        "table-bg": "#ffffff",
+        "table-border": "#e2e8f0",
+        "header-bg": "#f8fafc",
+        "header-text": "#374151",
+        "row-bg": "#ffffff",
+        "row-bg-alt": "#f9fafb",
+        "row-hover": "#f1f5f9",
+        "row-selected": "#eff6ff",
+        "cell-text": "#1f2937",
+        "cell-text-secondary": "#6b7280"
+      },
+      "spacing": {
+        "cell-padding-x": "1rem",
+        "cell-padding-y": "0.75rem",
+        "table-margin": "1rem",
+        "header-padding": "1rem"
+      },
+      "typography": {
+        "header-font-weight": "600",
+        "cell-font-size": "0.875rem",
+        "header-font-size": "0.875rem"
+      },
+      "borders": {
+        "table-border-width": "1px",
+        "cell-border-width": "1px",
+        "table-radius": "0.5rem"
+      }
+    },
+    "variants": {
+      "default": {
+        "description": "Standard table theme"
+      },
+      "compact": {
+        "description": "Compact spacing for dense data",
+        "overrides": {
+          "spacing": {
+            "cell-padding-x": "0.5rem",
+            "cell-padding-y": "0.5rem"
+          },
+          "typography": {
+            "cell-font-size": "0.8125rem"
+          }
+        }
+      },
+      "comfortable": {
+        "description": "Spacious layout for readability",
+        "overrides": {
+          "spacing": {
+            "cell-padding-x": "1.5rem",
+            "cell-padding-y": "1rem"
+          },
+          "typography": {
+            "cell-font-size": "1rem"
+          }
+        }
+      },
+      "enterprise": {
+        "description": "Professional corporate styling",
+        "overrides": {
+          "colors": {
+            "header-bg": "#f3f4f6",
+            "table-border": "#d1d5db"
+          },
+          "typography": {
+            "header-font-weight": "700"
+          }
+        }
+      }
+    }
+  },
+  "testData": {
+    "DataTable": {
+      "data": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "email": "john@example.com",
+          "role": "Administrator",
+          "status": "active",
+          "lastLogin": "2024-01-15T10:30:00Z",
+          "permissions": ["admin", "user.manage"]
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "email": "jane@example.com",
+          "role": "Editor",
+          "status": "active",
+          "lastLogin": "2024-01-14T15:45:00Z",
+          "permissions": ["editor", "content.edit"]
+        },
+        {
+          "id": 3,
+          "name": "Bob Johnson",
+          "email": "bob@example.com",
+          "role": "Viewer",
+          "status": "inactive",
+          "lastLogin": "2024-01-10T09:15:00Z",
+          "permissions": ["viewer"]
+        },
+        {
+          "id": 4,
+          "name": "Alice Brown",
+          "email": "alice@example.com",
+          "role": "Editor",
+          "status": "active",
+          "lastLogin": "2024-01-15T14:20:00Z",
+          "permissions": ["editor", "content.edit"]
+        },
+        {
+          "id": 5,
+          "name": "Charlie Wilson",
+          "email": "charlie@example.com",
+          "role": "Administrator",
+          "status": "active",
+          "lastLogin": "2024-01-15T11:00:00Z",
+          "permissions": ["admin", "user.manage", "system.config"]
+        }
+      ],
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true,
+          "width": "80px",
+          "type": "number"
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "sortable": true,
+          "filterable": true,
+          "width": "200px",
+          "type": "text"
+        },
+        {
+          "key": "email",
+          "label": "Email",
+          "sortable": true,
+          "filterable": true,
+          "width": "250px",
+          "type": "email"
+        },
+        {
+          "key": "role",
+          "label": "Role",
+          "sortable": true,
+          "filterable": true,
+          "width": "150px",
+          "type": "select",
+          "options": ["Administrator", "Editor", "Viewer"]
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "sortable": true,
+          "filterable": true,
+          "width": "120px",
+          "type": "badge",
+          "formatter": "status"
+        },
+        {
+          "key": "lastLogin",
+          "label": "Last Login",
+          "sortable": true,
+          "width": "180px",
+          "type": "datetime",
+          "formatter": "relative"
+        }
+      ],
+      "pagination": {
+        "page": 1,
+        "size": 10,
+        "total": 5,
+        "showSizeChanger": true,
+        "showQuickJumper": true,
+        "sizes": [10, 25, 50, 100]
+      },
+      "selection": {
+        "type": "multiple",
+        "showSelectAll": true,
+        "preserveSelection": false
+      },
+      "actions": [
+        {
+          "key": "edit",
+          "label": "Edit",
+          "icon": "✏️",
+          "type": "row",
+          "permissions": ["user.edit"]
+        },
+        {
+          "key": "delete",
+          "label": "Delete",
+          "icon": "🗑️",
+          "type": "row",
+          "variant": "danger",
+          "permissions": ["user.delete"]
+        },
+        {
+          "key": "bulk-delete",
+          "label": "Delete Selected",
+          "icon": "🗑️",
+          "type": "bulk",
+          "variant": "danger",
+          "permissions": ["user.delete"]
+        },
+        {
+          "key": "export",
+          "label": "Export",
+          "icon": "📤",
+          "type": "bulk",
+          "permissions": ["data.export"]
+        }
+      ],
+      "loading": false,
+      "theme": "default"
+    },
+    "SimpleTable": {
+      "data": [
+        { "name": "Product A", "price": "$29.99", "stock": 150 },
+        { "name": "Product B", "price": "$39.99", "stock": 75 },
+        { "name": "Product C", "price": "$19.99", "stock": 200 }
+      ],
+      "columns": [
+        { "key": "name", "label": "Product Name" },
+        { "key": "price", "label": "Price" },
+        { "key": "stock", "label": "Stock" }
+      ],
+      "striped": true,
+      "bordered": true
+    },
+    "TreeTable": {
+      "data": [
+        {
+          "id": 1,
+          "name": "Documents",
+          "type": "folder",
+          "size": "-",
+          "modified": "2024-01-15",
+          "children": [
+            {
+              "id": 2,
+              "name": "Projects",
+              "type": "folder",
+              "size": "-",
+              "modified": "2024-01-14",
+              "children": [
+                {
+                  "id": 3,
+                  "name": "Project A.docx",
+                  "type": "file",
+                  "size": "2.5 MB",
+                  "modified": "2024-01-13"
+                },
+                {
+                  "id": 4,
+                  "name": "Project B.pdf",
+                  "type": "file",
+                  "size": "1.8 MB",
+                  "modified": "2024-01-12"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "name": "Archive",
+              "type": "folder",
+              "size": "-",
+              "modified": "2024-01-10"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Images",
+          "type": "folder",
+          "size": "-",
+          "modified": "2024-01-15",
+          "children": [
+            {
+              "id": 7,
+              "name": "photo1.jpg",
+              "type": "file",
+              "size": "3.2 MB",
+              "modified": "2024-01-14"
+            }
+          ]
+        }
+      ],
+      "columns": [
+        { "key": "name", "label": "Name", "tree": true },
+        { "key": "type", "label": "Type" },
+        { "key": "size", "label": "Size" },
+        { "key": "modified", "label": "Modified" }
+      ],
+      "expandable": true,
+      "defaultExpanded": false
+    },
+    "VirtualTable": {
+      "data": "Array.from({length: 10000}, (_, i) => ({ id: i + 1, name: `Item ${i + 1}`, value: Math.random() * 1000 }))",
+      "columns": [
+        { "key": "id", "label": "ID", "width": "80px" },
+        { "key": "name", "label": "Name", "width": "200px" },
+        { "key": "value", "label": "Value", "width": "150px" }
+      ],
+      "itemHeight": 48,
+      "bufferSize": 10
+    }
+  },
+  "dependencies": {
+    "vue": "^3.3.0",
+    "@vueuse/core": "^10.0.0"
+  },
+  "peerDependencies": {
+    "vue-router": "^4.0.0"
+  }
+}

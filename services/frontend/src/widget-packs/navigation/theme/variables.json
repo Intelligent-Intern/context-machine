@@ -1,0 +1,391 @@
+{
+  "version": "1.0.0",
+  "name": "Navigation Widget Theme",
+  "description": "Theme variables for navigation components including sidebars, top bars, and breadcrumbs",
+  "author": "Context Machine Team",
+  "license": "MIT",
+  "categories": {
+    "colors": {
+      "name": "Colors",
+      "description": "Navigation color palette and state colors",
+      "icon": "🎨",
+      "order": 1,
+      "variables": {
+        "nav-bg-primary": {
+          "name": "nav-bg-primary",
+          "type": "color",
+          "default": "#ffffff",
+          "description": "Primary navigation background color",
+          "category": "colors",
+          "examples": ["#ffffff", "#f8fafc", "#1f2937"]
+        },
+        "nav-bg-secondary": {
+          "name": "nav-bg-secondary",
+          "type": "color",
+          "default": "#f8fafc",
+          "description": "Secondary background for elevated elements",
+          "category": "colors",
+          "examples": ["#f8fafc", "#f1f5f9", "#374151"]
+        },
+        "nav-text-primary": {
+          "name": "nav-text-primary",
+          "type": "color",
+          "default": "#1f2937",
+          "description": "Primary text color for navigation items",
+          "category": "colors",
+          "examples": ["#1f2937", "#374151", "#f9fafb"]
+        },
+        "nav-text-secondary": {
+          "name": "nav-text-secondary",
+          "type": "color",
+          "default": "#6b7280",
+          "description": "Secondary text color for less important items",
+          "category": "colors",
+          "examples": ["#6b7280", "#9ca3af", "#d1d5db"]
+        },
+        "nav-text-accent": {
+          "name": "nav-text-accent",
+          "type": "color",
+          "default": "#2563eb",
+          "description": "Accent color for active and highlighted items",
+          "category": "colors",
+          "examples": ["#2563eb", "#3b82f6", "#1d4ed8"]
+        },
+        "nav-border-primary": {
+          "name": "nav-border-primary",
+          "type": "color",
+          "default": "#e2e8f0",
+          "description": "Primary border color for dividers",
+          "category": "colors",
+          "examples": ["#e2e8f0", "#cbd5e1", "#4b5563"]
+        },
+        "nav-hover-bg": {
+          "name": "nav-hover-bg",
+          "type": "color",
+          "default": "#f1f5f9",
+          "description": "Background color for navigation items on hover",
+          "category": "colors",
+          "examples": ["#f1f5f9", "#e2e8f0", "#4b5563"]
+        },
+        "nav-active-bg": {
+          "name": "nav-active-bg",
+          "type": "color",
+          "default": "#eff6ff",
+          "description": "Background color for active navigation items",
+          "category": "colors",
+          "examples": ["#eff6ff", "#dbeafe", "#1e3a8a"]
+        },
+        "nav-selected-bg": {
+          "name": "nav-selected-bg",
+          "type": "color",
+          "default": "#dbeafe",
+          "description": "Background color for selected navigation items",
+          "category": "colors",
+          "examples": ["#dbeafe", "#bfdbfe", "#1e40af"]
+        }
+      }
+    },
+    "spacing": {
+      "name": "Spacing",
+      "description": "Navigation layout, padding, and spacing variables",
+      "icon": "📏",
+      "order": 2,
+      "variables": {
+        "nav-item-height": {
+          "name": "nav-item-height",
+          "type": "size",
+          "default": "40px",
+          "description": "Height of navigation items",
+          "category": "spacing",
+          "min": 32,
+          "max": 56,
+          "unit": "px",
+          "examples": ["40px", "2.5rem", "44px"]
+        },
+        "nav-item-padding-x": {
+          "name": "nav-item-padding-x",
+          "type": "spacing",
+          "default": "12px",
+          "description": "Horizontal padding for navigation items",
+          "category": "spacing",
+          "min": 8,
+          "max": 24,
+          "unit": "px",
+          "examples": ["12px", "0.75rem", "16px"]
+        },
+        "nav-item-padding-y": {
+          "name": "nav-item-padding-y",
+          "type": "spacing",
+          "default": "8px",
+          "description": "Vertical padding for navigation items",
+          "category": "spacing",
+          "min": 4,
+          "max": 16,
+          "unit": "px",
+          "examples": ["8px", "0.5rem", "10px"]
+        },
+        "nav-container-padding": {
+          "name": "nav-container-padding",
+          "type": "spacing",
+          "default": "16px",
+          "description": "Padding inside navigation containers",
+          "category": "spacing",
+          "examples": ["16px", "1rem", "20px"]
+        },
+        "nav-section-gap": {
+          "name": "nav-section-gap",
+          "type": "spacing",
+          "default": "24px",
+          "description": "Gap between navigation sections",
+          "category": "spacing",
+          "examples": ["24px", "1.5rem", "32px"]
+        },
+        "nav-indent-step": {
+          "name": "nav-indent-step",
+          "type": "spacing",
+          "default": "24px",
+          "description": "Indentation step for nested navigation items",
+          "category": "spacing",
+          "examples": ["24px", "1.5rem", "20px"]
+        }
+      }
+    },
+    "typography": {
+      "name": "Typography",
+      "description": "Font styles for navigation text",
+      "icon": "📝",
+      "order": 3,
+      "variables": {
+        "nav-font-size": {
+          "name": "nav-font-size",
+          "type": "size",
+          "default": "14px",
+          "description": "Base font size for navigation items",
+          "category": "typography",
+          "min": 12,
+          "max": 18,
+          "unit": "px",
+          "examples": ["14px", "0.875rem", "16px"]
+        },
+        "nav-font-weight": {
+          "name": "nav-font-weight",
+          "type": "font",
+          "default": "500",
+          "description": "Font weight for navigation items",
+          "category": "typography",
+          "options": ["400", "500", "600"],
+          "examples": ["500", "400", "600"]
+        },
+        "nav-title-size": {
+          "name": "nav-title-size",
+          "type": "size",
+          "default": "16px",
+          "description": "Font size for navigation section titles",
+          "category": "typography",
+          "min": 14,
+          "max": 20,
+          "unit": "px",
+          "examples": ["16px", "1rem", "18px"]
+        },
+        "nav-title-weight": {
+          "name": "nav-title-weight",
+          "type": "font",
+          "default": "600",
+          "description": "Font weight for navigation section titles",
+          "category": "typography",
+          "options": ["500", "600", "700"],
+          "examples": ["600", "500", "700"]
+        }
+      }
+    },
+    "borders": {
+      "name": "Borders",
+      "description": "Border styles and radius for navigation elements",
+      "icon": "⬜",
+      "order": 4,
+      "variables": {
+        "nav-border-width": {
+          "name": "nav-border-width",
+          "type": "border",
+          "default": "1px",
+          "description": "Border width for navigation elements",
+          "category": "borders",
+          "examples": ["1px", "2px", "0px"]
+        },
+        "nav-border-radius": {
+          "name": "nav-border-radius",
+          "type": "border",
+          "default": "6px",
+          "description": "Border radius for navigation items",
+          "category": "borders",
+          "examples": ["6px", "4px", "8px", "0px"]
+        },
+        "nav-focus-ring": {
+          "name": "nav-focus-ring",
+          "type": "shadow",
+          "default": "0 0 0 2px rgba(59, 130, 246, 0.3)",
+          "description": "Focus ring for navigation items",
+          "category": "borders",
+          "examples": [
+            "0 0 0 2px rgba(59, 130, 246, 0.3)",
+            "0 0 0 3px rgba(59, 130, 246, 0.2)"
+          ]
+        }
+      }
+    },
+    "shadows": {
+      "name": "Shadows",
+      "description": "Shadow effects for navigation elements",
+      "icon": "🌫️",
+      "order": 5,
+      "variables": {
+        "nav-shadow": {
+          "name": "nav-shadow",
+          "type": "shadow",
+          "default": "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
+          "description": "Shadow for navigation containers",
+          "category": "shadows",
+          "examples": [
+            "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
+            "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+            "none"
+          ]
+        },
+        "nav-dropdown-shadow": {
+          "name": "nav-dropdown-shadow",
+          "type": "shadow",
+          "default": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+          "description": "Shadow for navigation dropdowns",
+          "category": "shadows",
+          "examples": [
+            "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+            "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
+          ]
+        }
+      }
+    },
+    "layout": {
+      "name": "Layout",
+      "description": "Navigation layout and sizing variables",
+      "icon": "📐",
+      "order": 6,
+      "variables": {
+        "nav-width-collapsed": {
+          "name": "nav-width-collapsed",
+          "type": "size",
+          "default": "64px",
+          "description": "Width of collapsed sidebar navigation",
+          "category": "layout",
+          "min": 48,
+          "max": 80,
+          "unit": "px",
+          "examples": ["64px", "4rem", "72px"]
+        },
+        "nav-width-default": {
+          "name": "nav-width-default",
+          "type": "size",
+          "default": "280px",
+          "description": "Default width of sidebar navigation",
+          "category": "layout",
+          "min": 200,
+          "max": 400,
+          "unit": "px",
+          "examples": ["280px", "17.5rem", "320px"]
+        },
+        "nav-header-height": {
+          "name": "nav-header-height",
+          "type": "size",
+          "default": "64px",
+          "description": "Height of navigation header/top bar",
+          "category": "layout",
+          "min": 48,
+          "max": 80,
+          "unit": "px",
+          "examples": ["64px", "4rem", "72px"]
+        }
+      }
+    },
+    "transitions": {
+      "name": "Transitions",
+      "description": "Animation and transition effects",
+      "icon": "⚡",
+      "order": 7,
+      "variables": {
+        "nav-transition-fast": {
+          "name": "nav-transition-fast",
+          "type": "transition",
+          "default": "150ms ease-out",
+          "description": "Fast transition for hover effects",
+          "category": "transitions",
+          "examples": ["150ms ease-out", "100ms ease", "200ms linear"]
+        },
+        "nav-transition-normal": {
+          "name": "nav-transition-normal",
+          "type": "transition",
+          "default": "250ms ease-in-out",
+          "description": "Normal transition for state changes",
+          "category": "transitions",
+          "examples": ["250ms ease-in-out", "300ms ease", "200ms cubic-bezier(0.4, 0, 0.2, 1)"]
+        }
+      }
+    }
+  },
+  "variants": {
+    "dark": {
+      "name": "Dark Navigation",
+      "description": "Dark theme variant for navigation components",
+      "overrides": {
+        "nav-bg-primary": "#1f2937",
+        "nav-bg-secondary": "#374151",
+        "nav-text-primary": "#f9fafb",
+        "nav-text-secondary": "#d1d5db",
+        "nav-text-accent": "#60a5fa",
+        "nav-border-primary": "#4b5563",
+        "nav-hover-bg": "#4b5563",
+        "nav-active-bg": "#1e3a8a",
+        "nav-selected-bg": "#1e40af"
+      }
+    },
+    "minimal": {
+      "name": "Minimal Navigation",
+      "description": "Clean minimal navigation without borders or shadows",
+      "overrides": {
+        "nav-border-width": "0px",
+        "nav-shadow": "none",
+        "nav-dropdown-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+        "nav-bg-secondary": "transparent",
+        "nav-hover-bg": "rgba(0, 0, 0, 0.05)"
+      }
+    },
+    "compact": {
+      "name": "Compact Navigation",
+      "description": "Space-efficient navigation with reduced padding",
+      "overrides": {
+        "nav-item-height": "36px",
+        "nav-item-padding-x": "8px",
+        "nav-item-padding-y": "6px",
+        "nav-container-padding": "12px",
+        "nav-section-gap": "16px",
+        "nav-font-size": "13px",
+        "nav-width-collapsed": "56px",
+        "nav-width-default": "240px",
+        "nav-header-height": "56px"
+      }
+    },
+    "spacious": {
+      "name": "Spacious Navigation",
+      "description": "Comfortable navigation with generous spacing",
+      "overrides": {
+        "nav-item-height": "48px",
+        "nav-item-padding-x": "16px",
+        "nav-item-padding-y": "12px",
+        "nav-container-padding": "24px",
+        "nav-section-gap": "32px",
+        "nav-font-size": "16px",
+        "nav-width-collapsed": "72px",
+        "nav-width-default": "320px",
+        "nav-header-height": "72px"
+      }
+    }
+  }
+}

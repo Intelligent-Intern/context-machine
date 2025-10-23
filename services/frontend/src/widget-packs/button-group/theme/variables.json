@@ -1,0 +1,356 @@
+{
+  "version": "1.0.0",
+  "name": "Button Group Widget Theme",
+  "description": "Theme variables for button groups, toolbars, and action sets",
+  "author": "Context Machine Team",
+  "license": "MIT",
+  "categories": {
+    "colors": {
+      "name": "Colors",
+      "description": "Button group colors and states",
+      "icon": "🎨",
+      "order": 1,
+      "variables": {
+        "btn-group-primary": {
+          "name": "btn-group-primary",
+          "type": "color",
+          "default": "#3b82f6",
+          "description": "Primary button color in groups",
+          "category": "colors",
+          "examples": ["#3b82f6", "#2563eb", "#1d4ed8"]
+        },
+        "btn-group-secondary": {
+          "name": "btn-group-secondary",
+          "type": "color",
+          "default": "#6b7280",
+          "description": "Secondary button color",
+          "category": "colors",
+          "examples": ["#6b7280", "#9ca3af", "#d1d5db"]
+        },
+        "btn-group-background": {
+          "name": "btn-group-background",
+          "type": "color",
+          "default": "#ffffff",
+          "description": "Default button background",
+          "category": "colors",
+          "examples": ["#ffffff", "#f8fafc", "#f1f5f9"]
+        },
+        "btn-group-hover": {
+          "name": "btn-group-hover",
+          "type": "color",
+          "default": "#f1f5f9",
+          "description": "Button hover background",
+          "category": "colors",
+          "examples": ["#f1f5f9", "#e2e8f0", "#ddd6fe"]
+        },
+        "btn-group-active": {
+          "name": "btn-group-active",
+          "type": "color",
+          "default": "#e2e8f0",
+          "description": "Active/pressed button background",
+          "category": "colors",
+          "examples": ["#e2e8f0", "#cbd5e1", "#94a3b8"]
+        },
+        "btn-group-selected": {
+          "name": "btn-group-selected",
+          "type": "color",
+          "default": "#dbeafe",
+          "description": "Selected button background (toggle state)",
+          "category": "colors",
+          "examples": ["#dbeafe", "#e0e7ff", "#fef3c7"]
+        },
+        "btn-group-border": {
+          "name": "btn-group-border",
+          "type": "color",
+          "default": "#e2e8f0",
+          "description": "Button border color",
+          "category": "colors",
+          "examples": ["#e2e8f0", "#cbd5e1", "#94a3b8"]
+        },
+        "btn-group-text": {
+          "name": "btn-group-text",
+          "type": "color",
+          "default": "#374151",
+          "description": "Button text color",
+          "category": "colors",
+          "examples": ["#374151", "#1f2937", "#111827"]
+        },
+        "btn-group-text-primary": {
+          "name": "btn-group-text-primary",
+          "type": "color",
+          "default": "#ffffff",
+          "description": "Primary button text color",
+          "category": "colors",
+          "examples": ["#ffffff", "#f9fafb", "#f3f4f6"]
+        },
+        "btn-group-disabled": {
+          "name": "btn-group-disabled",
+          "type": "color",
+          "default": "#f3f4f6",
+          "description": "Disabled button background",
+          "category": "colors",
+          "examples": ["#f3f4f6", "#e5e7eb", "#d1d5db"]
+        },
+        "btn-group-disabled-text": {
+          "name": "btn-group-disabled-text",
+          "type": "color",
+          "default": "#9ca3af",
+          "description": "Disabled button text color",
+          "category": "colors",
+          "examples": ["#9ca3af", "#d1d5db", "#6b7280"]
+        }
+      }
+    },
+    "spacing": {
+      "name": "Spacing",
+      "description": "Button group layout and spacing",
+      "icon": "📏",
+      "order": 2,
+      "variables": {
+        "btn-group-padding": {
+          "name": "btn-group-padding",
+          "type": "spacing",
+          "default": "8px 16px",
+          "description": "Padding inside buttons",
+          "category": "spacing",
+          "examples": ["8px 16px", "6px 12px", "12px 20px"]
+        },
+        "btn-group-height": {
+          "name": "btn-group-height",
+          "type": "size",
+          "default": "36px",
+          "description": "Height of buttons in group",
+          "category": "spacing",
+          "min": 28,
+          "max": 56,
+          "unit": "px",
+          "examples": ["36px", "2.25rem", "40px"]
+        },
+        "btn-group-gap": {
+          "name": "btn-group-gap",
+          "type": "spacing",
+          "default": "0px",
+          "description": "Gap between buttons (0 for connected)",
+          "category": "spacing",
+          "examples": ["0px", "4px", "8px"]
+        },
+        "btn-group-icon-size": {
+          "name": "btn-group-icon-size",
+          "type": "size",
+          "default": "16px",
+          "description": "Size of icons in buttons",
+          "category": "spacing",
+          "min": 12,
+          "max": 24,
+          "unit": "px",
+          "examples": ["16px", "1rem", "20px"]
+        },
+        "btn-group-icon-gap": {
+          "name": "btn-group-icon-gap",
+          "type": "spacing",
+          "default": "8px",
+          "description": "Gap between icon and text",
+          "category": "spacing",
+          "examples": ["8px", "0.5rem", "6px"]
+        }
+      }
+    },
+    "borders": {
+      "name": "Borders",
+      "description": "Button group borders and shapes",
+      "icon": "⬜",
+      "order": 3,
+      "variables": {
+        "btn-group-border-width": {
+          "name": "btn-group-border-width",
+          "type": "border",
+          "default": "1px",
+          "description": "Border width for buttons",
+          "category": "borders",
+          "examples": ["1px", "2px", "0px"]
+        },
+        "btn-group-border-radius": {
+          "name": "btn-group-border-radius",
+          "type": "border",
+          "default": "6px",
+          "description": "Border radius for button group",
+          "category": "borders",
+          "examples": ["6px", "4px", "8px", "0px"]
+        },
+        "btn-group-inner-radius": {
+          "name": "btn-group-inner-radius",
+          "type": "border",
+          "default": "0px",
+          "description": "Border radius for inner buttons (usually 0)",
+          "category": "borders",
+          "examples": ["0px", "2px", "4px"]
+        },
+        "btn-group-focus-ring": {
+          "name": "btn-group-focus-ring",
+          "type": "shadow",
+          "default": "0 0 0 2px rgba(59, 130, 246, 0.3)",
+          "description": "Focus ring for buttons",
+          "category": "borders",
+          "examples": [
+            "0 0 0 2px rgba(59, 130, 246, 0.3)",
+            "0 0 0 3px rgba(59, 130, 246, 0.2)"
+          ]
+        }
+      }
+    },
+    "typography": {
+      "name": "Typography",
+      "description": "Font styles for button groups",
+      "icon": "📝",
+      "order": 4,
+      "variables": {
+        "btn-group-font-size": {
+          "name": "btn-group-font-size",
+          "type": "size",
+          "default": "14px",
+          "description": "Font size for button text",
+          "category": "typography",
+          "min": 12,
+          "max": 18,
+          "unit": "px",
+          "examples": ["14px", "0.875rem", "16px"]
+        },
+        "btn-group-font-weight": {
+          "name": "btn-group-font-weight",
+          "type": "font",
+          "default": "500",
+          "description": "Font weight for button text",
+          "category": "typography",
+          "options": ["400", "500", "600"],
+          "examples": ["500", "400", "600"]
+        },
+        "btn-group-line-height": {
+          "name": "btn-group-line-height",
+          "type": "size",
+          "default": "1.4",
+          "description": "Line height for button text",
+          "category": "typography",
+          "min": 1,
+          "max": 2,
+          "step": 0.1,
+          "examples": ["1.4", "1.5", "1.2"]
+        }
+      }
+    },
+    "shadows": {
+      "name": "Shadows",
+      "description": "Button group shadows and elevation",
+      "icon": "🌫️",
+      "order": 5,
+      "variables": {
+        "btn-group-shadow": {
+          "name": "btn-group-shadow",
+          "type": "shadow",
+          "default": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          "description": "Default button shadow",
+          "category": "shadows",
+          "examples": [
+            "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+            "0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+            "none"
+          ]
+        },
+        "btn-group-shadow-hover": {
+          "name": "btn-group-shadow-hover",
+          "type": "shadow",
+          "default": "0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+          "description": "Button shadow on hover",
+          "category": "shadows",
+          "examples": [
+            "0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+            "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+            "none"
+          ]
+        },
+        "btn-group-shadow-active": {
+          "name": "btn-group-shadow-active",
+          "type": "shadow",
+          "default": "inset 0 1px 2px 0 rgba(0, 0, 0, 0.1)",
+          "description": "Button shadow when pressed",
+          "category": "shadows",
+          "examples": [
+            "inset 0 1px 2px 0 rgba(0, 0, 0, 0.1)",
+            "inset 0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+            "none"
+          ]
+        }
+      }
+    },
+    "transitions": {
+      "name": "Transitions",
+      "description": "Button group animations and transitions",
+      "icon": "⚡",
+      "order": 6,
+      "variables": {
+        "btn-group-transition": {
+          "name": "btn-group-transition",
+          "type": "transition",
+          "default": "all 150ms ease-out",
+          "description": "Transition for button state changes",
+          "category": "transitions",
+          "examples": [
+            "all 150ms ease-out",
+            "background-color 200ms ease",
+            "transform 100ms ease-out"
+          ]
+        }
+      }
+    }
+  },
+  "variants": {
+    "dark": {
+      "name": "Dark Button Group",
+      "description": "Dark theme variant for button groups",
+      "overrides": {
+        "btn-group-background": "#374151",
+        "btn-group-hover": "#4b5563",
+        "btn-group-active": "#6b7280",
+        "btn-group-selected": "#1e3a8a",
+        "btn-group-border": "#4b5563",
+        "btn-group-text": "#f3f4f6",
+        "btn-group-disabled": "#1f2937",
+        "btn-group-disabled-text": "#6b7280"
+      }
+    },
+    "minimal": {
+      "name": "Minimal Button Group",
+      "description": "Clean minimal button group without borders",
+      "overrides": {
+        "btn-group-border-width": "0px",
+        "btn-group-shadow": "none",
+        "btn-group-shadow-hover": "none",
+        "btn-group-background": "transparent",
+        "btn-group-hover": "rgba(0, 0, 0, 0.05)"
+      }
+    },
+    "compact": {
+      "name": "Compact Button Group",
+      "description": "Space-efficient button group",
+      "overrides": {
+        "btn-group-padding": "6px 12px",
+        "btn-group-height": "32px",
+        "btn-group-font-size": "13px",
+        "btn-group-icon-size": "14px",
+        "btn-group-icon-gap": "6px",
+        "btn-group-border-radius": "4px"
+      }
+    },
+    "large": {
+      "name": "Large Button Group",
+      "description": "Larger button group for better touch targets",
+      "overrides": {
+        "btn-group-padding": "12px 20px",
+        "btn-group-height": "44px",
+        "btn-group-font-size": "16px",
+        "btn-group-icon-size": "20px",
+        "btn-group-icon-gap": "10px",
+        "btn-group-border-radius": "8px"
+      }
+    }
+  }
+}

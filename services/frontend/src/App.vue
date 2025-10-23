@@ -1,6 +1,6 @@
 <!-- src/App.vue -->
 <template>
-  <div id="app" class="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+  <div id="app" class="min-h-screen flex flex-col bg-gray-50 text-gray-900" :class="{ 'authenticated': isAuthenticated }">
     <!-- Skip-Link für A11y -->
     <a
         href="#main-content"
@@ -34,13 +34,22 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted } from 'vue'
 import AppShell from '@/components/AppShell.vue'
 import { useNotificationStore } from '@/core/stores/notification'
+import { useAuthStore } from '@/core/stores/auth'
 import { useI18n } from '@/core/i18n'
 
-
 const notifications = useNotificationStore()
+const authStore = useAuthStore()
 const { t } = useI18n()
+
+const isAuthenticated = computed(() => authStore.isAuthenticated)
+
+// Initialize auth store on app startup
+onMounted(() => {
+  authStore.initialize()
+})
 
 /**
  * Map Notification-Typ zu Tailwind-Klassen

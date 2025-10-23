@@ -20,16 +20,15 @@ touch ./infra/gitea/data/git/.ssh/authorized_keys.tmp
 sudo chown -R 1000:1000 ./infra/gitea/data
 sudo chmod -R 755 ./infra/gitea/data
 
-./infra/scripts/utils/container-utils.sh
-
 info "Starting services..."
-docker compose up -d --build
+docker compose up -d --no-build
 
 ./infra/scripts/utils/setup-minio.sh
 ./infra/scripts/utils/setup-rabbitmq.sh
 ./infra/scripts/utils/setup-minio-event.sh
 ./infra/scripts/utils/setup-n8n.sh || true
 ./infra/scripts/utils/setup-gitea.sh 
+# ./infra/scripts/utils/setup-mcp.sh
 ./infra/scripts/utils/setup-ollama.sh 
 
 system_up

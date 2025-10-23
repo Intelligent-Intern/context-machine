@@ -1,76 +1,87 @@
-/* src/styles/tailwind.css */
+/* Minimal Tailwind CSS setup for Context Machine */
 
-/* Import Tailwind Layers */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Theme Tokens – Basisfarben, Schriftgrößen, Abstände */
-:root {
-    --color-primary: 37 99 235;   /* blue-600 */
-    --color-primary-light: 59 130 246; /* blue-500 */
-    --color-danger: 220 38 38;    /* red-600 */
-    --color-success: 34 197 94;   /* green-500 */
-    --color-warning: 234 179 8;   /* yellow-500 */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px rgba(0,0,0,0.15);
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-/* Komponenten-Erweiterungen */
-@layer components {
-    .btn {
-        @apply inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
-    }
-    .btn-primary {
-        @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-400;
-    }
-    .btn-secondary {
-        @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-400;
-    }
-    .btn-danger {
-        @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-400;
-    }
+/* Utility classes that work with our theme system */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.block { display: block; }
+.hidden { display: none; }
 
-    .card {
-        @apply bg-white border border-gray-200 rounded-lg shadow-sm;
-    }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
 
-    .badge {
-        @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
-    }
-    .badge-primary {
-        @apply bg-blue-100 text-blue-800;
-    }
-    .badge-danger {
-        @apply bg-red-100 text-red-800;
-    }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+
+.p-2 { padding: 0.5rem; }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+
+.m-2 { margin: 0.5rem; }
+.m-4 { margin: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-4 { margin-top: 1rem; }
+
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.border { border-width: 1px; }
+.border-0 { border-width: 0; }
+
+.cursor-pointer { cursor: pointer; }
+
+.transition { transition: all 0.15s ease-in-out; }
+
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+
+.z-10 { z-index: 10; }
+.z-50 { z-index: 50; }
+
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+
+.top-0 { top: 0; }
+.bottom-0 { bottom: 0; }
+.left-0 { left: 0; }
+.right-0 { right: 0; }
+
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+
+/* Responsive utilities */
+@media (min-width: 768px) {
+  .md\:flex { display: flex; }
+  .md\:hidden { display: none; }
+  .md\:block { display: block; }
 }
 
-/* Utilities-Erweiterungen */
-@layer utilities {
-    .text-muted {
-        @apply text-gray-500;
-    }
-    .shadow-token-sm {
-        box-shadow: var(--shadow-sm);
-    }
-    .shadow-token-md {
-        box-shadow: var(--shadow-md);
-    }
-    .shadow-token-lg {
-        box-shadow: var(--shadow-lg);
-    }
-    .radius-sm {
-        border-radius: var(--radius-sm);
-    }
-    .radius-md {
-        border-radius: var(--radius-md);
-    }
-    .radius-lg {
-        border-radius: var(--radius-lg);
-    }
+@media (min-width: 1024px) {
+  .lg\:flex { display: flex; }
+  .lg\:hidden { display: none; }
+  .lg\:block { display: block; }
 }

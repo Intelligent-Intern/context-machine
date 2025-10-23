@@ -1,37 +1,55 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { useAuthStore } from '@/core/stores/auth'
-import { usePermissionStore } from '@/core/stores/permissions'
 
 function beforeEach(
-    to: RouteLocationNormalized,
-    _from: RouteLocationNormalized,
-    next: NavigationGuardNext
+  to: RouteLocationNormalized,
+  _from: RouteLocationNormalized,
+  next: NavigationGuardNext
 ) {
   const auth = useAuthStore()
-  const perms = usePermissionStore()
 
-  // Kein Token → Login erzwingen (außer Home/NotFound)
-  if (!auth.accessToken) {
-    if (to.name === 'home' || to.name === 'not-found') {
-      return next()
-    }
-    return auth.login()
+  // Try to restore session on first navigation
+  if (!auth.isAuthenticated) {
+    auth.restoreSession()
   }
 
-  // Permissions prüfen
-  const required = (to.meta?.permissions as string[]) || []
-  for (const p of required) {
-    if (!perms.has(p)) {
-      console.warn(`[router] blocked navigation, missing permission: ${p}`)
-      return next({ name: 'not-found' })
+  // Public routes that don't require authentication
+  const publicRoutes = ['login', 'forgot-password', 'not-found', 'test']
+
+  // If route is public, allow access
+  if (publicRoutes.includes(to.name as string)) {
+    return next()
+  }
+
+  // Check if user is authenticated and token is valid
+  if (!auth.isAuthenticated || !auth.isTokenValid) {
+    // Clear invalid session
+    if (auth.accessToken && !auth.isTokenValid) {
+      auth.logout()
+    }
+    
+    // Redirect to login
+    return next({ name: 'login' })
+  }
+
+  // Check role-based access
+  if (to.meta.requiresRole) {
+    const requiredRole = to.meta.requiresRole as string
+    const userRole = auth.user?.role
+    
+    if (!userRole || userRole !== requiredRole) {
+      console.warn(`[router] Access denied: required role ${requiredRole}, user has ${userRole}`)
+      // Redirect to home or show access denied
+      return next({ name: 'home' })
     }
   }
 
+  // User is authenticated and has required role, allow access
   return next()
 }
 
 function afterEach(to: RouteLocationNormalized) {
-  console.info(`[router] navigated to ${to.fullPath}`)
+
 }
 
 export default { beforeEach, afterEach }

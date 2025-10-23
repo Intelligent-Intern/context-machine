@@ -1,0 +1,110 @@
+{
+  "id": "widget-pack/core-ui/auth/550e8400-e29b-41d4-a716-446655440000/1.0.0",
+  "name": "Authentication Widget Pack",
+  "version": "1.0.0",
+  "description": "Authentication and login components",
+  "author": "Context Machine",
+  "license": "MIT",
+  "module": "core-ui",
+  "type": "auth",
+  "projectId": "550e8400-e29b-41d4-a716-446655440000",
+  "keywords": ["auth", "login", "authentication", "forms"],
+  "components": {
+    "LoginForm": {
+      "path": "./widgets/LoginForm.vue",
+      "name": "Professional Login Form",
+      "description": "Enterprise login form with validation and security features",
+      "category": "authentication",
+      "tags": ["login", "form", "auth", "security"],
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Sign In",
+          "description": "Login form title"
+        },
+        "subtitle": {
+          "type": "string",
+          "default": "Welcome back",
+          "description": "Login form subtitle"
+        },
+        "showRememberMe": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show remember me checkbox"
+        },
+        "showForgotPassword": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show forgot password link"
+        }
+      },
+      "events": {
+        "login": {
+          "description": "Fired when user attempts to login",
+          "payload": {
+            "username": "string",
+            "password": "string",
+            "rememberMe": "boolean"
+          },
+          "permissions": ["auth.login"]
+        },
+        "forgot-password": {
+          "description": "Fired when user clicks forgot password",
+          "payload": {
+            "username": "string"
+          },
+          "permissions": ["auth.forgot"]
+        }
+      },
+      "permissions": {
+        "auth.login": {
+          "description": "Allow login attempts",
+          "default": true
+        },
+        "auth.forgot": {
+          "description": "Allow forgot password",
+          "default": true
+        }
+      }
+    },
+    "ForgotPasswordForm": {
+      "path": "./widgets/ForgotPasswordForm.vue",
+      "name": "Forgot Password Form",
+      "description": "Password reset request form",
+      "category": "authentication",
+      "tags": ["forgot", "password", "reset", "auth"],
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Reset Password",
+          "description": "Form title"
+        },
+        "subtitle": {
+          "type": "string",
+          "default": "Enter your username or email to receive reset instructions",
+          "description": "Form subtitle"
+        }
+      },
+      "events": {
+        "forgot-password": {
+          "description": "Fired when user submits forgot password request",
+          "payload": {
+            "username": "string"
+          },
+          "permissions": ["auth.forgot"]
+        },
+        "back-to-login": {
+          "description": "Fired when user wants to go back to login",
+          "payload": {},
+          "permissions": []
+        }
+      },
+      "permissions": {
+        "auth.forgot": {
+          "description": "Allow forgot password requests",
+          "default": true
+        }
+      }
+    }
+  }
+}

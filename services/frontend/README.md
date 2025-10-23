@@ -80,16 +80,38 @@ Pages are not statically defined in the Vue Router. Instead, the router is popul
 Each page manifest includes:
 
 - `route` — the path (e.g., `/`, `/about`, `/app/graph`)  
-- `layout` — which bars are active (top, bottom, left, right) and their configurations  
+- `layout_config` — compact layout definition with bars and ports
 - `widgets` — which components populate each region  
 
-Widgets are referenced symbolically using a registry key format such as:
+#### Compact Layout Format
 
-~~~
-"site@TopNav"
-"core@Section"
-"graph@Viewer"
-~~~
+The layout format has been optimized for brevity:
+
+```json
+{
+  "bars": {"t": 2, "b": 0, "l": 2, "r": 0},
+  "ports": {
+    "t": ["nav@TopBar"],
+    "l": ["nav@SidebarNav"], 
+    "m": ["dashboard@Welcome"]
+  }
+}
+```
+
+Where:
+- **bars**: `t`=top, `b`=bottom, `l`=left, `r`=right (0=hidden, 1=collapsed, 2=visible)
+- **ports**: `t`=top, `l`=left, `r`=right, `b`=bottom, `m`=main
+- **widgets**: Direct string format `pack@Widget` instead of object notation
+
+Widgets are referenced using the compact format:
+- `nav@TopBar` (navigation pack, TopBar widget)
+- `dashboard@Welcome` (dashboard pack, Welcome widget)
+- `theme@ThemeEditor` (theme pack, ThemeEditor widget)
+
+Multiple widgets in a port are ordered by array position:
+```json
+"m": ["dashboard@Welcome", "stats@Overview", "charts@Graph"]
+```
 
 At runtime, the frontend resolves these references through the **Widget Registry**, dynamically importing and mounting the relevant components.
 

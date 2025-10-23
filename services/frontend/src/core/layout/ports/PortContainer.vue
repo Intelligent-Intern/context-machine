@@ -69,11 +69,8 @@ function dispatch(event: {
   permission?: string
 }) {
   if (event.scope === 'backend') {
-    request('event.dispatch', {
-      name: event.name,
-      payload: event.payload,
-      permission: event.permission
-    })
+    // Send the action directly, not wrapped in event.dispatch
+    request(event.name, event.payload)
   } else {
     if (event.name === 'bar.right.open') layout.setBarState('right', 3)
     if (event.name === 'bar.right.close') layout.setBarState('right', 0)
@@ -84,7 +81,18 @@ provide('ctx', ctx)
 
 const entries = computed<SlotEntry[]>(() => {
   const m = layout.manifest as any
-  const list: SlotEntry[] = m?.ports?.[props.port] || []
+  const portData = m?.ports?.[props.port] || []
+  
+  // Handle new compact format (array of strings)
+  if (Array.isArray(portData) && portData.length > 0 && typeof portData[0] === 'string') {
+    return portData.map((widget: string, index: number) => ({
+      slot: index + 1,
+      widget: widget
+    }))
+  }
+  
+  // Handle old format (array of objects with slot and widget)
+  const list: SlotEntry[] = portData
   return [...list].sort((a, b) => (a.slot || 0) - (b.slot || 0))
 })
 

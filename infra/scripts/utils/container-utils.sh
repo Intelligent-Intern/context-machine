@@ -3,8 +3,14 @@ set -euo pipefail
 
 source infra/scripts/utils/messages.sh || { echo "messages.sh missing"; exit 1; }
 
-info "Stopping and cleaning up existing containers..."
-docker compose down -v --remove-orphans || true
+MODE=${1:-up}  # Default to 'up' if no argument provided
+
+if [ "$MODE" = "build" ]; then
+    info "Building all service containers..."
+else
+    info "Stopping and cleaning up existing containers..."
+    docker compose down -v --remove-orphans || true
+fi
 
 
 # ---------------------------------------------------------------------------
@@ -24,18 +30,39 @@ SERVICE_PATH_ANALYZER="./services/analyzer-service"
 SERVICE_NAME_WS="context-machine-websocket-service"
 SERVICE_PATH_WS="./services/websocket-service"
 
+# --- MCP Service ---------------------------------------------------------
+#SERVICE_NAME_MCP="context-machine-mcp-service"
+#SERVICE_PATH_MCP="./services/mcp-service"
 
-info "Building all images from scratch (no cache)..."
-docker build --no-cache -t "${SERVICE_NAME_NEO4J}:${TAG}" "${SERVICE_PATH_NEO4J}"
-docker build --no-cache -t "${SERVICE_NAME_ANALYZER}:${TAG}" "${SERVICE_PATH_ANALYZER}"
-docker build --no-cache -t "${SERVICE_NAME_WS}:${TAG}" "${SERVICE_PATH_WS}"
+# --- Backend Service -----------------------------------------------------
+SERVICE_NAME_BACKEND="context-machine-backend"
+SERVICE_PATH_BACKEND="./services/backend"
 
-success "All service images rebuilt successfully."
+# --- Frontend Service ----------------------------------------------------
+SERVICE_NAME_FRONTEND="context-machine-frontend"
+SERVICE_PATH_FRONTEND="./services/frontend"
 
-# ---------------------------------------------------------------------------
-# Start all core services fresh
-# ---------------------------------------------------------------------------
-info "Starting Neo4j, Analyzer, and Gitea services..."
-docker compose up -d analyzer-service neo4j-service gitea
 
-success "✅ All core services (Neo4j, Analyzer) started successfully."
+
+if [ "$MODE" = "build" ]; then
+    info "Building all images from scratch (no cache)..."
+    docker build --no-cache -t "${SERVICE_NAME_NEO4J}:${TAG}" "${SERVICE_PATH_NEO4J}"
+    docker build --no-cache -t "${SERVICE_NAME_ANALYZER}:${TAG}" "${SERVICE_PATH_ANALYZER}"
+    docker build --no-cache -t "${SERVICE_NAME_WS}:${TAG}" "${SERVICE_PATH_WS}"
+    # docker build --no-cache -t "${SERVICE_NAME_MCP}:${TAG}" "${SERVICE_PATH_MCP}"
+    docker build --no-cache -t "${SERVICE_NAME_BACKEND}:${TAG}" "${SERVICE_PATH_BACKEND}"
+    docker build --no-cache -t "${SERVICE_NAME_FRONTEND}:${TAG}" "${SERVICE_PATH_FRONTEND}"
+    
+    success "All service images built successfully."
+else
+    info "Building images (using cache if available)..."
+    docker build -t "${SERVICE_NAME_NEO4J}:${TAG}" "${SERVICE_PATH_NEO4J}"
+    docker build -t "${SERVICE_NAME_ANALYZER}:${TAG}" "${SERVICE_PATH_ANALYZER}"
+    docker build -t "${SERVICE_NAME_WS}:${TAG}" "${SERVICE_PATH_WS}"
+    # docker build -t "${SERVICE_NAME_MCP}:${TAG}" "${SERVICE_PATH_MCP}"
+    docker build -t "${SERVICE_NAME_BACKEND}:${TAG}" "${SERVICE_PATH_BACKEND}"
+    docker build -t "${SERVICE_NAME_FRONTEND}:${TAG}" "${SERVICE_PATH_FRONTEND}"
+    
+    success "All service images built successfully."
+fi
+

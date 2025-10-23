@@ -28,8 +28,34 @@ export function useApi() {
     loading.value = true
     error.value = null
     try {
-      const res = await api.send<T>({ action, payload })
-      return { data: res, error: null }
+      // Use the existing messaging system instead of direct API calls
+      const { sendMessage } = await import('@/core/messaging/api')
+      
+      // Create promise that resolves when response arrives
+      const responsePromise = new Promise<T>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error(`Request timeout for ${action}`))
+        }, 10000) // 10 second timeout
+        
+        // Register one-time handler for this specific action
+        const handleResponse = (data: any) => {
+          clearTimeout(timeout)
+          resolve(data)
+        }
+        
+        const handleError = (error: string) => {
+          clearTimeout(timeout)
+          reject(new Error(error))
+        }
+        
+        // Send message and wait for response
+        sendMessage(action, payload, handleResponse, handleError)
+      })
+      
+      // Wait for response
+      const data = await responsePromise
+      return { data, error: null }
+      
     } catch (e: any) {
       const msg = e?.message || 'API error'
       error.value = msg

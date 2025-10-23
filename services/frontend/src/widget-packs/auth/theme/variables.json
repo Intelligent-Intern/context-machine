@@ -1,0 +1,231 @@
+{
+  "version": "1.0.0",
+  "name": "Authentication Widget Theme",
+  "description": "Theme variables for authentication widgets including login forms and password reset",
+  "author": "Context Machine Team",
+  "license": "MIT",
+  "categories": {
+    "colors": {
+      "name": "Colors",
+      "description": "Authentication form colors and states",
+      "icon": "🎨",
+      "order": 1,
+      "variables": {
+        "auth-primary": {
+          "name": "auth-primary",
+          "type": "color",
+          "default": "#3b82f6",
+          "description": "Primary color for login buttons and links",
+          "category": "colors",
+          "examples": ["#3b82f6", "#2563eb", "#1d4ed8"]
+        },
+        "auth-background": {
+          "name": "auth-background",
+          "type": "color",
+          "default": "#ffffff",
+          "description": "Background color for authentication forms",
+          "category": "colors",
+          "examples": ["#ffffff", "#f8fafc", "#f1f5f9"]
+        },
+        "auth-surface": {
+          "name": "auth-surface",
+          "type": "color",
+          "default": "#f8fafc",
+          "description": "Surface color for form containers",
+          "category": "colors",
+          "examples": ["#f8fafc", "#ffffff", "#f1f5f9"]
+        },
+        "auth-border": {
+          "name": "auth-border",
+          "type": "color",
+          "default": "#e2e8f0",
+          "description": "Border color for form inputs",
+          "category": "colors",
+          "examples": ["#e2e8f0", "#cbd5e1", "#94a3b8"]
+        },
+        "auth-text": {
+          "name": "auth-text",
+          "type": "color",
+          "default": "#1f2937",
+          "description": "Primary text color for forms",
+          "category": "colors",
+          "examples": ["#1f2937", "#374151", "#111827"]
+        },
+        "auth-text-secondary": {
+          "name": "auth-text-secondary",
+          "type": "color",
+          "default": "#6b7280",
+          "description": "Secondary text color for labels and hints",
+          "category": "colors",
+          "examples": ["#6b7280", "#9ca3af", "#d1d5db"]
+        },
+        "auth-error": {
+          "name": "auth-error",
+          "type": "color",
+          "default": "#ef4444",
+          "description": "Error color for validation messages",
+          "category": "colors",
+          "examples": ["#ef4444", "#dc2626", "#b91c1c"]
+        },
+        "auth-success": {
+          "name": "auth-success",
+          "type": "color",
+          "default": "#10b981",
+          "description": "Success color for confirmation messages",
+          "category": "colors",
+          "examples": ["#10b981", "#059669", "#047857"]
+        }
+      }
+    },
+    "spacing": {
+      "name": "Spacing",
+      "description": "Form layout and spacing variables",
+      "icon": "📏",
+      "order": 2,
+      "variables": {
+        "auth-form-padding": {
+          "name": "auth-form-padding",
+          "type": "spacing",
+          "default": "24px",
+          "description": "Padding inside authentication forms",
+          "category": "spacing",
+          "min": 16,
+          "max": 48,
+          "unit": "px",
+          "examples": ["24px", "1.5rem", "32px"]
+        },
+        "auth-input-height": {
+          "name": "auth-input-height",
+          "type": "size",
+          "default": "44px",
+          "description": "Height of form input fields",
+          "category": "spacing",
+          "min": 36,
+          "max": 56,
+          "unit": "px",
+          "examples": ["44px", "2.75rem", "48px"]
+        },
+        "auth-button-height": {
+          "name": "auth-button-height",
+          "type": "size",
+          "default": "44px",
+          "description": "Height of authentication buttons",
+          "category": "spacing",
+          "min": 36,
+          "max": 56,
+          "unit": "px",
+          "examples": ["44px", "2.75rem", "48px"]
+        },
+        "auth-field-gap": {
+          "name": "auth-field-gap",
+          "type": "spacing",
+          "default": "16px",
+          "description": "Gap between form fields",
+          "category": "spacing",
+          "min": 8,
+          "max": 32,
+          "unit": "px",
+          "examples": ["16px", "1rem", "20px"]
+        }
+      }
+    },
+    "borders": {
+      "name": "Borders",
+      "description": "Border styles for form elements",
+      "icon": "⬜",
+      "order": 3,
+      "variables": {
+        "auth-border-radius": {
+          "name": "auth-border-radius",
+          "type": "border",
+          "default": "8px",
+          "description": "Border radius for form elements",
+          "category": "borders",
+          "examples": ["8px", "6px", "12px", "0.5rem"]
+        },
+        "auth-border-width": {
+          "name": "auth-border-width",
+          "type": "border",
+          "default": "1px",
+          "description": "Border width for form inputs",
+          "category": "borders",
+          "examples": ["1px", "2px", "0.5px"]
+        },
+        "auth-focus-ring": {
+          "name": "auth-focus-ring",
+          "type": "shadow",
+          "default": "0 0 0 3px rgba(59, 130, 246, 0.1)",
+          "description": "Focus ring for form inputs",
+          "category": "borders",
+          "examples": [
+            "0 0 0 3px rgba(59, 130, 246, 0.1)",
+            "0 0 0 2px rgba(59, 130, 246, 0.2)"
+          ]
+        }
+      }
+    },
+    "typography": {
+      "name": "Typography",
+      "description": "Font styles for authentication forms",
+      "icon": "📝",
+      "order": 4,
+      "variables": {
+        "auth-font-size": {
+          "name": "auth-font-size",
+          "type": "size",
+          "default": "14px",
+          "description": "Base font size for form text",
+          "category": "typography",
+          "min": 12,
+          "max": 18,
+          "unit": "px",
+          "examples": ["14px", "0.875rem", "16px"]
+        },
+        "auth-title-size": {
+          "name": "auth-title-size",
+          "type": "size",
+          "default": "24px",
+          "description": "Font size for form titles",
+          "category": "typography",
+          "min": 18,
+          "max": 32,
+          "unit": "px",
+          "examples": ["24px", "1.5rem", "28px"]
+        },
+        "auth-label-size": {
+          "name": "auth-label-size",
+          "type": "size",
+          "default": "12px",
+          "description": "Font size for form labels",
+          "category": "typography",
+          "min": 10,
+          "max": 16,
+          "unit": "px",
+          "examples": ["12px", "0.75rem", "14px"]
+        }
+      }
+    }
+  },
+  "variants": {
+    "dark": {
+      "name": "Dark Authentication",
+      "description": "Dark theme variant for authentication forms",
+      "overrides": {
+        "auth-background": "#1f2937",
+        "auth-surface": "#374151",
+        "auth-border": "#4b5563",
+        "auth-text": "#f9fafb",
+        "auth-text-secondary": "#d1d5db"
+      }
+    },
+    "minimal": {
+      "name": "Minimal Authentication",
+      "description": "Clean minimal theme with reduced visual elements",
+      "overrides": {
+        "auth-border-width": "0px",
+        "auth-surface": "transparent",
+        "auth-focus-ring": "0 0 0 2px rgba(59, 130, 246, 0.3)"
+      }
+    }
+  }
+}

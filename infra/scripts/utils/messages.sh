@@ -38,3 +38,4 @@ system_down() { log "SYSTEM " "$FG_YELLOW" "System stopped"; }
 building()    { log "BUILD  " "$FG_BLUE"   "Building services..."; }
 
 debug()       { log "DEBUG  " "$FG_GREY"   "$@"; }
+

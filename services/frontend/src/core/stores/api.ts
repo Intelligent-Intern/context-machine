@@ -1,6 +1,7 @@
 // src/core/stores/api.ts
 import { defineStore } from 'pinia'
 import { useErrorStore } from '@/core/stores/error'
+import { useAuthStore } from '@/core/stores/auth'
 
 interface ApiRequest {
     a: string
@@ -15,15 +16,42 @@ export const useApiStore = defineStore('api', {
          */
         async send(messages: ApiRequest[]) {
             const errorStore = useErrorStore()
+            const authStore = useAuthStore()
+            
             try {
+                // Prepare headers
+                const headers: Record<string, string> = {
+                    'Content-Type': 'application/json'
+                }
+                
+                // Add JWT token if available
+                if (authStore.accessToken) {
+                    headers['Authorization'] = `Bearer ${authStore.accessToken}`
+                }
+                
                 const res = await fetch('/api/message', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ m: messages })
+                    headers,
+                    body: JSON.stringify(messages)
                 })
 
                 if (!res.ok) {
                     const text = await res.text()
+                    
+                    // Handle token expiration
+                    if (res.status === 401) {
+                        // Clear invalid token and redirect to login
+                        authStore.logout()
+                        errorStore.add({
+                            source: 'api.send',
+                            code: 'AUTH',
+                            msg: 'Authentication required - please login again',
+                            details: { status: res.status },
+                            ts: new Date().toISOString()
+                        })
+                        return false
+                    }
+                    
                     errorStore.add({
                         source: 'api.send',
                         code: 'HTTP',

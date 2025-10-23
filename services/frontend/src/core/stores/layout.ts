@@ -31,7 +31,7 @@ export const useLayoutStore = defineStore('layout', {
         },
         sizes: {
             left: { default: 280, current: 280 },
-            right: { default: 360, current: 360 }
+            right: { default: 320, current: 320 }
         },
         activePage: null,
         manifest: null
@@ -71,13 +71,29 @@ export const useLayoutStore = defineStore('layout', {
 
         persistSizes() {
             localStorage.setItem('layout.sizes', JSON.stringify(this.sizes))
+            localStorage.setItem('layout.bars', JSON.stringify(this.bars))
         },
 
         loadSizes() {
-            const raw = localStorage.getItem('layout.sizes')
-            if (raw) {
+            const rawSizes = localStorage.getItem('layout.sizes')
+            if (rawSizes) {
                 try {
-                    this.sizes = JSON.parse(raw)
+                    this.sizes = JSON.parse(rawSizes)
+                } catch {
+                    // parse error ignorieren
+                }
+            }
+            
+            const rawBars = localStorage.getItem('layout.bars')
+            if (rawBars) {
+                try {
+                    const savedBars = JSON.parse(rawBars)
+                    // Only restore non-mobile states
+                    Object.keys(savedBars).forEach(key => {
+                        if (savedBars[key] !== 4) { // Don't restore mobile state
+                            this.bars[key as BarKey] = savedBars[key]
+                        }
+                    })
                 } catch {
                     // parse error ignorieren
                 }
@@ -89,27 +105,71 @@ export const useLayoutStore = defineStore('layout', {
         },
 
         applyManifest(manifest: any) {
-            this.manifest = manifest
+            // Convert new compact format to internal format
+            const normalizedManifest = this.normalizeManifest(manifest)
+            this.manifest = normalizedManifest
 
-            if (manifest.bars) {
+            if (normalizedManifest.bars) {
                 this.bars = {
-                    top: manifest.bars.top ?? this.bars.top,
-                    bottom: manifest.bars.bottom ?? this.bars.bottom,
-                    left: manifest.bars.left ?? this.bars.left,
-                    right: manifest.bars.right ?? this.bars.right
+                    top: normalizedManifest.bars.top ?? this.bars.top,
+                    bottom: normalizedManifest.bars.bottom ?? this.bars.bottom,
+                    left: normalizedManifest.bars.left ?? this.bars.left,
+                    right: normalizedManifest.bars.right ?? this.bars.right
                 }
             }
 
-            if (manifest.sizes) {
-                if (manifest.sizes.left) {
-                    this.sizes.left.default = manifest.sizes.left
-                    this.sizes.left.current = manifest.sizes.left
+            if (normalizedManifest.sizes) {
+                if (normalizedManifest.sizes.left) {
+                    this.sizes.left.default = normalizedManifest.sizes.left
+                    this.sizes.left.current = normalizedManifest.sizes.left
                 }
-                if (manifest.sizes.right) {
-                    this.sizes.right.default = manifest.sizes.right
-                    this.sizes.right.current = manifest.sizes.right
+                if (normalizedManifest.sizes.right) {
+                    this.sizes.right.default = normalizedManifest.sizes.right
+                    this.sizes.right.current = normalizedManifest.sizes.right
                 }
             }
+        },
+
+        normalizeManifest(manifest: any) {
+            const normalized = { ...manifest }
+
+            // Normalize bars: convert compact format (t,b,l,r) to full format (top,bottom,left,right)
+            if (manifest.bars) {
+                const bars = manifest.bars
+                if (bars.t !== undefined || bars.b !== undefined || bars.l !== undefined || bars.r !== undefined) {
+                    normalized.bars = {
+                        top: bars.t ?? bars.top,
+                        bottom: bars.b ?? bars.bottom,
+                        left: bars.l ?? bars.left,
+                        right: bars.r ?? bars.right
+                    }
+                }
+            }
+
+            // Normalize ports: convert compact format (t,l,m) to full format (top,left,main)
+            if (manifest.ports) {
+                const ports = manifest.ports
+                const normalizedPorts: any = {}
+
+                // Map compact port names to full names
+                const portMapping: Record<string, string> = {
+                    't': 'top',
+                    'b': 'bottom', 
+                    'l': 'left',
+                    'r': 'right',
+                    'm': 'main'
+                }
+
+                // Convert compact port names
+                Object.entries(ports).forEach(([key, value]) => {
+                    const fullKey = portMapping[key] || key
+                    normalizedPorts[fullKey] = value
+                })
+
+                normalized.ports = normalizedPorts
+            }
+
+            return normalized
         },
 
         applyResponsiveDefaults() {

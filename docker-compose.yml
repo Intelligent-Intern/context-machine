@@ -132,6 +132,22 @@ services:
     networks:
       - context-machine-network
 
+#  mcp-service:
+#    image: context-machine-mcp-service:latest
+#    container_name: context-machine-mcp-service
+#    restart: unless-stopped
+#    ports:
+#      - "3003:3003"
+#    env_file:
+#      - .env.local
+#    volumes:
+#      - ./services/mcp-service/src:/app/src
+#    depends_on:
+#      - neo4j-service
+#    networks:
+#      - context-machine-network
+#    command: ["python", "-u", "src/app.py"]
+
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: context-machine-openwebui
@@ -143,6 +159,8 @@ services:
       - DEFAULT_MODEL=llama3
       - DATA_DIR=/app/backend/data
       - TZ=Europe/Berlin
+      - MCP_SERVERS=http://context-machine-mcp:3003
+      - MCP_API_KEY=context-machine-bearer-token-123      
     volumes:
       - ./infra/openwebui/data:/app/backend/data
     depends_on:
@@ -161,7 +179,66 @@ services:
     networks:
       - context-machine-network
 
+  postgres:
+    container_name: context-machine-postgres
+    hostname: postgres
+    image: timescale/timescaledb:latest-pg14
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env.local
+    volumes:
+      - ./infra/postgres/data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB || exit 1"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+      start_period: 10s
+    networks:
+      - context-machine-network
+
+  backend:
+    image: context-machine-backend:latest
+    container_name: context-machine-backend
+    restart: unless-stopped
+    ports:
+      - "3006:3006"
+    env_file:
+      - .env.local
+    volumes:
+      - ./services/backend/src:/app/src
+    depends_on:
+      - postgres
+      - websocket-service
+    networks:
+      - context-machine-network
+    command: ["python", "-u", "src/app.py"]
+
+  frontend:
+    image: context-machine-frontend:latest
+    container_name: context-machine-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env.local
+    environment:
+      - DOCKER_ENV=true
+    volumes:
+      - ./services/frontend/src:/app/src
+      - ./services/frontend/public:/app/public
+      - ./services/frontend/.env.local:/app/.env.local
+      - ./services/frontend/vite.config.ts:/app/vite.config.ts
+      - ./services/frontend/package.json:/app/package.json
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - context-machine-network
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 networks:
   context-machine-network:
     driver: bridge
+
