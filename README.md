@@ -1,27 +1,53 @@
-# 🧠 Context Machine – Local Infrastructure Setup
+# 🧠 Context Machine – Dynamic Data-Driven Platform
 
-This project provides a complete **local infrastructure** for the Context Machine ecosystem, including:
+**Context Machine** is a revolutionary **dynamic, data-driven platform** where the entire user interface configures itself from backend data. Unlike traditional applications with hardcoded routes and components, Context Machine builds everything at runtime from database configurations.
 
-- **MinIO** – S3-compatible object storage  
-- **RabbitMQ** – Message broker for event routing  
+## 🎯 Core Concept
+
+**No Hardcoded Frontend** – Pages, navigation, widgets, and layouts are all generated dynamically from backend data. The system uses a sophisticated **multi-tenant architecture** with subscription-based access control and a **message-driven communication protocol**.
+
+### Key Architecture Components
+
+- **Vue 3 Frontend** – Completely dynamic UI that builds itself from JSON manifests
+- **Flask API Gateway** – JWT authentication with unified message routing to specialized services  
+- **Widget-Based UI** – Modular, themeable components loaded at runtime
+- **Multi-Tenant Database** – SuperAdmin → Partner → Tenant → Project hierarchy
+- **Real-Time Updates** – WebSocket-based live synchronization
+- **Message Protocol** – Unified communication format across all services
+- **Code Analysis Engine** – Multi-language AST parsing with graph visualization
+
+### What Makes It Special
+
+🔄 **Runtime Configuration** – Everything from routes to UI components is loaded from the database  
+🎨 **Dynamic Theming** – CSS variables and themes applied at runtime  
+📦 **Widget Ecosystem** – Modular components with manifest-based loading  
+🏢 **Multi-Tenant Ready** – Built-in subscription and permission management  
+⚡ **Real-Time Sync** – Live updates across all connected clients  
+🔐 **JWT Security** – Secure, stateless authentication with role-based access  
+🔍 **Code Intelligence** – AST-based code analysis with graph database storage
+
+## 🏗️ System Architecture
+
+The platform consists of **core services** that power the dynamic system, plus **additional tools** for enhanced functionality:
+
+### Core Platform Services
+- **Backend Service** (Port 3006) – Main API Gateway with JWT auth and message routing
+- **Frontend Service** (Port 5173/8080) – Vue 3 SPA with dynamic UI generation  
+- **WebSocket Service** (Port 3010) – Real-time event distribution
+- **PostgreSQL** – Multi-tenant database with complete schema
+
+### Code Analysis & Intelligence Services
+- **Analyzer Service** (Port 3002) – Multi-language source code analyzer with AST parsing and recursive tree analysis
+- **Neo4j Service** (Port 3001) – Graph database for storing code relationships and structures
+- **22 Domain-Specific Analyzers** – Agricultural, Business, Coding, Communication, Cultural, Digital, Educational, Energy, Environmental, Financial, Legal, Manufacturing, Maritime, Medical, Quality, Scientific, Security, Social, Spatial, Technical, Temporal, Transportation
+- **MCP Service** (Port 3003) – Model Context Protocol integration for AI-powered analysis
+
+### Additional Tools (Bonus Features)
+- **Ollama + OpenWebUI** – Local LLM runtime for AI-powered features
 - **n8n** – Workflow automation engine  
-- **Neo4j** – Graph database for knowledge representation  
-- **Neo4j Service (Flask API)** – REST API for nodes, edges, and bulk operations  
-- **Analyzer Service** – Multi-language source code analyzer with AST parsing and recursive tree analysis  
-- **WebSocket Service** – Publishes real-time progress updates for frontend dashboards  
-- **Gitea** – Local Git hosting, API access, and repository management  
-- **Ollama + OpenWebUI** – Local LLM runtime and chat interface for on-device AI code analysis  
-
-All components run through **Docker Compose** and are automatically configured using setup scripts.  
-
-> 🧩 The system currently enables you to generate an **AST graph** of your local code base — entirely offline.
-
-Create a folder called `project` and put your source code inside to visualize structures like this:
-
-![AST Graph Example](code_graph.png)
-
-No code leaves your machine — everything runs locally.  
-Future AI components will also execute on-device.
+- **Gitea** – Local Git hosting and repository management
+- **MinIO** – S3-compatible object storage
+- **RabbitMQ** – Message broker for event routing
 
 ---
 
@@ -107,8 +133,15 @@ When setup completes, you’ll see a summary like:
 
 ---
 
-### 3. Start the Analyzer
+### 3. Analyze Your Code
 
+**Create a project folder and add your source code:**
+~~~bash
+mkdir project
+# Copy your source code into the project folder
+~~~
+
+**Start the code analysis:**
 ~~~bash
 curl -X POST http://localhost:3002/api/analyze \
   -H "Content-Type: application/json" \
@@ -116,33 +149,83 @@ curl -X POST http://localhost:3002/api/analyze \
 ~~~
 
 The analyzer will:
-- Scan `/project` recursively  
-- Create `:Folder` and `:File` nodes in Neo4j  
-- Stream progress updates (1% steps) via `ws://localhost:3010/progress`
+- **Recursively scan** your project directory for all supported file types
+- **Parse AST** (Abstract Syntax Trees) for each source file
+- **Create graph nodes** in Neo4j representing files, folders, and code structures
+- **Stream real-time progress** via WebSocket (1% increments)
+- **Generate visualizations** of your codebase structure
 
-Example WebSocket events:
+**Supported Languages:**
+JavaScript, TypeScript, Python, Java, C/C++, Go, Rust, PHP, Ruby, and more
+
+**Real-time Progress Updates:**
 ~~~json
-{"percent": 1}
-{"percent": 50}
-{"percent": 100}
+{"percent": 1}   // Starting analysis
+{"percent": 50}  // Halfway through
+{"percent": 100} // Analysis complete
 ~~~
+
+**Query Your Code Graph:**
+~~~cypher
+// Find all Python files
+MATCH (f:File) WHERE f.extension = '.py' RETURN f
+
+// Analyze project structure  
+MATCH (folder:Folder)-[:CONTAINS]->(file:File) 
+RETURN folder.name, count(file) as file_count
+~~~
+
+![AST Graph Example](code_graph.png)
+
+*Everything runs locally – no code leaves your machine.*
+
+## 🔍 Code Analysis Integration
+
+The code analysis system seamlessly integrates with the dynamic platform:
+
+**Dynamic Widgets for Code Visualization:**
+- Code structure widgets automatically appear in the frontend
+- Interactive graph visualizations load as dynamic components
+- Real-time analysis progress shown via WebSocket updates
+
+**Multi-Tenant Code Projects:**
+- Each tenant can have multiple code analysis projects
+- Permission-based access to different codebases
+- Subscription-based limits on analysis scope
+
+**AI-Powered Insights:**
+- Local LLM integration via Ollama for code understanding
+- Context-aware code suggestions and documentation
+- Privacy-first approach - all AI runs locally
 
 ---
 
-### 4. Access Service UIs
+### 4. Access All Services
 
+**Core Platform:**
 | Service | URL | Credentials |
 |----------|-----|-------------|
-| **MinIO** | [http://localhost:9001](http://localhost:9001) | `minioadmin / minioadmin` |
-| **RabbitMQ** | [http://localhost:15672](http://localhost:15672) | `admin / admin123` |
-| **n8n** | [http://localhost:5678](http://localhost:5678) | `admin / admin123` |
+| **Frontend** | [http://localhost:5173](http://localhost:5173) (Dev) / [http://localhost:8080](http://localhost:8080) (Prod) | `admin / admin123` |
+| **Backend API** | [http://localhost:3006/apidocs](http://localhost:3006/apidocs) | JWT Token |
+| **WebSocket** | `ws://localhost:3010` | JWT Token |
+
+**Code Analysis:**
+| Service | URL | Credentials |
+|----------|-----|-------------|
+| **Analyzer Service API** | [http://localhost:3002/apidocs](http://localhost:3002/apidocs) | Header: `X-API-Key: dev-key-123` |
 | **Neo4j Browser** | [http://localhost:7474](http://localhost:7474) | `neo4j / test12345` |
 | **Neo4j Service API** | [http://localhost:3001/apidocs](http://localhost:3001/apidocs) | Header: `X-API-Key: dev-key-123` |
-| **Analyzer Service API** | [http://localhost:3002/apidocs](http://localhost:3002/apidocs) | Header: `X-API-Key: dev-key-123` |
 | **WebSocket Progress** | `ws://localhost:3010/progress?api_key=dev-key-123` | — |
-| **Gitea** | [http://localhost:3005](http://localhost:3005) | `gitea-admin / admin123` |
+
+**Additional Tools:**
+| Service | URL | Credentials |
+|----------|-----|-------------|
 | **Ollama** | [http://localhost:11434](http://localhost:11434) | Model: `codellama:7b` |
 | **OpenWebUI** | [http://localhost:8080](http://localhost:8080) | Chat with your local model |
+| **n8n** | [http://localhost:5678](http://localhost:5678) | `admin / admin123` |
+| **Gitea** | [http://localhost:3005](http://localhost:3005) | `gitea-admin / admin123` |
+| **MinIO** | [http://localhost:9001](http://localhost:9001) | `minioadmin / minioadmin` |
+| **RabbitMQ** | [http://localhost:15672](http://localhost:15672) | `admin / admin123` |
 
 The Gitea API token (used for integrations) is saved at:
 ~~~
@@ -219,15 +302,6 @@ docker network prune -f
 ---
 
 ## 🧼 Troubleshooting
-
-**Error:**  
-`Gitea is not supposed to be run as root`  
-→ Fixed in current setup: all `docker exec` commands use UID 1000.  
-
-**Error:**  
-`CreateUser: name is reserved [admin]`  
-→ Gitea already contains a default `admin` user.  
-The setup script automatically switches to use `gitea-admin`.  
 
 **Error:**  
 `failed to bind port 0.0.0.0:11434`  
