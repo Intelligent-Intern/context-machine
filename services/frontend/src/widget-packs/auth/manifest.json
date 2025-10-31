@@ -8,14 +8,24 @@
   "module": "core-ui",
   "type": "auth",
   "projectId": "550e8400-e29b-41d4-a716-446655440000",
-  "keywords": ["auth", "login", "authentication", "forms"],
+  "keywords": [
+    "auth",
+    "login",
+    "authentication",
+    "forms"
+  ],
   "components": {
     "LoginForm": {
       "path": "./widgets/LoginForm.vue",
       "name": "Professional Login Form",
       "description": "Enterprise login form with validation and security features",
       "category": "authentication",
-      "tags": ["login", "form", "auth", "security"],
+      "tags": [
+        "login",
+        "form",
+        "auth",
+        "security"
+      ],
       "props": {
         "title": {
           "type": "string",
@@ -46,14 +56,18 @@
             "password": "string",
             "rememberMe": "boolean"
           },
-          "permissions": ["auth.login"]
+          "permissions": [
+            "auth.login"
+          ]
         },
         "forgot-password": {
           "description": "Fired when user clicks forgot password",
           "payload": {
             "username": "string"
           },
-          "permissions": ["auth.forgot"]
+          "permissions": [
+            "auth.forgot"
+          ]
         }
       },
       "permissions": {
@@ -72,7 +86,12 @@
       "name": "Forgot Password Form",
       "description": "Password reset request form",
       "category": "authentication",
-      "tags": ["forgot", "password", "reset", "auth"],
+      "tags": [
+        "forgot",
+        "password",
+        "reset",
+        "auth"
+      ],
       "props": {
         "title": {
           "type": "string",
@@ -91,7 +110,9 @@
           "payload": {
             "username": "string"
           },
-          "permissions": ["auth.forgot"]
+          "permissions": [
+            "auth.forgot"
+          ]
         },
         "back-to-login": {
           "description": "Fired when user wants to go back to login",

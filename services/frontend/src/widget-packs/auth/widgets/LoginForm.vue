@@ -143,9 +143,15 @@ const emit = defineEmits<{
   'forgot-password': [payload: { username: string }]
 }>()
 
-// Injected dependencies
-const dispatchEvent = inject('dispatchEvent') as Function
-const ctx = inject('ctx') as any
+// Injected dependencies (optional with fallbacks)
+const dispatchEvent = inject('dispatchEvent', () => {
+  console.log('[LoginForm] No dispatchEvent provided, using fallback')
+}) as Function
+
+const ctx = inject('ctx', {
+  widgetId: 'auth@LoginForm',
+  port: 'main'
+}) as any
 
 // Form state
 const form = ref({

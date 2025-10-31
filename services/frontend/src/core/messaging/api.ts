@@ -1,5 +1,4 @@
 // src/core/messaging/api.ts
-import { useErrorStore } from '@/core/stores/error'
 
 // Message handlers registry
 const handlers: Record<string, (action: string, payload: any) => void> = {}
@@ -40,14 +39,6 @@ export function dispatch(action: string, payload: any) {
     
   } catch (error) {
     console.error(`[messaging] Error dispatching ${action}:`, error)
-    
-    const errorStore = useErrorStore()
-    errorStore.add({
-      source: 'messaging.dispatch',
-      code: 'HANDLER_ERROR',
-      msg: `Error handling message: ${action}`,
-      details: { action, payload, error: error instanceof Error ? error.message : 'Unknown error' }
-    })
   }
 }
 

@@ -1,6 +1,6 @@
 <!-- src/App.vue -->
 <template>
-  <div id="app" class="min-h-screen flex flex-col bg-gray-50 text-gray-900" :class="{ 'authenticated': isAuthenticated }">
+  <div id="app" class="min-h-screen flex flex-col bg-white text-gray-900" :class="{ 'authenticated': isAuthenticated }">
     <!-- Skip-Link für A11y -->
     <a
         href="#main-content"
@@ -9,8 +9,18 @@
       {{ t('a11y.skipToContent') }}
     </a>
 
+    <!-- Loading State -->
+    <div v-if="isLoading" class="loading-container">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="text-center">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <h2 class="text-xl font-semibold text-gray-700">{{ loadingMessage }}</h2>
+        </div>
+      </div>
+    </div>
+
     <!-- Hauptlayout -->
-    <AppShell>
+    <AppShell v-else>
       <router-view v-slot="{ Component }">
         <component :is="Component" id="main-content" />
       </router-view>
@@ -35,10 +45,11 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import AppShell from '@/components/AppShell.vue'
+import AppShell from '@/core/layout/AppShell.vue'
 import { useNotificationStore } from '@/core/stores/notification'
 import { useAuthStore } from '@/core/stores/auth'
 import { useI18n } from '@/core/i18n'
+import { isLoading, loadingMessage } from '@/core/initCore'
 
 const notifications = useNotificationStore()
 const authStore = useAuthStore()

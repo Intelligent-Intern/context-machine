@@ -38,6 +38,11 @@
       </button>
     </div>
 
+    <!-- Main Content Area -->
+    <div class="main-content-area">
+      <slot name="main" />
+    </div>
+
     <!-- Right Sidebar -->
     <div 
       v-if="rightSidebar.mounted"
@@ -103,11 +108,6 @@
       </svg>
     </button>
 
-    <!-- Main Content Area -->
-    <div class="main-content-area">
-      <slot name="main" />
-    </div>
-
     <!-- Mobile Overlay -->
     <div 
       v-if="mobileOverlay.show"
@@ -160,9 +160,10 @@ const checkMobile = () => {
 
 // Sidebar computed properties
 const leftSidebar = computed(() => {
-  const state = layout.bars.left
+  const state = layout.bars.l  // Use 'l' instead of 'left'
   const size = layout.sizes.left
   const collapsed = state === 1
+  const expanded = state === 2
   const hidden = state === 0
   const mobile = state === 4
   
@@ -189,9 +190,10 @@ const leftSidebar = computed(() => {
 })
 
 const rightSidebar = computed(() => {
-  const state = layout.bars.right
+  const state = layout.bars.r  // Use 'r' instead of 'right'
   const size = layout.sizes.right
   const collapsed = state === 1
+  const expanded = state === 2
   const hidden = state === 0
   const mobile = state === 4
   
@@ -365,254 +367,52 @@ defineExpose({
 </script>
 
 <style scoped>
+@import './styles/sidebar.css';
+
+/* Override specific styles that conflict */
 .sidebar-manager {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
+  background: #f8fafc;
 }
 
 .main-content-area {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Sidebar Base Styles */
-.sidebar {
-  position: relative;
-  height: 100%;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  flex-shrink: 0;
+  border-radius: 12px 0 0 0;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
+  margin-left: 2px;
 }
 
-.sidebar-left {
-  border-right: 1px solid #e2e8f0;
-  border-left: none;
-}
-
-.sidebar-right {
-  border-left: 1px solid #e2e8f0;
-  border-right: none;
-}
-
-/* Collapsed State */
-.sidebar-collapsed {
-  min-width: 64px;
-  max-width: 64px;
-}
-
-.sidebar-collapsed .sidebar-content {
-  padding: 0.5rem;
-  align-items: center;
-}
-
-/* Mobile State */
-.sidebar-mobile {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  max-width: 100vw;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Hover Effects */
-.sidebar-hovered {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Sidebar Content */
-.sidebar-content {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Resize Handle */
-.resize-handle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  cursor: col-resize;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.resize-handle-right {
-  right: -4px;
-}
-
-.resize-handle-left {
-  left: -4px;
-}
-
-.sidebar:hover .resize-handle,
-.sidebar-resizing .resize-handle {
-  opacity: 1;
-}
-
+/* Fix resize handle color */
 .resize-indicator {
-  width: 2px;
-  height: 40px;
-  background: #3b82f6;
-  border-radius: 1px;
-  transition: all 0.2s ease;
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .resize-handle:hover .resize-indicator {
-  background: #2563eb;
-  height: 60px;
+  background: linear-gradient(180deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
-/* Collapse Button */
-.sidebar-collapse-btn {
-  position: absolute;
-  top: 1rem;
-  width: 24px;
-  height: 24px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  z-index: 20;
-}
-
-.sidebar-collapse-btn-left {
-  right: -12px;
-}
-
-.sidebar-collapse-btn-right {
-  left: -12px;
-}
-
-.sidebar-collapse-btn:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
-  transform: scale(1.1);
-}
-
-.collapse-icon {
-  width: 12px;
-  height: 12px;
-  transition: transform 0.2s ease;
-}
-
-/* Expand Triggers */
+/* Fix expand trigger color */
 .sidebar-expand-trigger {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 48px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 0 8px 8px 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  transition: all 0.2s ease;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-expand-trigger-left {
-  left: 0;
-}
-
-.sidebar-expand-trigger-right {
-  right: 0;
-  border-radius: 8px 0 0 8px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  box-shadow: 4px 0 16px rgba(16, 185, 129, 0.3);
 }
 
 .sidebar-expand-trigger:hover {
-  background: #2563eb;
-  width: 32px;
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 6px 0 24px rgba(16, 185, 129, 0.4);
 }
 
-.expand-icon {
-  width: 14px;
-  height: 14px;
+/* Fix collapse button */
+.sidebar-collapse-btn {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile Overlay */
-.mobile-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  backdrop-filter: blur(2px);
-}
-
-/* Scrollbar Styling */
-.sidebar-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Responsive Breakpoints */
-@media (max-width: 767px) {
-  .sidebar:not(.sidebar-mobile) {
-    display: none;
-  }
-  
-  .sidebar-expand-trigger {
-    display: none;
-  }
-}
-
-/* Animation Classes */
-.sidebar-resizing {
-  transition: none;
-}
-
-.sidebar-resizing * {
-  pointer-events: none;
-}
-
-/* Focus States */
-.sidebar-collapse-btn:focus,
-.sidebar-expand-trigger:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+.sidebar-collapse-btn:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 </style>

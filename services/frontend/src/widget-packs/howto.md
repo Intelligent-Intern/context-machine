@@ -250,14 +250,15 @@ Page Config → Layout State → Regions → Widget Slots → Component → Rend
 ```
 Widget Pack
 ├── manifest.json          # Package definition & metadata
-├── widgets/               # Vue components
-│   ├── ComponentA.vue
-│   └── ComponentB.vue
-└── theme/                 # Theme system
-    ├── variables.css      # Design tokens
-    ├── themes.css         # Theme variants
-    └── mixins.css         # Reusable styles
+└── widgets/               # Vue components (NO STYLES)
+    ├── ComponentA.vue     # Uses theme classes only
+    └── ComponentB.vue     # Uses theme classes only
 ```
+
+**Important**: Widget packs do NOT contain any CSS files or styling. All styling is handled through:
+1. **Theme Classes**: Widgets use CSS classes defined in the database theme system
+2. **Fallback Theme**: A single local fallback theme provides base styling when database is unavailable
+3. **Database Themes**: Themes stored in database override fallback theme classes
 
 ### How Widget Packs Integrate with the Frontend
 
@@ -294,10 +295,7 @@ services/frontend/src/widget-packs/
     ├── widgets/               # REQUIRED: Component directory
     │   ├── {Component}.vue    # Vue 3 components
     │   └── ...
-    └── theme/                 # REQUIRED: Theme system
-        ├── variables.css      # Design tokens
-        ├── themes.css         # Theme variants
-        └── mixins.css         # CSS utilities
+    # NO theme directory - styling handled by centralized theme system
 ```
 
 ### Naming Conventions
@@ -320,9 +318,9 @@ services/frontend/src/widget-packs/
   "version": "1.0.0",                   // REQUIRED: Semantic version
   "description": "Detailed description", // REQUIRED: Purpose & features
   "author": "Context Machine",          // REQUIRED: Author
-  "license": "MIT",                     // REQUIRED: License
+  "license": "Proprietary",              // REQUIRED: License
   "components": { /* ... */ },          // REQUIRED: Component definitions
-  "theme": { /* ... */ },               // REQUIRED: Theme system
+  "themeClasses": { /* ... */ },        // OPTIONAL: Theme class definitions
   "testData": { /* ... */ },            // REQUIRED: Test data for theme designer
   "dependencies": { /* ... */ },        // REQUIRED: Package dependencies
   "peerDependencies": { /* ... */ }     // OPTIONAL: Peer dependencies
@@ -477,56 +475,7 @@ function handleEvent(payload: any) {
 }
 </script>
 
-<style scoped>
-/* Use CSS variables from theme system */
-.widget-component {
-  /* Base styles using design tokens */
-  background: var(--pack-bg-primary);
-  color: var(--pack-text-primary);
-  border: 1px solid var(--pack-border-primary);
-  border-radius: var(--pack-radius-md);
-  transition: var(--pack-transition-normal);
-}
-
-/* Theme variants */
-.theme-dark {
-  /* Dark theme overrides */
-}
-
-/* Accessibility */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .widget-component {
-    /* Mobile styles */
-  }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .widget-component {
-    /* High contrast styles */
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .widget-component {
-    transition: none;
-  }
-}
-</style>
+<!-- NO <style> section - all styling via theme classes -->
 ```
 
 ### TypeScript Interfaces
@@ -675,100 +624,80 @@ function hasAllPermissions(permissions: string[]): boolean {
 
 ## Theme System
 
-### Design Token Structure
+**Widget packs do NOT contain theme files.** All theming is handled by the centralized theme system:
+
+### Database Theme Structure
+
+```sql
+-- Themes table
+themes: id, name, display_name, description, css_variables (JSONB), is_default, is_active
+
+-- Project themes (many-to-many)
+project_themes: project_id, theme_id, is_default
+
+-- User preferences
+user_preferences: user_id, project_id, theme_id, preferences_json
+```
+
+### Theme Hierarchy (Override Order)
+
+1. **Database Theme** (highest priority) - Themes stored in database per project
+2. **Fallback Theme** (lowest priority) - Single local theme file for when database is unavailable
+
+### CSS Class Usage in Widgets
+
+Widgets use semantic CSS classes that are defined by the active theme:
+
+```vue
+<template>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1 class="auth-title">Login</h1>
+      <button class="btn btn-primary">Sign In</button>
+    </div>
+  </div>
+</template>
+
+<!-- NO <style> section in widgets -->
+```
+
+### Theme Class Examples
 
 ```css
-:root {
-  /* Color Tokens */
-  --pack-color-primary: #3b82f6;
-  --pack-color-secondary: #6b7280;
-  --pack-color-success: #10b981;
-  --pack-color-warning: #f59e0b;
-  --pack-color-error: #ef4444;
-  
-  /* Background Tokens */
-  --pack-bg-primary: #ffffff;
-  --pack-bg-secondary: #f8fafc;
-  --pack-bg-hover: #f1f5f9;
-  --pack-bg-active: #eff6ff;
-  
-  /* Text Tokens */
-  --pack-text-primary: #1f2937;
-  --pack-text-secondary: #6b7280;
-  --pack-text-muted: #9ca3af;
-  
-  /* Border Tokens */
-  --pack-border-primary: #e2e8f0;
-  --pack-border-secondary: #cbd5e1;
-  --pack-border-focus: #3b82f6;
-  
-  /* Spacing Tokens */
-  --pack-space-xs: 0.25rem;
-  --pack-space-sm: 0.5rem;
-  --pack-space-md: 1rem;
-  --pack-space-lg: 1.5rem;
-  --pack-space-xl: 2rem;
-  
-  /* Typography Tokens */
-  --pack-font-size-xs: 0.75rem;
-  --pack-font-size-sm: 0.875rem;
-  --pack-font-size-base: 1rem;
-  --pack-font-size-lg: 1.125rem;
-  --pack-font-weight-normal: 400;
-  --pack-font-weight-medium: 500;
-  --pack-font-weight-semibold: 600;
-  
-  /* Border Radius Tokens */
-  --pack-radius-sm: 0.25rem;
-  --pack-radius-md: 0.375rem;
-  --pack-radius-lg: 0.5rem;
-  
-  /* Shadow Tokens */
-  --pack-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --pack-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --pack-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  
-  /* Transition Tokens */
-  --pack-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --pack-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --pack-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+/* These classes are defined by themes, not widgets */
+.auth-container { /* theme-specific styles */ }
+.auth-card { /* theme-specific styles */ }
+.auth-title { /* theme-specific styles */ }
+.btn { /* base button styles */ }
+.btn-primary { /* primary button variant */ }
+```
+
+### Fallback Theme Structure
+
+Only ONE fallback theme exists locally for when database is unavailable:
+
+```json
+{
+  "name": "fallback",
+  "tokens": {
+    "color-primary": "#059669",
+    "color-secondary": "#65a30d", 
+    "color-danger": "#dc2626",
+    "background": "#ffffff",
+    "surface": "#f9fafb",
+    "text-primary": "#111827",
+    "text-muted": "#6b7280"
+  }
 }
 ```
 
-### Theme Variants
+### CSS Best Practices for Widgets
 
-```css
-/* Dark Theme */
-[data-theme="dark"] {
-  --pack-bg-primary: #1f2937;
-  --pack-bg-secondary: #374151;
-  --pack-text-primary: #f9fafb;
-  --pack-text-secondary: #d1d5db;
-  --pack-border-primary: #4b5563;
-}
-
-/* High Contrast Theme */
-[data-theme="high-contrast"] {
-  --pack-bg-primary: #ffffff;
-  --pack-text-primary: #000000;
-  --pack-border-primary: #000000;
-}
-
-/* Compact Theme */
-[data-theme="compact"] {
-  --pack-space-sm: 0.25rem;
-  --pack-space-md: 0.5rem;
-  --pack-space-lg: 0.75rem;
-  --pack-font-size-base: 0.875rem;
-}
-```
-
-### CSS Best Practices
-
-1. **Always use design tokens** - Never hardcode colors or spacing
-2. **Mobile-first responsive design** - Start with mobile styles
-3. **Accessibility considerations** - High contrast, focus states, reduced motion
-4. **Performance optimization** - Efficient selectors, minimal repaints
+1. **Use semantic CSS classes only** - Never use inline styles or CSS variables directly
+2. **No <style> sections** - All styling comes from theme system
+3. **Extend theme when needed** - If widget needs special styling, extend the fallback theme
+4. **Mobile-first responsive design** - Theme classes should handle responsiveness
+5. **Accessibility considerations** - Theme classes include focus states, contrast, etc.
 
 ---
 

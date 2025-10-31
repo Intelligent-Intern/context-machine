@@ -7,6 +7,7 @@ class PubService:
     """WebSocket publishing service for sending events to frontend clients"""
     
     def __init__(self):
+        # Use port 3011 for the internal API (WebSocket is on 3010)
         self.websocket_url = os.getenv("WEBSOCKET_SERVICE_URL", "http://context-machine-websocket-service:3011")
         self.api_key = os.getenv("API_KEY", "dev-key-123")
     
@@ -22,24 +23,31 @@ class PubService:
             bool: True if published successfully, False otherwise
         """
         try:
+            # Send as JSON line to the WebSocket service internal API
             event = {
                 "api_key": self.api_key,
                 "a": action,
                 "p": payload
             }
             
-            response = requests.post(
-                self.websocket_url,
-                json=event,
-                timeout=5
-            )
+            # Send as raw TCP connection (not HTTP POST)
+            import socket
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
             
-            if response.status_code == 200:
-                print(f"[PUB] Published event: {action}")
-                return True
-            else:
-                print(f"[PUB] Failed to publish {action}: {response.status_code}")
-                return False
+            # Extract host and port from URL
+            url_parts = self.websocket_url.replace('http://', '').split(':')
+            host = url_parts[0]
+            port = int(url_parts[1])
+            
+            sock.connect((host, port))
+            message = json.dumps(event) + '\n'
+            sock.send(message.encode('utf-8'))
+            sock.close()
+            
+            print(f"[PUB] Published event: {action}")
+            return True
+
                 
         except Exception as e:
             print(f"[PUB] Error publishing {action}: {e}")

@@ -26,6 +26,15 @@ class AuthService:
             Dict with token, user info, and complete frontend config, or None if auth fails
         """
         try:
+            # Check database connectivity first
+            if not self.db_service.health_check():
+                print("[AUTH] Database health check failed")
+                return {
+                    "error": "CONFIG_ERROR",
+                    "error_type": "DATABASE_ERROR",
+                    "message": "Unser Service ist aktuell nicht erreichbar. Bitte versuchen Sie es später erneut."
+                }
+            
             with self.db_service.get_session() as session:
                 user = session.query(User).filter(User.username == username).first()
                 
@@ -47,6 +56,26 @@ class AuthService:
                 
                 token = jwt.encode(payload, self.secret_key, algorithm="HS256")
                 
+                # Get frontend configuration - this may raise exceptions for system errors
+                try:
+                    config = self._get_frontend_config(str(user.id))
+                except Exception as config_error:
+                    error_msg = str(config_error)
+                    print(f"[AUTH] Configuration error for user {user.username}: {error_msg}")
+                    
+                    # Return error in response instead of None to distinguish from auth failure
+                    return {
+                        "error": "CONFIG_ERROR",
+                        "error_type": error_msg,
+                        "message": self._get_error_message(error_msg),
+                        "user": {
+                            "id": str(user.id),
+                            "username": user.username,
+                            "name": user.full_name or user.username,
+                            "role": user.role.value.upper()
+                        }
+                    }
+                
                 # Return token + complete frontend configuration
                 return {
                     "token": token,
@@ -57,12 +86,17 @@ class AuthService:
                         "email": user.email,
                         "role": user.role.value.upper()
                     },
-                    "config": self._get_frontend_config(str(user.id))
+                    "config": config
                 }
                 
         except Exception as e:
             print(f"[AUTH] Login error: {e}")
-            return None
+            # Return database error instead of None for better error handling
+            return {
+                "error": "CONFIG_ERROR", 
+                "error_type": "DATABASE_ERROR",
+                "message": "Unser Service ist aktuell nicht erreichbar. Bitte versuchen Sie es später erneut."
+            }
     
     def forgot_password(self, username: str) -> bool:
         """
@@ -169,98 +203,49 @@ class AuthService:
     
     def _get_frontend_config(self, user_id: str) -> Dict[str, Any]:
         """
-        Generate frontend configuration based on user permissions
+        Generate simple frontend configuration without database access
         
         Args:
             user_id: User ID string
             
         Returns:
-            Frontend config with modules, pages, and widgets based on user access
+            Simple static config
         """
-        try:
-            with self.db_service.get_session() as session:
-                # Get user object
-                user = session.query(User).filter(User.id == user_id).first()
-                if not user:
-                    return {"modules": [], "pages": [], "widgetPacks": []}
-                
-                from models import Module, Page, Widget
-                
-                # Get active modules
-                modules = session.query(Module).filter(Module.is_active == True).all()
-                module_list = []
-                for module in modules:
-                    widgets = session.query(Widget).filter(
-                        Widget.module_id == module.id,
-                        Widget.is_active == True
-                    ).all()
-                    
-                    widget_names = [f"{module.name}@{widget.name}" for widget in widgets]
-                    
-                    module_list.append({
-                        "id": module.name,
-                        "name": module.display_name,
-                        "widgets": widget_names
-                    })
-                
-                # Get active pages based on user role
-                if user and user.role == UserRole.SUPERADMIN:
-                    # Superadmin sees all pages
-                    pages = session.query(Page).filter(Page.is_active == True).all()
-                else:
-                    # Regular users see pages without specific permissions
-                    from models.page import page_permissions
-                    pages_with_permissions = session.query(Page.id).join(page_permissions).distinct()
-                    pages = session.query(Page).filter(
-                        Page.is_active == True,
-                        ~Page.id.in_(pages_with_permissions)
-                    ).all()
-                
-                page_list = []
-                for page in pages:
-                    page_list.append({
-                        "route": page.route,
-                        "name": page.name,
-                        "layout": page.layout_config or {"top": True, "main": True}
-                    })
-                
-                # Get widget packs with new naming schema
-                widget_packs = []
-                for module in modules:
-                    widgets = session.query(Widget).filter(
-                        Widget.module_id == module.id,
-                        Widget.is_active == True
-                    ).all()
-                    
-                    components = {}
-                    for widget in widgets:
-                        components[widget.name] = {
-                            "path": widget.component_path
-                        }
-                    
-                    if components:
-                        # Use new widget pack naming schema
-                        widget_pack_id = f"widget-pack/{module.name}/ui/550e8400-e29b-41d4-a716-446655440000/1.0.0"
-                        widget_packs.append({
-                            "id": widget_pack_id,
-                            "name": f"{module.display_name} Widget Pack",
-                            "module": module.name,
-                            "type": "ui",
-                            "projectId": "550e8400-e29b-41d4-a716-446655440000",
-                            "version": "1.0.0",
-                            "components": components
-                        })
-                
-                return {
-                    "modules": module_list,
-                    "pages": page_list,
-                    "widgetPacks": widget_packs
+        # Simple static config - no database access
+        config = {
+            "page": [{
+                "route": "/",
+                "name": "Home",
+                "layout": {
+                    "bars": {"t": 0, "b": 0, "l": 2, "r": 0},
+                    "ports": {
+                        "t": [],
+                        "b": [],
+                        "m": ["dashboard@Default"],
+                        "l": ["navigation@LeftNav"],
+                        "r": []
+                    }
                 }
-                
-        except Exception as e:
-            print(f"[AUTH] Config generation error: {e}")
-            return {
-                "modules": [],
-                "pages": [],
-                "widgetPacks": []
-            }
+            }]
+        }
+        
+        return config
+    
+    def _get_error_message(self, error_type: str) -> str:
+        """
+        Get user-friendly error message based on error type
+        
+        Args:
+            error_type: Error type string
+            
+        Returns:
+            User-friendly error message
+        """
+        error_messages = {
+            "USER_NOT_FOUND": "Benutzer nicht gefunden. Bitte wenden Sie sich an den Administrator.",
+            "SYSTEM_NOT_CONFIGURED": "System ist nicht konfiguriert. Bitte wenden Sie sich an den Administrator.",
+            "ADMIN_CONFIG_MISSING": "Admin-Konfiguration fehlt. Das System ist nicht vollständig eingerichtet.",
+            "DATABASE_ERROR": "Unser Service ist aktuell nicht erreichbar. Bitte versuchen Sie es später erneut."
+        }
+        
+        return error_messages.get(error_type, "Ein unbekannter Fehler ist aufgetreten.")

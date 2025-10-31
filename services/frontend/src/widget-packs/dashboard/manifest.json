@@ -1,0 +1,30 @@
+{
+  "id": "widget-pack/dashboard/ui/550e8400-e29b-41d4-a716-446655440000/1.0.0",
+  "name": "Dashboard Widget Pack",
+  "version": "1.0.0",
+  "description": "Dashboard and welcome components",
+  "author": "Context Machine",
+  "license": "MIT",
+  "module": "dashboard",
+  "type": "ui",
+  "projectId": "550e8400-e29b-41d4-a716-446655440000",
+  "keywords": ["dashboard", "welcome", "home"],
+  "components": {
+    "Default": {
+      "path": "./widgets/Default.vue",
+      "name": "Dashboard Default Widget",
+      "description": "Default dashboard widget with user info and navigation",
+      "category": "dashboard",
+      "tags": ["default", "dashboard", "home"],
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Willkommen",
+          "description": "Dashboard title"
+        }
+      },
+      "events": {},
+      "permissions": {}
+    }
+  }
+}

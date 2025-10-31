@@ -2,143 +2,119 @@
 <template>
   <section
       :aria-label="`Port ${port}`"
-      class="h-full w-full overflow-hidden"
+      class="h-full w-full m-0 p-0"
       :data-port="port"
   >
+    <!-- Show widgets if any -->
     <template
-        v-for="entry in visibleSlots"
+        v-for="entry in entries"
         :key="`${port}-${entry.slot}-${entry.widget}`"
     >
-      <PortSlot :slot-index="entry.slot" :port="port">
-        <component
-            v-if="resolve(entry)"
-            :is="resolve(entry)"
-            :ctx="ctx"
-            :bind-key="entry.bind || null"
-            :class="widgetClass(entry)"
-        />
-        <div v-else class="p-3 text-sm text-red-600">
-          Unknown widget: <code>{{ entry.widget }}</code>
-        </div>
-      </PortSlot>
+      <WidgetProvider
+          v-if="resolve(entry)"
+          :widget-id="entry.widget"
+          :port="port"
+      >
+        <component :is="resolve(entry)" />
+      </WidgetProvider>
+      <div v-else class="p-3 text-sm text-red-600">
+        Unknown widget: <code>{{ entry.widget }}</code>
+      </div>
     </template>
+    
+    <!-- Show placeholder if no widgets -->
+    <div v-if="entries.length === 0" class="port-placeholder">
+      <div class="placeholder-content">
+        <div class="placeholder-text">{{ getPortName(port) }}</div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, provide } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, defineAsyncComponent } from 'vue'
 import { useLayoutStore } from '@/core/stores/layout'
-import PortSlot from '@/core/layout/ports/PortSlot.vue'
-import { useUserStateStore } from '@/core/stores/userState'
-import { useApi } from '@/composables/useApi'
 import { resolveWidget, hasWidget } from '@/core/widgets/registry'
+import WidgetProvider from './WidgetProvider.vue'
 
 type PortKey = 'top' | 'bottom' | 'left' | 'right' | 'main'
 interface SlotEntry {
   slot: number
   widget: string
-  bind?: string
-  visibleWhen?: string
-  classes?: string
 }
 
 const props = defineProps<{ port: PortKey }>()
 
-const route = useRoute()
 const layout = useLayoutStore()
-const userState = useUserStateStore()
-const { request } = useApi()
-
-const ctx = computed(() => ({
-  route: {
-    params: route.params,
-    query: route.query,
-    path: route.path,
-    name: route.name
-  },
-  page: layout.activePage,
-  user: userState.data?.preferences || {},
-  layout: layout.bars
-}))
-
-function dispatch(event: {
-  name: string
-  scope: 'ui' | 'backend'
-  payload?: any
-  permission?: string
-}) {
-  if (event.scope === 'backend') {
-    // Send the action directly, not wrapped in event.dispatch
-    request(event.name, event.payload)
-  } else {
-    if (event.name === 'bar.right.open') layout.setBarState('right', 3)
-    if (event.name === 'bar.right.close') layout.setBarState('right', 0)
-  }
-}
-provide('dispatchEvent', dispatch)
-provide('ctx', ctx)
 
 const entries = computed<SlotEntry[]>(() => {
-  const m = layout.manifest as any
-  const portData = m?.ports?.[props.port] || []
+  const portWidgets = layout.getPortWidgets(props.port)
   
-  // Handle new compact format (array of strings)
-  if (Array.isArray(portData) && portData.length > 0 && typeof portData[0] === 'string') {
-    return portData.map((widget: string, index: number) => ({
-      slot: index + 1,
-      widget: widget
-    }))
-  }
-  
-  // Handle old format (array of objects with slot and widget)
-  const list: SlotEntry[] = portData
-  return [...list].sort((a, b) => (a.slot || 0) - (b.slot || 0))
+  return portWidgets.map((widget: string, index: number) => ({
+    slot: index + 1,
+    widget: widget
+  }))
 })
 
-function isVisible(entry: SlotEntry): boolean {
-  if (!entry.visibleWhen) return true
-  try {
-    const c = ctx.value as any
-    const inMatch = entry.visibleWhen.match(/^ctx\.([\w.]+)\s+in\s+\[(.*)\]$/)
-    if (inMatch) {
-      const path = inMatch[1]
-      const arr = inMatch[2]
-          .split(',')
-          .map(s => s.trim().replace(/^['"]|['"]$/g, ''))
-      const val = path.split('.').reduce((acc, k) => (acc ? acc[k] : undefined), c)
-      return arr.includes(String(val))
-    }
-    const eqMatch = entry.visibleWhen.match(/^ctx\.([\w.]+)\s*={2,3}\s*['\"](.+)['\"]$/)
-    if (eqMatch) {
-      const path = eqMatch[1]
-      const expected = eqMatch[2]
-      const val = path.split('.').reduce((acc, k) => (acc ? acc[k] : undefined), c)
-      return String(val) === expected
-    }
-    console.warn('[PortContainer] Unsupported visibleWhen expression:', entry.visibleWhen)
-    return true
-  } catch (e) {
-    console.warn('[PortContainer] visibleWhen evaluation failed:', entry, e)
-    return true
-  }
-}
-
-const visibleSlots = computed(() => entries.value.filter(isVisible))
-
 function resolve(entry: SlotEntry) {
+  console.log('[PortContainer] Resolving widget:', entry.widget)
   if (hasWidget(entry.widget)) {
-    return resolveWidget(entry.widget)
+    const widgetLoader = resolveWidget(entry.widget)
+    console.log('[PortContainer] Widget loader:', entry.widget, widgetLoader)
+    
+    // Convert dynamic import to async component
+    const asyncComponent = defineAsyncComponent(widgetLoader)
+    console.log('[PortContainer] Async component created:', entry.widget)
+    return asyncComponent
   }
   console.warn('[PortContainer] No widget found for', entry.widget)
   return null
 }
 
-function widgetClass(entry: SlotEntry) {
-  // Widget-Referenz auflösen
-  if (!hasWidget(entry.widget)) return ''
-  const comp = resolveWidget(entry.widget) as any
-  // Optional: Klassen-Hooks können in Manifest oder Registry hinterlegt sein
-  return comp?.classes?.root || entry.classes || ''
+// Port name mapping for placeholders
+function getPortName(portKey: string): string {
+  const names: Record<string, string> = {
+    'top': 'Top Bar',
+    'bottom': 'Bottom Bar', 
+    'left': 'Left Sidebar',
+    'right': 'Right Sidebar',
+    'main': 'Main Content'
+  }
+  return names[portKey] || portKey
 }
 </script>
+
+<style scoped>
+.port-placeholder {
+  height: 100%;
+  width: 100%;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  min-height: 100px;
+}
+
+.placeholder-content {
+  text-align: center;
+  color: #6b7280;
+}
+
+.placeholder-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.placeholder-text {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.placeholder-subtext {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+</style>

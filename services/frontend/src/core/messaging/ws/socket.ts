@@ -1,6 +1,5 @@
 // src/core/messaging/ws/socket.ts
 import { dispatch } from '@/core/messaging/api'
-import { useErrorStore } from '@/core/stores/error'
 
 let ws: WebSocket | null = null
 let reconnectTimer: number | null = null
@@ -17,6 +16,7 @@ let progressCallbacks: Map<string, (progress: number) => void> = new Map()
 function handleWebSocketMessage(msg: any) {
   // Handle standard action/payload messages (existing format)
   if (msg.a && msg.p !== undefined) {
+    console.log(`[ws] Dispatching message: ${msg.a}`, msg.p)
     dispatch(msg.a, msg.p)
     return
   }
@@ -68,7 +68,7 @@ function handleWebSocketMessage(msg: any) {
  */
 function handleProgressMessage(msg: { percent: number, operation?: string, id?: string }) {
   const { percent, operation = 'default', id = 'default' } = msg
-  
+
   // Call registered progress callback if exists
   const callbackKey = `${operation}_${id}`
   const callback = progressCallbacks.get(callbackKey)
@@ -106,14 +106,14 @@ function handleWidgetContentMessage(msg: { type: string, widget_id: string, cont
  * Handles page streaming for lazy loading
  * Pages contain modules and widgets that are streamed based on viewport
  */
-function handlePageStreamMessage(msg: { 
-  type: string, 
-  page_id: string, 
-  viewport_section: string, 
-  modules?: any[], 
-  widgets?: any[], 
+function handlePageStreamMessage(msg: {
+  type: string,
+  page_id: string,
+  viewport_section: string,
+  modules?: any[],
+  widgets?: any[],
   layout?: any,
-  complete?: boolean 
+  complete?: boolean
 }) {
   dispatch('page.stream', {
     pageId: msg.page_id,
@@ -143,7 +143,15 @@ function handleTableStreamMessage(msg: { type: string, table_id: string, rows: a
  */
 export function connectWebSocket() {
   if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+    console.log('[ws] WebSocket already connected/connecting, reusing existing connection')
     return ws
+  }
+
+  // Close existing connection if it exists
+  if (ws) {
+    console.log('[ws] Closing existing WebSocket connection')
+    ws.close()
+    ws = null
   }
 
   // Get JWT token for authentication
@@ -156,11 +164,10 @@ export function connectWebSocket() {
   const wsUrl = buildWebSocketUrl(token)
 
 
-  const errorStore = useErrorStore()
   ws = new WebSocket(wsUrl)
 
   ws.onopen = () => {
-
+    console.log('[ws] Connected to WebSocket')
     reconnectAttempts = 0 // Reset reconnect attempts on successful connection
     startHeartbeat()
     if (reconnectTimer) {
@@ -170,20 +177,13 @@ export function connectWebSocket() {
   }
 
   ws.onclose = () => {
-    console.warn('[ws] closed')
+    console.warn('[ws] Connection closed')
     stopHeartbeat()
     scheduleReconnect()
   }
 
   ws.onerror = (ev) => {
-    console.error('[ws] error', ev)
-    errorStore.add({
-      source: 'ws',
-      code: 'ERROR',
-      msg: 'WebSocket error',
-      details: { event: ev },
-      ts: new Date().toISOString()
-    })
+    console.error('[ws] WebSocket error:', ev)
   }
 
   ws.onmessage = (ev) => {
@@ -191,13 +191,7 @@ export function connectWebSocket() {
       const msg = JSON.parse(ev.data)
       handleWebSocketMessage(msg)
     } catch (err: any) {
-      errorStore.add({
-        source: 'ws',
-        code: 'PARSE',
-        msg: 'WebSocket message parse error',
-        details: { error: err.message, data: ev.data },
-        ts: new Date().toISOString()
-      })
+      console.error('[ws] Message parse error:', err, 'Data:', ev.data)
     }
   }
 
@@ -248,10 +242,10 @@ export function requestWidgetStream(widgetId: string, viewport?: { top: number, 
  * Requests streaming content for a page based on viewport
  * This will stream modules and widgets that are visible or about to be visible
  */
-export function requestPageStream(pageId: string, viewport: { 
-  top: number, 
-  bottom: number, 
-  left: number, 
+export function requestPageStream(pageId: string, viewport: {
+  top: number,
+  bottom: number,
+  left: number,
   right: number,
   scrollDirection?: 'up' | 'down' | 'left' | 'right'
 }) {
@@ -329,13 +323,20 @@ function stopHeartbeat() {
 let reconnectAttempts = 0
 function scheduleReconnect() {
   if (reconnectTimer) return
-  
+
+  // Don't reconnect if we already have a working connection
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    console.log('[ws] WebSocket already connected, skipping reconnect')
+    return
+  }
+
   // Exponential backoff: 5s, 10s, 20s, 30s, dann 30s
   const delay = Math.min(5000 * Math.pow(2, reconnectAttempts), 30000)
   reconnectAttempts++
-  
-  reconnectTimer = window.setTimeout(() => {
 
+  console.log(`[ws] Scheduling reconnect in ${delay}ms (attempt ${reconnectAttempts})`)
+  reconnectTimer = window.setTimeout(() => {
+    reconnectTimer = null
     connectWebSocket()
   }, delay)
 }
@@ -362,14 +363,14 @@ function getAuthToken(): string | null {
  */
 function buildWebSocketUrl(token: string): string {
   const url = new URL(WS_BASE_URL)
-  
+
   // Add JWT token as query parameter for authentication
   url.searchParams.set('token', token)
-  
+
   // Add API key if available (fallback authentication)
   const apiKey = import.meta.env.VITE_API_KEY || 'dev-key-123'
   url.searchParams.set('api_key', apiKey)
-  
+
   return url.toString()
 }
 
@@ -378,17 +379,17 @@ function buildWebSocketUrl(token: string): string {
  */
 export function disconnectWebSocket() {
 
-  
+
   if (ws) {
     ws.close()
     ws = null
   }
-  
+
   if (reconnectTimer) {
     clearTimeout(reconnectTimer)
     reconnectTimer = null
   }
-  
+
   stopHeartbeat()
   reconnectAttempts = 0
 }

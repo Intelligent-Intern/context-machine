@@ -1,191 +1,178 @@
 // src/core/stores/layout.ts
 import { defineStore } from 'pinia'
-import type { RouteLocationNormalized } from 'vue-router'
-import { registerHandler } from '@/core/messaging/api'
-import { useErrorStore } from '@/core/stores/error'
-import { validateManifest, normalizePage } from '@/core/discovery/manifest-loader'
-import { getResponsiveSnapshot } from '@/composables/useResponsive'
 
-type BarKey = 'top' | 'bottom' | 'left' | 'right'
-type BarState = 0 | 1 | 2 | 3 | 4
-
-interface Sizes {
-    default: number
-    current: number
+interface LayoutConfig {
+  bars: { t: number, b: number, l: number, r: number }
+  ports?: Record<string, string[]>
 }
 
 interface LayoutState {
-    bars: Record<BarKey, BarState>
-    sizes: Record<'left' | 'right', Sizes>
-    activePage: string | null
-    manifest: Record<string, any> | null
+  bars: { t: number, b: number, l: number, r: number }
+  ports: Record<string, string[]>
+  sizes: {
+    left: { default: number, current: number }
+    right: { default: number, current: number }
+  }
 }
 
 export const useLayoutStore = defineStore('layout', {
-    state: (): LayoutState => ({
-        bars: {
-            top: 2,
-            bottom: 1,
-            left: 2,
-            right: 0
-        },
-        sizes: {
-            left: { default: 280, current: 280 },
-            right: { default: 320, current: 320 }
-        },
-        activePage: null,
-        manifest: null
-    }),
-
-    actions: {
-        initHandlers() {
-            const errorStore = useErrorStore()
-
-            registerHandler('discovery.page', (action, p) => {
-                if (action === 'get') {
-                    if (validateManifest('page', p)) {
-                        this.applyManifest(normalizePage(p))
-                    } else {
-                        errorStore.add({
-                            source: 'discovery.page.get',
-                            code: 'VALIDATION',
-                            msg: 'Invalid page manifest received for layout',
-                            details: { manifest: p }
-                        })
-                    }
-                }
-            })
-        },
-
-        setBarState(key: BarKey, state: BarState) {
-            this.bars[key] = state
-        },
-
-        toggleBar(key: BarKey) {
-            this.bars[key] = this.bars[key] >= 2 ? 0 : 2
-        },
-
-        setBarSize(side: 'left' | 'right', size: number) {
-            this.sizes[side].current = size
-        },
-
-        persistSizes() {
-            localStorage.setItem('layout.sizes', JSON.stringify(this.sizes))
-            localStorage.setItem('layout.bars', JSON.stringify(this.bars))
-        },
-
-        loadSizes() {
-            const rawSizes = localStorage.getItem('layout.sizes')
-            if (rawSizes) {
-                try {
-                    this.sizes = JSON.parse(rawSizes)
-                } catch {
-                    // parse error ignorieren
-                }
-            }
-            
-            const rawBars = localStorage.getItem('layout.bars')
-            if (rawBars) {
-                try {
-                    const savedBars = JSON.parse(rawBars)
-                    // Only restore non-mobile states
-                    Object.keys(savedBars).forEach(key => {
-                        if (savedBars[key] !== 4) { // Don't restore mobile state
-                            this.bars[key as BarKey] = savedBars[key]
-                        }
-                    })
-                } catch {
-                    // parse error ignorieren
-                }
-            }
-        },
-
-        applyPageByRoute(route: RouteLocationNormalized) {
-            this.activePage = (route.name as string) || route.path
-        },
-
-        applyManifest(manifest: any) {
-            // Convert new compact format to internal format
-            const normalizedManifest = this.normalizeManifest(manifest)
-            this.manifest = normalizedManifest
-
-            if (normalizedManifest.bars) {
-                this.bars = {
-                    top: normalizedManifest.bars.top ?? this.bars.top,
-                    bottom: normalizedManifest.bars.bottom ?? this.bars.bottom,
-                    left: normalizedManifest.bars.left ?? this.bars.left,
-                    right: normalizedManifest.bars.right ?? this.bars.right
-                }
-            }
-
-            if (normalizedManifest.sizes) {
-                if (normalizedManifest.sizes.left) {
-                    this.sizes.left.default = normalizedManifest.sizes.left
-                    this.sizes.left.current = normalizedManifest.sizes.left
-                }
-                if (normalizedManifest.sizes.right) {
-                    this.sizes.right.default = normalizedManifest.sizes.right
-                    this.sizes.right.current = normalizedManifest.sizes.right
-                }
-            }
-        },
-
-        normalizeManifest(manifest: any) {
-            const normalized = { ...manifest }
-
-            // Normalize bars: convert compact format (t,b,l,r) to full format (top,bottom,left,right)
-            if (manifest.bars) {
-                const bars = manifest.bars
-                if (bars.t !== undefined || bars.b !== undefined || bars.l !== undefined || bars.r !== undefined) {
-                    normalized.bars = {
-                        top: bars.t ?? bars.top,
-                        bottom: bars.b ?? bars.bottom,
-                        left: bars.l ?? bars.left,
-                        right: bars.r ?? bars.right
-                    }
-                }
-            }
-
-            // Normalize ports: convert compact format (t,l,m) to full format (top,left,main)
-            if (manifest.ports) {
-                const ports = manifest.ports
-                const normalizedPorts: any = {}
-
-                // Map compact port names to full names
-                const portMapping: Record<string, string> = {
-                    't': 'top',
-                    'b': 'bottom', 
-                    'l': 'left',
-                    'r': 'right',
-                    'm': 'main'
-                }
-
-                // Convert compact port names
-                Object.entries(ports).forEach(([key, value]) => {
-                    const fullKey = portMapping[key] || key
-                    normalizedPorts[fullKey] = value
-                })
-
-                normalized.ports = normalizedPorts
-            }
-
-            return normalized
-        },
-
-        applyResponsiveDefaults() {
-            const snap = getResponsiveSnapshot()
-
-            if (snap.width >= 1024) {
-                this.bars = { top: 2, bottom: 1, left: 2, right: 2 }
-            } else if (snap.width >= 768) {
-                this.bars = { top: 2, bottom: 1, left: 1, right: 0 }
-            } else {
-                if (snap.orientation === 'portrait') {
-                    this.bars = { top: 1, bottom: 0, left: 0, right: 0 }
-                } else {
-                    this.bars = { top: 1, bottom: 0, left: 1, right: 0 }
-                }
-            }
-        }
+  state: (): LayoutState => ({
+    bars: { t: 0, b: 0, l: 0, r: 0 }, // Default: all bars hidden
+    ports: { t: [], b: [], l: [], r: [], m: [] },
+    sizes: {
+      left: { default: 280, current: 280 },
+      right: { default: 320, current: 320 }
     }
+  }),
+
+  getters: {
+    isBarVisible: (state) => (bar: 't' | 'b' | 'l' | 'r') => state.bars[bar] > 0,
+    
+    getPortWidgets: (state) => (port: string) => {
+      // Map full port names to compact format
+      const portMap: Record<string, string> = {
+        'top': 't',
+        'bottom': 'b', 
+        'left': 'l',
+        'right': 'r',
+        'main': 'm'
+      }
+      
+      const mappedPort = portMap[port] || port
+      const widgets = state.ports[mappedPort] || []
+      console.log(`[layout] getPortWidgets(${port} -> ${mappedPort}):`, widgets)
+      return widgets
+    }
+  },
+
+  actions: {
+    applyConfig(config: LayoutConfig) {
+      console.log('[layout] Applying config:', config)
+      
+      // Apply bar states
+      this.bars = { ...config.bars }
+      
+      // Apply port configuration if provided
+      if (config.ports) {
+        this.ports = { ...config.ports }
+        console.log('[layout] Ports updated:', this.ports)
+      } else {
+        console.warn('[layout] No ports in config!')
+      }
+      
+      // Only persist to backend if user is authenticated
+      try {
+        const authStore = (window as any).__AUTH_STORE__
+        if (authStore?.accessToken) {
+          this.persistLayoutState()
+        }
+      } catch (error) {
+        // Ignore persistence errors during fallback mode
+        console.log('[layout] Skipping persistence in fallback mode')
+      }
+    },
+
+    updatePorts(ports: Record<string, string[]>) {
+      console.log('[layout] Updating ports:', ports)
+      this.ports = { ...this.ports, ...ports }
+    },
+
+    setBarState(bar: 't' | 'b' | 'l' | 'r', state: number) {
+      console.log(`[layout] Setting bar ${bar} to state ${state}`)
+      this.bars[bar] = state
+      this.persistLayoutState()
+    },
+
+    toggleBar(bar: 't' | 'b' | 'l' | 'r') {
+      const newState = this.bars[bar] > 0 ? 0 : 2
+      this.setBarState(bar, newState)
+    },
+
+    setBarSize(side: 'left' | 'right', size: number) {
+      console.log(`[layout] Setting ${side} bar size to ${size}`)
+      this.sizes[side].current = size
+      this.persistSizes()
+    },
+
+    async persistLayoutState() {
+      // Skip backend persistence for now - not needed for basic functionality
+      console.log('[layout] Layout state updated (local only)')
+    },
+
+    persistSizes() {
+      // Store sizes locally for immediate feedback
+      localStorage.setItem('layout.sizes', JSON.stringify(this.sizes))
+      
+      // Only send to backend if authenticated
+      try {
+        const authStore = (window as any).__AUTH_STORE__
+        if (authStore?.accessToken) {
+          this.persistLayoutState()
+        }
+      } catch (error) {
+        console.log('[layout] Skipping backend persistence in fallback mode')
+      }
+    },
+
+    loadSizes() {
+      const rawSizes = localStorage.getItem('layout.sizes')
+      if (rawSizes) {
+        try {
+          this.sizes = JSON.parse(rawSizes)
+        } catch (error) {
+          console.error('[layout] Failed to parse stored sizes:', error)
+        }
+      }
+    },
+
+    // Apply fallback configuration (all bars hidden, auth widget only)
+    applyFallbackConfig() {
+      console.log('[layout] Applying fallback configuration')
+      
+      this.bars = { t: 0, b: 0, l: 0, r: 0 }
+      this.ports = {
+        t: [],
+        b: [],
+        l: [],
+        r: [],
+        m: ['auth@LoginForm']
+      }
+    },
+
+    // Initialize layout store
+    initialize() {
+      this.loadSizes()
+      
+      // Register message handlers for layout updates
+      this.initMessageHandlers()
+    },
+
+    initMessageHandlers() {
+      import('@/core/messaging/api').then(({ registerHandler }) => {
+        registerHandler('layout', (action, payload) => {
+          console.log(`[layout] Received message: ${action}`, payload)
+          
+          switch (action) {
+            case 'config.update':
+              this.applyConfig(payload)
+              break
+              
+            case 'ports.update':
+              this.updatePorts(payload)
+              break
+              
+            case 'content.loaded':
+              // Page content loaded from backend
+              if (payload.widgets) {
+                this.updatePorts(payload.widgets)
+              }
+              break
+              
+            default:
+              console.warn(`[layout] Unknown action: ${action}`)
+          }
+        })
+      })
+    }
+  }
 })

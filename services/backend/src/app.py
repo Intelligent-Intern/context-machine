@@ -113,6 +113,9 @@ def login():
         result = auth_service.login(data['username'], data['password'])
         
         if result:
+            # Check if result contains an error
+            if isinstance(result, dict) and result.get('error') == 'CONFIG_ERROR':
+                return result, 500  # Return as 500 for system errors
             return result
         else:
             return {'error': 'Invalid credentials'}, 401
@@ -373,12 +376,15 @@ def openapi_spec():
 if __name__ == '__main__':
     # Setup database on startup
     try:
+        print("[APP] Starting database setup...")
         migration_service = MigrationService()
         migration_service.setup_database()
         print("[APP] Database setup complete")
     except Exception as e:
         print(f"[APP] Database setup failed: {e}")
+        print("[APP] Continuing without database - will show appropriate errors")
     
     # Start Flask app
     port = int(os.getenv('BACKEND_PORT', 3006))
+    print(f"[APP] Starting Flask app on port {port}")
     app.run(host='0.0.0.0', port=port, debug=True)

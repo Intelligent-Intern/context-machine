@@ -1,249 +1,96 @@
+// src/core/routing/index.ts
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { registerDynamicRoutes } from './routes'
-import guards from './guards'
 
-// Helper function to get page layout from auth config
-async function getPageLayoutFromConfig(route: string) {
-  const { useAuthStore } = await import('@/core/stores/auth')
-  const authStore = useAuthStore()
-  
-  if (!authStore.config || !authStore.config.pages) {
-    return null
-  }
-  
-  // Find the page in the config
-  const page = authStore.config.pages.find(p => p.route === route)
-  if (!page) {
-    return null
-  }
-  
-  // Convert page layout to the expected format
-  if (page.layout && typeof page.layout === 'object') {
-    // Check if it's already in the new compact format
-    if ('bars' in page.layout && 'ports' in page.layout) {
-      return page.layout
-    }
-    
-    // Convert from old format to new compact format
-    const layout = page.layout as Record<string, boolean>
-    return {
-      bars: {
-        t: layout.top ? 2 : 0,
-        b: layout.bottom ? 2 : 0,
-        l: layout.left ? 2 : 0,
-        r: layout.right ? 2 : 0
-      },
-      ports: {
-        t: layout.top ? ['nav@TopBar'] : [],
-        b: layout.bottom ? [] : [],
-        l: layout.left ? ['nav@SidebarNav'] : [],
-        r: layout.right ? [] : [],
-        m: ['dashboard@Welcome'] // Default main content
-      }
-    }
-  }
-  
-  return null
-}
+/**
+ * Minimal routing system with fallback
+ * - /login: Always available (fallback when backend unavailable)
+ * - Dynamic routes: Registered after login from backend config
+ */
 
+// Minimal static routes - only what's absolutely necessary
 const staticRoutes: RouteRecordRaw[] = [
+    // Login route - uses fallback config when backend unavailable
     {
         path: '/login',
         name: 'login',
-        component: () => import('@/components/AppShell.vue'),
+        component: () => import('@/core/layout/AppShell.vue'),
         beforeEnter: async (_to, _from, next) => {
-            // For login page, get public config
-            const { useLayoutStore } = await import('@/core/stores/layout')
-            const layout = useLayoutStore()
+            // Check if user is already authenticated
+            const { useAuthStore } = await import('@/core/stores/auth')
+            const authStore = useAuthStore()
             
-            try {
-                // Get public config for login page
-                const response = await fetch(`/api/config?origin=${window.location.origin}`)
-                const config = await response.json()
-                
-                // Register widget packs from public config
-                if (config.widgetPacks) {
-                    const { updateWidgetRegistry } = await import('@/core/widgets/registry')
-                    const widgetPacksMap: Record<string, any> = {}
-                    
-                    config.widgetPacks.forEach((pack: any) => {
-                        widgetPacksMap[pack.id] = pack
-                    })
-                    
-                    updateWidgetRegistry(widgetPacksMap)
-                }
-                
-                if (config.pages?.login?.layout) {
-                    layout.applyManifest(config.pages.login.layout)
-                } else {
-                    throw new Error('No login layout in config')
-                }
-            } catch (error) {
-                console.warn('[router] Public config failed, using fallback for login page:', error)
-                // Fallback layout (using new compact format)
-                layout.applyManifest({
-                    bars: { t: 0, b: 0, l: 0, r: 0 },
-                    ports: { 
-                        m: ['auth@LoginForm']
-                    }
-                })
+            if (authStore.isAuthenticated && authStore.isTokenValid) {
+                // User is already logged in - redirect to home
+                console.log('[router] User already authenticated, redirecting to home')
+                next('/')
+                return
             }
+            
+            // Apply fallback layout for login (all bars hidden, auth widget only)
+            const { initFallbackConfig } = await import('@/site/init')
+            await initFallbackConfig()
             next()
         }
     },
+    
+    // Logout route - clears session and redirects to login
+    {
+        path: '/logout',
+        name: 'logout',
+        beforeEnter: async (_to, _from, next) => {
+            // Perform logout
+            const { useAuthStore } = await import('@/core/stores/auth')
+            const authStore = useAuthStore()
+            await authStore.logout()
+            
+            // Redirect to login
+            next('/login')
+        }
+    },
+    
+    // Forgot password route - public access
     {
         path: '/forgot-password',
         name: 'forgot-password',
-        component: () => import('@/components/AppShell.vue'),
+        component: () => import('@/core/layout/AppShell.vue'),
         beforeEnter: async (_to, _from, next) => {
-            // For forgot password page, get public config
-            const { useLayoutStore } = await import('@/core/stores/layout')
-            const layout = useLayoutStore()
-            
-            try {
-                // Get public config for forgot password page
-                const response = await fetch(`/api/config?origin=${window.location.origin}`)
-                const config = await response.json()
-                
-                // Register widget packs from public config
-                if (config.widgetPacks) {
-                    const { updateWidgetRegistry } = await import('@/core/widgets/registry')
-                    const widgetPacksMap: Record<string, any> = {}
-                    
-                    config.widgetPacks.forEach((pack: any) => {
-                        widgetPacksMap[pack.id] = pack
-                    })
-                    
-                    updateWidgetRegistry(widgetPacksMap)
-                }
-                
-                if (config.pages?.['forgot-password']?.layout) {
-                    layout.applyManifest(config.pages['forgot-password'].layout)
-                } else {
-                    throw new Error('No forgot-password layout in config')
-                }
-            } catch (error) {
-                console.warn('[router] Public config failed, using fallback for forgot-password page:', error)
-                // Fallback layout
-                layout.applyManifest({
-                    bars: { t: 0, b: 0, l: 0, r: 0 },
-                    ports: { 
-                        m: ['auth@ForgotPasswordForm']
-                    }
-                })
-            }
+            // Apply fallback config for forgot password page
+            const { initForgotPasswordConfig } = await import('@/site/init')
+            await initForgotPasswordConfig()
             next()
         }
     },
-    {
-        path: '/test',
-        name: 'test',
-        component: () => import('@/components/AppShell.vue'),
-        beforeEnter: async (_to, _from, next) => {
-            const { useLayoutStore } = await import('@/core/stores/layout')
-            const layout = useLayoutStore()
-            
-            try {
-                // Try to get layout from auth config first
-                const configLayout = await getPageLayoutFromConfig('/test')
-                if (configLayout) {
-                    console.log('[router] Using layout from auth config for test page')
-                    layout.applyManifest(configLayout)
-                } else {
-                    throw new Error('No layout found in auth config')
-                }
-            } catch (error) {
-                console.warn('[router] Backend layout failed, using fallback for test page:', error)
-                // Fallback layout (using new compact format)
-                const manifest = {
-                    bars: { t: 2, b: 0, l: 2, r: 0 },
-                    ports: {
-                        t: ['nav@TopBar'],
-                        l: ['nav@SidebarNav'],
-                        m: ['dashboard@Welcome']
-                    }
-                }
-                layout.applyManifest(manifest)
-            }
-            next()
-        }
-    },
-    {
-        path: '/admin/theme-editor',
-        name: 'theme-editor',
-        component: () => import('@/components/AppShell.vue'),
-        beforeEnter: async (_to, _from, next) => {
-            const { useLayoutStore } = await import('@/core/stores/layout')
-            const layout = useLayoutStore()
-            
-            try {
-                // Try to get layout from auth config first
-                const configLayout = await getPageLayoutFromConfig('/admin/theme-editor')
-                if (configLayout) {
-                    console.log('[router] Using layout from auth config for theme editor page')
-                    layout.applyManifest(configLayout)
-                } else {
-                    throw new Error('No layout found in auth config')
-                }
-            } catch (error) {
-                console.warn('[router] Backend layout failed, using fallback for theme editor page:', error)
-                // Fallback layout (using new compact format)
-                const manifest = {
-                    bars: { t: 2, b: 0, l: 2, r: 0 },
-                    ports: {
-                        t: ['nav@TopBar'],
-                        l: ['nav@SidebarNav'],
-                        m: ['theme@ThemeEditor']
-                    }
-                }
-                layout.applyManifest(manifest)
-            }
-            next()
-        },
-        meta: { requiresAuth: true, requiresRole: 'SUPERADMIN' }
-    },
+    
+    // Root route - show dashboard for authenticated users
     {
         path: '/',
         name: 'home',
-        component: () => import('@/components/AppShell.vue'),
+        component: () => import('@/core/layout/AppShell.vue'),
         beforeEnter: async (_to, _from, next) => {
-            const { useLayoutStore } = await import('@/core/stores/layout')
-            const layout = useLayoutStore()
+            const { useAuthStore } = await import('@/core/stores/auth')
+            const authStore = useAuthStore()
             
-            try {
-                // Try to get layout from auth config first
-                const configLayout = await getPageLayoutFromConfig('/')
-                if (configLayout) {
-                    console.log('[router] Using layout from auth config for home page')
-                    layout.applyManifest(configLayout)
-                } else {
-                    throw new Error('No layout found in auth config')
-                }
-            } catch (error) {
-                console.warn('[router] Backend layout failed, using fallback for home page:', error)
-                // Fallback layout (using new compact format)
-                const manifest = {
-                    bars: { t: 2, b: 0, l: 2, r: 0 },
-                    ports: {
-                        t: ['nav@TopBar'],
-                        l: ['nav@SidebarNav'],
-                        m: ['dashboard@Welcome']
-                    }
-                }
-                layout.applyManifest(manifest)
+            if (!authStore.isAuthenticated || !authStore.isTokenValid) {
+                // Not authenticated - redirect to login
+                console.log('[router] Not authenticated, redirecting to login')
+                next('/login')
+                return
             }
+            
+            // User is authenticated - just proceed without additional logic
+            console.log('[router] Accessing home page')
             next()
-        },
-        meta: { requiresAuth: true }
+        }
     },
+    
+    // 404 fallback - redirect unknown routes to login
     {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
-        component: () => import('@/pages/NotFound.vue')
+        redirect: '/login'
     }
 ]
-
 
 const router = createRouter({
     history: createWebHistory(),
@@ -251,15 +98,133 @@ const router = createRouter({
 })
 
 /**
- * Registriert dynamische Routen aus Discovery-Store.
- * Wird nach erfolgreichem Login aufgerufen.
+ * Registers dynamic routes from auth config after successful login
+ * Called by auth store after login response is received
  */
-export async function initDynamicRoutes() {
-    await registerDynamicRoutes(router)
+export async function registerDynamicRoutes(routes: Array<{
+    route: string
+    name: string
+    layout: any
+}>) {
+    console.log('[router] Registering dynamic routes:', routes.length)
+    
+    // Clear existing dynamic routes (keep only static ones)
+    const staticRouteNames = ['login', 'forgot-password', 'not-found']
+    router.getRoutes().forEach(route => {
+        if (route.name && !staticRouteNames.includes(route.name as string)) {
+            router.removeRoute(route.name)
+        }
+    })
+    
+    // Register routes from auth config
+    routes.forEach(routeConfig => {
+        if (router.hasRoute(routeConfig.route)) {
+            console.warn(`[router] Route ${routeConfig.route} already exists, skipping`)
+            return
+        }
+        
+        router.addRoute({
+            path: routeConfig.route,
+            name: routeConfig.route.replace('/', '') || 'home',
+            component: () => import('@/core/layout/AppShell.vue'),
+            beforeEnter: async (to, _from, next) => {
+                console.log(`[router] Entering route: ${to.path}`)
+                
+                // Apply layout from config
+                const { useLayoutStore } = await import('@/core/stores/layout')
+                const layoutStore = useLayoutStore()
+                
+                if (routeConfig.layout) {
+                    layoutStore.applyConfig(routeConfig.layout)
+                } else {
+                    // Fallback: all bars hidden, empty main
+                    layoutStore.applyFallbackConfig()
+                }
+                
+                // Request page content via message API
+                await loadPageContent(routeConfig.route)
+                
+                next()
+            },
+            meta: { requiresAuth: true }
+        })
+        
+        console.log(`[router] Registered dynamic route: ${routeConfig.route}`)
+    })
+    
+    // Redirect root to first available route or login
+    if (routes.length > 0) {
+        const homeRoute = routes.find(r => r.route === '/') || routes[0]
+        router.addRoute({
+            path: '/',
+            redirect: homeRoute.route
+        })
+    }
 }
 
-// Guards anhängen
-router.beforeEach(guards.beforeEach)
-router.afterEach(guards.afterEach)
+/**
+ * Loads page content via message API when route becomes active
+ */
+async function loadPageContent(route: string) {
+    try {
+        const { sendMessage } = await import('@/core/messaging/api')
+        
+        // Send message to backend - response will come via WebSocket
+        await sendMessage('page.content.load', { route })
+        
+        console.log(`[router] Page content request sent for: ${route}`)
+    } catch (error) {
+        console.error(`[router] Failed to request page content for ${route}:`, error)
+        // Continue without content - layout is already applied
+    }
+}
+
+/**
+ * Navigation guard for authentication
+ */
+router.beforeEach(async (to, from, next) => {
+    // Allow access to public pages
+    if (to.path === '/login' || to.path === '/forgot-password') {
+        next()
+        return
+    }
+    
+    // Check authentication for protected routes
+    try {
+        const { useAuthStore } = await import('@/core/stores/auth')
+        const authStore = useAuthStore()
+        
+        if (!authStore.isAuthenticated || !authStore.isTokenValid) {
+            // Not authenticated - redirect to login
+            console.log('[router] Not authenticated, redirecting to login')
+            next('/login')
+            return
+        }
+        
+        // Authenticated - allow access
+        next()
+    } catch (error) {
+        console.error('[router] Auth check failed:', error)
+        next('/login')
+    }
+})
+
+/**
+ * Clear all dynamic routes and redirect to login
+ * Called when user logs out or API is unavailable
+ */
+export function clearDynamicRoutes() {
+    console.log('[router] Clearing dynamic routes')
+    
+    const staticRouteNames = ['login', 'forgot-password', 'not-found']
+    router.getRoutes().forEach(route => {
+        if (route.name && !staticRouteNames.includes(route.name as string)) {
+            router.removeRoute(route.name)
+        }
+    })
+    
+    // Redirect to login
+    router.push('/login')
+}
 
 export default router

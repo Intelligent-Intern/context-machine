@@ -1,0 +1,24 @@
+{
+  "widgetPacks": [
+    {
+      "id": "auth",
+      "components": {
+        "LoginForm": {
+          "path": "@/widget-packs/auth/widgets/LoginForm.vue"
+        }
+      }
+    }
+  ],
+  "routes": [
+    {
+      "route": "/login",
+      "name": "Login",
+      "layout": {
+        "bars": { "t": 0, "b": 0, "l": 0, "r": 0 },
+        "ports": {
+          "m": ["auth@LoginForm"]
+        }
+      }
+    }
+  ]
+}
