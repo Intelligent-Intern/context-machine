@@ -1,0 +1,1326 @@
+{
+  "ontology": {
+    "name": "maritime_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/maritime#",
+    "description": "Comprehensive maritime ontology for fleet & vessel management, machinery, electrical & automation, navigation & GMDSS, cargo operations, maintenance/PMS, regulatory compliance (SOLAS/MARPOL/ISM/MLC/BWM, EU MRV/DCS/ETS), safety & security (LSA/FFE/ISPS), energy & emissions (EEXI/CII/SEEMP), port logistics, shipyard & modifications, documents, sensors/IIoT/VDR and federated access policies.",
+    "namespaces": {
+      "mar": "http://context-machine.org/ontology/maritime#",
+      "ship": "http://context-machine.org/ontology/maritime/ship#",
+      "sys": "http://context-machine.org/ontology/maritime/systems#",
+      "mach": "http://context-machine.org/ontology/maritime/machinery#",
+      "elec": "http://context-machine.org/ontology/maritime/electrical#",
+      "auto": "http://context-machine.org/ontology/maritime/automation#",
+      "nav": "http://context-machine.org/ontology/maritime/navigation#",
+      "cargo": "http://context-machine.org/ontology/maritime/cargo#",
+      "safety": "http://context-machine.org/ontology/maritime/safety#",
+      "sec": "http://context-machine.org/ontology/maritime/security#",
+      "crew": "http://context-machine.org/ontology/maritime/crew#",
+      "reg": "http://context-machine.org/ontology/maritime/regulation#",
+      "class": "http://context-machine.org/ontology/maritime/class#",
+      "port": "http://context-machine.org/ontology/maritime/port#",
+      "voy": "http://context-machine.org/ontology/maritime/voyage#",
+      "maint": "http://context-machine.org/ontology/maritime/maintenance#",
+      "spares": "http://context-machine.org/ontology/maritime/spares#",
+      "doc": "http://context-machine.org/ontology/maritime/document#",
+      "sensor": "http://context-machine.org/ontology/maritime/sensor#",
+      "vdr": "http://context-machine.org/ontology/maritime/vdr#",
+      "env": "http://context-machine.org/ontology/maritime/environment#",
+      "energy": "http://context-machine.org/ontology/maritime/energy#",
+      "fuel": "http://context-machine.org/ontology/maritime/fuel#",
+      "risk": "http://context-machine.org/ontology/maritime/risk#",
+      "cyber": "http://context-machine.org/ontology/maritime/cyber#",
+      "contract": "http://context-machine.org/ontology/maritime/contract#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "gsp": "http://www.opengis.net/ont/geosparql#",
+      "time": "http://www.w3.org/2006/time#",
+      "qudt": "http://qudt.org/vocab/unit#",
+      "sosa": "http://www.w3.org/ns/sosa/",
+      "ssn": "http://www.w3.org/ns/ssn/",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "http://www.w3.org/ns/sosa/",
+      "http://www.w3.org/ns/ssn/"
+    ],
+    "frames": {
+      "Fleet_And_Vessel_System": {
+        "collections": {
+          "Fleet_Registry": {
+            "entities": {
+              "Company": {
+                "properties": {
+                  "company_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "imo_company_number": "xsd:string",
+                  "country": "xsd:string",
+                  "address": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "contact_phone": "xsd:string"
+                }
+              },
+              "Fleet": {
+                "properties": {
+                  "fleet_id": "xsd:string",
+                  "fleet_name": "xsd:string",
+                  "owner_company_id": "xsd:string",
+                  "manager_company_id": "xsd:string",
+                  "vessel_count": "xsd:integer"
+                }
+              }
+            }
+          },
+          "Vessel_Basics": {
+            "entities": {
+              "Vessel": {
+                "properties": {
+                  "vessel_id": "xsd:string",
+                  "imo_number": "xsd:string",
+                  "mmsi": "xsd:string",
+                  "call_sign": "xsd:string",
+                  "vessel_name": "xsd:string",
+                  "vessel_type": "xsd:string",
+                  "sub_type": "xsd:string",
+                  "flag_state": "xsd:string",
+                  "registry_port": "xsd:string",
+                  "class_society": "xsd:string",
+                  "class_notation": "xsd:string",
+                  "ice_class": "xsd:string",
+                  "dp_class": "xsd:string",
+                  "year_built": "xsd:integer",
+                  "builder": "xsd:string",
+                  "hull_number": "xsd:string",
+                  "status": "xsd:string",
+                  "owner_company_id": "xsd:string",
+                  "manager_company_id": "xsd:string",
+                  "operator_company_id": "xsd:string",
+                  "doc_company_id": "xsd:string",
+                  "gross_tonnage": "xsd:float",
+                  "net_tonnage": "xsd:float",
+                  "deadweight_tonnes": "xsd:float",
+                  "length_overall_m": "xsd:float",
+                  "length_bp_m": "xsd:float",
+                  "breadth_molded_m": "xsd:float",
+                  "depth_m": "xsd:float",
+                  "design_draft_m": "xsd:float",
+                  "summer_draft_m": "xsd:float",
+                  "service_speed_kn": "xsd:float",
+                  "economic_speed_kn": "xsd:float",
+                  "crew_complement": "xsd:integer",
+                  "primary_fuel": "xsd:string",
+                  "alternative_fuels": "xsd:string",
+                  "propulsion_type": "xsd:string",
+                  "eexi_g_co2_per_tnm": "xsd:float",
+                  "cii_rating_last_year": "xsd:string",
+                  "position": "geo:Point",
+                  "last_ais_update": "xsd:dateTime",
+                  "last_drydock_date": "xsd:date",
+                  "digital_twin_id": "xsd:string"
+                }
+              },
+              "Compartment": {
+                "properties": {
+                  "compartment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "deck": "xsd:string",
+                  "frame_start": "xsd:string",
+                  "frame_end": "xsd:string",
+                  "capacity_m3": "xsd:float",
+                  "service_medium": "xsd:string",
+                  "hazardous_zone": "xsd:string",
+                  "inerted": "xsd:boolean",
+                  "location_polygon": "gsp:Polygon"
+                }
+              }
+            }
+          },
+          "Vessel_Structure": {
+            "entities": {
+              "HullSegment": {
+                "properties": {
+                  "segment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "location": "xsd:string",
+                  "material": "xsd:string",
+                  "coating_system": "xsd:string",
+                  "thickness_mm": "xsd:float",
+                  "corrosion_allowance_mm": "xsd:float",
+                  "last_utm_date": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Propulsion_And_Machinery_System": {
+        "collections": {
+          "Propulsion": {
+            "entities": {
+              "MainEngine": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "tag_number": "xsd:string",
+                  "make": "xsd:string",
+                  "model": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "engine_type": "xsd:string",
+                  "cylinders": "xsd:integer",
+                  "bore_mm": "xsd:float",
+                  "stroke_mm": "xsd:float",
+                  "mcr_kw": "xsd:float",
+                  "sfc_g_per_kwh": "xsd:float",
+                  "nox_tier": "xsd:string",
+                  "egr_installed": "xsd:boolean",
+                  "scr_installed": "xsd:boolean",
+                  "shaft_power_limitation_kw": "xsd:float",
+                  "rated_rpm": "xsd:float",
+                  "fuel_types": "xsd:string",
+                  "running_hours_total": "xsd:float",
+                  "last_overhaul_date": "xsd:date",
+                  "next_overhaul_due_hours": "xsd:float",
+                  "location_compartment_id": "xsd:string"
+                }
+              },
+              "Propeller": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "type": "xsd:string",
+                  "diameter_m": "xsd:float",
+                  "pitch_m": "xsd:float",
+                  "blades": "xsd:integer",
+                  "cp_control_system": "xsd:string"
+                }
+              },
+              "Gearbox": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "ratio": "xsd:string",
+                  "input_rpm": "xsd:float",
+                  "output_rpm": "xsd:float",
+                  "lubrication_type": "xsd:string"
+                }
+              },
+              "Thruster": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "thruster_type": "xsd:string",
+                  "location": "xsd:string",
+                  "rated_thrust_kn": "xsd:float",
+                  "power_kw": "xsd:float"
+                }
+              },
+              "SteeringGear": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "type": "xsd:string",
+                  "torque_knm": "xsd:float",
+                  "power_unit_count": "xsd:integer"
+                }
+              }
+            }
+          },
+          "Auxiliary_And_Utility_Systems": {
+            "entities": {
+              "AuxEngineGenerator": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "tag_number": "xsd:string",
+                  "make": "xsd:string",
+                  "model": "xsd:string",
+                  "prime_mover_type": "xsd:string",
+                  "mcr_kw": "xsd:float",
+                  "alternator_kva": "xsd:float",
+                  "voltage_v": "xsd:float",
+                  "frequency_hz": "xsd:float",
+                  "running_hours_total": "xsd:float",
+                  "last_service_date": "xsd:date"
+                }
+              },
+              "Boiler": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "type": "xsd:string",
+                  "steam_capacity_t_per_h": "xsd:float",
+                  "pressure_bar": "xsd:float",
+                  "fuel_type": "xsd:string"
+                }
+              },
+              "Pump": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "service": "xsd:string",
+                  "rated_flow_m3_h": "xsd:float",
+                  "head_m": "xsd:float",
+                  "driver_type": "xsd:string"
+                }
+              },
+              "HeatExchanger": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "type": "xsd:string",
+                  "duty_kw": "xsd:float",
+                  "primary_medium": "xsd:string",
+                  "secondary_medium": "xsd:string"
+                }
+              },
+              "BWTSystem": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "type": "xsd:string",
+                  "maker": "xsd:string",
+                  "capacity_m3_h": "xsd:float",
+                  "imo_type_approval": "xsd:string",
+                  "uscg_approved": "xsd:boolean"
+                }
+              },
+              "OilyWaterSeparator": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "capacity_m3_h": "xsd:float",
+                  "ppm_alarm_type": "xsd:string"
+                }
+              },
+              "SewageTreatmentPlant": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "capacity_persons": "xsd:integer",
+                  "standard": "xsd:string"
+                }
+              },
+              "FreshWaterGenerator": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "type": "xsd:string",
+                  "capacity_m3_d": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Electrical_Power_System": {
+        "collections": {
+          "Power_Distribution": {
+            "entities": {
+              "Switchboard": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "voltage_v": "xsd:float",
+                  "short_circuit_rating_ka": "xsd:float",
+                  "sections": "xsd:integer",
+                  "bus_tie_breakers": "xsd:integer",
+                  "protection_scheme": "xsd:string"
+                }
+              },
+              "Transformer": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "rating_kva": "xsd:float",
+                  "primary_v": "xsd:float",
+                  "secondary_v": "xsd:float"
+                }
+              },
+              "FrequencyConverter": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "input_v": "xsd:float",
+                  "output_v": "xsd:float",
+                  "output_hz": "xsd:float",
+                  "power_kw": "xsd:float"
+                }
+              },
+              "BatterySystem": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "chemistry": "xsd:string",
+                  "capacity_kwh": "xsd:float",
+                  "max_discharge_kw": "xsd:float",
+                  "soh_percentage": "xsd:float"
+                }
+              },
+              "ShorePowerInterface": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "standard": "xsd:string",
+                  "max_power_mva": "xsd:float",
+                  "voltage_class": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Automation_Monitoring_Control_System": {
+        "collections": {
+          "IAS_And_Control": {
+            "entities": {
+              "PLC": {
+                "properties": {
+                  "controller_id": "xsd:string",
+                  "vendor": "xsd:string",
+                  "firmware_version": "xsd:string",
+                  "network_zone": "xsd:string"
+                }
+              },
+              "ControlLoop": {
+                "properties": {
+                  "loop_id": "xsd:string",
+                  "controller_id": "xsd:string",
+                  "controlled_variable_tag": "xsd:string",
+                  "setpoint": "xsd:float",
+                  "controller_type": "xsd:string",
+                  "mode": "xsd:string",
+                  "last_tuning_date": "xsd:date"
+                }
+              },
+              "Sensor": {
+                "properties": {
+                  "sensor_id": "xsd:string",
+                  "tag": "xsd:string",
+                  "measurand": "xsd:string",
+                  "unit": "xsd:string",
+                  "range_min": "xsd:float",
+                  "range_max": "xsd:float",
+                  "sampling_rate_hz": "xsd:float",
+                  "accuracy": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "location": "xsd:string"
+                }
+              },
+              "DataStream": {
+                "properties": {
+                  "stream_id": "xsd:string",
+                  "source": "xsd:string",
+                  "topic": "xsd:string",
+                  "sample_interval_s": "xsd:float",
+                  "access_uri": "xsd:string",
+                  "retention_policy_days": "xsd:integer",
+                  "quality_flags": "xsd:string"
+                }
+              },
+              "AlarmEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "tag": "xsd:string",
+                  "severity": "xsd:string",
+                  "message": "xsd:string",
+                  "ack_time": "xsd:dateTime",
+                  "clear_time": "xsd:dateTime",
+                  "equipment_id": "xsd:string",
+                  "cause_code": "xsd:string",
+                  "recommended_action": "xsd:string"
+                }
+              }
+            }
+          },
+          "Voyage_Data_Recorders": {
+            "entities": {
+              "VDRRecord": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "channels": "xsd:string",
+                  "storage_uri": "xsd:string",
+                  "checksum": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Navigation_And_Communication_System": {
+        "collections": {
+          "Bridge_Systems": {
+            "entities": {
+              "ECDIS": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "maker": "xsd:string",
+                  "sw_version": "xsd:string",
+                  "enc_provider": "xsd:string",
+                  "ais_integrated": "xsd:boolean"
+                }
+              },
+              "Radar": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "band": "xsd:string",
+                  "arpa": "xsd:boolean",
+                  "xband_kw": "xsd:float"
+                }
+              },
+              "AIS": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "class": "xsd:string",
+                  "last_report_time": "xsd:dateTime"
+                }
+              },
+              "GMDSSStation": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "sea_area": "xsd:string",
+                  "epirb_id": "xsd:string",
+                  "ssas_id": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Cargo_And_Operations_System": {
+        "collections": {
+          "Cargo_Spaces_And_Assets": {
+            "entities": {
+              "CargoHold": {
+                "properties": {
+                  "hold_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "capacity_m3": "xsd:float",
+                  "bale_capacity_m3": "xsd:float",
+                  "grain_capacity_m3": "xsd:float"
+                }
+              },
+              "CargoTank": {
+                "properties": {
+                  "tank_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "product_group": "xsd:string",
+                  "capacity_m3": "xsd:float",
+                  "has_inert_gas": "xsd:boolean",
+                  "heating_coils": "xsd:boolean"
+                }
+              },
+              "Container": {
+                "properties": {
+                  "container_id": "xsd:string",
+                  "iso_code": "xsd:string",
+                  "gross_weight_kg": "xsd:float",
+                  "seal_number": "xsd:string",
+                  "haz_class": "xsd:string",
+                  "stowage_bay_row_tier": "xsd:string"
+                }
+              }
+            }
+          },
+          "Cargo_Operations": {
+            "entities": {
+              "CargoOperation": {
+                "properties": {
+                  "operation_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "type": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "port_call_id": "xsd:string",
+                  "quantity_loaded_t": "xsd:float",
+                  "quantity_discharged_t": "xsd:float",
+                  "loading_computer_result_id": "xsd:string"
+                }
+              },
+              "StabilityCalculation": {
+                "properties": {
+                  "calc_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "gm_m": "xsd:float",
+                  "draft_fwd_m": "xsd:float",
+                  "draft_aft_m": "xsd:float",
+                  "trim_m": "xsd:float",
+                  "shear_force_limit_ok": "xsd:boolean",
+                  "bending_moment_limit_ok": "xsd:boolean",
+                  "damage_case": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Maintenance_And_Asset_System": {
+        "collections": {
+          "Asset_Registry_And_PMS": {
+            "entities": {
+              "Equipment": {
+                "properties": {
+                  "equipment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "parent_equipment_id": "xsd:string",
+                  "tag_number": "xsd:string",
+                  "equipment_type": "xsd:string",
+                  "make": "xsd:string",
+                  "model": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "location_compartment_id": "xsd:string",
+                  "rated_power_kw": "xsd:float",
+                  "pressure_bar": "xsd:float",
+                  "flow_rate_m3_h": "xsd:float",
+                  "voltage_v": "xsd:float",
+                  "safety_critical": "xsd:boolean",
+                  "running_hours_total": "xsd:float",
+                  "commissioned_date": "xsd:date"
+                }
+              },
+              "MaintenancePlan": {
+                "properties": {
+                  "plan_id": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "strategy": "xsd:string",
+                  "interval_hours": "xsd:float",
+                  "interval_months": "xsd:integer",
+                  "procedure_ref": "xsd:string"
+                }
+              },
+              "WorkOrder": {
+                "properties": {
+                  "wo_id": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "job_description": "xsd:string",
+                  "scheduled_date": "xsd:date",
+                  "completed_date": "xsd:date",
+                  "labor_hours": "xsd:float",
+                  "materials_cost": "xsd:float",
+                  "service_report_ref": "xsd:string"
+                }
+              },
+              "ConditionMonitoring": {
+                "properties": {
+                  "cm_id": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "method": "xsd:string",
+                  "measurement_time": "xsd:dateTime",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "alarm_state": "xsd:string",
+                  "lab_report_ref": "xsd:string"
+                }
+              },
+              "FailureEvent": {
+                "properties": {
+                  "failure_id": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "mode": "xsd:string",
+                  "cause": "xsd:string",
+                  "effect": "xsd:string",
+                  "downtime_h": "xsd:float",
+                  "rca_summary": "xsd:string"
+                }
+              },
+              "SparePart": {
+                "properties": {
+                  "part_id": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "oem_part_number": "xsd:string",
+                  "description": "xsd:string",
+                  "stock_onboard_qty": "xsd:integer",
+                  "reorder_level": "xsd:integer",
+                  "lead_time_days": "xsd:integer",
+                  "storage_location": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Regulatory_Compliance_System": {
+        "collections": {
+          "Rules_And_Certificates": {
+            "entities": {
+              "Regulation": {
+                "properties": {
+                  "reg_id": "xsd:string",
+                  "name": "xsd:string",
+                  "issuer": "xsd:string",
+                  "scope": "xsd:string",
+                  "edition": "xsd:string",
+                  "effective_date": "xsd:date"
+                },
+                "instances": {
+                  "SOLAS": {
+                    "name": "SOLAS",
+                    "issuer": "IMO",
+                    "scope": "Safety of Life at Sea"
+                  },
+                  "MARPOL_Annex_VI": {
+                    "name": "MARPOL Annex VI",
+                    "issuer": "IMO",
+                    "scope": "Air pollution/NOx/SOx/CO2"
+                  },
+                  "ISM_Code": {
+                    "name": "ISM Code",
+                    "issuer": "IMO",
+                    "scope": "Safety Management"
+                  },
+                  "MLC_2006": {
+                    "name": "MLC 2006",
+                    "issuer": "ILO",
+                    "scope": "Maritime Labour"
+                  },
+                  "BWM_Convention": {
+                    "name": "BWM Convention",
+                    "issuer": "IMO",
+                    "scope": "Ballast Water"
+                  },
+                  "STCW": {
+                    "name": "STCW",
+                    "issuer": "IMO",
+                    "scope": "Seafarer Training"
+                  },
+                  "EU_MRV": {
+                    "name": "EU MRV",
+                    "issuer": "EU",
+                    "scope": "CO2 Monitoring/Reporting"
+                  },
+                  "IMO_DCS": {
+                    "name": "IMO DCS",
+                    "issuer": "IMO",
+                    "scope": "Fuel Oil/CO2 Data Collection"
+                  },
+                  "EU_ETS": {
+                    "name": "EU ETS",
+                    "issuer": "EU",
+                    "scope": "Emissions Trading"
+                  }
+                }
+              },
+              "RuleClause": {
+                "properties": {
+                  "clause_id": "xsd:string",
+                  "reg_id": "xsd:string",
+                  "citation": "xsd:string",
+                  "title": "xsd:string",
+                  "text_summary": "xsd:string"
+                }
+              },
+              "Certificate": {
+                "properties": {
+                  "cert_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "type": "xsd:string",
+                  "issuer": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "status": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "SurveyRecord": {
+                "properties": {
+                  "survey_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "class_society": "xsd:string",
+                  "survey_type": "xsd:string",
+                  "date": "xsd:date",
+                  "findings": "xsd:string",
+                  "condition_of_class": "xsd:string",
+                  "documents": "xsd:string"
+                }
+              },
+              "PSCInspection": {
+                "properties": {
+                  "psc_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "mou_region": "xsd:string",
+                  "port": "xsd:string",
+                  "date": "xsd:date",
+                  "deficiencies_count": "xsd:integer",
+                  "detained": "xsd:boolean",
+                  "report_ref": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Safety_And_Security_System": {
+        "collections": {
+          "LSA_FFE": {
+            "entities": {
+              "LSAItem": {
+                "properties": {
+                  "item_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "type": "xsd:string",
+                  "capacity": "xsd:string",
+                  "location": "xsd:string",
+                  "expiry_date": "xsd:date",
+                  "inspection_due_date": "xsd:date"
+                }
+              },
+              "FFEItem": {
+                "properties": {
+                  "item_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "type": "xsd:string",
+                  "agent": "xsd:string",
+                  "medium": "xsd:string",
+                  "rating": "xsd:string",
+                  "location": "xsd:string",
+                  "last_service_date": "xsd:date"
+                }
+              }
+            }
+          },
+          "HSE_And_ISPS": {
+            "entities": {
+              "RiskAssessment": {
+                "properties": {
+                  "ra_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "activity": "xsd:string",
+                  "hazards": "xsd:string",
+                  "controls": "xsd:string",
+                  "residual_risk": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "PermitToWork": {
+                "properties": {
+                  "ptw_id": "xsd:string",
+                  "type": "xsd:string",
+                  "area": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "authorized_by": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "DrillRecord": {
+                "properties": {
+                  "drill_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "type": "xsd:string",
+                  "date": "xsd:date",
+                  "participants": "xsd:integer",
+                  "remarks": "xsd:string"
+                }
+              },
+              "SecurityEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "level": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "description": "xsd:string",
+                  "reported_to": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Environmental_And_Energy_System": {
+        "collections": {
+          "Fuel_And_Emissions": {
+            "entities": {
+              "FuelType": {
+                "properties": {
+                  "fuel_id": "xsd:string",
+                  "name": "xsd:string",
+                  "sulphur_limit_percentage": "xsd:float",
+                  "lhv_mj_kg": "xsd:float"
+                },
+                "instances": {
+                  "HFO": {
+                    "name": "HFO",
+                    "sulphur_limit_percentage": 3.5,
+                    "lhv_mj_kg": 40.0
+                  },
+                  "VLSFO": {
+                    "name": "VLSFO",
+                    "sulphur_limit_percentage": 0.5,
+                    "lhv_mj_kg": 41.0
+                  },
+                  "MGO": {
+                    "name": "MGO",
+                    "sulphur_limit_percentage": 0.1,
+                    "lhv_mj_kg": 42.8
+                  },
+                  "LNG": {
+                    "name": "LNG",
+                    "sulphur_limit_percentage": 0.0,
+                    "lhv_mj_kg": 50.0
+                  },
+                  "Methanol": {
+                    "name": "Methanol",
+                    "sulphur_limit_percentage": 0.0,
+                    "lhv_mj_kg": 19.9
+                  },
+                  "Ammonia": {
+                    "name": "Ammonia",
+                    "sulphur_limit_percentage": 0.0,
+                    "lhv_mj_kg": 18.6
+                  }
+                }
+              },
+              "BunkeringEvent": {
+                "properties": {
+                  "bunkering_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "port_call_id": "xsd:string",
+                  "fuel_id": "xsd:string",
+                  "date": "xsd:date",
+                  "supplier": "xsd:string",
+                  "bdn_number": "xsd:string",
+                  "delivered_mass_t": "xsd:float",
+                  "density_kg_m3": "xsd:float",
+                  "sulphur_percentage": "xsd:float"
+                }
+              },
+              "NoonReport": {
+                "properties": {
+                  "report_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "date": "xsd:date",
+                  "position": "geo:Point",
+                  "distance_run_nm": "xsd:float",
+                  "speed_kn": "xsd:float",
+                  "me_rpm": "xsd:float",
+                  "me_foc_t": "xsd:float",
+                  "ae_foc_t": "xsd:float",
+                  "fuel_breakdown": "xsd:string",
+                  "wind_beaufort": "xsd:integer",
+                  "sea_state": "xsd:string"
+                }
+              },
+              "EmissionsReport": {
+                "properties": {
+                  "report_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "co2_t": "xsd:float",
+                  "nox_kg": "xsd:float",
+                  "sox_kg": "xsd:float",
+                  "pm_kg": "xsd:float",
+                  "methane_kg": "xsd:float",
+                  "methodology": "xsd:string",
+                  "verification_status": "xsd:string"
+                }
+              },
+              "HullPerformance": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "date": "xsd:date",
+                  "speed_power_deviation_percentage": "xsd:float",
+                  "fouling_index": "xsd:float",
+                  "action_taken": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Voyage_And_Port_Logistics_System": {
+        "collections": {
+          "Voyage_Planning": {
+            "entities": {
+              "Voyage": {
+                "properties": {
+                  "voyage_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "charterparty_ref": "xsd:string",
+                  "origin_locode": "xsd:string",
+                  "destination_locode": "xsd:string",
+                  "etd": "xsd:dateTime",
+                  "eta": "xsd:dateTime",
+                  "route_distance_nm": "xsd:float"
+                }
+              },
+              "RouteLeg": {
+                "properties": {
+                  "leg_id": "xsd:string",
+                  "voyage_id": "xsd:string",
+                  "start_point": "geo:Point",
+                  "end_point": "geo:Point",
+                  "planned_speed_kn": "xsd:float",
+                  "distance_nm": "xsd:float"
+                }
+              }
+            }
+          },
+          "Port_Calls": {
+            "entities": {
+              "PortCall": {
+                "properties": {
+                  "port_call_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "port_name": "xsd:string",
+                  "locode": "xsd:string",
+                  "ata": "xsd:dateTime",
+                  "atd": "xsd:dateTime",
+                  "berth": "xsd:string",
+                  "agent": "xsd:string",
+                  "services_ordered": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Shipyard_And_Modification_System": {
+        "collections": {
+          "Docking_And_Changes": {
+            "entities": {
+              "DryDockEvent": {
+                "properties": {
+                  "dock_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "yard": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "scope_summary": "xsd:string",
+                  "class_involved": "xsd:boolean"
+                }
+              },
+              "Modification": {
+                "properties": {
+                  "mod_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "title": "xsd:string",
+                  "reason": "xsd:string",
+                  "approval_ref": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "documents": "xsd:string"
+                }
+              },
+              "CommissioningRecord": {
+                "properties": {
+                  "comm_id": "xsd:string",
+                  "equipment_id": "xsd:string",
+                  "date": "xsd:date",
+                  "test_results": "xsd:string",
+                  "signoff_by": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Documentation_And_Federation_System": {
+        "collections": {
+          "Documents_And_Policies": {
+            "entities": {
+              "Document": {
+                "properties": {
+                  "document_id": "xsd:string",
+                  "title": "xsd:string",
+                  "doc_type": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "origin_stakeholder": "xsd:string",
+                  "source_system": "xsd:string",
+                  "version": "xsd:string",
+                  "revision_date": "xsd:date",
+                  "effective_date": "xsd:date",
+                  "language": "xsd:string",
+                  "file_mime": "xsd:string",
+                  "file_uri": "xsd:string",
+                  "checksum": "xsd:string",
+                  "confidentiality": "xsd:string",
+                  "retention_policy": "xsd:string",
+                  "access_policy_id": "xsd:string",
+                  "tags": "xsd:string"
+                }
+              },
+              "DocumentFragment": {
+                "properties": {
+                  "fragment_id": "xsd:string",
+                  "document_id": "xsd:string",
+                  "section_title": "xsd:string",
+                  "section_number": "xsd:string",
+                  "page_range": "xsd:string",
+                  "anchor_text": "xsd:string"
+                }
+              },
+              "AccessPolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "owner_stakeholder": "xsd:string",
+                  "classification": "xsd:string",
+                  "abac_attributes": "xsd:string",
+                  "sharing_scope": "xsd:string",
+                  "export_controlled": "xsd:boolean",
+                  "audit_required": "xsd:boolean"
+                }
+              },
+              "DataContract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "provider": "xsd:string",
+                  "consumer": "xsd:string",
+                  "purpose": "xsd:string",
+                  "legal_basis": "xsd:string",
+                  "retention_days": "xsd:integer",
+                  "usage_constraints": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Crew_And_Certification_System": {
+        "collections": {
+          "People_And_Competence": {
+            "entities": {
+              "CrewMember": {
+                "properties": {
+                  "person_id": "xsd:string",
+                  "vessel_id": "xsd:string",
+                  "name": "xsd:string",
+                  "rank": "xsd:string",
+                  "nationality": "xsd:string",
+                  "seamans_book": "xsd:string",
+                  "medical_valid_until": "xsd:date",
+                  "sign_on_date": "xsd:date",
+                  "sign_off_date": "xsd:date"
+                }
+              },
+              "CertificateOfCompetency": {
+                "properties": {
+                  "coc_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "stcw_grade": "xsd:string",
+                  "issuer": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date"
+                }
+              },
+              "TrainingRecord": {
+                "properties": {
+                  "training_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "course_name": "xsd:string",
+                  "provider": "xsd:string",
+                  "completion_date": "xsd:date",
+                  "valid_until": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Cybersecurity_And_Network_System": {
+        "collections": {
+          "OT_IT_Security": {
+            "entities": {
+              "NetworkZone": {
+                "properties": {
+                  "zone_id": "xsd:string",
+                  "name": "xsd:string",
+                  "purpose": "xsd:string",
+                  "segmentation_level": "xsd:string"
+                }
+              },
+              "VulnerabilityRecord": {
+                "properties": {
+                  "vuln_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "cve": "xsd:string",
+                  "severity": "xsd:string",
+                  "patch_available": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "RemoteAccessSession": {
+                "properties": {
+                  "session_id": "xsd:string",
+                  "provider": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "purpose": "xsd:string",
+                  "approved_by": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "FLEET_HAS_VESSEL": {
+        "domain": "Fleet",
+        "range": "Vessel"
+      },
+      "COMPANY_OWNS_VESSEL": {
+        "domain": "Company",
+        "range": "Vessel"
+      },
+      "VESSEL_HAS_COMPARTMENT": {
+        "domain": "Vessel",
+        "range": "Compartment"
+      },
+      "VESSEL_HAS_EQUIPMENT": {
+        "domain": "Vessel",
+        "range": "Equipment"
+      },
+      "EQUIPMENT_HAS_COMPONENT": {
+        "domain": "Equipment",
+        "range": "Equipment"
+      },
+      "EQUIPMENT_INSTALLED_IN": {
+        "domain": "Equipment",
+        "range": "Compartment"
+      },
+      "EQUIPMENT_MONITORED_BY_SENSOR": {
+        "domain": "Equipment",
+        "range": "Sensor"
+      },
+      "SENSOR_FEEDS_DATASTREAM": {
+        "domain": "Sensor",
+        "range": "DataStream"
+      },
+      "EQUIPMENT_GENERATES_ALARM": {
+        "domain": "Equipment",
+        "range": "AlarmEvent"
+      },
+      "DOCUMENT_FRAGMENT_OF": {
+        "domain": "DocumentFragment",
+        "range": "Document"
+      },
+      "DOCUMENT_REFERENCES_ENTITY": {
+        "domain": "Document",
+        "range": "prov:Entity"
+      },
+      "DOCUMENT_CITES_RULE": {
+        "domain": "Document",
+        "range": "RuleClause"
+      },
+      "RULE_APPLIES_TO_VESSEL": {
+        "domain": "RuleClause",
+        "range": "Vessel"
+      },
+      "RULE_APPLIES_TO_EQUIPMENT": {
+        "domain": "RuleClause",
+        "range": "Equipment"
+      },
+      "CERTIFICATE_FOR_VESSEL": {
+        "domain": "Certificate",
+        "range": "Vessel"
+      },
+      "SURVEY_FOR_VESSEL": {
+        "domain": "SurveyRecord",
+        "range": "Vessel"
+      },
+      "SURVEY_RELATES_EQUIPMENT": {
+        "domain": "SurveyRecord",
+        "range": "Equipment"
+      },
+      "PSC_FOR_VESSEL": {
+        "domain": "PSCInspection",
+        "range": "Vessel"
+      },
+      "WORKORDER_TARGETS_EQUIPMENT": {
+        "domain": "WorkOrder",
+        "range": "Equipment"
+      },
+      "CM_FOR_EQUIPMENT": {
+        "domain": "ConditionMonitoring",
+        "range": "Equipment"
+      },
+      "FAILURE_OF_EQUIPMENT": {
+        "domain": "FailureEvent",
+        "range": "Equipment"
+      },
+      "SPARE_OF_EQUIPMENT": {
+        "domain": "SparePart",
+        "range": "Equipment"
+      },
+      "VOYAGE_OF_VESSEL": {
+        "domain": "Voyage",
+        "range": "Vessel"
+      },
+      "LEG_OF_VOYAGE": {
+        "domain": "RouteLeg",
+        "range": "Voyage"
+      },
+      "PORTCALL_OF_VESSEL": {
+        "domain": "PortCall",
+        "range": "Vessel"
+      },
+      "CARGO_OP_IN_PORTCALL": {
+        "domain": "CargoOperation",
+        "range": "PortCall"
+      },
+      "STABILITY_FOR_VESSEL": {
+        "domain": "StabilityCalculation",
+        "range": "Vessel"
+      },
+      "NOON_FOR_VESSEL": {
+        "domain": "NoonReport",
+        "range": "Vessel"
+      },
+      "EMISSIONS_FOR_VESSEL": {
+        "domain": "EmissionsReport",
+        "range": "Vessel"
+      },
+      "BUNKERING_AT_PORTCALL": {
+        "domain": "BunkeringEvent",
+        "range": "PortCall"
+      },
+      "BUNKERING_FUELTYPE": {
+        "domain": "BunkeringEvent",
+        "range": "FuelType"
+      },
+      "DRYDOCK_FOR_VESSEL": {
+        "domain": "DryDockEvent",
+        "range": "Vessel"
+      },
+      "MODIFICATION_FOR_VESSEL": {
+        "domain": "Modification",
+        "range": "Vessel"
+      },
+      "COMMISSIONING_OF_EQUIPMENT": {
+        "domain": "CommissioningRecord",
+        "range": "Equipment"
+      },
+      "CREWMEMBER_ON_VESSEL": {
+        "domain": "CrewMember",
+        "range": "Vessel"
+      },
+      "CREW_HAS_CERTIFICATE": {
+        "domain": "CertificateOfCompetency",
+        "range": "CrewMember"
+      },
+      "TRAINING_OF_CREW": {
+        "domain": "TrainingRecord",
+        "range": "CrewMember"
+      },
+      "ACCESS_POLICY_GOVERNS_DOCUMENT": {
+        "domain": "AccessPolicy",
+        "range": "Document"
+      },
+      "DATA_CONTRACT_COVERS_STREAM": {
+        "domain": "DataContract",
+        "range": "DataStream"
+      },
+      "VDR_RECORD_FOR_VESSEL": {
+        "domain": "VDRRecord",
+        "range": "Vessel"
+      }
+    }
+  }
+}

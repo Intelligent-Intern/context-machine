@@ -1,0 +1,1015 @@
+{
+  "ontology": {
+    "name": "payroll_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/payroll#",
+    "description": "Global Payroll ontology covering workforce, time & attendance, pay elements, tax and social insurance, garnishments, benefits, pay runs, payments, accounting, compliance, analytics, and integrations.",
+    "namespaces": {
+      "pay": "http://context-machine.org/ontology/payroll#",
+      "hr": "http://context-machine.org/ontology/hr#",
+      "org": "http://www.w3.org/ns/org#",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "time": "http://www.w3.org/2006/time#",
+      "geo": "http://www.opengis.net/ont/geosparql#",
+      "unit": "http://qudt.org/vocab/unit#",
+      "gr": "http://purl.org/goodrelations/v1#",
+      "acc": "http://context-machine.org/ontology/accounting#",
+      "tax": "http://context-machine.org/ontology/tax#",
+      "benefit": "http://context-machine.org/ontology/benefit#",
+      "bank": "http://context-machine.org/ontology/banking#",
+      "doc": "http://context-machine.org/ontology/document#",
+      "law": "http://context-machine.org/ontology/law#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.w3.org/2006/time#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.omg.org/spec/BPMN/20100524/MODEL",
+      "http://purl.org/goodrelations/v1#",
+      "http://www.w3.org/2004/02/skos/core#",
+      "http://www.w3.org/ns/org#",
+      "http://schema.org/"
+    ],
+    "alignments": {
+      "Employer": "org:Organization",
+      "Worker": "foaf:Person",
+      "Position": "org:Post",
+      "EmploymentContract": "schema:EmployeeRole",
+      "BankAccount": "gr:PaymentMethod",
+      "Currency": "gr:PriceSpecification",
+      "Payment": "gr:PriceSpecification",
+      "Document": "schema:DigitalDocument"
+    },
+
+    "frames": {
+
+      "Workforce_Management": {
+        "collections": {
+          "Organizations_and_People": {
+            "entities": {
+              "Employer": {
+                "properties": {
+                  "employer_id": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "trading_name": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "tax_identifiers": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "headquarters_location": "xsd:string",
+                  "operating_countries": "xsd:string",
+                  "industry_code": "xsd:string",
+                  "payroll_contact_email": "xsd:string",
+                  "payroll_contact_phone": "xsd:string",
+                  "default_currency": "xsd:string",
+                  "default_timezone": "xsd:string",
+                  "payroll_software": "xsd:string",
+                  "employee_count": "xsd:integer"
+                }
+              },
+              "Worker": {
+                "properties": {
+                  "worker_id": "xsd:string",
+                  "person_identifier": "xsd:string",
+                  "first_name": "xsd:string",
+                  "last_name": "xsd:string",
+                  "preferred_name": "xsd:string",
+                  "date_of_birth": "xsd:date",
+                  "gender": "xsd:string",
+                  "nationalities": "xsd:string",
+                  "marital_status": "xsd:string",
+                  "dependents_count": "xsd:integer",
+                  "home_address": "xsd:string",
+                  "work_location_id": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "tax_identifiers": "xsd:string",
+                  "social_insurance_numbers": "xsd:string",
+                  "immigration_status": "xsd:string",
+                  "disability_status": "xsd:string",
+                  "union_member": "xsd:boolean",
+                  "bank_account_id": "xsd:string",
+                  "payment_method": "xsd:string",
+                  "currency_preference": "xsd:string",
+                  "privacy_consent_status": "xsd:string",
+                  "data_retention_end": "xsd:date"
+                }
+              },
+              "Position": {
+                "properties": {
+                  "position_id": "xsd:string",
+                  "title": "xsd:string",
+                  "job_family": "xsd:string",
+                  "grade": "xsd:string",
+                  "classification": "xsd:string",
+                  "exempt_status": "xsd:string",
+                  "cost_center_id": "xsd:string",
+                  "department": "xsd:string",
+                  "work_schedule_id": "xsd:string",
+                  "location_id": "xsd:string",
+                  "remote_eligible": "xsd:boolean"
+                }
+              },
+              "EmploymentContract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "employer_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "position_id": "xsd:string",
+                  "employment_type": "xsd:string",
+                  "fte": "xsd:decimal",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "probation_end_date": "xsd:date",
+                  "base_currency": "xsd:string",
+                  "base_pay_frequency": "xsd:string",
+                  "base_pay_amount": "xsd:decimal",
+                  "pay_unit": "xsd:string",
+                  "variable_pay_eligible": "xsd:boolean",
+                  "overtime_eligible": "xsd:boolean",
+                  "collective_agreement_id": "xsd:string",
+                  "jurisdiction_id": "xsd:string"
+                }
+              },
+              "WorkSchedule": {
+                "properties": {
+                  "work_schedule_id": "xsd:string",
+                  "name": "xsd:string",
+                  "timezone": "xsd:string",
+                  "weekly_hours": "xsd:decimal",
+                  "week_start_day": "xsd:string",
+                  "daily_break_minutes": "xsd:integer",
+                  "overtime_rule_id": "xsd:string",
+                  "holiday_calendar_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "Location": {
+                "properties": {
+                  "location_id": "xsd:string",
+                  "name": "xsd:string",
+                  "address": "xsd:string",
+                  "country_code": "xsd:string",
+                  "subdivision_code": "xsd:string",
+                  "city": "xsd:string",
+                  "postal_code": "xsd:string",
+                  "geo_lat": "xsd:decimal",
+                  "geo_lon": "xsd:decimal",
+                  "timezone": "xsd:string",
+                  "jurisdiction_id": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Payroll_Configuration": {
+        "collections": {
+          "Calendars_and_Groups": {
+            "entities": {
+              "PayrollCalendar": {
+                "properties": {
+                  "calendar_id": "xsd:string",
+                  "name": "xsd:string",
+                  "frequency": "xsd:string",
+                  "period_start_rule": "xsd:string",
+                  "period_end_rule": "xsd:string",
+                  "pay_date_rule": "xsd:string",
+                  "cutoff_rule": "xsd:string",
+                  "timezone": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "PayGroup": {
+                "properties": {
+                  "pay_group_id": "xsd:string",
+                  "name": "xsd:string",
+                  "calendar_id": "xsd:string",
+                  "default_currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "overtime_rule_id": "xsd:string",
+                  "minimum_wage_rule_id": "xsd:string",
+                  "rounding_policy": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Pay_Elements_and_Codes": {
+            "entities": {
+              "EarningType": {
+                "properties": {
+                  "earning_type_id": "xsd:string",
+                  "code": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "taxable": "xsd:boolean",
+                  "subject_to_social": "xsd:boolean",
+                  "subject_to_unemployment": "xsd:boolean",
+                  "subject_to_local_tax": "xsd:boolean",
+                  "overtime_multiplier": "xsd:decimal",
+                  "unit_of_measure": "xsd:string",
+                  "default_rate": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "DeductionType": {
+                "properties": {
+                  "deduction_type_id": "xsd:string",
+                  "code": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "pre_tax": "xsd:boolean",
+                  "post_tax": "xsd:boolean",
+                  "employer_paid": "xsd:boolean",
+                  "subject_to_limits": "xsd:boolean",
+                  "limit_amount": "xsd:decimal",
+                  "limit_frequency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "EmployerContributionType": {
+                "properties": {
+                  "contribution_type_id": "xsd:string",
+                  "code": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "taxable_to_employee": "xsd:boolean",
+                  "subject_to_employer_tax": "xsd:boolean",
+                  "rate_type": "xsd:string",
+                  "rate_value": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              }
+            }
+          },
+          "Rules_and_Statutes": {
+            "entities": {
+              "OvertimeRule": {
+                "properties": {
+                  "overtime_rule_id": "xsd:string",
+                  "name": "xsd:string",
+                  "daily_threshold_hours": "xsd:decimal",
+                  "weekly_threshold_hours": "xsd:decimal",
+                  "daily_multiplier": "xsd:decimal",
+                  "weekly_multiplier": "xsd:decimal",
+                  "rest_day_multiplier": "xsd:decimal",
+                  "max_daily_hours": "xsd:decimal",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "MinimumWageRule": {
+                "properties": {
+                  "minimum_wage_rule_id": "xsd:string",
+                  "name": "xsd:string",
+                  "amount": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "applies_to_classification": "xsd:string",
+                  "age_threshold": "xsd:integer",
+                  "region_scope": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "TaxRule": {
+                "properties": {
+                  "tax_rule_id": "xsd:string",
+                  "tax_authority_id": "xsd:string",
+                  "name": "xsd:string",
+                  "rule_type": "xsd:string",
+                  "base_definition": "xsd:string",
+                  "progressive": "xsd:boolean",
+                  "flat_rate": "xsd:decimal",
+                  "bracket_set_id": "xsd:string",
+                  "exemption_amount": "xsd:decimal",
+                  "standard_deduction": "xsd:decimal",
+                  "annual_cap": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "TaxBracket": {
+                "properties": {
+                  "bracket_id": "xsd:string",
+                  "bracket_set_id": "xsd:string",
+                  "lower_bound": "xsd:decimal",
+                  "upper_bound": "xsd:decimal",
+                  "marginal_rate": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string"
+                }
+              },
+              "SocialInsuranceScheme": {
+                "properties": {
+                  "scheme_id": "xsd:string",
+                  "name": "xsd:string",
+                  "employee_rate": "xsd:decimal",
+                  "employer_rate": "xsd:decimal",
+                  "wage_base_cap": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "GarnishmentType": {
+                "properties": {
+                  "garnishment_type_id": "xsd:string",
+                  "code": "xsd:string",
+                  "name": "xsd:string",
+                  "priority_rank": "xsd:integer",
+                  "calculation_method": "xsd:string",
+                  "disposable_income_threshold": "xsd:decimal",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Time_and_Attendance": {
+        "collections": {
+          "Time_Tracking": {
+            "entities": {
+              "Timecard": {
+                "properties": {
+                  "timecard_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "status": "xsd:string",
+                  "submitted_at": "xsd:dateTime",
+                  "approved_by": "xsd:string",
+                  "approved_at": "xsd:dateTime",
+                  "total_hours": "xsd:decimal",
+                  "regular_hours": "xsd:decimal",
+                  "overtime_hours": "xsd:decimal",
+                  "absence_hours": "xsd:decimal",
+                  "jurisdiction_id": "xsd:string"
+                }
+              },
+              "TimeEntry": {
+                "properties": {
+                  "time_entry_id": "xsd:string",
+                  "timecard_id": "xsd:string",
+                  "date": "xsd:date",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "break_minutes": "xsd:integer",
+                  "hours": "xsd:decimal",
+                  "earning_type_id": "xsd:string",
+                  "project_code": "xsd:string",
+                  "cost_center_id": "xsd:string",
+                  "location_id": "xsd:string"
+                }
+              },
+              "LeaveType": {
+                "properties": {
+                  "leave_type_id": "xsd:string",
+                  "code": "xsd:string",
+                  "name": "xsd:string",
+                  "paid": "xsd:boolean",
+                  "accrues": "xsd:boolean",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "LeaveRequest": {
+                "properties": {
+                  "leave_request_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "leave_type_id": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "hours": "xsd:decimal",
+                  "status": "xsd:string",
+                  "approved_by": "xsd:string",
+                  "approved_at": "xsd:dateTime"
+                }
+              },
+              "HolidayCalendar": {
+                "properties": {
+                  "holiday_calendar_id": "xsd:string",
+                  "name": "xsd:string",
+                  "country_code": "xsd:string",
+                  "subdivision_code": "xsd:string",
+                  "timezone": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Payroll_Processing": {
+        "collections": {
+          "Runs_and_Lines": {
+            "entities": {
+              "PayRun": {
+                "properties": {
+                  "pay_run_id": "xsd:string",
+                  "pay_group_id": "xsd:string",
+                  "calendar_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "pay_date": "xsd:date",
+                  "status": "xsd:string",
+                  "run_type": "xsd:string",
+                  "gross_pay_total": "xsd:decimal",
+                  "employee_tax_total": "xsd:decimal",
+                  "employer_tax_total": "xsd:decimal",
+                  "deductions_total": "xsd:decimal",
+                  "net_pay_total": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "approved_at": "xsd:dateTime"
+                }
+              },
+              "PaySlip": {
+                "properties": {
+                  "payslip_id": "xsd:string",
+                  "pay_run_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "pay_date": "xsd:date",
+                  "gross_pay": "xsd:decimal",
+                  "employee_tax": "xsd:decimal",
+                  "employer_tax": "xsd:decimal",
+                  "deductions": "xsd:decimal",
+                  "net_pay": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              },
+              "PayLine": {
+                "properties": {
+                  "pay_line_id": "xsd:string",
+                  "payslip_id": "xsd:string",
+                  "line_type": "xsd:string",
+                  "earning_type_id": "xsd:string",
+                  "deduction_type_id": "xsd:string",
+                  "contribution_type_id": "xsd:string",
+                  "hours": "xsd:decimal",
+                  "rate": "xsd:decimal",
+                  "amount": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "taxable": "xsd:boolean",
+                  "pre_tax": "xsd:boolean",
+                  "post_tax": "xsd:boolean",
+                  "subject_to_social": "xsd:boolean",
+                  "cost_center_id": "xsd:string",
+                  "project_code": "xsd:string"
+                }
+              },
+              "Adjustment": {
+                "properties": {
+                  "adjustment_id": "xsd:string",
+                  "payslip_id": "xsd:string",
+                  "reason": "xsd:string",
+                  "amount": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "created_by": "xsd:string",
+                  "created_at": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "Garnishments_and_Orders": {
+            "entities": {
+              "GarnishmentOrder": {
+                "properties": {
+                  "order_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "garnishment_type_id": "xsd:string",
+                  "issuing_authority": "xsd:string",
+                  "case_number": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "percent_of_disposable": "xsd:decimal",
+                  "fixed_amount": "xsd:decimal",
+                  "frequency": "xsd:string",
+                  "original_balance": "xsd:decimal",
+                  "current_balance": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "priority_rank": "xsd:integer"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Payments_and_Disbursements": {
+        "collections": {
+          "Payment_Execution": {
+            "entities": {
+              "PaymentInstruction": {
+                "properties": {
+                  "payment_instruction_id": "xsd:string",
+                  "pay_run_id": "xsd:string",
+                  "payslip_id": "xsd:string",
+                  "payee_id": "xsd:string",
+                  "payment_method": "xsd:string",
+                  "amount": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "execution_date": "xsd:date",
+                  "status": "xsd:string",
+                  "bank_account_id": "xsd:string",
+                  "payment_file_id": "xsd:string"
+                }
+              },
+              "PaymentFile": {
+                "properties": {
+                  "payment_file_id": "xsd:string",
+                  "format": "xsd:string",
+                  "file_reference": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "batch_count": "xsd:integer",
+                  "total_amount": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "banking_network": "xsd:string"
+                }
+              },
+              "BankAccount": {
+                "properties": {
+                  "bank_account_id": "xsd:string",
+                  "account_holder_name": "xsd:string",
+                  "account_number": "xsd:string",
+                  "iban": "xsd:string",
+                  "swift_bic": "xsd:string",
+                  "bank_name": "xsd:string",
+                  "branch_code": "xsd:string",
+                  "routing_number": "xsd:string",
+                  "currency": "xsd:string",
+                  "country_code": "xsd:string"
+                }
+              },
+              "ExchangeRate": {
+                "properties": {
+                  "exchange_rate_id": "xsd:string",
+                  "base_currency": "xsd:string",
+                  "quote_currency": "xsd:string",
+                  "rate": "xsd:decimal",
+                  "as_of": "xsd:date",
+                  "source": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Compliance_and_Tax": {
+        "collections": {
+          "Authorities_and_Filings": {
+            "entities": {
+              "Jurisdiction": {
+                "properties": {
+                  "jurisdiction_id": "xsd:string",
+                  "country_code": "xsd:string",
+                  "subdivision_code": "xsd:string",
+                  "locality": "xsd:string",
+                   "tax_year_start": "xsd:date",
+                  "tax_year_end": "xsd:date",
+                  "currency": "xsd:string",
+                  "primary_authority_id": "xsd:string"
+                }
+              },
+              "TaxAuthority": {
+                "properties": {
+                  "tax_authority_id": "xsd:string",
+                  "name": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "filing_frequency": "xsd:string",
+                  "remittance_method": "xsd:string",
+                  "portal_url": "xsd:string",
+                  "requires_electronic_filing": "xsd:boolean"
+                }
+              },
+              "WithholdingCertificate": {
+                "properties": {
+                  "certificate_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "form_code": "xsd:string",
+                  "allowances_count": "xsd:integer",
+                  "additional_withholding": "xsd:decimal",
+                  "exempt": "xsd:boolean",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date",
+                  "jurisdiction_id": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              },
+              "TaxFiling": {
+                "properties": {
+                  "filing_id": "xsd:string",
+                  "tax_authority_id": "xsd:string",
+                  "pay_run_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "filing_date": "xsd:date",
+                  "status": "xsd:string",
+                  "tax_due": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "confirmation_number": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              },
+              "YearEndStatement": {
+                "properties": {
+                  "year_end_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "tax_year": "xsd:integer",
+                  "form_code": "xsd:string",
+                  "gross_earnings": "xsd:decimal",
+                  "tax_withheld": "xsd:decimal",
+                  "social_contributions": "xsd:decimal",
+                  "jurisdiction_id": "xsd:string",
+                  "currency": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Benefits_and_Leave": {
+        "collections": {
+          "Plans_and_Enrollments": {
+            "entities": {
+              "BenefitPlan": {
+                "properties": {
+                  "benefit_plan_id": "xsd:string",
+                  "name": "xsd:string",
+                  "plan_type": "xsd:string",
+                  "provider_name": "xsd:string",
+                  "employer_contribution_rate": "xsd:decimal",
+                  "employee_contribution_rate": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "Enrollment": {
+                "properties": {
+                  "enrollment_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "benefit_plan_id": "xsd:string",
+                  "coverage_level": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "employee_contribution": "xsd:decimal",
+                  "employer_contribution": "xsd:decimal",
+                  "currency": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Accounting_and_Costing": {
+        "collections": {
+          "Posting_and_Allocation": {
+            "entities": {
+              "GLAccount": {
+                "properties": {
+                  "gl_account_id": "xsd:string",
+                  "account_code": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "currency": "xsd:string"
+                }
+              },
+              "CostCenter": {
+                "properties": {
+                  "cost_center_id": "xsd:string",
+                  "code": "xsd:string",
+                  "name": "xsd:string",
+                  "department": "xsd:string"
+                }
+              },
+              "JournalEntry": {
+                "properties": {
+                  "journal_entry_id": "xsd:string",
+                  "pay_run_id": "xsd:string",
+                  "posting_date": "xsd:date",
+                  "gl_account_id": "xsd:string",
+                  "debit": "xsd:decimal",
+                  "credit": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "cost_center_id": "xsd:string",
+                  "project_code": "xsd:string",
+                  "memo": "xsd:string"
+                }
+              },
+              "CostAllocation": {
+                "properties": {
+                  "allocation_id": "xsd:string",
+                  "payslip_id": "xsd:string",
+                  "pay_line_id": "xsd:string",
+                  "dimension": "xsd:string",
+                  "dimension_value": "xsd:string",
+                  "amount": "xsd:decimal",
+                  "currency": "xsd:string",
+                  "percentage": "xsd:decimal"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Security_and_Audit": {
+        "collections": {
+          "Access_and_Traceability": {
+            "entities": {
+              "Role": {
+                "properties": {
+                  "role_id": "xsd:string",
+                  "name": "xsd:string",
+                  "permissions": "xsd:string"
+                }
+              },
+              "AuditLog": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "entity_type": "xsd:string",
+                  "entity_id": "xsd:string",
+                  "action": "xsd:string",
+                  "performed_by": "xsd:string",
+                  "performed_at": "xsd:dateTime",
+                  "before_state": "xsd:string",
+                  "after_state": "xsd:string"
+                }
+              },
+              "DataPrivacyConsent": {
+                "properties": {
+                  "consent_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "purpose": "xsd:string",
+                  "granted": "xsd:boolean",
+                  "granted_at": "xsd:dateTime",
+                  "expires_at": "xsd:dateTime",
+                  "document_uri": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Analytics_and_Reporting": {
+        "collections": {
+          "KPIs_and_Metrics": {
+            "entities": {
+              "PayrollMetric": {
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "name": "xsd:string",
+                  "definition": "xsd:string",
+                  "value": "xsd:decimal",
+                  "unit": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "currency": "xsd:string",
+                  "dimension": "xsd:string",
+                  "dimension_value": "xsd:string",
+                  "benchmark_value": "xsd:decimal"
+                }
+              },
+              "Report": {
+                "properties": {
+                  "report_id": "xsd:string",
+                  "name": "xsd:string",
+                  "parameters": "xsd:string",
+                  "generated_at": "xsd:dateTime",
+                  "format": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Integrations": {
+        "collections": {
+          "Systems": {
+            "entities": {
+              "IntegrationEndpoint": {
+                "properties": {
+                  "endpoint_id": "xsd:string",
+                  "system_type": "xsd:string",
+                  "name": "xsd:string",
+                  "base_url": "xsd:string",
+                  "api_version": "xsd:string",
+                  "authentication": "xsd:string",
+                  "webhook_support": "xsd:boolean",
+                  "sandbox": "xsd:boolean",
+                  "documentation_url": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": [
+      {
+        "relation": "pay:employs",
+        "domain": "pay:Employer",
+        "range": "pay:Worker",
+        "properties": { "relationship_type": "organizational", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:assigned_to",
+        "domain": "pay:Worker",
+        "range": "pay:Position",
+        "properties": { "relationship_type": "role_assignment", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:has_contract",
+        "domain": "pay:Worker",
+        "range": "pay:EmploymentContract",
+        "properties": { "relationship_type": "contractual", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:member_of_pay_group",
+        "domain": "pay:EmploymentContract",
+        "range": "pay:PayGroup",
+        "properties": { "relationship_type": "configuration", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:uses_calendar",
+        "domain": "pay:PayGroup",
+        "range": "pay:PayrollCalendar",
+        "properties": { "relationship_type": "configuration", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:governed_by",
+        "domain": "pay:PayGroup",
+        "range": "pay:OvertimeRule",
+        "properties": { "relationship_type": "policy", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:applies_min_wage",
+        "domain": "pay:PayGroup",
+        "range": "pay:MinimumWageRule",
+        "properties": { "relationship_type": "policy", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:works_at",
+        "domain": "pay:Worker",
+        "range": "pay:Location",
+        "properties": { "relationship_type": "locational", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:records_time_in",
+        "domain": "pay:Worker",
+        "range": "pay:Timecard",
+        "properties": { "relationship_type": "operational", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:contains_entry",
+        "domain": "pay:Timecard",
+        "range": "pay:TimeEntry",
+        "properties": { "relationship_type": "compositional", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:produces_payslip",
+        "domain": "pay:PayRun",
+        "range": "pay:PaySlip",
+        "properties": { "relationship_type": "process_output", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:breaks_down_into",
+        "domain": "pay:PaySlip",
+        "range": "pay:PayLine",
+        "properties": { "relationship_type": "compositional", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:uses_earning_code",
+        "domain": "pay:PayLine",
+        "range": "pay:EarningType",
+        "properties": { "relationship_type": "classification", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:uses_deduction_code",
+        "domain": "pay:PayLine",
+        "range": "pay:DeductionType",
+        "properties": { "relationship_type": "classification", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:uses_contribution_code",
+        "domain": "pay:PayLine",
+        "range": "pay:EmployerContributionType",
+        "properties": { "relationship_type": "classification", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:pays_via",
+        "domain": "pay:PaymentInstruction",
+        "range": "pay:PaymentFile",
+        "properties": { "relationship_type": "operational", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:credits_to",
+        "domain": "pay:PaymentInstruction",
+        "range": "pay:BankAccount",
+        "properties": { "relationship_type": "financial", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:located_in",
+        "domain": "pay:Employer",
+        "range": "pay:Jurisdiction",
+        "properties": { "relationship_type": "regulatory", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:subject_to_tax",
+        "domain": "pay:PayLine",
+        "range": "pay:TaxRule",
+        "properties": { "relationship_type": "regulatory", "cardinality": "many_to_many" }
+      },
+      {
+        "relation": "pay:files_with",
+        "domain": "pay:TaxFiling",
+        "range": "pay:TaxAuthority",
+        "properties": { "relationship_type": "regulatory", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:covered_by_scheme",
+        "domain": "pay:PayLine",
+        "range": "pay:SocialInsuranceScheme",
+        "properties": { "relationship_type": "regulatory", "cardinality": "many_to_many" }
+      },
+      {
+        "relation": "pay:has_garnishment",
+        "domain": "pay:Worker",
+        "range": "pay:GarnishmentOrder",
+        "properties": { "relationship_type": "legal", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:allocates_to",
+        "domain": "pay:PayLine",
+        "range": "pay:CostCenter",
+        "properties": { "relationship_type": "costing", "cardinality": "many_to_one" }
+      },
+      {
+        "relation": "pay:posted_as",
+        "domain": "pay:PayRun",
+        "range": "pay:JournalEntry",
+        "properties": { "relationship_type": "accounting", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:has_benefit_enrollment",
+        "domain": "pay:Worker",
+        "range": "pay:Enrollment",
+        "properties": { "relationship_type": "benefit", "cardinality": "one_to_many" }
+      },
+      {
+        "relation": "pay:governs",
+        "domain": "pay:Jurisdiction",
+        "range": "pay:TaxRule",
+        "properties": { "relationship_type": "regulatory", "cardinality": "one_to_many" }
+      }
+    ]
+  }
+}

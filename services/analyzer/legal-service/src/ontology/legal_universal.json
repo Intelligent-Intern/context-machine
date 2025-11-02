@@ -1,0 +1,299 @@
+{
+  "ontology": {
+    "name": "legal_universal",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/universal#",
+    "description": "Universal ontology for legal processes, procedures, and institutional structures. Serves as the shared backbone across all legal-related domains.",
+
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.w3.org/2006/time#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/goodrelations/v1#"
+    ],
+
+    "frames": {
+      "Legal_Structure": {
+        "collections": {
+          "Core_Entities": {
+            "entities": {
+              "Institution": {
+                "description": "A legal organization providing judicial, legislative, or administrative services.",
+                "properties": {
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "established": "xsd:date"
+                }
+              },
+              "Case": {
+                "description": "Legal matter or dispute brought before a court or tribunal.",
+                "properties": {
+                  "case_id": "xsd:string",
+                  "case_number": "xsd:string",
+                  "type": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Party": {
+                "description": "Individual or entity involved in legal proceedings.",
+                "properties": {
+                  "party_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "role": "xsd:string"
+                }
+              },
+              "Document": {
+                "description": "Legal instrument or record used in legal proceedings.",
+                "properties": {
+                  "document_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "description": "xsd:string"
+                }
+              },
+              "Professional": {
+                "description": "Licensed practitioner providing legal services.",
+                "properties": {
+                  "professional_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "license": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Procedure_Process_Model": {
+        "collections": {
+          "Procedure_Elements": {
+            "entities": {
+              "Procedure": {
+                "description": "Established method for conducting legal proceedings.",
+                "properties": {
+                  "procedure_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "timestamp": "xsd:dateTime"
+                }
+              },
+              "Filing": {
+                "description": "Submission of documents to a court or agency.",
+                "properties": {
+                  "filing_id": "xsd:string",
+                  "method": "xsd:string",
+                  "status": "xsd:string",
+                  "processing_time": "xsd:duration"
+                }
+              },
+              "Service": {
+                "description": "Delivery of legal documents to parties.",
+                "properties": {
+                  "service_id": "xsd:string",
+                  "method": "xsd:string",
+                  "recipient": "xsd:string",
+                  "type": "xsd:string"
+                }
+              },
+              "Hearing": {
+                "description": "Formal proceeding before a judge or tribunal.",
+                "properties": {
+                  "hearing_id": "xsd:string",
+                  "date": "xsd:date",
+                  "type": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Decision": {
+                "description": "Ruling or judgment made by a legal authority.",
+                "properties": {
+                  "decision_id": "xsd:string",
+                  "result": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "basis": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Evidence_Analysis_Model": {
+        "collections": {
+          "Evidence_Tracking": {
+            "entities": {
+              "Evidence": {
+                "description": "Material presented to support or refute facts in legal proceedings.",
+                "properties": {
+                  "evidence_id": "xsd:string",
+                  "type": "xsd:string",
+                  "relevance": "xsd:float",
+                  "authenticity": "xsd:string"
+                }
+              },
+              "Testimony": {
+                "description": "Sworn statement given by a witness under oath.",
+                "properties": {
+                  "testimony_id": "xsd:string",
+                  "witness": "xsd:string",
+                  "credibility": "xsd:float",
+                  "content": "xsd:string"
+                }
+              },
+              "Exhibit": {
+                "description": "Physical or documentary evidence presented in court.",
+                "properties": {
+                  "exhibit_id": "xsd:string",
+                  "description": "xsd:string",
+                  "admissibility": "xsd:string",
+                  "chain_of_custody": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Compliance_Management_Model": {
+        "collections": {
+          "Compliance_Tools": {
+            "entities": {
+              "Regulation": {
+                "description": "Rule or directive having the force of law.",
+                "properties": {
+                  "regulation_id": "xsd:string",
+                  "title": "xsd:string",
+                  "authority": "xsd:string",
+                  "effective_date": "xsd:date"
+                }
+              },
+              "Violation": {
+                "description": "Breach of legal requirements or professional standards.",
+                "properties": {
+                  "violation_id": "xsd:string",
+                  "type": "xsd:string",
+                  "severity": "xsd:string",
+                  "penalty": "xsd:float"
+                }
+              },
+              "Audit": {
+                "description": "Systematic examination of legal compliance and procedures.",
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "auditor": "xsd:string",
+                  "scope": "xsd:string",
+                  "findings": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Dispute_Resolution_Model": {
+        "collections": {
+          "Resolution_Activities": {
+            "entities": {
+              "Negotiation": {
+                "description": "Discussion between parties to reach agreement.",
+                "properties": {
+                  "negotiation_id": "xsd:string",
+                  "participants": "xsd:string",
+                  "status": "xsd:string",
+                  "outcome": "xsd:string"
+                }
+              },
+              "Mediation": {
+                "description": "Facilitated negotiation with neutral third party.",
+                "properties": {
+                  "mediation_id": "xsd:string",
+                  "mediator": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date"
+                }
+              },
+              "Arbitration": {
+                "description": "Binding dispute resolution by neutral arbitrator.",
+                "properties": {
+                  "arbitration_id": "xsd:string",
+                  "arbitrator": "xsd:string",
+                  "rules": "xsd:string",
+                  "award": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Contract_Model": {
+        "collections": {
+          "Contract_Processes": {
+            "entities": {
+              "Agreement": {
+                "description": "Legally binding contract between parties.",
+                "properties": {
+                  "agreement_id": "xsd:string",
+                  "type": "xsd:string",
+                  "parties": "xsd:string",
+                  "terms": "xsd:string"
+                }
+              },
+              "Performance": {
+                "description": "Fulfillment of contractual obligations.",
+                "properties": {
+                  "performance_id": "xsd:string",
+                  "completion_date": "xsd:date",
+                  "status": "xsd:string",
+                  "quality": "xsd:string"
+                }
+              },
+              "Breach": {
+                "description": "Failure to perform contractual obligations.",
+                "properties": {
+                  "breach_id": "xsd:string",
+                  "type": "xsd:string",
+                  "damages": "xsd:float",
+                  "remedy": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "ADJUDICATES": {"domain": "Institution", "range": "Case"},
+      "INVOLVES": {"domain": "Case", "range": "Party"},
+      "REPRESENTS": {"domain": "Professional", "range": "Party"},
+      "FILES": {"domain": "Party", "range": "Document"},
+      "GOVERNS": {"domain": "Institution", "range": "Procedure"},
+      "FOLLOWS": {"domain": "Case", "range": "Procedure"},
+      "REQUIRES": {"domain": "Procedure", "range": "Filing"},
+      "INCLUDES": {"domain": "Filing", "range": "Service"},
+      "SCHEDULES": {"domain": "Case", "range": "Hearing"},
+      "RESULTS_IN": {"domain": "Hearing", "range": "Decision"},
+      "PRESENTS": {"domain": "Party", "range": "Evidence"},
+      "GIVES": {"domain": "Party", "range": "Testimony"},
+      "ADMITS": {"domain": "Hearing", "range": "Exhibit"},
+      "ENFORCES": {"domain": "Institution", "range": "Regulation"},
+      "VIOLATES": {"domain": "Party", "range": "Regulation"},
+      "IDENTIFIES": {"domain": "Audit", "range": "Violation"},
+      "ENGAGES_IN": {"domain": "Party", "range": "Negotiation"},
+      "FACILITATES": {"domain": "Professional", "range": "Mediation"},
+      "CONDUCTS": {"domain": "Professional", "range": "Arbitration"},
+      "ENTERS_INTO": {"domain": "Party", "range": "Agreement"},
+      "PERFORMS": {"domain": "Party", "range": "Performance"},
+      "COMMITS": {"domain": "Party", "range": "Breach"},
+      "RESOLVES": {"domain": "Mediation", "range": "Case"},
+      "DECIDES": {"domain": "Arbitration", "range": "Case"},
+      "REFERENCES": {"domain": "Decision", "range": "Regulation"}
+    }
+  }
+}

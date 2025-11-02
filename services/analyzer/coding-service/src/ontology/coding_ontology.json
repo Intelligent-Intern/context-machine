@@ -1,0 +1,1289 @@
+{
+    "ontology": {
+        "name": "coding_ontology",
+        "version": "1.2.0",
+        "namespace": "http://context-machine.org/ontology/coding#",
+        "description": "Comprehensive ontology for software engineering, programming languages, code analysis, development methodologies, software architecture, and the complete software development lifecycle.",
+        "namespaces": {
+            "code": "http://context-machine.org/ontology/coding#",
+            "ast": "http://context-machine.org/ontology/coding/ast#",
+            "git": "http://context-machine.org/ontology/coding/git#",
+            "ci": "http://context-machine.org/ontology/coding/ci#",
+            "arch": "http://context-machine.org/ontology/coding/architecture#",
+            "test": "http://context-machine.org/ontology/coding/testing#",
+            "sec": "http://context-machine.org/ontology/coding/security#",
+            "perf": "http://context-machine.org/ontology/coding/performance#",
+            "doc": "http://context-machine.org/ontology/coding/documentation#",
+            "dep": "http://context-machine.org/ontology/coding/dependencies#",
+            "api": "http://context-machine.org/ontology/coding/api#",
+            "db": "http://context-machine.org/ontology/coding/database#",
+            "ui": "http://context-machine.org/ontology/coding/ui#",
+            "net": "http://context-machine.org/ontology/coding/networking#",
+            "config": "http://context-machine.org/ontology/coding/configuration#",
+            "deploy": "http://context-machine.org/ontology/coding/deployment#",
+            "monitor": "http://context-machine.org/ontology/coding/monitoring#",
+            "debug": "http://context-machine.org/ontology/coding/debugging#",
+            "refactor": "http://context-machine.org/ontology/coding/refactoring#",
+            "pattern": "http://context-machine.org/ontology/coding/patterns#",
+            "license": "http://context-machine.org/ontology/coding/licensing#",
+            "compliance": "http://context-machine.org/ontology/coding/compliance#"
+        },
+        "imports": [
+            "http://context-machine.org/ontology/universal#",
+            "http://www.w3.org/2006/time#",
+            "http://www.opengis.net/ont/geosparql#",
+            "http://qudt.org/vocab/unit#",
+            "http://purl.org/dc/elements/1.1/",
+            "http://xmlns.com/foaf/0.1/",
+            "http://www.w3.org/ns/prov#"
+        ],
+        "frames": {
+            "Source_Code_Structure": {
+                "collections": {
+                    "Code_Artifacts": {
+                        "entities": {
+                            "CodeFile": {
+                                "properties": {
+                                    "file_path": "xsd:string",
+                                    "absolute_path": "xsd:string",
+                                    "relative_path": "xsd:string",
+                                    "file_name": "xsd:string",
+                                    "file_extension": "xsd:string",
+                                    "language": "xsd:string",
+                                    "dialect": "xsd:string",
+                                    "language_version": "xsd:string",
+                                    "lines_of_code": "xsd:integer",
+                                    "lines_of_comments": "xsd:integer",
+                                    "blank_lines": "xsd:integer",
+                                    "total_lines": "xsd:integer",
+                                    "file_size_bytes": "xsd:integer",
+                                    "encoding": "xsd:string",
+                                    "line_ending": "xsd:string",
+                                    "indentation_style": "xsd:string",
+                                    "indentation_size": "xsd:integer",
+                                    "last_modified": "xsd:dateTime",
+                                    "created_date": "xsd:dateTime",
+                                    "checksum_md5": "xsd:string",
+                                    "checksum_sha256": "xsd:string",
+                                    "mime_type": "xsd:string",
+                                    "is_binary": "xsd:boolean",
+                                    "is_generated": "xsd:boolean",
+                                    "is_test_file": "xsd:boolean",
+                                    "is_configuration": "xsd:boolean",
+                                    "is_documentation": "xsd:boolean",
+                                    "complexity_score": "xsd:float",
+                                    "maintainability_index": "xsd:float",
+                                    "technical_debt_minutes": "xsd:integer"
+                                }
+                            },
+                            "CodeModule": {
+                                "properties": {
+                                    "module_name": "xsd:string",
+                                    "namespace": "xsd:string",
+                                    "package_name": "xsd:string",
+                                    "module_type": "xsd:string",
+                                    "visibility": "xsd:string",
+                                    "is_internal": "xsd:boolean",
+                                    "is_external": "xsd:boolean",
+                                    "api_surface": "xsd:integer",
+                                    "coupling_factor": "xsd:float",
+                                    "cohesion_factor": "xsd:float"
+                                }
+                            },
+                            "CodeDirectory": {
+                                "properties": {
+                                    "directory_path": "xsd:string",
+                                    "directory_name": "xsd:string",
+                                    "file_count": "xsd:integer",
+                                    "subdirectory_count": "xsd:integer",
+                                    "total_size_bytes": "xsd:integer",
+                                    "directory_type": "xsd:string",
+                                    "is_source": "xsd:boolean",
+                                    "is_test": "xsd:boolean",
+                                    "is_build": "xsd:boolean",
+                                    "is_documentation": "xsd:boolean"
+                                }
+                            }
+                        }
+                    },
+                    "Abstract_Syntax_Tree": {
+                        "entities": {
+                            "ASTNode": {
+                                "properties": {
+                                    "node_id": "xsd:string",
+                                    "node_type": "xsd:string",
+                                    "node_value": "xsd:string",
+                                    "start_line": "xsd:integer",
+                                    "end_line": "xsd:integer",
+                                    "start_column": "xsd:integer",
+                                    "end_column": "xsd:integer",
+                                    "depth": "xsd:integer",
+                                    "child_count": "xsd:integer",
+                                    "is_leaf": "xsd:boolean"
+                                }
+                            },
+                            "Function": {
+                                "properties": {
+                                    "function_name": "xsd:string",
+                                    "qualified_name": "xsd:string",
+                                    "signature": "xsd:string",
+                                    "parameters": "xsd:string",
+                                    "parameter_count": "xsd:integer",
+                                    "return_type": "xsd:string",
+                                    "visibility": "xsd:string",
+                                    "is_static": "xsd:boolean",
+                                    "is_abstract": "xsd:boolean",
+                                    "is_virtual": "xsd:boolean",
+                                    "is_override": "xsd:boolean",
+                                    "is_async": "xsd:boolean",
+                                    "is_generator": "xsd:boolean",
+                                    "is_recursive": "xsd:boolean",
+                                    "is_pure": "xsd:boolean",
+                                    "cyclomatic_complexity": "xsd:integer",
+                                    "cognitive_complexity": "xsd:integer",
+                                    "nesting_depth": "xsd:integer",
+                                    "lines_of_code": "xsd:integer",
+                                    "halstead_volume": "xsd:float",
+                                    "halstead_difficulty": "xsd:float",
+                                    "maintainability_index": "xsd:float",
+                                    "fan_in": "xsd:integer",
+                                    "fan_out": "xsd:integer"
+                                }
+                            },
+                            "Class": {
+                                "properties": {
+                                    "class_name": "xsd:string",
+                                    "qualified_name": "xsd:string",
+                                    "namespace": "xsd:string",
+                                    "inheritance_hierarchy": "xsd:string",
+                                    "implements_interfaces": "xsd:string",
+                                    "visibility": "xsd:string",
+                                    "is_abstract": "xsd:boolean",
+                                    "is_final": "xsd:boolean",
+                                    "is_static": "xsd:boolean",
+                                    "is_inner": "xsd:boolean",
+                                    "is_anonymous": "xsd:boolean",
+                                    "is_generic": "xsd:boolean",
+                                    "type_parameters": "xsd:string",
+                                    "methods_count": "xsd:integer",
+                                    "properties_count": "xsd:integer",
+                                    "fields_count": "xsd:integer",
+                                    "constructors_count": "xsd:integer",
+                                    "public_methods": "xsd:integer",
+                                    "private_methods": "xsd:integer",
+                                    "protected_methods": "xsd:integer",
+                                    "lines_of_code": "xsd:integer",
+                                    "weighted_methods_per_class": "xsd:integer",
+                                    "depth_of_inheritance": "xsd:integer",
+                                    "number_of_children": "xsd:integer",
+                                    "coupling_between_objects": "xsd:integer",
+                                    "response_for_class": "xsd:integer",
+                                    "lack_of_cohesion": "xsd:float"
+                                }
+                            },
+                            "Interface": {
+                                "properties": {
+                                    "interface_name": "xsd:string",
+                                    "qualified_name": "xsd:string",
+                                    "extends_interfaces": "xsd:string",
+                                    "method_signatures": "xsd:string",
+                                    "is_functional": "xsd:boolean",
+                                    "is_marker": "xsd:boolean"
+                                }
+                            },
+                            "Variable": {
+                                "properties": {
+                                    "variable_name": "xsd:string",
+                                    "qualified_name": "xsd:string",
+                                    "data_type": "xsd:string",
+                                    "declared_type": "xsd:string",
+                                    "inferred_type": "xsd:string",
+                                    "scope": "xsd:string",
+                                    "visibility": "xsd:string",
+                                    "is_constant": "xsd:boolean",
+                                    "is_static": "xsd:boolean",
+                                    "is_final": "xsd:boolean",
+                                    "is_volatile": "xsd:boolean",
+                                    "is_mutable": "xsd:boolean",
+                                    "is_nullable": "xsd:boolean",
+                                    "default_value": "xsd:string",
+                                    "initialization_line": "xsd:integer",
+                                    "last_assignment_line": "xsd:integer",
+                                    "usage_count": "xsd:integer",
+                                    "is_unused": "xsd:boolean"
+                                }
+                            },
+                            "Annotation": {
+                                "properties": {
+                                    "annotation_name": "xsd:string",
+                                    "annotation_type": "xsd:string",
+                                    "parameters": "xsd:string",
+                                    "retention_policy": "xsd:string",
+                                    "target_elements": "xsd:string"
+                                }
+                            },
+                            "Comment": {
+                                "properties": {
+                                    "comment_type": "xsd:string",
+                                    "content": "xsd:string",
+                                    "is_documentation": "xsd:boolean",
+                                    "is_todo": "xsd:boolean",
+                                    "is_fixme": "xsd:boolean",
+                                    "is_deprecated": "xsd:boolean",
+                                    "associated_element": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Code_Dependencies": {
+                        "entities": {
+                            "Import": {
+                                "properties": {
+                                    "import_statement": "xsd:string",
+                                    "imported_module": "xsd:string",
+                                    "imported_symbols": "xsd:string",
+                                    "import_type": "xsd:string",
+                                    "is_wildcard": "xsd:boolean",
+                                    "is_static": "xsd:boolean",
+                                    "alias": "xsd:string",
+                                    "source_location": "xsd:string"
+                                }
+                            },
+                            "Include": {
+                                "properties": {
+                                    "include_path": "xsd:string",
+                                    "include_type": "xsd:string",
+                                    "is_system": "xsd:boolean",
+                                    "is_local": "xsd:boolean",
+                                    "resolved_path": "xsd:string"
+                                }
+                            },
+                            "Require": {
+                                "properties": {
+                                    "require_path": "xsd:string",
+                                    "require_type": "xsd:string",
+                                    "is_dynamic": "xsd:boolean",
+                                    "is_conditional": "xsd:boolean"
+                                }
+                            },
+                            "Using": {
+                                "properties": {
+                                    "using_directive": "xsd:string",
+                                    "namespace": "xsd:string",
+                                    "alias": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Software_Architecture": {
+                "collections": {
+                    "Architectural_Patterns": {
+                        "entities": {
+                            "ArchitecturalPattern": {
+                                "properties": {
+                                    "pattern_name": "xsd:string",
+                                    "pattern_type": "xsd:string",
+                                    "description": "xsd:string",
+                                    "benefits": "xsd:string",
+                                    "drawbacks": "xsd:string",
+                                    "use_cases": "xsd:string",
+                                    "complexity_level": "xsd:string"
+                                }
+                            },
+                            "Component": {
+                                "properties": {
+                                    "component_name": "xsd:string",
+                                    "component_type": "xsd:string",
+                                    "responsibility": "xsd:string",
+                                    "interfaces_provided": "xsd:string",
+                                    "interfaces_required": "xsd:string",
+                                    "is_reusable": "xsd:boolean",
+                                    "is_configurable": "xsd:boolean",
+                                    "deployment_unit": "xsd:string"
+                                }
+                            },
+                            "Layer": {
+                                "properties": {
+                                    "layer_name": "xsd:string",
+                                    "layer_level": "xsd:integer",
+                                    "responsibilities": "xsd:string",
+                                    "allowed_dependencies": "xsd:string",
+                                    "is_open": "xsd:boolean"
+                                }
+                            },
+                            "Service": {
+                                "properties": {
+                                    "service_name": "xsd:string",
+                                    "service_type": "xsd:string",
+                                    "endpoint": "xsd:string",
+                                    "protocol": "xsd:string",
+                                    "is_stateless": "xsd:boolean",
+                                    "is_idempotent": "xsd:boolean",
+                                    "sla_requirements": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Design_Patterns": {
+                        "entities": {
+                            "DesignPattern": {
+                                "properties": {
+                                    "pattern_name": "xsd:string",
+                                    "pattern_category": "xsd:string",
+                                    "intent": "xsd:string",
+                                    "structure": "xsd:string",
+                                    "participants": "xsd:string",
+                                    "collaborations": "xsd:string",
+                                    "consequences": "xsd:string",
+                                    "implementation_notes": "xsd:string"
+                                }
+                            },
+                            "PatternInstance": {
+                                "properties": {
+                                    "instance_id": "xsd:string",
+                                    "pattern_type": "xsd:string",
+                                    "implementation_quality": "xsd:float",
+                                    "deviation_notes": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Development_Process": {
+                "collections": {
+                    "Version_Control": {
+                        "entities": {
+                            "Repository": {
+                                "properties": {
+                                    "repo_name": "xsd:string",
+                                    "repo_url": "xsd:anyURI",
+                                    "repo_type": "xsd:string",
+                                    "hosting_platform": "xsd:string",
+                                    "visibility": "xsd:string",
+                                    "default_branch": "xsd:string",
+                                    "branch_count": "xsd:integer",
+                                    "tag_count": "xsd:integer",
+                                    "commit_count": "xsd:integer",
+                                    "contributor_count": "xsd:integer",
+                                    "fork_count": "xsd:integer",
+                                    "star_count": "xsd:integer",
+                                    "watch_count": "xsd:integer",
+                                    "issue_count": "xsd:integer",
+                                    "pull_request_count": "xsd:integer",
+                                    "total_size_kb": "xsd:integer",
+                                    "created_date": "xsd:dateTime",
+                                    "last_activity": "xsd:dateTime",
+                                    "license": "xsd:string",
+                                    "primary_language": "xsd:string",
+                                    "language_distribution": "xsd:string"
+                                }
+                            },
+                            "Commit": {
+                                "properties": {
+                                    "commit_hash": "xsd:string",
+                                    "short_hash": "xsd:string",
+                                    "author_name": "xsd:string",
+                                    "author_email": "xsd:string",
+                                    "committer_name": "xsd:string",
+                                    "committer_email": "xsd:string",
+                                    "commit_message": "xsd:string",
+                                    "commit_subject": "xsd:string",
+                                    "commit_body": "xsd:string",
+                                    "timestamp": "xsd:dateTime",
+                                    "author_date": "xsd:dateTime",
+                                    "committer_date": "xsd:dateTime",
+                                    "files_changed": "xsd:integer",
+                                    "insertions": "xsd:integer",
+                                    "deletions": "xsd:integer",
+                                    "net_lines": "xsd:integer",
+                                    "is_merge": "xsd:boolean",
+                                    "is_revert": "xsd:boolean",
+                                    "parent_commits": "xsd:string",
+                                    "branch": "xsd:string",
+                                    "tags": "xsd:string",
+                                    "gpg_signature": "xsd:string",
+                                    "is_signed": "xsd:boolean"
+                                }
+                            },
+                            "Branch": {
+                                "properties": {
+                                    "branch_name": "xsd:string",
+                                    "full_name": "xsd:string",
+                                    "base_branch": "xsd:string",
+                                    "head_commit": "xsd:string",
+                                    "commit_count": "xsd:integer",
+                                    "is_default": "xsd:boolean",
+                                    "is_protected": "xsd:boolean",
+                                    "is_merged": "xsd:boolean",
+                                    "is_active": "xsd:boolean",
+                                    "created_date": "xsd:dateTime",
+                                    "last_commit_date": "xsd:dateTime",
+                                    "merge_date": "xsd:dateTime",
+                                    "author": "xsd:string",
+                                    "branch_type": "xsd:string"
+                                }
+                            },
+                            "Tag": {
+                                "properties": {
+                                    "tag_name": "xsd:string",
+                                    "tag_message": "xsd:string",
+                                    "commit_hash": "xsd:string",
+                                    "tagger_name": "xsd:string",
+                                    "tagger_email": "xsd:string",
+                                    "tag_date": "xsd:dateTime",
+                                    "is_annotated": "xsd:boolean",
+                                    "is_release": "xsd:boolean"
+                                }
+                            },
+                            "PullRequest": {
+                                "properties": {
+                                    "pr_number": "xsd:integer",
+                                    "title": "xsd:string",
+                                    "description": "xsd:string",
+                                    "author": "xsd:string",
+                                    "assignees": "xsd:string",
+                                    "reviewers": "xsd:string",
+                                    "labels": "xsd:string",
+                                    "milestone": "xsd:string",
+                                    "source_branch": "xsd:string",
+                                    "target_branch": "xsd:string",
+                                    "status": "xsd:string",
+                                    "state": "xsd:string",
+                                    "is_draft": "xsd:boolean",
+                                    "is_mergeable": "xsd:boolean",
+                                    "merge_method": "xsd:string",
+                                    "created_date": "xsd:dateTime",
+                                    "updated_date": "xsd:dateTime",
+                                    "merged_date": "xsd:dateTime",
+                                    "closed_date": "xsd:dateTime",
+                                    "commits_count": "xsd:integer",
+                                    "files_changed": "xsd:integer",
+                                    "additions": "xsd:integer",
+                                    "deletions": "xsd:integer",
+                                    "comments_count": "xsd:integer",
+                                    "review_comments_count": "xsd:integer"
+                                }
+                            },
+                            "CodeReview": {
+                                "properties": {
+                                    "review_id": "xsd:string",
+                                    "reviewer": "xsd:string",
+                                    "review_state": "xsd:string",
+                                    "review_body": "xsd:string",
+                                    "submitted_date": "xsd:dateTime",
+                                    "comments_count": "xsd:integer",
+                                    "approval_status": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Issue_Tracking": {
+                        "entities": {
+                            "Issue": {
+                                "properties": {
+                                    "issue_number": "xsd:integer",
+                                    "title": "xsd:string",
+                                    "description": "xsd:string",
+                                    "issue_type": "xsd:string",
+                                    "priority": "xsd:string",
+                                    "severity": "xsd:string",
+                                    "status": "xsd:string",
+                                    "state": "xsd:string",
+                                    "reporter": "xsd:string",
+                                    "assignee": "xsd:string",
+                                    "labels": "xsd:string",
+                                    "milestone": "xsd:string",
+                                    "component": "xsd:string",
+                                    "version": "xsd:string",
+                                    "fix_version": "xsd:string",
+                                    "created_date": "xsd:dateTime",
+                                    "updated_date": "xsd:dateTime",
+                                    "resolved_date": "xsd:dateTime",
+                                    "closed_date": "xsd:dateTime",
+                                    "due_date": "xsd:dateTime",
+                                    "estimated_hours": "xsd:float",
+                                    "actual_hours": "xsd:float",
+                                    "comments_count": "xsd:integer"
+                                }
+                            },
+                            "Bug": {
+                                "properties": {
+                                    "bug_id": "xsd:string",
+                                    "reproduction_steps": "xsd:string",
+                                    "expected_behavior": "xsd:string",
+                                    "actual_behavior": "xsd:string",
+                                    "environment": "xsd:string",
+                                    "browser": "xsd:string",
+                                    "os": "xsd:string",
+                                    "is_regression": "xsd:boolean",
+                                    "root_cause": "xsd:string",
+                                    "fix_description": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "CI_CD_Pipeline": {
+                        "entities": {
+                            "Pipeline": {
+                                "properties": {
+                                    "pipeline_id": "xsd:string",
+                                    "pipeline_name": "xsd:string",
+                                    "pipeline_type": "xsd:string",
+                                    "trigger_type": "xsd:string",
+                                    "trigger_event": "xsd:string",
+                                    "branch_filter": "xsd:string",
+                                    "is_enabled": "xsd:boolean",
+                                    "configuration_file": "xsd:string"
+                                }
+                            },
+                            "BuildJob": {
+                                "properties": {
+                                    "job_id": "xsd:string",
+                                    "job_name": "xsd:string",
+                                    "build_number": "xsd:integer",
+                                    "status": "xsd:string",
+                                    "result": "xsd:string",
+                                    "start_time": "xsd:dateTime",
+                                    "end_time": "xsd:dateTime",
+                                    "duration_seconds": "xsd:integer",
+                                    "queue_time_seconds": "xsd:integer",
+                                    "trigger_cause": "xsd:string",
+                                    "triggered_by": "xsd:string",
+                                    "commit_hash": "xsd:string",
+                                    "branch": "xsd:string",
+                                    "build_agent": "xsd:string",
+                                    "build_environment": "xsd:string",
+                                    "artifacts_count": "xsd:integer",
+                                    "test_results": "xsd:string",
+                                    "code_coverage": "xsd:float",
+                                    "build_log_size": "xsd:integer"
+                                }
+                            },
+                            "Deployment": {
+                                "properties": {
+                                    "deployment_id": "xsd:string",
+                                    "deployment_name": "xsd:string",
+                                    "environment": "xsd:string",
+                                    "target_platform": "xsd:string",
+                                    "version": "xsd:string",
+                                    "build_number": "xsd:string",
+                                    "commit_hash": "xsd:string",
+                                    "deploy_time": "xsd:dateTime",
+                                    "completion_time": "xsd:dateTime",
+                                    "duration_seconds": "xsd:integer",
+                                    "status": "xsd:string",
+                                    "deployed_by": "xsd:string",
+                                    "rollback_version": "xsd:string",
+                                    "is_rollback": "xsd:boolean",
+                                    "deployment_strategy": "xsd:string",
+                                    "health_check_url": "xsd:string",
+                                    "smoke_test_results": "xsd:string"
+                                }
+                            },
+                            "Artifact": {
+                                "properties": {
+                                    "artifact_id": "xsd:string",
+                                    "artifact_name": "xsd:string",
+                                    "artifact_type": "xsd:string",
+                                    "file_path": "xsd:string",
+                                    "file_size": "xsd:integer",
+                                    "checksum": "xsd:string",
+                                    "created_date": "xsd:dateTime",
+                                    "expiry_date": "xsd:dateTime",
+                                    "download_count": "xsd:integer",
+                                    "repository_url": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Code_Quality_Analysis": {
+                "collections": {
+                    "Static_Analysis": {
+                        "entities": {
+                            "CodeMetric": {
+                                "properties": {
+                                    "metric_name": "xsd:string",
+                                    "metric_category": "xsd:string",
+                                    "value": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "threshold_min": "xsd:float",
+                                    "threshold_max": "xsd:float",
+                                    "is_within_threshold": "xsd:boolean",
+                                    "measurement_date": "xsd:dateTime",
+                                    "measurement_tool": "xsd:string",
+                                    "scope": "xsd:string",
+                                    "trend": "xsd:string"
+                                }
+                            },
+                            "CodeSmell": {
+                                "properties": {
+                                    "smell_id": "xsd:string",
+                                    "smell_type": "xsd:string",
+                                    "smell_category": "xsd:string",
+                                    "severity": "xsd:string",
+                                    "priority": "xsd:string",
+                                    "location": "xsd:string",
+                                    "line_number": "xsd:integer",
+                                    "column_number": "xsd:integer",
+                                    "description": "xsd:string",
+                                    "message": "xsd:string",
+                                    "rule_id": "xsd:string",
+                                    "rule_name": "xsd:string",
+                                    "detection_tool": "xsd:string",
+                                    "detection_date": "xsd:dateTime",
+                                    "is_suppressed": "xsd:boolean",
+                                    "suppression_reason": "xsd:string",
+                                    "effort_minutes": "xsd:integer",
+                                    "debt_ratio": "xsd:float"
+                                }
+                            },
+                            "Vulnerability": {
+                                "properties": {
+                                    "vulnerability_id": "xsd:string",
+                                    "cve_id": "xsd:string",
+                                    "vulnerability_type": "xsd:string",
+                                    "severity_score": "xsd:float",
+                                    "severity_level": "xsd:string",
+                                    "description": "xsd:string",
+                                    "affected_component": "xsd:string",
+                                    "affected_versions": "xsd:string",
+                                    "fixed_version": "xsd:string",
+                                    "discovery_date": "xsd:dateTime",
+                                    "publication_date": "xsd:dateTime",
+                                    "patch_available": "xsd:boolean",
+                                    "workaround": "xsd:string",
+                                    "exploit_available": "xsd:boolean",
+                                    "is_false_positive": "xsd:boolean"
+                                }
+                            },
+                            "Duplication": {
+                                "properties": {
+                                    "duplication_id": "xsd:string",
+                                    "duplicate_lines": "xsd:integer",
+                                    "duplicate_tokens": "xsd:integer",
+                                    "similarity_percentage": "xsd:float",
+                                    "files_involved": "xsd:string",
+                                    "locations": "xsd:string",
+                                    "duplication_type": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Dynamic_Analysis": {
+                        "entities": {
+                            "PerformanceProfile": {
+                                "properties": {
+                                    "profile_id": "xsd:string",
+                                    "profiling_tool": "xsd:string",
+                                    "execution_time_ms": "xsd:integer",
+                                    "memory_usage_mb": "xsd:float",
+                                    "cpu_usage_percent": "xsd:float",
+                                    "hotspots": "xsd:string",
+                                    "bottlenecks": "xsd:string",
+                                    "optimization_suggestions": "xsd:string"
+                                }
+                            },
+                            "MemoryLeak": {
+                                "properties": {
+                                    "leak_id": "xsd:string",
+                                    "leak_type": "xsd:string",
+                                    "location": "xsd:string",
+                                    "leaked_objects": "xsd:integer",
+                                    "leaked_memory_mb": "xsd:float",
+                                    "growth_rate": "xsd:float",
+                                    "detection_tool": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Testing_Framework": {
+                "collections": {
+                    "Test_Artifacts": {
+                        "entities": {
+                            "TestSuite": {
+                                "properties": {
+                                    "suite_name": "xsd:string",
+                                    "suite_type": "xsd:string",
+                                    "test_count": "xsd:integer",
+                                    "passed_tests": "xsd:integer",
+                                    "failed_tests": "xsd:integer",
+                                    "skipped_tests": "xsd:integer",
+                                    "execution_time_ms": "xsd:integer",
+                                    "success_rate": "xsd:float",
+                                    "framework": "xsd:string"
+                                }
+                            },
+                            "TestCase": {
+                                "properties": {
+                                    "test_name": "xsd:string",
+                                    "test_method": "xsd:string",
+                                    "test_class": "xsd:string",
+                                    "test_type": "xsd:string",
+                                    "test_category": "xsd:string",
+                                    "priority": "xsd:string",
+                                    "status": "xsd:string",
+                                    "result": "xsd:string",
+                                    "execution_time_ms": "xsd:integer",
+                                    "setup_time_ms": "xsd:integer",
+                                    "teardown_time_ms": "xsd:integer",
+                                    "assertions_count": "xsd:integer",
+                                    "error_message": "xsd:string",
+                                    "stack_trace": "xsd:string",
+                                    "is_flaky": "xsd:boolean",
+                                    "retry_count": "xsd:integer",
+                                    "tags": "xsd:string"
+                                }
+                            },
+                            "TestData": {
+                                "properties": {
+                                    "data_id": "xsd:string",
+                                    "data_type": "xsd:string",
+                                    "data_source": "xsd:string",
+                                    "data_format": "xsd:string",
+                                    "is_synthetic": "xsd:boolean",
+                                    "generation_method": "xsd:string"
+                                }
+                            },
+                            "MockObject": {
+                                "properties": {
+                                    "mock_id": "xsd:string",
+                                    "mocked_type": "xsd:string",
+                                    "mock_framework": "xsd:string",
+                                    "behavior_definitions": "xsd:string",
+                                    "interaction_count": "xsd:integer"
+                                }
+                            }
+                        }
+                    },
+                    "Coverage_Analysis": {
+                        "entities": {
+                            "CodeCoverage": {
+                                "properties": {
+                                    "coverage_id": "xsd:string",
+                                    "coverage_type": "xsd:string",
+                                    "line_coverage": "xsd:float",
+                                    "branch_coverage": "xsd:float",
+                                    "function_coverage": "xsd:float",
+                                    "statement_coverage": "xsd:float",
+                                    "condition_coverage": "xsd:float",
+                                    "path_coverage": "xsd:float",
+                                    "covered_lines": "xsd:integer",
+                                    "total_lines": "xsd:integer",
+                                    "covered_branches": "xsd:integer",
+                                    "total_branches": "xsd:integer",
+                                    "measurement_tool": "xsd:string",
+                                    "measurement_date": "xsd:dateTime"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Programming_Languages_Ecosystem": {
+                "collections": {
+                    "Language_Specifications": {
+                        "entities": {
+                            "ProgrammingLanguage": {
+                                "properties": {
+                                    "language_name": "xsd:string",
+                                    "language_family": "xsd:string",
+                                    "version": "xsd:string",
+                                    "release_date": "xsd:date",
+                                    "paradigms": "xsd:string",
+                                    "typing_discipline": "xsd:string",
+                                    "compilation_type": "xsd:string",
+                                    "file_extensions": "xsd:string",
+                                    "syntax_style": "xsd:string",
+                                    "case_sensitivity": "xsd:boolean",
+                                    "memory_management": "xsd:string",
+                                    "standard_library": "xsd:string",
+                                    "package_manager": "xsd:string",
+                                    "build_system": "xsd:string",
+                                    "documentation_format": "xsd:string",
+                                    "community_size": "xsd:string",
+                                    "popularity_rank": "xsd:integer",
+                                    "learning_curve": "xsd:string",
+                                    "performance_characteristics": "xsd:string"
+                                }
+                            },
+                            "LanguageFeature": {
+                                "properties": {
+                                    "feature_name": "xsd:string",
+                                    "feature_type": "xsd:string",
+                                    "description": "xsd:string",
+                                    "syntax_example": "xsd:string",
+                                    "introduced_version": "xsd:string",
+                                    "is_experimental": "xsd:boolean",
+                                    "is_deprecated": "xsd:boolean"
+                                }
+                            }
+                        }
+                    },
+                    "Package_Management": {
+                        "entities": {
+                            "Package": {
+                                "properties": {
+                                    "package_name": "xsd:string",
+                                    "package_id": "xsd:string",
+                                    "version": "xsd:string",
+                                    "semantic_version": "xsd:string",
+                                    "description": "xsd:string",
+                                    "author": "xsd:string",
+                                    "maintainer": "xsd:string",
+                                    "license": "xsd:string",
+                                    "homepage": "xsd:anyURI",
+                                    "repository": "xsd:anyURI",
+                                    "documentation": "xsd:anyURI",
+                                    "keywords": "xsd:string",
+                                    "category": "xsd:string",
+                                    "download_count": "xsd:integer",
+                                    "star_count": "xsd:integer",
+                                    "fork_count": "xsd:integer",
+                                    "issue_count": "xsd:integer",
+                                    "last_updated": "xsd:dateTime",
+                                    "creation_date": "xsd:dateTime",
+                                    "package_size": "xsd:integer",
+                                    "dependency_count": "xsd:integer",
+                                    "dependent_count": "xsd:integer",
+                                    "security_score": "xsd:float",
+                                    "quality_score": "xsd:float",
+                                    "popularity_score": "xsd:float",
+                                    "maintenance_score": "xsd:float"
+                                }
+                            },
+                            "Dependency": {
+                                "properties": {
+                                    "dependency_name": "xsd:string",
+                                    "version_constraint": "xsd:string",
+                                    "resolved_version": "xsd:string",
+                                    "dependency_type": "xsd:string",
+                                    "scope": "xsd:string",
+                                    "is_direct": "xsd:boolean",
+                                    "is_transitive": "xsd:boolean",
+                                    "is_optional": "xsd:boolean",
+                                    "is_dev_dependency": "xsd:boolean",
+                                    "is_peer_dependency": "xsd:boolean",
+                                    "vulnerability_count": "xsd:integer",
+                                    "license_compatibility": "xsd:string"
+                                }
+                            },
+                            "Library": {
+                                "properties": {
+                                    "library_name": "xsd:string",
+                                    "library_type": "xsd:string",
+                                    "version": "xsd:string",
+                                    "api_version": "xsd:string",
+                                    "license": "xsd:string",
+                                    "license_type": "xsd:string",
+                                    "is_open_source": "xsd:boolean",
+                                    "vendor": "xsd:string",
+                                    "documentation_url": "xsd:anyURI",
+                                    "source_url": "xsd:anyURI",
+                                    "binary_size": "xsd:integer",
+                                    "api_surface": "xsd:integer",
+                                    "breaking_changes": "xsd:string",
+                                    "migration_guide": "xsd:string",
+                                    "support_status": "xsd:string",
+                                    "end_of_life": "xsd:date"
+                                }
+                            },
+                            "Framework": {
+                                "properties": {
+                                    "framework_name": "xsd:string",
+                                    "framework_type": "xsd:string",
+                                    "category": "xsd:string",
+                                    "target_platform": "xsd:string",
+                                    "language": "xsd:string",
+                                    "version": "xsd:string",
+                                    "architecture_pattern": "xsd:string",
+                                    "conventions": "xsd:string",
+                                    "configuration_approach": "xsd:string",
+                                    "plugin_system": "xsd:boolean",
+                                    "cli_tools": "xsd:string",
+                                    "scaffolding_support": "xsd:boolean",
+                                    "hot_reload": "xsd:boolean",
+                                    "development_server": "xsd:boolean",
+                                    "build_optimization": "xsd:string",
+                                    "testing_integration": "xsd:string",
+                                    "deployment_options": "xsd:string",
+                                    "maturity_level": "xsd:string",
+                                    "learning_resources": "xsd:string",
+                                    "community_plugins": "xsd:integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Documentation_Knowledge": {
+                "collections": {
+                    "Documentation_Types": {
+                        "entities": {
+                            "Documentation": {
+                                "properties": {
+                                    "doc_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "doc_type": "xsd:string",
+                                    "format": "xsd:string",
+                                    "language": "xsd:string",
+                                    "author": "xsd:string",
+                                    "creation_date": "xsd:dateTime",
+                                    "last_updated": "xsd:dateTime",
+                                    "version": "xsd:string",
+                                    "target_audience": "xsd:string",
+                                    "completeness_score": "xsd:float",
+                                    "accuracy_score": "xsd:float",
+                                    "readability_score": "xsd:float",
+                                    "is_generated": "xsd:boolean",
+                                    "generation_tool": "xsd:string",
+                                    "word_count": "xsd:integer",
+                                    "page_count": "xsd:integer"
+                                }
+                            },
+                            "APIDocumentation": {
+                                "properties": {
+                                    "api_name": "xsd:string",
+                                    "api_version": "xsd:string",
+                                    "endpoint_count": "xsd:integer",
+                                    "schema_format": "xsd:string",
+                                    "authentication_methods": "xsd:string",
+                                    "rate_limits": "xsd:string",
+                                    "example_count": "xsd:integer",
+                                    "interactive_examples": "xsd:boolean"
+                                }
+                            },
+                            "CodeComment": {
+                                "properties": {
+                                    "comment_id": "xsd:string",
+                                    "comment_type": "xsd:string",
+                                    "content": "xsd:string",
+                                    "language": "xsd:string",
+                                    "is_documentation": "xsd:boolean",
+                                    "is_inline": "xsd:boolean",
+                                    "is_block": "xsd:boolean",
+                                    "is_todo": "xsd:boolean",
+                                    "is_fixme": "xsd:boolean",
+                                    "is_hack": "xsd:boolean",
+                                    "is_deprecated": "xsd:boolean",
+                                    "associated_element": "xsd:string",
+                                    "line_number": "xsd:integer",
+                                    "author": "xsd:string",
+                                    "creation_date": "xsd:dateTime"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "relations": {
+            "CONTAINS_FILE": {
+                "domain": "CodeDirectory",
+                "range": "CodeFile"
+            },
+            "CONTAINS_SUBDIRECTORY": {
+                "domain": "CodeDirectory",
+                "range": "CodeDirectory"
+            },
+            "BELONGS_TO_MODULE": {
+                "domain": "CodeFile",
+                "range": "CodeModule"
+            },
+            "IMPORTS_MODULE": {
+                "domain": "CodeFile",
+                "range": "CodeModule"
+            },
+            "INCLUDES_FILE": {
+                "domain": "CodeFile",
+                "range": "CodeFile"
+            },
+            "REQUIRES_DEPENDENCY": {
+                "domain": "CodeFile",
+                "range": "Dependency"
+            },
+            "USES_LIBRARY": {
+                "domain": "CodeFile",
+                "range": "Library"
+            },
+            "USES_FRAMEWORK": {
+                "domain": "CodeFile",
+                "range": "Framework"
+            },
+            "WRITTEN_IN": {
+                "domain": "CodeFile",
+                "range": "ProgrammingLanguage"
+            },
+            "HAS_AST_NODE": {
+                "domain": "CodeFile",
+                "range": "ASTNode"
+            },
+            "PARENT_OF": {
+                "domain": "ASTNode",
+                "range": "ASTNode"
+            },
+            "CHILD_OF": {
+                "domain": "ASTNode",
+                "range": "ASTNode"
+            },
+            "CONTAINS_FUNCTION": {
+                "domain": "CodeFile",
+                "range": "Function"
+            },
+            "CONTAINS_CLASS": {
+                "domain": "CodeFile",
+                "range": "Class"
+            },
+            "CONTAINS_INTERFACE": {
+                "domain": "CodeFile",
+                "range": "Interface"
+            },
+            "CONTAINS_VARIABLE": {
+                "domain": "CodeFile",
+                "range": "Variable"
+            },
+            "HAS_METHOD": {
+                "domain": "Class",
+                "range": "Function"
+            },
+            "HAS_PROPERTY": {
+                "domain": "Class",
+                "range": "Variable"
+            },
+            "HAS_FIELD": {
+                "domain": "Class",
+                "range": "Variable"
+            },
+            "HAS_PARAMETER": {
+                "domain": "Function",
+                "range": "Variable"
+            },
+            "HAS_LOCAL_VARIABLE": {
+                "domain": "Function",
+                "range": "Variable"
+            },
+            "INHERITS_FROM": {
+                "domain": "Class",
+                "range": "Class"
+            },
+            "IMPLEMENTS": {
+                "domain": "Class",
+                "range": "Interface"
+            },
+            "EXTENDS": {
+                "domain": "Interface",
+                "range": "Interface"
+            },
+            "CALLS_FUNCTION": {
+                "domain": "Function",
+                "range": "Function"
+            },
+            "ACCESSES_VARIABLE": {
+                "domain": "Function",
+                "range": "Variable"
+            },
+            "INSTANTIATES_CLASS": {
+                "domain": "Function",
+                "range": "Class"
+            },
+            "HAS_ANNOTATION": {
+                "domain": "Function",
+                "range": "Annotation"
+            },
+            "HAS_COMMENT": {
+                "domain": "Function",
+                "range": "Comment"
+            },
+            "DOCUMENTS": {
+                "domain": "Comment",
+                "range": "Function"
+            },
+            "BELONGS_TO_REPO": {
+                "domain": "CodeFile",
+                "range": "Repository"
+            },
+            "HAS_BRANCH": {
+                "domain": "Repository",
+                "range": "Branch"
+            },
+            "HAS_TAG": {
+                "domain": "Repository",
+                "range": "Tag"
+            },
+            "HAS_COMMIT": {
+                "domain": "Repository",
+                "range": "Commit"
+            },
+            "HAS_PULL_REQUEST": {
+                "domain": "Repository",
+                "range": "PullRequest"
+            },
+            "HAS_ISSUE": {
+                "domain": "Repository",
+                "range": "Issue"
+            },
+            "MODIFIES_FILE": {
+                "domain": "Commit",
+                "range": "CodeFile"
+            },
+            "CREATES_BRANCH": {
+                "domain": "Commit",
+                "range": "Branch"
+            },
+            "MERGES_BRANCH": {
+                "domain": "Commit",
+                "range": "Branch"
+            },
+            "TARGETS_BRANCH": {
+                "domain": "PullRequest",
+                "range": "Branch"
+            },
+            "SOURCES_FROM_BRANCH": {
+                "domain": "PullRequest",
+                "range": "Branch"
+            },
+            "HAS_REVIEW": {
+                "domain": "PullRequest",
+                "range": "CodeReview"
+            },
+            "REVIEWS": {
+                "domain": "CodeReview",
+                "range": "PullRequest"
+            },
+            "FIXES_ISSUE": {
+                "domain": "Commit",
+                "range": "Issue"
+            },
+            "RELATES_TO_ISSUE": {
+                "domain": "PullRequest",
+                "range": "Issue"
+            },
+            "REPORTS_BUG": {
+                "domain": "Issue",
+                "range": "Bug"
+            },
+            "HAS_PIPELINE": {
+                "domain": "Repository",
+                "range": "Pipeline"
+            },
+            "TRIGGERS_BUILD": {
+                "domain": "Commit",
+                "range": "BuildJob"
+            },
+            "PRODUCES_ARTIFACT": {
+                "domain": "BuildJob",
+                "range": "Artifact"
+            },
+            "DEPLOYS_ARTIFACT": {
+                "domain": "Deployment",
+                "range": "Artifact"
+            },
+            "HAS_METRIC": {
+                "domain": "CodeFile",
+                "range": "CodeMetric"
+            },
+            "HAS_SMELL": {
+                "domain": "CodeFile",
+                "range": "CodeSmell"
+            },
+            "HAS_VULNERABILITY": {
+                "domain": "Dependency",
+                "range": "Vulnerability"
+            },
+            "HAS_DUPLICATION": {
+                "domain": "CodeFile",
+                "range": "Duplication"
+            },
+            "HAS_PERFORMANCE_PROFILE": {
+                "domain": "Function",
+                "range": "PerformanceProfile"
+            },
+            "HAS_MEMORY_LEAK": {
+                "domain": "Function",
+                "range": "MemoryLeak"
+            },
+            "BELONGS_TO_SUITE": {
+                "domain": "TestCase",
+                "range": "TestSuite"
+            },
+            "TESTS_FUNCTION": {
+                "domain": "TestCase",
+                "range": "Function"
+            },
+            "TESTS_CLASS": {
+                "domain": "TestCase",
+                "range": "Class"
+            },
+            "USES_TEST_DATA": {
+                "domain": "TestCase",
+                "range": "TestData"
+            },
+            "USES_MOCK": {
+                "domain": "TestCase",
+                "range": "MockObject"
+            },
+            "HAS_COVERAGE": {
+                "domain": "CodeFile",
+                "range": "CodeCoverage"
+            },
+            "SUPPORTS_FEATURE": {
+                "domain": "ProgrammingLanguage",
+                "range": "LanguageFeature"
+            },
+            "DEPENDS_ON": {
+                "domain": "Package",
+                "range": "Dependency"
+            },
+            "PROVIDES_PACKAGE": {
+                "domain": "Repository",
+                "range": "Package"
+            },
+            "IMPLEMENTS_PATTERN": {
+                "domain": "CodeFile",
+                "range": "DesignPattern"
+            },
+            "USES_PATTERN": {
+                "domain": "Class",
+                "range": "DesignPattern"
+            },
+            "INSTANCE_OF_PATTERN": {
+                "domain": "Class",
+                "range": "PatternInstance"
+            },
+            "HAS_COMPONENT": {
+                "domain": "ArchitecturalPattern",
+                "range": "Component"
+            },
+            "BELONGS_TO_LAYER": {
+                "domain": "Component",
+                "range": "Layer"
+            },
+            "PROVIDES_SERVICE": {
+                "domain": "Component",
+                "range": "Service"
+            },
+            "CONSUMES_SERVICE": {
+                "domain": "Component",
+                "range": "Service"
+            },
+            "HAS_DOCUMENTATION": {
+                "domain": "CodeFile",
+                "range": "Documentation"
+            },
+            "DOCUMENTS_API": {
+                "domain": "APIDocumentation",
+                "range": "Service"
+            },
+            "HAS_CODE_COMMENT": {
+                "domain": "CodeFile",
+                "range": "CodeComment"
+            }
+        }
+    }
+}

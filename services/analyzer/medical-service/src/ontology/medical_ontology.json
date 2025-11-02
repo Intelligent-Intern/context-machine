@@ -1,0 +1,1680 @@
+{
+  "ontology": {
+    "name": "medical_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/medical-service#",
+    "description": "Comprehensive ontology for healthcare delivery, patient management, diagnostics, pharmacy, surgery, emergency, rehabilitation, mental health, telemedicine, public health, clinical research, administration, billing, quality & safety, medical devices, facilities, supply chain, interoperability and compliance.",
+    "namespaces": {
+      "med": "http://context-machine.org/ontology/medical-service#",
+      "org": "http://context-machine.org/ontology/medical/organization#",
+      "fac": "http://context-machine.org/ontology/medical/facility#",
+      "staff": "http://context-machine.org/ontology/medical/staff#",
+      "pt": "http://context-machine.org/ontology/medical/patient#",
+      "enc": "http://context-machine.org/ontology/medical/encounter#",
+      "obs": "http://context-machine.org/ontology/medical/observation#",
+      "lab": "http://context-machine.org/ontology/medical/lab#",
+      "img": "http://context-machine.org/ontology/medical/imaging#",
+      "proc": "http://context-machine.org/ontology/medical/procedure#",
+      "meds": "http://context-machine.org/ontology/medical/medication#",
+      "pharm": "http://context-machine.org/ontology/medical/pharmacy#",
+      "care": "http://context-machine.org/ontology/medical/care#",
+      "ehr": "http://context-machine.org/ontology/medical/ehr#",
+      "device": "http://context-machine.org/ontology/medical/device#",
+      "asset": "http://context-machine.org/ontology/medical/assets#",
+      "supply": "http://context-machine.org/ontology/medical/supply#",
+      "admin": "http://context-machine.org/ontology/medical/admin#",
+      "billing": "http://context-machine.org/ontology/medical/billing#",
+      "ins": "http://context-machine.org/ontology/medical/insurance#",
+      "quality": "http://context-machine.org/ontology/medical/quality#",
+      "safety": "http://context-machine.org/ontology/medical/safety#",
+      "research": "http://context-machine.org/ontology/medical/research#",
+      "public": "http://context-machine.org/ontology/medical/public-health#",
+      "tele": "http://context-machine.org/ontology/medical/telehealth#",
+      "security": "http://context-machine.org/ontology/medical/security#",
+      "audit": "http://context-machine.org/ontology/medical/audit#",
+      "codes": "http://context-machine.org/ontology/medical/codes#",
+      "icd10": "http://purl.bioontology.org/ontology/ICD10/",
+      "snomed": "http://snomed.info/sct#",
+      "loinc": "http://loinc.org/owl#",
+      "rxnorm": "http://purl.bioontology.org/ontology/RXNORM/",
+      "cpt": "http://purl.bioontology.org/ontology/CPT/",
+      "atc": "http://purl.bioontology.org/ontology/ATC/",
+      "ucum": "http://unitsofmeasure.org/ucum.html#",
+      "fhir": "http://hl7.org/fhir#",
+      "dicom": "http://dicom.nema.org/resources/ontology/DCM#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "geos": "http://www.opengis.net/ont/geosparql#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "time": "http://www.w3.org/2006/time#",
+      "qudt": "http://qudt.org/schema/qudt#",
+      "unit": "http://qudt.org/vocab/unit#",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "schema": "http://schema.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "http://hl7.org/fhir#",
+      "http://dicom.nema.org/resources/ontology/DCM#",
+      "http://snomed.info/sct",
+      "http://loinc.org/owl",
+      "http://purl.bioontology.org/ontology/ICD10/",
+      "http://purl.bioontology.org/ontology/RXNORM/",
+      "http://purl.bioontology.org/ontology/CPT/",
+      "http://purl.bioontology.org/ontology/ATC/",
+      "http://schema.org/"
+    ],
+    "frames": {
+      "Healthcare_System_Management": {
+        "collections": {
+          "Organizations_Providers": {
+            "entities": {
+              "HealthcareOrganization": {
+                "properties": {
+                  "org_id": "xsd:string",
+                  "name": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "organization_type": "xsd:string",
+                  "tax_id": "xsd:string",
+                  "national_provider_identifier": "xsd:string",
+                  "accreditations": "xsd:string",
+                  "licenses": "xsd:string",
+                  "parent_org_id": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "website": "xsd:string",
+                  "address_line": "xsd:string",
+                  "city": "xsd:string",
+                  "postal_code": "xsd:string",
+                  "country": "xsd:string",
+                  "location": "geo:Point",
+                  "service_areas": "xsd:string",
+                  "operational_status": "xsd:string",
+                  "established_date": "xsd:date"
+                }
+              },
+              "Facility": {
+                "properties": {
+                  "facility_id": "xsd:string",
+                  "org_id": "xsd:string",
+                  "facility_name": "xsd:string",
+                  "facility_type": "xsd:string",
+                  "level_of_care": "xsd:string",
+                  "bed_count_total": "xsd:integer",
+                  "bed_count_icu": "xsd:integer",
+                  "operating_rooms": "xsd:integer",
+                  "trauma_level": "xsd:string",
+                  "radiation_license": "xsd:string",
+                  "hazardous_material_permits": "xsd:string",
+                  "address_line": "xsd:string",
+                  "city": "xsd:string",
+                  "postal_code": "xsd:string",
+                  "country": "xsd:string",
+                  "location": "geo:Point",
+                  "boundary": "geos:Polygon",
+                  "opening_hours": "xsd:string",
+                  "emergency_department": "xsd:boolean",
+                  "pharmacy_on_site": "xsd:boolean",
+                  "laboratory_on_site": "xsd:boolean",
+                  "imaging_on_site": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "Department": {
+                "properties": {
+                  "dept_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "department_name": "xsd:string",
+                  "specialty": "xsd:string",
+                  "service_type": "xsd:string",
+                  "manager_name": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "email": "xsd:string",
+                  "floor": "xsd:string",
+                  "wing": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "CareTeam": {
+                "properties": {
+                  "team_id": "xsd:string",
+                  "name": "xsd:string",
+                  "care_model": "xsd:string",
+                  "specialty": "xsd:string",
+                  "lead_practitioner_id": "xsd:string",
+                  "members_count": "xsd:integer",
+                  "active": "xsd:boolean"
+                }
+              },
+              "Practitioner": {
+                "properties": {
+                  "practitioner_id": "xsd:string",
+                  "prefix": "xsd:string",
+                  "given_name": "xsd:string",
+                  "family_name": "xsd:string",
+                  "suffix": "xsd:string",
+                  "gender": "xsd:string",
+                  "birth_date": "xsd:date",
+                  "role": "xsd:string",
+                  "primary_specialty": "xsd:string",
+                  "secondary_specialties": "xsd:string",
+                  "license_number": "xsd:string",
+                  "license_state_country": "xsd:string",
+                  "license_expiry": "xsd:date",
+                  "npi": "xsd:string",
+                  "languages": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "employment_status": "xsd:string",
+                  "credentialing_status": "xsd:string",
+                  "privileges": "xsd:string"
+                }
+              },
+              "PractitionerRole": {
+                "properties": {
+                  "role_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "org_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "dept_id": "xsd:string",
+                  "specialty": "xsd:string",
+                  "service_category": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "active": "xsd:boolean"
+                }
+              },
+              "Schedule": {
+                "properties": {
+                  "schedule_id": "xsd:string",
+                  "owner_type": "xsd:string",
+                  "owner_id": "xsd:string",
+                  "service_type": "xsd:string",
+                  "location": "geo:Point",
+                  "start": "xsd:dateTime",
+                  "end": "xsd:dateTime",
+                  "recurrence_rule": "xsd:string",
+                  "capacity": "xsd:integer",
+                  "timezone": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Slot": {
+                "properties": {
+                  "slot_id": "xsd:string",
+                  "schedule_id": "xsd:string",
+                  "start": "xsd:dateTime",
+                  "end": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "booking_reference": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Patient_Management": {
+        "collections": {
+          "Demographics_Registration": {
+            "entities": {
+              "Patient": {
+                "properties": {
+                  "patient_id": "xsd:string",
+                  "mrn": "xsd:string",
+                  "national_id": "xsd:string",
+                  "given_name": "xsd:string",
+                  "family_name": "xsd:string",
+                  "middle_name": "xsd:string",
+                  "birth_date": "xsd:date",
+                  "gender": "xsd:string",
+                  "marital_status": "xsd:string",
+                  "language": "xsd:string",
+                  "race_ethnicity": "xsd:string",
+                  "address_line": "xsd:string",
+                  "city": "xsd:string",
+                  "postal_code": "xsd:string",
+                  "country": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "email": "xsd:string",
+                  "preferred_communication": "xsd:string",
+                  "religion": "xsd:string",
+                  "occupation": "xsd:string",
+                  "primary_care_practitioner_id": "xsd:string",
+                  "organ_donor": "xsd:boolean",
+                  "deceased": "xsd:boolean",
+                  "deceased_date": "xsd:date",
+                  "privacy_flags": "xsd:string"
+                }
+              },
+              "RelatedPerson": {
+                "properties": {
+                  "related_person_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "relationship": "xsd:string",
+                  "name": "xsd:string",
+                  "phone": "xsd:string",
+                  "email": "xsd:string",
+                  "address_line": "xsd:string",
+                  "legal_guardian": "xsd:boolean",
+                  "emergency_contact": "xsd:boolean"
+                }
+              },
+              "InsuranceCoverage": {
+                "properties": {
+                  "coverage_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "payer_name": "xsd:string",
+                  "plan_name": "xsd:string",
+                  "policy_number": "xsd:string",
+                  "group_number": "xsd:string",
+                  "coverage_class": "xsd:string",
+                  "effective_start": "xsd:date",
+                  "effective_end": "xsd:date",
+                  "copay_amount": "xsd:float",
+                  "deductible_amount": "xsd:float",
+                  "out_of_pocket_max": "xsd:float",
+                  "network_indicator": "xsd:string",
+                  "subscriber_name": "xsd:string",
+                  "subscriber_id": "xsd:string",
+                  "relationship_to_subscriber": "xsd:string"
+                }
+              },
+              "Consent": {
+                "properties": {
+                  "consent_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "category": "xsd:string",
+                  "scope": "xsd:string",
+                  "status": "xsd:string",
+                  "signed_date": "xsd:date",
+                  "expires_date": "xsd:date",
+                  "policy_reference_url": "xsd:string",
+                  "actor_id": "xsd:string",
+                  "consent_document_ref": "xsd:string"
+                }
+              },
+              "AllergyIntolerance": {
+                "properties": {
+                  "allergy_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "substance_code": "xsd:string",
+                  "substance_display": "xsd:string",
+                  "code_system": "xsd:string",
+                  "criticality": "xsd:string",
+                  "verification_status": "xsd:string",
+                  "clinical_status": "xsd:string",
+                  "reaction_manifestation": "xsd:string",
+                  "onset_date": "xsd:date",
+                  "last_occurrence": "xsd:date",
+                  "comment": "xsd:string"
+                }
+              },
+              "Condition": {
+                "properties": {
+                  "condition_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "code": "xsd:string",
+                  "code_system": "xsd:string",
+                  "display": "xsd:string",
+                  "clinical_status": "xsd:string",
+                  "verification_status": "xsd:string",
+                  "onset_date": "xsd:date",
+                  "abatement_date": "xsd:date",
+                  "severity": "xsd:string",
+                  "body_site": "xsd:string",
+                  "asserter_practitioner_id": "xsd:string",
+                  "stage": "xsd:string",
+                  "note": "xsd:string"
+                }
+              },
+              "Immunization": {
+                "properties": {
+                  "immunization_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "vaccine_code": "xsd:string",
+                  "vaccine_code_system": "xsd:string",
+                  "vaccine_display": "xsd:string",
+                  "date_administered": "xsd:date",
+                  "dose_number": "xsd:integer",
+                  "series": "xsd:string",
+                  "route": "xsd:string",
+                  "site": "xsd:string",
+                  "lot_number": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "performer_id": "xsd:string",
+                  "adverse_event": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "CarePlan": {
+                "properties": {
+                  "careplan_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "category": "xsd:string",
+                  "status": "xsd:string",
+                  "intent": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "goals": "xsd:string",
+                  "activities": "xsd:string",
+                  "care_team_id": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Clinical_Care": {
+        "collections": {
+          "Encounters_Orders_Observations": {
+            "entities": {
+              "Appointment": {
+                "properties": {
+                  "appointment_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "dept_id": "xsd:string",
+                  "slot_id": "xsd:string",
+                  "start": "xsd:dateTime",
+                  "end": "xsd:dateTime",
+                  "service_type": "xsd:string",
+                  "status": "xsd:string",
+                  "priority": "xsd:string",
+                  "reason_code": "xsd:string",
+                  "telehealth": "xsd:boolean",
+                  "tele_session_id": "xsd:string"
+                }
+              },
+              "Encounter": {
+                "properties": {
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "class": "xsd:string",
+                  "type": "xsd:string",
+                  "status": "xsd:string",
+                  "priority": "xsd:string",
+                  "reason_code": "xsd:string",
+                  "service_provider_org_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "dept_id": "xsd:string",
+                  "room_id": "xsd:string",
+                  "bed_id": "xsd:string",
+                  "period_start": "xsd:dateTime",
+                  "period_end": "xsd:dateTime",
+                  "admission_source": "xsd:string",
+                  "discharge_disposition": "xsd:string"
+                }
+              },
+              "EpisodeOfCare": {
+                "properties": {
+                  "episode_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "managing_org_id": "xsd:string",
+                  "type": "xsd:string",
+                  "status": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date"
+                }
+              },
+              "ServiceRequest": {
+                "properties": {
+                  "request_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "code": "xsd:string",
+                  "code_system": "xsd:string",
+                  "display": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "intent": "xsd:string",
+                  "auth_required": "xsd:boolean",
+                  "requested_by_practitioner_id": "xsd:string",
+                  "performer_type": "xsd:string",
+                  "scheduled_start": "xsd:dateTime",
+                  "scheduled_end": "xsd:dateTime"
+                }
+              },
+              "Observation": {
+                "properties": {
+                  "observation_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "code": "xsd:string",
+                  "code_system": "xsd:string",
+                  "display": "xsd:string",
+                  "category": "xsd:string",
+                  "effective_time": "xsd:dateTime",
+                  "value_quantity": "xsd:float",
+                  "value_unit": "xsd:string",
+                  "value_text": "xsd:string",
+                  "reference_range_low": "xsd:float",
+                  "reference_range_high": "xsd:float",
+                  "interpretation": "xsd:string",
+                  "method": "xsd:string",
+                  "body_site": "xsd:string",
+                  "performer_id": "xsd:string",
+                  "device_id": "xsd:string"
+                }
+              },
+              "Procedure": {
+                "properties": {
+                  "procedure_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "code": "xsd:string",
+                  "code_system": "xsd:string",
+                  "display": "xsd:string",
+                  "category": "xsd:string",
+                  "status": "xsd:string",
+                  "performed_start": "xsd:dateTime",
+                  "performed_end": "xsd:dateTime",
+                  "performer_practitioner_id": "xsd:string",
+                  "location_facility_id": "xsd:string",
+                  "body_site": "xsd:string",
+                  "outcome": "xsd:string",
+                  "complication": "xsd:string",
+                  "used_device_ids": "xsd:string",
+                  "used_medication_ids": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Diagnostics": {
+        "collections": {
+          "Laboratory_Pathology_Imaging": {
+            "entities": {
+              "DiagnosticOrder": {
+                "properties": {
+                  "order_id": "xsd:string",
+                  "request_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "ordering_practitioner_id": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "reason_code": "xsd:string",
+                  "specimen_required": "xsd:boolean",
+                  "performing_lab_org_id": "xsd:string",
+                  "requested_date": "xsd:dateTime"
+                }
+              },
+              "Specimen": {
+                "properties": {
+                  "specimen_id": "xsd:string",
+                  "order_id": "xsd:string",
+                  "type_code": "xsd:string",
+                  "type_display": "xsd:string",
+                  "collection_date": "xsd:dateTime",
+                  "collector_id": "xsd:string",
+                  "body_site": "xsd:string",
+                  "container_type": "xsd:string",
+                  "quantity_value": "xsd:float",
+                  "quantity_unit": "xsd:string",
+                  "received_date": "xsd:dateTime",
+                  "condition": "xsd:string"
+                }
+              },
+              "LabTestPanel": {
+                "properties": {
+                  "panel_id": "xsd:string",
+                  "order_id": "xsd:string",
+                  "specimen_id": "xsd:string",
+                  "panel_code": "xsd:string",
+                  "panel_display": "xsd:string",
+                  "status": "xsd:string",
+                  "performing_lab_org_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime"
+                }
+              },
+              "LabResult": {
+                "properties": {
+                  "result_id": "xsd:string",
+                  "panel_id": "xsd:string",
+                  "test_code": "xsd:string",
+                  "test_display": "xsd:string",
+                  "code_system": "xsd:string",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "reference_range_low": "xsd:float",
+                  "reference_range_high": "xsd:float",
+                  "flag_abnormal": "xsd:string",
+                  "method": "xsd:string",
+                  "issued_time": "xsd:dateTime",
+                  "performer_id": "xsd:string",
+                  "comment": "xsd:string"
+                }
+              },
+              "ImagingStudy": {
+                "properties": {
+                  "imaging_id": "xsd:string",
+                  "order_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "modality": "xsd:string",
+                  "body_site": "xsd:string",
+                  "accession_number": "xsd:string",
+                  "study_instance_uid": "xsd:string",
+                  "series_count": "xsd:integer",
+                  "image_count": "xsd:integer",
+                  "radiation_dose_mgy_cm": "xsd:float",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "performing_facility_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "ImagingReport": {
+                "properties": {
+                  "report_id": "xsd:string",
+                  "imaging_id": "xsd:string",
+                  "findings": "xsd:string",
+                  "impression": "xsd:string",
+                  "recommendations": "xsd:string",
+                  "report_status": "xsd:string",
+                  "reported_by_practitioner_id": "xsd:string",
+                  "report_time": "xsd:dateTime",
+                  "cpt_code": "xsd:string"
+                }
+              },
+              "PathologyReport": {
+                "properties": {
+                  "path_report_id": "xsd:string",
+                  "specimen_id": "xsd:string",
+                  "diagnosis_code": "xsd:string",
+                  "diagnosis_display": "xsd:string",
+                  "morphology_code": "xsd:string",
+                  "grade_stage": "xsd:string",
+                  "margin_status": "xsd:string",
+                  "report_text": "xsd:string",
+                  "report_time": "xsd:dateTime",
+                  "reported_by_practitioner_id": "xsd:string"
+                }
+              },
+              "GenomicVariant": {
+                "properties": {
+                  "variant_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "gene_symbol": "xsd:string",
+                  "hgvs": "xsd:string",
+                  "variant_type": "xsd:string",
+                  "zygosity": "xsd:string",
+                  "clinical_significance": "xsd:string",
+                  "evidence_level": "xsd:string",
+                  "report_date": "xsd:date",
+                  "laboratory_org_id": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Medications_Pharmacy": {
+        "collections": {
+          "Medication_Management": {
+            "entities": {
+              "Medication": {
+                "properties": {
+                  "med_id": "xsd:string",
+                  "rxnorm_code": "xsd:string",
+                  "atc_code": "xsd:string",
+                  "generic_name": "xsd:string",
+                  "brand_name": "xsd:string",
+                  "form": "xsd:string",
+                  "strength_value": "xsd:float",
+                  "strength_unit": "xsd:string",
+                  "ingredients": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "ndc": "xsd:string",
+                  "route": "xsd:string",
+                  "storage_requirements": "xsd:string",
+                  "controlled_substance_schedule": "xsd:string"
+                }
+              },
+              "MedicationRequest": {
+                "properties": {
+                  "rx_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "med_id": "xsd:string",
+                  "dosage_text": "xsd:string",
+                  "dose_value": "xsd:float",
+                  "dose_unit": "xsd:string",
+                  "route": "xsd:string",
+                  "frequency": "xsd:string",
+                  "duration_days": "xsd:integer",
+                  "quantity": "xsd:float",
+                  "refills": "xsd:integer",
+                  "substitution_allowed": "xsd:boolean",
+                  "prescriber_id": "xsd:string",
+                  "intended_dispenser_org_id": "xsd:string",
+                  "status": "xsd:string",
+                  "auth_required": "xsd:boolean"
+                }
+              },
+              "MedicationDispense": {
+                "properties": {
+                  "dispense_id": "xsd:string",
+                  "rx_id": "xsd:string",
+                  "pharmacy_org_id": "xsd:string",
+                  "quantity": "xsd:float",
+                  "days_supply": "xsd:integer",
+                  "when_handed_over": "xsd:dateTime",
+                  "substitution": "xsd:string",
+                  "performer_id": "xsd:string",
+                  "lot_number": "xsd:string",
+                  "expiration_date": "xsd:date"
+                }
+              },
+              "MedicationAdministration": {
+                "properties": {
+                  "admin_id": "xsd:string",
+                  "rx_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "med_id": "xsd:string",
+                  "time": "xsd:dateTime",
+                  "dose_value": "xsd:float",
+                  "dose_unit": "xsd:string",
+                  "route": "xsd:string",
+                  "site": "xsd:string",
+                  "performed_by_id": "xsd:string",
+                  "status": "xsd:string",
+                  "reason_code": "xsd:string",
+                  "note": "xsd:string"
+                }
+              },
+              "MedicationStatement": {
+                "properties": {
+                  "statement_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "med_id": "xsd:string",
+                  "status": "xsd:string",
+                  "source": "xsd:string",
+                  "effective_start": "xsd:date",
+                  "effective_end": "xsd:date",
+                  "adherence": "xsd:string",
+                  "note": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Surgery_Anesthesia": {
+        "collections": {
+          "Perioperative_Care": {
+            "entities": {
+              "OperatingRoom": {
+                "properties": {
+                  "or_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "room_number": "xsd:string",
+                  "cleaning_status": "xsd:string",
+                  "laminar_flow": "xsd:boolean",
+                  "equipment_inventory": "xsd:string",
+                  "availability_status": "xsd:string"
+                }
+              },
+              "OperativePlan": {
+                "properties": {
+                  "op_plan_id": "xsd:string",
+                  "procedure_id": "xsd:string",
+                  "asa_class": "xsd:string",
+                  "anesthesia_type": "xsd:string",
+                  "anticipated_blood_loss_ml": "xsd:float",
+                  "prophylaxis_plan": "xsd:string",
+                  "implants_planned": "xsd:string",
+                  "consent_id": "xsd:string"
+                }
+              },
+              "AnesthesiaRecord": {
+                "properties": {
+                  "anes_rec_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "asa_class": "xsd:string",
+                  "airway_class": "xsd:string",
+                  "induction_time": "xsd:dateTime",
+                  "emergence_time": "xsd:dateTime",
+                  "agents": "xsd:string",
+                  "blocks": "xsd:string",
+                  "fluids_ml": "xsd:float",
+                  "urine_output_ml": "xsd:float",
+                  "events": "xsd:string",
+                  "complications": "xsd:string",
+                  "postop_pain_score": "xsd:float"
+                }
+              },
+              "Implant": {
+                "properties": {
+                  "implant_id": "xsd:string",
+                  "udi": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "lot_number": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "implant_site": "xsd:string",
+                  "laterality": "xsd:string",
+                  "expiration_date": "xsd:date"
+                }
+              },
+              "TransfusionEvent": {
+                "properties": {
+                  "transfusion_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "product_code": "xsd:string",
+                  "blood_group": "xsd:string",
+                  "volume_ml": "xsd:float",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "reaction": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Emergency_Care": {
+        "collections": {
+          "EMS_Triage_Resus": {
+            "entities": {
+              "EMSIncident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "dispatch_time": "xsd:dateTime",
+                  "scene_location": "geo:Point",
+                  "chief_complaint": "xsd:string",
+                  "acuity": "xsd:string",
+                  "first_response_time": "xsd:dateTime",
+                  "transported_to_facility_id": "xsd:string",
+                  "crew_ids": "xsd:string",
+                  "disposition": "xsd:string"
+                }
+              },
+              "TriageAssessment": {
+                "properties": {
+                  "triage_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "scale": "xsd:string",
+                  "acuity_level": "xsd:string",
+                  "chief_complaint": "xsd:string",
+                  "vitals": "xsd:string",
+                  "pain_score": "xsd:float",
+                  "initial_orders": "xsd:string",
+                  "triage_time": "xsd:dateTime"
+                },
+                "instances": {
+                  "ESI_1": { "scale": "ESI", "acuity_level": "1" },
+                  "ESI_2": { "scale": "ESI", "acuity_level": "2" },
+                  "ESI_3": { "scale": "ESI", "acuity_level": "3" },
+                  "ESI_4": { "scale": "ESI", "acuity_level": "4" },
+                  "ESI_5": { "scale": "ESI", "acuity_level": "5" }
+                }
+              },
+              "ResuscitationEvent": {
+                "properties": {
+                  "resus_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "event_time": "xsd:dateTime",
+                  "algorithm": "xsd:string",
+                  "interventions": "xsd:string",
+                  "rhythm": "xsd:string",
+                  "shocks": "xsd:integer",
+                  "drugs_administered": "xsd:string",
+                  "outcome": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Nursing_Rehabilitation_MentalHealth": {
+        "collections": {
+          "Nursing": {
+            "entities": {
+              "NursingAssessment": {
+                "properties": {
+                  "nurse_assess_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "assessment_time": "xsd:dateTime",
+                  "adls": "xsd:string",
+                  "braden_score": "xsd:integer",
+                  "fall_risk_score": "xsd:integer",
+                  "notes": "xsd:string"
+                }
+              },
+              "CareTask": {
+                "properties": {
+                  "task_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "task_type": "xsd:string",
+                  "scheduled_time": "xsd:dateTime",
+                  "performed_time": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "performer_id": "xsd:string",
+                  "result": "xsd:string"
+                }
+              }
+            }
+          },
+          "Rehabilitation": {
+            "entities": {
+              "TherapyPlan": {
+                "properties": {
+                  "therapy_plan_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "discipline": "xsd:string",
+                  "goals": "xsd:string",
+                  "frequency": "xsd:string",
+                  "duration_weeks": "xsd:integer",
+                  "status": "xsd:string"
+                }
+              },
+              "TherapySession": {
+                "properties": {
+                  "session_id": "xsd:string",
+                  "therapy_plan_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "date": "xsd:date",
+                  "activities": "xsd:string",
+                  "minutes": "xsd:integer",
+                  "tolerance": "xsd:string",
+                  "outcome_measure": "xsd:string",
+                  "therapist_id": "xsd:string"
+                }
+              },
+              "FunctionalStatus": {
+                "properties": {
+                  "fs_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "measure_name": "xsd:string",
+                  "score_value": "xsd:float",
+                  "score_scale": "xsd:string",
+                  "date": "xsd:date"
+                }
+              }
+            }
+          },
+          "MentalHealth": {
+            "entities": {
+              "PsychAssessment": {
+                "properties": {
+                  "psych_assess_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "tool_name": "xsd:string",
+                  "score": "xsd:float",
+                  "severity": "xsd:string",
+                  "suicide_risk": "xsd:string",
+                  "notes": "xsd:string",
+                  "assessor_id": "xsd:string",
+                  "date": "xsd:date"
+                }
+              },
+              "SafetyPlan": {
+                "properties": {
+                  "safety_plan_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "triggers": "xsd:string",
+                  "coping_strategies": "xsd:string",
+                  "contacts": "xsd:string",
+                  "means_restriction": "xsd:string",
+                  "review_date": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Telehealth_RemoteMonitoring": {
+        "collections": {
+          "Telemedicine_IoT": {
+            "entities": {
+              "Teleconsultation": {
+                "properties": {
+                  "tele_session_id": "xsd:string",
+                  "appointment_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "start": "xsd:dateTime",
+                  "end": "xsd:dateTime",
+                  "platform": "xsd:string",
+                  "connection_quality": "xsd:string",
+                  "consent_id": "xsd:string",
+                  "recording_reference": "xsd:string",
+                  "outcome_summary": "xsd:string"
+                }
+              },
+              "RemoteDevice": {
+                "properties": {
+                  "remote_device_id": "xsd:string",
+                  "device_type": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "firmware_version": "xsd:string",
+                  "connectivity": "xsd:string",
+                  "battery_level_percentage": "xsd:float",
+                  "assigned_patient_id": "xsd:string",
+                  "activation_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "RemoteMeasurement": {
+                "properties": {
+                  "rm_id": "xsd:string",
+                  "remote_device_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "code": "xsd:string",
+                  "code_system": "xsd:string",
+                  "display": "xsd:string",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "quality_flag": "xsd:string"
+                }
+              },
+              "ClinicalAlert": {
+                "properties": {
+                  "alert_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "source": "xsd:string",
+                  "severity": "xsd:string",
+                  "trigger": "xsd:string",
+                  "trigger_value": "xsd:string",
+                  "raised_time": "xsd:dateTime",
+                  "ack_time": "xsd:dateTime",
+                  "resolved_time": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "handler_id": "xsd:string",
+                  "action_taken": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Public_Health_Surveillance": {
+        "collections": {
+          "Case_Reporting_Contact_Tracing": {
+            "entities": {
+              "CaseReport": {
+                "properties": {
+                  "case_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "notifiable_condition_code": "xsd:string",
+                  "onset_date": "xsd:date",
+                  "report_date": "xsd:date",
+                  "reporting_org_id": "xsd:string",
+                  "report_status": "xsd:string",
+                  "exposure_location": "geo:Point",
+                  "risk_factors": "xsd:string"
+                }
+              },
+              "ContactTracingLink": {
+                "properties": {
+                  "link_id": "xsd:string",
+                  "index_case_id": "xsd:string",
+                  "contact_patient_id": "xsd:string",
+                  "exposure_date": "xsd:date",
+                  "exposure_type": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "outcome": "xsd:string"
+                }
+              },
+              "VaccinationCampaign": {
+                "properties": {
+                  "campaign_id": "xsd:string",
+                  "disease_target": "xsd:string",
+                  "vaccine_code": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "target_population": "xsd:string",
+                  "coverage_goal_percentage": "xsd:float",
+                  "delivered_doses": "xsd:integer"
+                }
+              },
+              "Outbreak": {
+                "properties": {
+                  "outbreak_id": "xsd:string",
+                  "disease": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "cases_confirmed": "xsd:integer",
+                  "cases_probable": "xsd:integer",
+                  "deaths": "xsd:integer",
+                  "geographic_extent": "xsd:string",
+                  "r0_estimate": "xsd:float",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Clinical_Research": {
+        "collections": {
+          "Trials_Observational": {
+            "entities": {
+              "Study": {
+                "properties": {
+                  "study_id": "xsd:string",
+                  "title": "xsd:string",
+                  "phase": "xsd:string",
+                  "design": "xsd:string",
+                  "condition_studied": "xsd:string",
+                  "intervention_types": "xsd:string",
+                  "sponsor_org_id": "xsd:string",
+                  "irb_approval_id": "xsd:string",
+                  "registration_id": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "StudySite": {
+                "properties": {
+                  "site_id": "xsd:string",
+                  "study_id": "xsd:string",
+                  "org_id": "xsd:string",
+                  "principal_investigator_id": "xsd:string",
+                  "status": "xsd:string",
+                  "activation_date": "xsd:date"
+                }
+              },
+              "Subject": {
+                "properties": {
+                  "subject_id": "xsd:string",
+                  "study_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "arm": "xsd:string",
+                  "consent_id": "xsd:string",
+                  "randomization_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "StudyVisit": {
+                "properties": {
+                  "visit_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "visit_name": "xsd:string",
+                  "scheduled_date": "xsd:date",
+                  "actual_date": "xsd:date",
+                  "procedures": "xsd:string",
+                  "samples_collected": "xsd:string"
+                }
+              },
+              "AdverseEvent": {
+                "properties": {
+                  "ae_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "onset_date": "xsd:date",
+                  "severity": "xsd:string",
+                  "serious": "xsd:boolean",
+                  "related_to_drug": "xsd:string",
+                  "outcome": "xsd:string",
+                  "action_taken": "xsd:string",
+                  "meddra_code": "xsd:string"
+                }
+              },
+              "ProtocolDeviation": {
+                "properties": {
+                  "pd_id": "xsd:string",
+                  "study_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "date": "xsd:date",
+                  "severity": "xsd:string",
+                  "description": "xsd:string",
+                  "impact": "xsd:string",
+                  "resolution": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Administration_Billing_Compliance": {
+        "collections": {
+          "Claims_Contracts_Authorizations": {
+            "entities": {
+              "PriorAuthorization": {
+                "properties": {
+                  "auth_id": "xsd:string",
+                  "request_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "payer_name": "xsd:string",
+                  "service_code": "xsd:string",
+                  "status": "xsd:string",
+                  "decision_date": "xsd:date",
+                  "valid_from": "xsd:date",
+                  "valid_to": "xsd:date",
+                  "notes": "xsd:string"
+                }
+              },
+              "Claim": {
+                "properties": {
+                  "claim_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "coverage_id": "xsd:string",
+                  "provider_org_id": "xsd:string",
+                  "claim_type": "xsd:string",
+                  "status": "xsd:string",
+                  "billable_period_start": "xsd:date",
+                  "billable_period_end": "xsd:date",
+                  "total_charge": "xsd:float",
+                  "total_cost": "xsd:float",
+                  "total_allowed": "xsd:float",
+                  "total_paid": "xsd:float",
+                  "diagnosis_codes": "xsd:string",
+                  "procedure_codes": "xsd:string"
+                }
+              },
+              "ClaimItem": {
+                "properties": {
+                  "claim_item_id": "xsd:string",
+                  "claim_id": "xsd:string",
+                  "service_date": "xsd:date",
+                  "cpt_code": "xsd:string",
+                  "modifiers": "xsd:string",
+                  "quantity": "xsd:float",
+                  "unit_price": "xsd:float",
+                  "line_charge": "xsd:float",
+                  "diagnosis_pointer": "xsd:string",
+                  "revenue_code": "xsd:string",
+                  "place_of_service": "xsd:string"
+                }
+              },
+              "Payment": {
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "claim_id": "xsd:string",
+                  "payer_name": "xsd:string",
+                  "payment_date": "xsd:date",
+                  "amount": "xsd:float",
+                  "method": "xsd:string",
+                  "transaction_reference": "xsd:string",
+                  "adjustments": "xsd:string"
+                }
+              },
+              "Invoice": {
+                "properties": {
+                  "invoice_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "amount_due": "xsd:float",
+                  "amount_paid": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "Contract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "org_id": "xsd:string",
+                  "payer_name": "xsd:string",
+                  "contract_type": "xsd:string",
+                  "effective_start": "xsd:date",
+                  "effective_end": "xsd:date",
+                  "reimbursement_model": "xsd:string",
+                  "rate_schedule_ref": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Quality_Safety_Governance": {
+        "collections": {
+          "Metrics_Incidents_Audits": {
+            "entities": {
+              "QualityMeasure": {
+                "properties": {
+                  "measure_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "definition": "xsd:string",
+                  "numerator": "xsd:float",
+                  "denominator": "xsd:float",
+                  "rate": "xsd:float",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "target": "xsd:float",
+                  "benchmark": "xsd:float"
+                }
+              },
+              "SafetyIncident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "category": "xsd:string",
+                  "severity": "xsd:string",
+                  "event_time": "xsd:dateTime",
+                  "description": "xsd:string",
+                  "immediate_actions": "xsd:string",
+                  "harm": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "InfectionControlCase": {
+                "properties": {
+                  "ic_case_id": "xsd:string",
+                  "encounter_id": "xsd:string",
+                  "organism": "xsd:string",
+                  "specimen_id": "xsd:string",
+                  "isolation_precautions": "xsd:string",
+                  "onset_date": "xsd:date",
+                  "resolved_date": "xsd:date",
+                  "source": "xsd:string"
+                }
+              },
+              "AuditEvent": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "user_id": "xsd:string",
+                  "role": "xsd:string",
+                  "action": "xsd:string",
+                  "resource_type": "xsd:string",
+                  "resource_id": "xsd:string",
+                  "outcome": "xsd:string",
+                  "ip_address": "xsd:string",
+                  "provenance_id": "xsd:string"
+                }
+              },
+              "AccreditationAudit": {
+                "properties": {
+                  "acc_audit_id": "xsd:string",
+                  "org_id": "xsd:string",
+                  "standard_set": "xsd:string",
+                  "audit_date": "xsd:date",
+                  "score": "xsd:float",
+                  "nonconformities": "xsd:string",
+                  "corrective_actions": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Medical_Device_Facilities_Supply": {
+        "collections": {
+          "Devices_Assets_Capacity": {
+            "entities": {
+              "Device": {
+                "properties": {
+                  "device_id": "xsd:string",
+                  "udi": "xsd:string",
+                  "type_code": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "software_version": "xsd:string",
+                  "status": "xsd:string",
+                  "location_facility_id": "xsd:string",
+                  "location_room_id": "xsd:string",
+                  "calibration_due": "xsd:date",
+                  "maintenance_contract_ref": "xsd:string"
+                }
+              },
+              "DeviceMetric": {
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "device_id": "xsd:string",
+                  "code": "xsd:string",
+                  "unit": "xsd:string",
+                  "last_value": "xsd:float",
+                  "last_updated": "xsd:dateTime",
+                  "operating_mode": "xsd:string"
+                }
+              },
+              "MaintenanceRecord": {
+                "properties": {
+                  "maint_id": "xsd:string",
+                  "device_id": "xsd:string",
+                  "type": "xsd:string",
+                  "performed_date": "xsd:date",
+                  "performed_by": "xsd:string",
+                  "result": "xsd:string",
+                  "next_due_date": "xsd:date"
+                }
+              },
+              "CalibrationRecord": {
+                "properties": {
+                  "cal_id": "xsd:string",
+                  "device_id": "xsd:string",
+                  "date": "xsd:date",
+                  "method": "xsd:string",
+                  "standards_ref": "xsd:string",
+                  "result": "xsd:string",
+                  "due_date": "xsd:date"
+                }
+              },
+              "SterilizationCycle": {
+                "properties": {
+                  "cycle_id": "xsd:string",
+                  "device_id": "xsd:string",
+                  "cycle_type": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "parameters": "xsd:string",
+                  "result": "xsd:string",
+                  "operator_id": "xsd:string"
+                }
+              },
+              "Location": {
+                "properties": {
+                  "location_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "floor": "xsd:string",
+                  "wing": "xsd:string",
+                  "coordinates": "geo:Point"
+                }
+              },
+              "Room": {
+                "properties": {
+                  "room_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "capacity": "xsd:integer",
+                  "negative_pressure": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "Bed": {
+                "properties": {
+                  "bed_id": "xsd:string",
+                  "room_id": "xsd:string",
+                  "bed_label": "xsd:string",
+                  "status": "xsd:string",
+                  "isolation_required": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Inventory_SupplyChain_ColdChain": {
+            "entities": {
+              "InventoryItem": {
+                "properties": {
+                  "item_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "description": "xsd:string",
+                  "code": "xsd:string",
+                  "category": "xsd:string",
+                  "quantity_on_hand": "xsd:float",
+                  "unit": "xsd:string",
+                  "reorder_point": "xsd:float",
+                  "expiration_date": "xsd:date",
+                  "lot_number": "xsd:string",
+                  "storage_condition": "xsd:string"
+                }
+              },
+              "StockTransaction": {
+                "properties": {
+                  "txn_id": "xsd:string",
+                  "item_id": "xsd:string",
+                  "type": "xsd:string",
+                  "quantity": "xsd:float",
+                  "unit": "xsd:string",
+                  "txn_time": "xsd:dateTime",
+                  "source_dest": "xsd:string",
+                  "responsible_id": "xsd:string",
+                  "reference": "xsd:string"
+                }
+              },
+              "PurchaseOrder": {
+                "properties": {
+                  "po_id": "xsd:string",
+                  "supplier_org_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "order_date": "xsd:date",
+                  "status": "xsd:string",
+                  "total_amount": "xsd:float",
+                  "expected_delivery_date": "xsd:date"
+                }
+              },
+              "ColdChainUnit": {
+                "properties": {
+                  "ccu_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "type": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "capacity_liters": "xsd:float",
+                  "temperature_setpoint_c": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "TemperatureLog": {
+                "properties": {
+                  "log_id": "xsd:string",
+                  "ccu_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "temperature_c": "xsd:float",
+                  "humidity_percentage": "xsd:float",
+                  "alarm": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "IT_Interoperability_Security": {
+        "collections": {
+          "Data_Governance_Exchange": {
+            "entities": {
+              "DocumentReference": {
+                "properties": {
+                  "doc_id": "xsd:string",
+                  "patient_id": "xsd:string",
+                  "type": "xsd:string",
+                  "title": "xsd:string",
+                  "author": "xsd:string",
+                  "created": "xsd:dateTime",
+                  "content_type": "xsd:string",
+                  "size_bytes": "xsd:integer",
+                  "url": "xsd:string",
+                  "hash": "xsd:string"
+                }
+              },
+              "DataProvenance": {
+                "properties": {
+                  "provenance_id": "xsd:string",
+                  "activity": "xsd:string",
+                  "entity_type": "xsd:string",
+                  "entity_id": "xsd:string",
+                  "agent_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "signature": "xsd:string"
+                }
+              },
+              "HIEExchangeEvent": {
+                "properties": {
+                  "exchange_id": "xsd:string",
+                  "source_org_id": "xsd:string",
+                  "destination_org_id": "xsd:string",
+                  "payload_type": "xsd:string",
+                  "payload_size_bytes": "xsd:integer",
+                  "timestamp": "xsd:dateTime",
+                  "protocol": "xsd:string",
+                  "outcome": "xsd:string"
+                }
+              },
+              "UserAccount": {
+                "properties": {
+                  "user_id": "xsd:string",
+                  "username": "xsd:string",
+                  "display_name": "xsd:string",
+                  "email": "xsd:string",
+                  "role": "xsd:string",
+                  "status": "xsd:string",
+                  "last_login": "xsd:dateTime",
+                  "mfa_enabled": "xsd:boolean"
+                }
+              },
+              "RolePermission": {
+                "properties": {
+                  "role_perm_id": "xsd:string",
+                  "role": "xsd:string",
+                  "resource": "xsd:string",
+                  "action": "xsd:string",
+                  "effect": "xsd:string"
+                }
+              },
+              "AccessControlPolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "scope": "xsd:string",
+                  "condition": "xsd:string",
+                  "effect": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "BELONGS_TO_ORG": { "domain": "Facility", "range": "HealthcareOrganization" },
+      "HAS_DEPARTMENT": { "domain": "Facility", "range": "Department" },
+      "EMPLOYS_PRACTITIONER": { "domain": "HealthcareOrganization", "range": "Practitioner" },
+      "HAS_ROLE": { "domain": "Practitioner", "range": "PractitionerRole" },
+      "ASSIGNED_TO_TEAM": { "domain": "Practitioner", "range": "CareTeam" },
+      "HAS_SCHEDULE": { "domain": "Practitioner", "range": "Schedule" },
+      "HAS_SLOT": { "domain": "Schedule", "range": "Slot" },
+
+      "HAS_APPOINTMENT": { "domain": "Patient", "range": "Appointment" },
+      "ENCOUNTER_OF": { "domain": "Encounter", "range": "Patient" },
+      "ENCOUNTER_AT_FACILITY": { "domain": "Encounter", "range": "Facility" },
+      "ENCOUNTER_IN_DEPT": { "domain": "Encounter", "range": "Department" },
+      "ENCOUNTER_IN_ROOM": { "domain": "Encounter", "range": "Room" },
+      "ASSIGNED_BED": { "domain": "Encounter", "range": "Bed" },
+      "EPISODE_FOR_PATIENT": { "domain": "EpisodeOfCare", "range": "Patient" },
+      "REQUEST_FOR_ENCOUNTER": { "domain": "ServiceRequest", "range": "Encounter" },
+      "OBSERVATION_OF_ENCOUNTER": { "domain": "Observation", "range": "Encounter" },
+      "OBSERVATION_OF_PATIENT": { "domain": "Observation", "range": "Patient" },
+      "PROCEDURE_OF_PATIENT": { "domain": "Procedure", "range": "Patient" },
+      "PROCEDURE_IN_ENCOUNTER": { "domain": "Procedure", "range": "Encounter" },
+      "PERFORMED_BY": { "domain": "Procedure", "range": "Practitioner" },
+
+      "ORDERED_BY": { "domain": "DiagnosticOrder", "range": "Practitioner" },
+      "ORDER_FOR_PATIENT": { "domain": "DiagnosticOrder", "range": "Patient" },
+      "ORDER_HAS_SPECIMEN": { "domain": "DiagnosticOrder", "range": "Specimen" },
+      "PANEL_OF_ORDER": { "domain": "LabTestPanel", "range": "DiagnosticOrder" },
+      "HAS_LAB_RESULT": { "domain": "LabTestPanel", "range": "LabResult" },
+      "IMAGING_OF_ORDER": { "domain": "ImagingStudy", "range": "DiagnosticOrder" },
+      "HAS_IMAGING_REPORT": { "domain": "ImagingStudy", "range": "ImagingReport" },
+      "PATHOLOGY_OF_SPECIMEN": { "domain": "PathologyReport", "range": "Specimen" },
+
+      "PATIENT_DIAGNOSED_WITH": { "domain": "Patient", "range": "Condition" },
+      "PATIENT_HAS_ALLERGY": { "domain": "Patient", "range": "AllergyIntolerance" },
+      "PATIENT_IMMUNIZED_WITH": { "domain": "Patient", "range": "Immunization" },
+      "PATIENT_CAREPLAN": { "domain": "Patient", "range": "CarePlan" },
+      "RELATIVE_OF": { "domain": "RelatedPerson", "range": "Patient" },
+
+      "PRESCRIBED_FOR_PATIENT": { "domain": "MedicationRequest", "range": "Patient" },
+      "DISPENSES_FOR_RX": { "domain": "MedicationDispense", "range": "MedicationRequest" },
+      "ADMINISTERED_FROM_RX": { "domain": "MedicationAdministration", "range": "MedicationRequest" },
+      "MED_STATEMENT_OF_PATIENT": { "domain": "MedicationStatement", "range": "Patient" },
+
+      "USES_OPERATING_ROOM": { "domain": "Procedure", "range": "OperatingRoom" },
+      "HAS_OPERATIVE_PLAN": { "domain": "Procedure", "range": "OperativePlan" },
+      "HAS_ANESTHESIA_RECORD": { "domain": "Encounter", "range": "AnesthesiaRecord" },
+      "USES_IMPLANT": { "domain": "Procedure", "range": "Implant" },
+      "HAS_TRANSFUSION_EVENT": { "domain": "Encounter", "range": "TransfusionEvent" },
+
+      "TRIAGE_FOR_ENCOUNTER": { "domain": "TriageAssessment", "range": "Encounter" },
+      "EMS_TO_FACILITY": { "domain": "EMSIncident", "range": "Facility" },
+      "RESUS_FOR_ENCOUNTER": { "domain": "ResuscitationEvent", "range": "Encounter" },
+
+      "NURSING_ASSESSMENT_FOR": { "domain": "NursingAssessment", "range": "Encounter" },
+      "CARE_TASK_FOR": { "domain": "CareTask", "range": "Encounter" },
+      "THERAPY_PLAN_FOR": { "domain": "TherapyPlan", "range": "Patient" },
+      "SESSION_OF_PLAN": { "domain": "TherapySession", "range": "TherapyPlan" },
+      "FUNCTIONAL_STATUS_OF": { "domain": "FunctionalStatus", "range": "Patient" },
+      "PSYCH_ASSESS_FOR": { "domain": "PsychAssessment", "range": "Encounter" },
+      "SAFETY_PLAN_FOR": { "domain": "SafetyPlan", "range": "Patient" },
+
+      "TELE_FOR_APPOINTMENT": { "domain": "Teleconsultation", "range": "Appointment" },
+      "DEVICE_ASSIGNED_TO": { "domain": "RemoteDevice", "range": "Patient" },
+      "REMOTE_MEASUREMENT_FROM": { "domain": "RemoteMeasurement", "range": "RemoteDevice" },
+      "ALERT_FOR_PATIENT": { "domain": "ClinicalAlert", "range": "Patient" },
+
+      "CASE_REPORT_FOR": { "domain": "CaseReport", "range": "Patient" },
+      "CONTACT_OF_CASE": { "domain": "ContactTracingLink", "range": "CaseReport" },
+      "OUTBREAK_HAS_CASE": { "domain": "Outbreak", "range": "CaseReport" },
+      "CAMPAIGN_IMMUNIZATION": { "domain": "VaccinationCampaign", "range": "Immunization" },
+
+      "STUDY_HAS_SITE": { "domain": "Study", "range": "StudySite" },
+      "SITE_OF_ORG": { "domain": "StudySite", "range": "HealthcareOrganization" },
+      "STUDY_HAS_SUBJECT": { "domain": "Study", "range": "Subject" },
+      "VISIT_OF_SUBJECT": { "domain": "StudyVisit", "range": "Subject" },
+      "AE_OF_SUBJECT": { "domain": "AdverseEvent", "range": "Subject" },
+
+      "CLAIM_FOR_ENCOUNTER": { "domain": "Claim", "range": "Encounter" },
+      "CLAIM_HAS_ITEM": { "domain": "Claim", "range": "ClaimItem" },
+      "PAYMENT_FOR_CLAIM": { "domain": "Payment", "range": "Claim" },
+      "AUTH_FOR_REQUEST": { "domain": "PriorAuthorization", "range": "ServiceRequest" },
+      "PATIENT_COVERED_BY": { "domain": "Patient", "range": "InsuranceCoverage" },
+
+      "QUALITY_MEASURE_FOR_ORG": { "domain": "QualityMeasure", "range": "HealthcareOrganization" },
+      "INCIDENT_FOR_ENCOUNTER": { "domain": "SafetyIncident", "range": "Encounter" },
+      "INFECTION_IN_ENCOUNTER": { "domain": "InfectionControlCase", "range": "Encounter" },
+      "AUDIT_BY_USER": { "domain": "AuditEvent", "range": "UserAccount" },
+      "AUDIT_OF_RESOURCE": { "domain": "AuditEvent", "range": "DocumentReference" },
+
+      "DEVICE_IN_ROOM": { "domain": "Device", "range": "Room" },
+      "METRIC_OF_DEVICE": { "domain": "DeviceMetric", "range": "Device" },
+      "MAINTENANCE_OF_DEVICE": { "domain": "MaintenanceRecord", "range": "Device" },
+      "CALIBRATION_OF_DEVICE": { "domain": "CalibrationRecord", "range": "Device" },
+      "STERILIZATION_OF_DEVICE": { "domain": "SterilizationCycle", "range": "Device" },
+
+      "ITEM_STORED_AT": { "domain": "InventoryItem", "range": "Facility" },
+      "STOCK_TXN_FOR_ITEM": { "domain": "StockTransaction", "range": "InventoryItem" },
+      "PO_FOR_FACILITY": { "domain": "PurchaseOrder", "range": "Facility" },
+      "CCU_AT_FACILITY": { "domain": "ColdChainUnit", "range": "Facility" },
+      "TEMPLOG_FOR_CCU": { "domain": "TemperatureLog", "range": "ColdChainUnit" },
+
+      "DOC_FOR_PATIENT": { "domain": "DocumentReference", "range": "Patient" },
+      "PROVENANCE_OF_DOC": { "domain": "DataProvenance", "range": "DocumentReference" },
+      "HIE_EVENT_SOURCE": { "domain": "HIEExchangeEvent", "range": "HealthcareOrganization" },
+      "ACCESS_POLICY_FOR_ROLE": { "domain": "AccessControlPolicy", "range": "RolePermission" }
+    }
+  }
+}

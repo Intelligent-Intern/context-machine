@@ -1,0 +1,2207 @@
+{
+  "ontology": {
+    "name": "legal_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/legal-service#",
+    "description": "Comprehensive, implementation-ready ontology for legal services: firm operations, client lifecycle, matter management, litigation, transactions, IP, compliance & risk, billing & finance, knowledge & research, e-discovery, court/agency interfaces, human resources, and security/privacy.",
+    "namespaces": {
+      "legal": "http://context-machine.org/ontology/legal-service#",
+      "firm": "http://context-machine.org/ontology/legal-service/firm#",
+      "client": "http://context-machine.org/ontology/legal-service/client#",
+      "matter": "http://context-machine.org/ontology/legal-service/matter#",
+      "lit": "http://context-machine.org/ontology/legal-service/litigation#",
+      "trans": "http://context-machine.org/ontology/legal-service/transaction#",
+      "contract": "http://context-machine.org/ontology/legal-service/contract#",
+      "ip": "http://context-machine.org/ontology/legal-service/ip#",
+      "billing": "http://context-machine.org/ontology/legal-service/billing#",
+      "comp": "http://context-machine.org/ontology/legal-service/compliance#",
+      "risk": "http://context-machine.org/ontology/legal-service/risk#",
+      "km": "http://context-machine.org/ontology/legal-service/knowledge#",
+      "edis": "http://context-machine.org/ontology/legal-service/ediscovery#",
+      "court": "http://context-machine.org/ontology/legal-service/court#",
+      "hr": "http://context-machine.org/ontology/legal-service/hr#",
+      "sec": "http://context-machine.org/ontology/legal-service/security#",
+      "taxo": "http://context-machine.org/ontology/legal-service/taxonomies#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "time": "http://www.w3.org/2006/time#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "dc": "http://purl.org/dc/terms/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "org": "http://www.w3.org/ns/org#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#",
+      "qudt": "http://qudt.org/schema/qudt/",
+      "unit": "http://qudt.org/vocab/unit#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/terms/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "http://www.w3.org/2004/02/skos/core#",
+      "http://schema.org/",
+      "http://www.w3.org/ns/org#",
+      "http://www.w3.org/2006/vcard/ns#"
+    ],
+    "frames": {
+      "Firm_Operations": {
+        "collections": {
+          "Firm_Structure": {
+            "entities": {
+              "LawFirm": {
+                "properties": {
+                  "firm_id": "xsd:string",
+                  "firm_name": "xsd:string",
+                  "legal_form": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "tax_id": "xsd:string",
+                  "duns_number": "xsd:string",
+                  "headquarters": "schema:PostalAddress",
+                  "timezone": "xsd:string",
+                  "website": "xsd:string",
+                  "phone": "xsd:string",
+                  "email": "xsd:string",
+                  "active_since": "xsd:date",
+                  "employee_count": "xsd:integer",
+                  "attorney_count": "xsd:integer",
+                  "practice_areas": "xsd:string",
+                  "insurance_policy_number": "xsd:string",
+                  "professional_liability_limit": "xsd:float",
+                  "currency_default": "xsd:string",
+                  "language_default": "xsd:string",
+                  "conflicts_policy_ref": "xsd:string",
+                  "data_retention_policy_ref": "xsd:string"
+                }
+              },
+              "Office": {
+                "properties": {
+                  "office_id": "xsd:string",
+                  "office_name": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "geo_location": "geo:Point",
+                  "timezone": "xsd:string",
+                  "phone": "xsd:string",
+                  "email": "xsd:string",
+                  "opening_date": "xsd:date",
+                  "closing_date": "xsd:date",
+                  "floor_area_m2": "xsd:float"
+                }
+              },
+              "Department": {
+                "properties": {
+                  "department_id": "xsd:string",
+                  "department_name": "xsd:string",
+                  "description": "xsd:string",
+                  "cost_center_code": "xsd:string",
+                  "head_person_id": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              },
+              "PracticeGroup": {
+                "properties": {
+                  "group_id": "xsd:string",
+                  "group_name": "xsd:string",
+                  "practice_area": "xsd:string",
+                  "lead_attorney_id": "xsd:string",
+                  "description": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              },
+              "Team": {
+                "properties": {
+                  "team_id": "xsd:string",
+                  "team_name": "xsd:string",
+                  "purpose": "xsd:string",
+                  "lead_id": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              },
+              "Vendor": {
+                "properties": {
+                  "vendor_id": "xsd:string",
+                  "vendor_name": "xsd:string",
+                  "service_category": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "contact": "schema:ContactPoint",
+                  "contract_id": "xsd:string",
+                  "sla_level": "xsd:string",
+                  "security_review_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Human_Resources": {
+        "collections": {
+          "People": {
+            "entities": {
+              "Person": {
+                "properties": {
+                  "person_id": "xsd:string",
+                  "first_name": "xsd:string",
+                  "last_name": "xsd:string",
+                  "full_name": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "mobile": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "timezone": "xsd:string",
+                  "language": "xsd:string",
+                  "employment_status": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "role_ids": "xsd:string",
+                  "manager_id": "xsd:string"
+                }
+              },
+              "Attorney": {
+                "properties": {
+                  "attorney_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "bar_numbers": "xsd:string",
+                  "bar_admissions": "xsd:string",
+                  "years_experience": "xsd:integer",
+                  "practice_areas": "xsd:string",
+                  "status": "xsd:string",
+                  "rate_default": "xsd:float",
+                  "utilization_target_percentage": "xsd:float",
+                  "billable_target_hours": "xsd:float"
+                }
+              },
+              "Paralegal": {
+                "properties": {
+                  "paralegal_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "certifications": "xsd:string",
+                  "practice_areas": "xsd:string",
+                  "rate_default": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "Staff": {
+                "properties": {
+                  "staff_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "position_title": "xsd:string",
+                  "department_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Role": {
+                "properties": {
+                  "role_id": "xsd:string",
+                  "role_name": "xsd:string",
+                  "description": "xsd:string",
+                  "permissions": "xsd:string"
+                }
+              },
+              "License": {
+                "properties": {
+                  "license_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "jurisdiction": "xsd:string",
+                  "license_type": "xsd:string",
+                  "bar_number": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "good_standing": "xsd:boolean"
+                }
+              },
+              "CLECourse": {
+                "properties": {
+                  "course_id": "xsd:string",
+                  "title": "xsd:string",
+                  "provider": "xsd:string",
+                  "category": "xsd:string",
+                  "credit_hours": "xsd:float",
+                  "ethics_hours": "xsd:float",
+                  "jurisdiction": "xsd:string",
+                  "date": "xsd:date"
+                }
+              },
+              "CLERecord": {
+                "properties": {
+                  "cle_record_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "course_id": "xsd:string",
+                  "completion_date": "xsd:date",
+                  "credits_earned": "xsd:float",
+                  "ethics_credits_earned": "xsd:float"
+                }
+              },
+              "Availability": {
+                "properties": {
+                  "availability_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "date": "xsd:date",
+                  "available_hours": "xsd:float",
+                  "status": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Client_Lifecycle": {
+        "collections": {
+          "Client_Management": {
+            "entities": {
+              "Client": {
+                "properties": {
+                  "client_id": "xsd:string",
+                  "client_type": "xsd:string",
+                  "organization_name": "xsd:string",
+                  "person_first_name": "xsd:string",
+                  "person_last_name": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "tax_id": "xsd:string",
+                  "industry": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "primary_contact_id": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "onboarding_date": "xsd:date",
+                  "status": "xsd:string",
+                  "risk_rating": "xsd:string",
+                  "billing_currency": "xsd:string",
+                  "payment_terms_days": "xsd:integer",
+                  "preferred_invoice_format": "xsd:string",
+                  "ebilling_vendor": "xsd:string"
+                }
+              },
+              "ClientContact": {
+                "properties": {
+                  "contact_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role_title": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "is_billing_contact": "xsd:boolean",
+                  "is_legal_contact": "xsd:boolean"
+                }
+              },
+              "EngagementLetter": {
+                "properties": {
+                  "engagement_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "matter_scope": "xsd:string",
+                  "fee_arrangement_id": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "termination_date": "xsd:date",
+                  "signed_by_client": "xsd:boolean",
+                  "signed_by_firm": "xsd:boolean",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "ConflictCheck": {
+                "properties": {
+                  "conflict_check_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "search_terms": "xsd:string",
+                  "hits_count": "xsd:integer",
+                  "decision": "xsd:string",
+                  "decision_date": "xsd:date",
+                  "approver_person_id": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "KYCCheck": {
+                "properties": {
+                  "kyc_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "document_list": "xsd:string",
+                  "pep_status": "xsd:string",
+                  "sanction_list_hits": "xsd:integer",
+                  "risk_score": "xsd:float",
+                  "completed_date": "xsd:date",
+                  "review_cycle_months": "xsd:integer"
+                }
+              },
+              "Opportunity": {
+                "properties": {
+                  "opportunity_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "title": "xsd:string",
+                  "practice_area": "xsd:string",
+                  "probability_percentage": "xsd:float",
+                  "estimated_fees": "xsd:float",
+                  "stage": "xsd:string",
+                  "close_date_expected": "xsd:date",
+                  "owner_person_id": "xsd:string"
+                }
+              },
+              "Proposal": {
+                "properties": {
+                  "proposal_id": "xsd:string",
+                  "opportunity_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "submitted_date": "xsd:date",
+                  "status": "xsd:string",
+                  "document_ref": "xsd:string",
+                  "valid_until": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Matter_Management": {
+        "collections": {
+          "Core_Matter": {
+            "entities": {
+              "Matter": {
+                "properties": {
+                  "matter_id": "xsd:string",
+                  "matter_number": "xsd:string",
+                  "client_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "practice_area": "xsd:string",
+                  "matter_type": "xsd:string",
+                  "status": "xsd:string",
+                  "open_date": "xsd:date",
+                  "close_date": "xsd:date",
+                  "responsible_attorney_id": "xsd:string",
+                  "team_member_ids": "xsd:string",
+                  "confidentiality_level": "xsd:string",
+                  "budget_amount": "xsd:float",
+                  "budget_currency": "xsd:string",
+                  "billing_model": "xsd:string",
+                  "phase": "xsd:string",
+                  "priority": "xsd:string",
+                  "related_matter_ids": "xsd:string"
+                }
+              },
+              "MatterPhase": {
+                "properties": {
+                  "phase_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "phase_name": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "percent_complete": "xsd:float",
+                  "health_score": "xsd:float",
+                  "notes": "xsd:string"
+                }
+              },
+              "Task": {
+                "properties": {
+                  "task_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "assignee_person_id": "xsd:string",
+                  "task_type": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "start_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "completed_date": "xsd:date",
+                  "estimated_hours": "xsd:float",
+                  "actual_hours": "xsd:float"
+                }
+              },
+              "Subtask": {
+                "properties": {
+                  "subtask_id": "xsd:string",
+                  "task_id": "xsd:string",
+                  "title": "xsd:string",
+                  "status": "xsd:string",
+                  "assignee_person_id": "xsd:string",
+                  "due_date": "xsd:date"
+                }
+              },
+              "CalendarEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "title": "xsd:string",
+                  "location": "schema:Place",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "all_day": "xsd:boolean",
+                  "organizer_person_id": "xsd:string",
+                  "attendee_ids": "xsd:string",
+                  "reminder_minutes": "xsd:integer"
+                }
+              },
+              "Deadline": {
+                "properties": {
+                  "deadline_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "rule_source": "xsd:string",
+                  "trigger_event": "xsd:string",
+                  "due_date": "xsd:date",
+                  "time_zone": "xsd:string",
+                  "is_critical": "xsd:boolean",
+                  "safety_margin_days": "xsd:integer"
+                }
+              },
+              "Communication": {
+                "properties": {
+                  "comm_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "comm_type": "xsd:string",
+                  "direction": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "sender_id": "xsd:string",
+                  "recipient_ids": "xsd:string",
+                  "channel": "xsd:string",
+                  "subject": "xsd:string",
+                  "body_excerpt": "xsd:string",
+                  "document_ref": "xsd:string",
+                  "privileged": "xsd:boolean"
+                }
+              },
+              "Note": {
+                "properties": {
+                  "note_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "author_person_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "text": "xsd:string",
+                  "visibility": "xsd:string"
+                }
+              },
+              "Document": {
+                "properties": {
+                  "document_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "title": "xsd:string",
+                  "document_type": "xsd:string",
+                  "created_by_person_id": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "updated_at": "xsd:dateTime",
+                  "version_count": "xsd:integer",
+                  "storage_uri": "xsd:string",
+                  "hash_sha256": "xsd:string",
+                  "confidentiality_level": "xsd:string",
+                  "retention_category": "xsd:string",
+                  "is_evidence": "xsd:boolean",
+                  "is_privileged": "xsd:boolean"
+                }
+              },
+              "DocumentVersion": {
+                "properties": {
+                  "version_id": "xsd:string",
+                  "document_id": "xsd:string",
+                  "version_number": "xsd:string",
+                  "author_person_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "change_summary": "xsd:string",
+                  "storage_uri": "xsd:string",
+                  "hash_sha256": "xsd:string"
+                }
+              },
+              "Template": {
+                "properties": {
+                  "template_id": "xsd:string",
+                  "template_name": "xsd:string",
+                  "category": "xsd:string",
+                  "storage_uri": "xsd:string",
+                  "version": "xsd:string",
+                  "owner_group_id": "xsd:string"
+                }
+              },
+              "Clause": {
+                "properties": {
+                  "clause_id": "xsd:string",
+                  "clause_name": "xsd:string",
+                  "text": "xsd:string",
+                  "jurisdiction": "xsd:string",
+                  "language": "xsd:string",
+                  "risk_rating": "xsd:string"
+                }
+              },
+              "Checklist": {
+                "properties": {
+                  "checklist_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "title": "xsd:string",
+                  "status": "xsd:string",
+                  "owner_person_id": "xsd:string"
+                }
+              },
+              "ChecklistItem": {
+                "properties": {
+                  "item_id": "xsd:string",
+                  "checklist_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "status": "xsd:string",
+                  "due_date": "xsd:date",
+                  "assignee_person_id": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Litigation_Process": {
+        "collections": {
+          "Litigation_Core": {
+            "entities": {
+              "Case": {
+                "properties": {
+                  "case_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "court_id": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "case_number": "xsd:string",
+                  "case_title": "xsd:string",
+                  "case_type": "xsd:string",
+                  "stage": "xsd:string",
+                  "filed_date": "xsd:date",
+                  "closed_date": "xsd:date",
+                  "judge_ids": "xsd:string",
+                  "disposition": "xsd:string"
+                }
+              },
+              "Court": {
+                "properties": {
+                  "court_id": "xsd:string",
+                  "court_name": "xsd:string",
+                  "level": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "e_filing_supported": "xsd:boolean",
+                  "filing_portal_url": "xsd:string",
+                  "calendar_url": "xsd:string"
+                }
+              },
+              "Jurisdiction": {
+                "properties": {
+                  "jurisdiction_id": "xsd:string",
+                  "name": "xsd:string",
+                  "country": "xsd:string",
+                  "subdivision": "xsd:string",
+                  "timezone": "xsd:string",
+                  "currency": "xsd:string",
+                  "legal_system": "xsd:string"
+                }
+              },
+              "Judge": {
+                "properties": {
+                  "judge_id": "xsd:string",
+                  "name": "xsd:string",
+                  "court_id": "xsd:string",
+                  "title": "xsd:string",
+                  "chambers_contact": "schema:ContactPoint"
+                }
+              },
+              "Party": {
+                "properties": {
+                  "party_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "party_name": "xsd:string",
+                  "party_role": "xsd:string",
+                  "is_client": "xsd:boolean",
+                  "counsel_attorney_ids": "xsd:string",
+                  "address": "schema:PostalAddress"
+                }
+              },
+              "AttorneyAppearance": {
+                "properties": {
+                  "appearance_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "attorney_id": "xsd:string",
+                  "party_id": "xsd:string",
+                  "appearance_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "DocketEntry": {
+                "properties": {
+                  "docket_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "entry_number": "xsd:integer",
+                  "entry_date": "xsd:date",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Filing": {
+                "properties": {
+                  "filing_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "filing_type": "xsd:string",
+                  "filed_by_attorney_id": "xsd:string",
+                  "filed_date_time": "xsd:dateTime",
+                  "accepted": "xsd:boolean",
+                  "fee_paid": "xsd:float",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Pleading": {
+                "properties": {
+                  "pleading_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "title": "xsd:string",
+                  "party_id": "xsd:string",
+                  "served_date": "xsd:date",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Motion": {
+                "properties": {
+                  "motion_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "title": "xsd:string",
+                  "filed_date": "xsd:date",
+                  "status": "xsd:string",
+                  "hearing_id": "xsd:string",
+                  "order_id": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Order": {
+                "properties": {
+                  "order_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "date": "xsd:date",
+                  "judge_id": "xsd:string",
+                  "result": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Hearing": {
+                "properties": {
+                  "hearing_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "type": "xsd:string",
+                  "location": "schema:Place",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "result": "xsd:string",
+                  "minutes_ref": "xsd:string"
+                }
+              },
+              "Trial": {
+                "properties": {
+                  "trial_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "verdict_id": "xsd:string"
+                }
+              },
+              "Verdict": {
+                "properties": {
+                  "verdict_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "date": "xsd:date",
+                  "outcome": "xsd:string",
+                  "damages_awarded": "xsd:float",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Judgment": {
+                "properties": {
+                  "judgment_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "date": "xsd:date",
+                  "amount": "xsd:float",
+                  "interest_rate": "xsd:float",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Settlement": {
+                "properties": {
+                  "settlement_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "date": "xsd:date",
+                  "amount": "xsd:float",
+                  "confidential": "xsd:boolean",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Appeal": {
+                "properties": {
+                  "appeal_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "filed_date": "xsd:date",
+                  "appellate_court_id": "xsd:string",
+                  "outcome": "xsd:string",
+                  "decision_date": "xsd:date",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "CourtRule": {
+                "properties": {
+                  "rule_id": "xsd:string",
+                  "court_id": "xsd:string",
+                  "citation": "xsd:string",
+                  "title": "xsd:string",
+                  "text": "xsd:string",
+                  "effective_date": "xsd:date"
+                }
+              },
+              "ServiceOfProcess": {
+                "properties": {
+                  "service_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "party_id": "xsd:string",
+                  "method": "xsd:string",
+                  "service_date": "xsd:date",
+                  "server_name": "xsd:string",
+                  "proof_document_ref": "xsd:string"
+                }
+              },
+              "EvidenceItem": {
+                "properties": {
+                  "evidence_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "document_id": "xsd:string",
+                  "evidence_type": "xsd:string",
+                  "exhibit_number": "xsd:string",
+                  "source": "xsd:string",
+                  "chain_of_custody_id": "xsd:string",
+                  "is_privileged": "xsd:boolean"
+                }
+              },
+              "Witness": {
+                "properties": {
+                  "witness_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "name": "xsd:string",
+                  "witness_type": "xsd:string",
+                  "contact": "schema:ContactPoint",
+                  "expertise": "xsd:string"
+                }
+              },
+              "Deposition": {
+                "properties": {
+                  "deposition_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "witness_id": "xsd:string",
+                  "date": "xsd:date",
+                  "location": "schema:Place",
+                  "transcript_ref": "xsd:string",
+                  "exhibit_refs": "xsd:string"
+                }
+              },
+              "Transcript": {
+                "properties": {
+                  "transcript_id": "xsd:string",
+                  "deposition_id": "xsd:string",
+                  "pages": "xsd:integer",
+                  "storage_uri": "xsd:string",
+                  "hash_sha256": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Transactional_Practice": {
+        "collections": {
+          "Transactions_Contracts": {
+            "entities": {
+              "Transaction": {
+                "properties": {
+                  "transaction_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "transaction_type": "xsd:string",
+                  "status": "xsd:string",
+                  "counterparty_ids": "xsd:string",
+                  "signing_date": "xsd:date",
+                  "closing_date": "xsd:date",
+                  "deal_value": "xsd:float",
+                  "currency": "xsd:string",
+                  "datasite_id": "xsd:string"
+                }
+              },
+              "Contract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "title": "xsd:string",
+                  "contract_type": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "auto_renew": "xsd:boolean",
+                  "governing_law_jurisdiction_id": "xsd:string",
+                  "signature_status": "xsd:string",
+                  "document_ref": "xsd:string",
+                  "obligation_count": "xsd:integer"
+                }
+              },
+              "ContractParty": {
+                "properties": {
+                  "contract_party_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "party_name": "xsd:string",
+                  "party_role": "xsd:string",
+                  "contact": "schema:ContactPoint",
+                  "address": "schema:PostalAddress"
+                }
+              },
+              "Obligation": {
+                "properties": {
+                  "obligation_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "responsible_party_id": "xsd:string",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string",
+                  "penalty_amount": "xsd:float"
+                }
+              },
+              "NegotiationRound": {
+                "properties": {
+                  "round_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "round_number": "xsd:integer",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "redline_document_ref": "xsd:string",
+                  "summary": "xsd:string"
+                }
+              },
+              "Amendment": {
+                "properties": {
+                  "amendment_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "document_ref": "xsd:string",
+                  "summary": "xsd:string"
+                }
+              },
+              "Approval": {
+                "properties": {
+                  "approval_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "approver_person_id": "xsd:string",
+                  "status": "xsd:string",
+                  "decision_date": "xsd:date",
+                  "comments": "xsd:string"
+                }
+              },
+              "Signature": {
+                "properties": {
+                  "signature_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "signer_name": "xsd:string",
+                  "signer_email": "xsd:string",
+                  "signature_provider": "xsd:string",
+                  "signed_at": "xsd:dateTime",
+                  "signature_hash": "xsd:string"
+                }
+              },
+              "ClosingChecklistItem": {
+                "properties": {
+                  "closing_item_id": "xsd:string",
+                  "transaction_id": "xsd:string",
+                  "title": "xsd:string",
+                  "responsible_person_id": "xsd:string",
+                  "status": "xsd:string",
+                  "due_date": "xsd:date",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Datasite": {
+                "properties": {
+                  "datasite_id": "xsd:string",
+                  "provider_name": "xsd:string",
+                  "url": "xsd:string",
+                  "access_method": "xsd:string",
+                  "folder_count": "xsd:integer",
+                  "document_count": "xsd:integer"
+                }
+              },
+              "RegulatoryFiling": {
+                "properties": {
+                  "reg_filing_id": "xsd:string",
+                  "transaction_id": "xsd:string",
+                  "agency_id": "xsd:string",
+                  "filing_type": "xsd:string",
+                  "submitted_date": "xsd:date",
+                  "status": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "BoardResolution": {
+                "properties": {
+                  "resolution_id": "xsd:string",
+                  "transaction_id": "xsd:string",
+                  "corporate_entity_name": "xsd:string",
+                  "adoption_date": "xsd:date",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "ShareIssuance": {
+                "properties": {
+                  "issuance_id": "xsd:string",
+                  "transaction_id": "xsd:string",
+                  "share_class": "xsd:string",
+                  "shares_issued": "xsd:integer",
+                  "price_per_share": "xsd:float",
+                  "currency": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Intellectual_Property_Management": {
+        "collections": {
+          "IP_Core": {
+            "entities": {
+              "IPAsset": {
+                "properties": {
+                  "ip_asset_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "title": "xsd:string",
+                  "ip_type": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "status": "xsd:string",
+                  "priority_date": "xsd:date",
+                  "owner_name": "xsd:string"
+                }
+              },
+              "Patent": {
+                "properties": {
+                  "patent_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "application_number": "xsd:string",
+                  "publication_number": "xsd:string",
+                  "grant_number": "xsd:string",
+                  "filing_date": "xsd:date",
+                  "grant_date": "xsd:date",
+                  "expiration_date": "xsd:date",
+                  "ipc_classes": "xsd:string"
+                }
+              },
+              "PatentApplication": {
+                "properties": {
+                  "patent_app_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "application_number": "xsd:string",
+                  "filing_date": "xsd:date",
+                  "status": "xsd:string",
+                  "office_id": "xsd:string"
+                }
+              },
+              "Trademark": {
+                "properties": {
+                  "trademark_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "mark_text": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "classes": "xsd:string",
+                  "filing_date": "xsd:date",
+                  "registration_date": "xsd:date",
+                  "renewal_date": "xsd:date"
+                }
+              },
+              "TrademarkApplication": {
+                "properties": {
+                  "tm_app_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "application_number": "xsd:string",
+                  "filing_date": "xsd:date",
+                  "status": "xsd:string",
+                  "office_id": "xsd:string"
+                }
+              },
+              "Copyright": {
+                "properties": {
+                  "copyright_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "work_title": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "creation_date": "xsd:date",
+                  "registration_date": "xsd:date"
+                }
+              },
+              "TradeSecret": {
+                "properties": {
+                  "trade_secret_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "description": "xsd:string",
+                  "protection_measures": "xsd:string",
+                  "review_date": "xsd:date"
+                }
+              },
+              "OfficeAction": {
+                "properties": {
+                  "office_action_id": "xsd:string",
+                  "application_id": "xsd:string",
+                  "office_id": "xsd:string",
+                  "date": "xsd:date",
+                  "issues": "xsd:string",
+                  "response_due_date": "xsd:date",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "OfficeResponse": {
+                "properties": {
+                  "office_response_id": "xsd:string",
+                  "office_action_id": "xsd:string",
+                  "filed_date": "xsd:date",
+                  "document_ref": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "MaintenanceFee": {
+                "properties": {
+                  "maintenance_fee_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "due_date": "xsd:date",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "paid_date": "xsd:date",
+                  "receipt_ref": "xsd:string"
+                }
+              },
+              "DocketDate": {
+                "properties": {
+                  "docket_date_id": "xsd:string",
+                  "ip_asset_id": "xsd:string",
+                  "event_name": "xsd:string",
+                  "event_date": "xsd:date",
+                  "notes": "xsd:string",
+                  "critical": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Compliance_And_Risk": {
+        "collections": {
+          "Compliance_Risk": {
+            "entities": {
+              "Regulation": {
+                "properties": {
+                  "regulation_id": "xsd:string",
+                  "title": "xsd:string",
+                  "citation": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "summary": "xsd:string",
+                  "url": "xsd:string"
+                }
+              },
+              "Statute": {
+                "properties": {
+                  "statute_id": "xsd:string",
+                  "title": "xsd:string",
+                  "citation": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "url": "xsd:string"
+                }
+              },
+              "ComplianceRequirement": {
+                "properties": {
+                  "requirement_id": "xsd:string",
+                  "title": "xsd:string",
+                  "source_type": "xsd:string",
+                  "source_id": "xsd:string",
+                  "description": "xsd:string",
+                  "control_id": "xsd:string",
+                  "review_frequency_months": "xsd:integer"
+                }
+              },
+              "Policy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "title": "xsd:string",
+                  "category": "xsd:string",
+                  "version": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "owner_person_id": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Procedure": {
+                "properties": {
+                  "procedure_id": "xsd:string",
+                  "policy_id": "xsd:string",
+                  "title": "xsd:string",
+                  "version": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Risk": {
+                "properties": {
+                  "risk_id": "xsd:string",
+                  "title": "xsd:string",
+                  "category": "xsd:string",
+                  "likelihood": "xsd:string",
+                  "impact": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "owner_person_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Control": {
+                "properties": {
+                  "control_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "control_type": "xsd:string",
+                  "owner_person_id": "xsd:string",
+                  "frequency": "xsd:string",
+                  "evidence_ref": "xsd:string"
+                }
+              },
+              "Audit": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "auditor": "xsd:string",
+                  "result": "xsd:string",
+                  "report_ref": "xsd:string"
+                }
+              },
+              "AuditFinding": {
+                "properties": {
+                  "finding_id": "xsd:string",
+                  "audit_id": "xsd:string",
+                  "severity": "xsd:string",
+                  "description": "xsd:string",
+                  "remediation_owner_id": "xsd:string",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Incident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "date_time": "xsd:dateTime",
+                  "category": "xsd:string",
+                  "severity": "xsd:string",
+                  "description": "xsd:string",
+                  "affected_records": "xsd:integer",
+                  "reported_to_authority": "xsd:boolean",
+                  "report_ref": "xsd:string"
+                }
+              },
+              "Sanction": {
+                "properties": {
+                  "sanction_id": "xsd:string",
+                  "party_name": "xsd:string",
+                  "list_name": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "listed_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Billing_And_Finance": {
+        "collections": {
+          "Time_Expense_Billing": {
+            "entities": {
+              "RateCard": {
+                "properties": {
+                  "rate_card_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "currency": "xsd:string",
+                  "role_rate_map_json": "xsd:string",
+                  "discount_percentage": "xsd:float"
+                }
+              },
+              "FeeArrangement": {
+                "properties": {
+                  "fee_arrangement_id": "xsd:string",
+                  "type": "xsd:string",
+                  "description": "xsd:string",
+                  "cap_amount": "xsd:float",
+                  "success_fee_percentage": "xsd:float",
+                  "retainer_amount": "xsd:float",
+                  "billing_cycle_days": "xsd:integer"
+                }
+              },
+              "Budget": {
+                "properties": {
+                  "budget_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "phase_breakdown_json": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "TimeEntry": {
+                "properties": {
+                  "time_entry_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "date": "xsd:date",
+                  "hours": "xsd:float",
+                  "narrative": "xsd:string",
+                  "utbms_code": "xsd:string",
+                  "rate_applied": "xsd:float",
+                  "billable": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "Expense": {
+                "properties": {
+                  "expense_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "date": "xsd:date",
+                  "expense_type": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "tax_amount": "xsd:float",
+                  "receipt_ref": "xsd:string",
+                  "billable": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "Prebill": {
+                "properties": {
+                  "prebill_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "total_hours": "xsd:float",
+                  "total_fees": "xsd:float",
+                  "total_expenses": "xsd:float",
+                  "status": "xsd:string",
+                  "reviewer_person_id": "xsd:string"
+                }
+              },
+              "Invoice": {
+                "properties": {
+                  "invoice_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "invoice_number": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "currency": "xsd:string",
+                  "subtotal": "xsd:float",
+                  "tax_total": "xsd:float",
+                  "discount_total": "xsd:float",
+                  "total": "xsd:float",
+                  "status": "xsd:string",
+                  "ebilling_format": "xsd:string",
+                  "ledes_file_ref": "xsd:string"
+                }
+              },
+              "InvoiceLine": {
+                "properties": {
+                  "invoice_line_id": "xsd:string",
+                  "invoice_id": "xsd:string",
+                  "line_type": "xsd:string",
+                  "description": "xsd:string",
+                  "quantity": "xsd:float",
+                  "unit_price": "xsd:float",
+                  "amount": "xsd:float",
+                  "tax_rate": "xsd:float",
+                  "utbms_code": "xsd:string",
+                  "time_entry_id": "xsd:string",
+                  "expense_id": "xsd:string"
+                }
+              },
+              "CreditNote": {
+                "properties": {
+                  "credit_note_id": "xsd:string",
+                  "invoice_id": "xsd:string",
+                  "date": "xsd:date",
+                  "amount": "xsd:float",
+                  "reason": "xsd:string"
+                }
+              },
+              "Payment": {
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "invoice_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "date": "xsd:date",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "method": "xsd:string",
+                  "reference": "xsd:string",
+                  "trust_account_id": "xsd:string"
+                }
+              },
+              "TrustAccount": {
+                "properties": {
+                  "trust_account_id": "xsd:string",
+                  "bank_name": "xsd:string",
+                  "account_number": "xsd:string",
+                  "currency": "xsd:string",
+                  "balance": "xsd:float",
+                  "jurisdiction_id": "xsd:string"
+                }
+              },
+              "TrustTransaction": {
+                "properties": {
+                  "trust_tx_id": "xsd:string",
+                  "trust_account_id": "xsd:string",
+                  "date": "xsd:date",
+                  "type": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "reference": "xsd:string"
+                }
+              },
+              "TaxRate": {
+                "properties": {
+                  "tax_rate_id": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "name": "xsd:string",
+                  "rate_percentage": "xsd:float",
+                  "effective_date": "xsd:date"
+                }
+              },
+              "Currency": {
+                "properties": {
+                  "currency_code": "xsd:string",
+                  "currency_name": "xsd:string",
+                  "numeric_code": "xsd:string",
+                  "symbol": "xsd:string"
+                }
+              },
+              "ExchangeRate": {
+                "properties": {
+                  "rate_id": "xsd:string",
+                  "from_currency": "xsd:string",
+                  "to_currency": "xsd:string",
+                  "rate": "xsd:float",
+                  "as_of_date": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Knowledge_And_Research": {
+        "collections": {
+          "Knowledge_Research": {
+            "entities": {
+              "LegalIssue": {
+                "properties": {
+                  "issue_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "ResearchMemo": {
+                "properties": {
+                  "memo_id": "xsd:string",
+                  "issue_id": "xsd:string",
+                  "author_person_id": "xsd:string",
+                  "date": "xsd:date",
+                  "summary": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Citation": {
+                "properties": {
+                  "citation_id": "xsd:string",
+                  "source_type": "xsd:string",
+                  "source_id": "xsd:string",
+                  "citation_text": "xsd:string",
+                  "url": "xsd:string"
+                }
+              },
+              "CaseLaw": {
+                "properties": {
+                  "case_law_id": "xsd:string",
+                  "title": "xsd:string",
+                  "citation": "xsd:string",
+                  "court_id": "xsd:string",
+                  "decision_date": "xsd:date",
+                  "summary": "xsd:string",
+                  "url": "xsd:string"
+                }
+              },
+              "SecondarySource": {
+                "properties": {
+                  "source_id": "xsd:string",
+                  "title": "xsd:string",
+                  "author": "xsd:string",
+                  "publication_date": "xsd:date",
+                  "publisher": "xsd:string",
+                  "url": "xsd:string",
+                  "summary": "xsd:string"
+                }
+              },
+              "KnowledgeArticle": {
+                "properties": {
+                  "article_id": "xsd:string",
+                  "title": "xsd:string",
+                  "tags": "xsd:string",
+                  "author_person_id": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "updated_at": "xsd:dateTime",
+                  "document_ref": "xsd:string",
+                  "approval_status": "xsd:string"
+                }
+              },
+              "ClauseLibrary": {
+                "properties": {
+                  "library_id": "xsd:string",
+                  "name": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "language": "xsd:string",
+                  "owner_group_id": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "EDiscovery_And_Digital_Evidence": {
+        "collections": {
+          "EDiscovery": {
+            "entities": {
+              "Custodian": {
+                "properties": {
+                  "custodian_id": "xsd:string",
+                  "name": "xsd:string",
+                  "email": "xsd:string",
+                  "department_id": "xsd:string",
+                  "role": "xsd:string"
+                }
+              },
+              "MatterDataSource": {
+                "properties": {
+                  "data_source_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "source_type": "xsd:string",
+                  "location": "xsd:string",
+                  "system_id": "xsd:string",
+                  "owner_custodian_id": "xsd:string"
+                }
+              },
+              "LegalHold": {
+                "properties": {
+                  "hold_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "issued_date": "xsd:date",
+                  "released_date": "xsd:date",
+                  "scope_description": "xsd:string",
+                  "acknowledgement_rate_percentage": "xsd:float"
+                }
+              },
+              "PreservationNotice": {
+                "properties": {
+                  "notice_id": "xsd:string",
+                  "hold_id": "xsd:string",
+                  "custodian_id": "xsd:string",
+                  "sent_date": "xsd:date",
+                  "acknowledged_date": "xsd:date",
+                  "reminder_count": "xsd:integer"
+                }
+              },
+              "Collection": {
+                "properties": {
+                  "collection_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "data_source_id": "xsd:string",
+                  "collection_date": "xsd:date",
+                  "method": "xsd:string",
+                  "size_gb": "xsd:float",
+                  "hash": "xsd:string",
+                  "chain_of_custody_id": "xsd:string"
+                }
+              },
+              "ProcessingBatch": {
+                "properties": {
+                  "processing_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "tool_name": "xsd:string",
+                  "version": "xsd:string",
+                  "date": "xsd:date",
+                  "items_count": "xsd:integer",
+                  "errors_count": "xsd:integer"
+                }
+              },
+              "ReviewSet": {
+                "properties": {
+                  "review_set_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "name": "xsd:string",
+                  "document_count": "xsd:integer",
+                  "tag_set_id": "xsd:string"
+                }
+              },
+              "DocumentTag": {
+                "properties": {
+                  "tag_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "description": "xsd:string"
+                }
+              },
+              "ReviewAnnotation": {
+                "properties": {
+                  "annotation_id": "xsd:string",
+                  "document_id": "xsd:string",
+                  "reviewer_person_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "tag_ids": "xsd:string",
+                  "issue_codes": "xsd:string",
+                  "privilege": "xsd:string",
+                  "relevance": "xsd:string"
+                }
+              },
+              "Production": {
+                "properties": {
+                  "production_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "production_set_name": "xsd:string",
+                  "volume_count": "xsd:integer",
+                  "bates_start": "xsd:string",
+                  "bates_end": "xsd:string",
+                  "loadfile_ref": "xsd:string"
+                }
+              },
+              "LoadFile": {
+                "properties": {
+                  "loadfile_id": "xsd:string",
+                  "production_id": "xsd:string",
+                  "format": "xsd:string",
+                  "storage_uri": "xsd:string",
+                  "hash_sha256": "xsd:string"
+                }
+              },
+              "Volume": {
+                "properties": {
+                  "volume_id": "xsd:string",
+                  "production_id": "xsd:string",
+                  "label": "xsd:string",
+                  "size_gb": "xsd:float",
+                  "checksum": "xsd:string"
+                }
+              },
+              "ChainOfCustody": {
+                "properties": {
+                  "chain_of_custody_id": "xsd:string",
+                  "evidence_id": "xsd:string",
+                  "events_json": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "last_update": "xsd:dateTime"
+                }
+              },
+              "PrivilegeLog": {
+                "properties": {
+                  "priv_log_id": "xsd:string",
+                  "matter_id": "xsd:string",
+                  "entries_count": "xsd:integer",
+                  "document_ref": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Court_And_Agency_Interface": {
+        "collections": {
+          "Court_Agency": {
+            "entities": {
+              "Agency": {
+                "properties": {
+                  "agency_id": "xsd:string",
+                  "agency_name": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "address": "schema:PostalAddress",
+                  "portal_url": "xsd:string"
+                }
+              },
+              "EfilingSubmission": {
+                "properties": {
+                  "efiling_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "court_id": "xsd:string",
+                  "submitted_by_person_id": "xsd:string",
+                  "submitted_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "fee_amount": "xsd:float",
+                  "receipt_ref": "xsd:string"
+                }
+              },
+              "CourtAccount": {
+                "properties": {
+                  "court_account_id": "xsd:string",
+                  "court_id": "xsd:string",
+                  "username": "xsd:string",
+                  "registration_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "CourtFee": {
+                "properties": {
+                  "court_fee_id": "xsd:string",
+                  "court_id": "xsd:string",
+                  "fee_type": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "effective_date": "xsd:date"
+                }
+              },
+              "FilingFeePayment": {
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "efiling_id": "xsd:string",
+                  "court_fee_id": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "paid_at": "xsd:dateTime",
+                  "reference": "xsd:string"
+                }
+              },
+              "HearingReservation": {
+                "properties": {
+                  "reservation_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "court_id": "xsd:string",
+                  "requested_time": "xsd:dateTime",
+                  "confirmed_time": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "ServiceList": {
+                "properties": {
+                  "service_list_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "party_ids": "xsd:string",
+                  "counsel_contact_points": "xsd:string",
+                  "updated_at": "xsd:dateTime"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Security_And_Privacy": {
+        "collections": {
+          "Security_Privacy": {
+            "entities": {
+              "DataClassification": {
+                "properties": {
+                  "classification_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "handling_requirements": "xsd:string"
+                }
+              },
+              "AccessControlPolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "conditions_json": "xsd:string"
+                }
+              },
+              "Permission": {
+                "properties": {
+                  "permission_id": "xsd:string",
+                  "name": "xsd:string",
+                  "resource_type": "xsd:string",
+                  "action": "xsd:string"
+                }
+              },
+              "Identity": {
+                "properties": {
+                  "identity_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "sso_provider": "xsd:string",
+                  "sso_subject": "xsd:string",
+                  "mfa_enabled": "xsd:boolean",
+                  "last_login": "xsd:dateTime"
+                }
+              },
+              "AuthenticationEvent": {
+                "properties": {
+                  "auth_event_id": "xsd:string",
+                  "identity_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "ip_address": "xsd:string",
+                  "result": "xsd:string",
+                  "factor_used": "xsd:string"
+                }
+              },
+              "AccessLog": {
+                "properties": {
+                  "access_log_id": "xsd:string",
+                  "identity_id": "xsd:string",
+                  "resource_id": "xsd:string",
+                  "resource_type": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "action": "xsd:string",
+                  "success": "xsd:boolean"
+                }
+              },
+              "AuditTrail": {
+                "properties": {
+                  "audit_trail_id": "xsd:string",
+                  "event_type": "xsd:string",
+                  "actor_identity_id": "xsd:string",
+                  "target_resource_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "details_json": "xsd:string"
+                }
+              },
+              "DataProcessingAgreement": {
+                "properties": {
+                  "dpa_id": "xsd:string",
+                  "counterparty_name": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "termination_date": "xsd:date",
+                  "jurisdiction_id": "xsd:string",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "PrivacyNotice": {
+                "properties": {
+                  "notice_id": "xsd:string",
+                  "title": "xsd:string",
+                  "version": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "document_ref": "xsd:string"
+                }
+              },
+              "Consent": {
+                "properties": {
+                  "consent_id": "xsd:string",
+                  "subject_name": "xsd:string",
+                  "purpose": "xsd:string",
+                  "granted_date": "xsd:date",
+                  "withdrawn_date": "xsd:date"
+                }
+              },
+              "DataSubjectRequest": {
+                "properties": {
+                  "dsr_id": "xsd:string",
+                  "subject_name": "xsd:string",
+                  "request_type": "xsd:string",
+                  "received_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string",
+                  "response_ref": "xsd:string"
+                }
+              },
+              "RetentionSchedule": {
+                "properties": {
+                  "retention_schedule_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "rules_json": "xsd:string",
+                  "effective_date": "xsd:date"
+                }
+              },
+              "RetentionRule": {
+                "properties": {
+                  "retention_rule_id": "xsd:string",
+                  "retention_schedule_id": "xsd:string",
+                  "record_category": "xsd:string",
+                  "jurisdiction_id": "xsd:string",
+                  "retention_period_months": "xsd:integer",
+                  "disposition_action": "xsd:string"
+                }
+              },
+              "RetentionEvent": {
+                "properties": {
+                  "retention_event_id": "xsd:string",
+                  "document_id": "xsd:string",
+                  "rule_id": "xsd:string",
+                  "action": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "actor_person_id": "xsd:string"
+                }
+              },
+              "EncryptionKey": {
+                "properties": {
+                  "key_id": "xsd:string",
+                  "algorithm": "xsd:string",
+                  "key_length_bits": "xsd:integer",
+                  "scope": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "rotated_at": "xsd:dateTime"
+                }
+              },
+              "DLPIncident": {
+                "properties": {
+                  "dlp_incident_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "severity": "xsd:string",
+                  "rule_triggered": "xsd:string",
+                  "resource_id": "xsd:string",
+                  "action_taken": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Reference_Taxonomies": {
+        "collections": {
+          "Code_Lists": {
+            "entities": {
+              "MatterStatus": {
+                "properties": {
+                  "status_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string"
+                },
+                "instances": {
+                  "Open": { "name": "open", "description": "Matter is active" },
+                  "Pending": { "name": "pending", "description": "Awaiting decision/input" },
+                  "Suspended": { "name": "suspended", "description": "Temporarily paused" },
+                  "Closed": { "name": "closed", "description": "Completed and closed" },
+                  "Archived": { "name": "archived", "description": "Archived record" }
+                }
+              },
+              "PriorityLevel": {
+                "properties": {
+                  "priority_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Low": { "name": "low" },
+                  "Medium": { "name": "medium" },
+                  "High": { "name": "high" },
+                  "Urgent": { "name": "urgent" }
+                }
+              },
+              "PracticeArea": {
+                "properties": {
+                  "area_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Corporate": { "name": "Corporate/M&A" },
+                  "Litigation": { "name": "Litigation" },
+                  "IP": { "name": "Intellectual Property" },
+                  "Employment": { "name": "Employment" },
+                  "RealEstate": { "name": "Real Estate" },
+                  "Tax": { "name": "Tax" },
+                  "Regulatory": { "name": "Regulatory" },
+                  "Privacy": { "name": "Privacy/Data Protection" },
+                  "Antitrust": { "name": "Antitrust" },
+                  "Banking": { "name": "Banking & Finance" }
+                }
+              },
+              "MatterType": {
+                "properties": {
+                  "type_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "GeneralCounsel": { "name": "General Counsel Support" },
+                  "Dispute": { "name": "Dispute/Pre-litigation" },
+                  "LitigationCivil": { "name": "Litigation - Civil" },
+                  "LitigationCriminal": { "name": "Litigation - Criminal" },
+                  "TransactionMAndA": { "name": "Transaction - M&A" },
+                  "Financing": { "name": "Financing" },
+                  "IPProsecution": { "name": "IP - Prosecution" },
+                  "IPEnforcement": { "name": "IP - Enforcement" },
+                  "Advisory": { "name": "Advisory/Opinion" }
+                }
+              },
+              "DocumentType": {
+                "properties": {
+                  "doc_type_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Pleading": { "name": "Pleading" },
+                  "Motion": { "name": "Motion" },
+                  "Order": { "name": "Order" },
+                  "Brief": { "name": "Brief" },
+                  "Contract": { "name": "Contract" },
+                  "Policy": { "name": "Policy" },
+                  "Memo": { "name": "Research Memo" },
+                  "Correspondence": { "name": "Correspondence" },
+                  "Exhibit": { "name": "Exhibit" },
+                  "Invoice": { "name": "Invoice" }
+                }
+              },
+              "PartyRoleType": {
+                "properties": {
+                  "role_type_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Plaintiff": { "name": "Plaintiff" },
+                  "Defendant": { "name": "Defendant" },
+                  "Claimant": { "name": "Claimant" },
+                  "Respondent": { "name": "Respondent" },
+                  "Appellant": { "name": "Appellant" },
+                  "Appellee": { "name": "Appellee" }
+                }
+              },
+              "CaseStage": {
+                "properties": {
+                  "stage_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Pleadings": { "name": "Pleadings" },
+                  "Discovery": { "name": "Discovery" },
+                  "PreTrial": { "name": "Pre-Trial" },
+                  "Trial": { "name": "Trial" },
+                  "PostTrial": { "name": "Post-Trial" },
+                  "Appeal": { "name": "Appeal" }
+                }
+              },
+              "FeeType": {
+                "properties": {
+                  "fee_type_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Hourly": { "name": "Hourly" },
+                  "Fixed": { "name": "Fixed/Flat" },
+                  "Capped": { "name": "Capped Hourly" },
+                  "Contingency": { "name": "Contingency" },
+                  "Success": { "name": "Success Fee" },
+                  "Subscription": { "name": "Subscription" },
+                  "Blended": { "name": "Blended Rate" }
+                }
+              },
+              "ConfidentialityLevel": {
+                "properties": {
+                  "level_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Public": { "name": "public" },
+                  "Internal": { "name": "internal" },
+                  "Confidential": { "name": "confidential" },
+                  "Privileged": { "name": "privileged" },
+                  "HighlySensitive": { "name": "highly_sensitive" }
+                }
+              },
+              "EvidenceType": {
+                "properties": {
+                  "ev_type_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Email": { "name": "email" },
+                  "Document": { "name": "document" },
+                  "Image": { "name": "image" },
+                  "Audio": { "name": "audio" },
+                  "Video": { "name": "video" },
+                  "Forensic": { "name": "forensic_image" }
+                }
+              },
+              "CommunicationType": {
+                "properties": {
+                  "comm_type_id": "xsd:string",
+                  "name": "xsd:string"
+                },
+                "instances": {
+                  "Email": { "name": "email" },
+                  "Call": { "name": "phone_call" },
+                  "Meeting": { "name": "meeting" },
+                  "Letter": { "name": "letter" },
+                  "Portal": { "name": "portal_message" },
+                  "Chat": { "name": "chat" }
+                }
+              },
+              "UTBMSCode": {
+                "properties": {
+                  "code_id": "xsd:string",
+                  "code": "xsd:string",
+                  "description": "xsd:string"
+                },
+                "instances": {
+                  "L100": { "code": "L100", "description": "Case Assessment, Development and Administration" },
+                  "L200": { "code": "L200", "description": "Pre-Trial Pleadings and Motions" },
+                  "L300": { "code": "L300", "description": "Discovery" },
+                  "L400": { "code": "L400", "description": "Trial Preparation and Trial" },
+                  "L500": { "code": "L500", "description": "Appeal" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "HAS_OFFICE": { "domain": "LawFirm", "range": "Office" },
+      "HAS_DEPARTMENT": { "domain": "LawFirm", "range": "Department" },
+      "HAS_PRACTICE_GROUP": { "domain": "LawFirm", "range": "PracticeGroup" },
+      "HAS_TEAM": { "domain": "LawFirm", "range": "Team" },
+      "EMPLOYS_PERSON": { "domain": "LawFirm", "range": "Person" },
+      "WORKS_AT": { "domain": "Person", "range": "Office" },
+      "MEMBER_OF_DEPARTMENT": { "domain": "Person", "range": "Department" },
+      "MEMBER_OF_GROUP": { "domain": "Person", "range": "PracticeGroup" },
+      "MEMBER_OF_TEAM": { "domain": "Person", "range": "Team" },
+      "REPORTS_TO": { "domain": "Person", "range": "Person" },
+      "HAS_LICENSE": { "domain": "Person", "range": "License" },
+      "HAS_CLE_RECORD": { "domain": "Person", "range": "CLERecord" },
+
+      "CLIENT_OF": { "domain": "Client", "range": "LawFirm" },
+      "HAS_CLIENT_CONTACT": { "domain": "Client", "range": "ClientContact" },
+      "HAS_ENGAGEMENT": { "domain": "Client", "range": "EngagementLetter" },
+      "HAS_CONFLICT_CHECK": { "domain": "Client", "range": "ConflictCheck" },
+      "HAS_KYC": { "domain": "Client", "range": "KYCCheck" },
+
+      "HAS_MATTER": { "domain": "Client", "range": "Matter" },
+      "BELONGS_TO_CLIENT": { "domain": "Matter", "range": "Client" },
+      "BELONGS_TO_FIRM": { "domain": "Matter", "range": "LawFirm" },
+      "PRIMARY_ATTORNEY": { "domain": "Matter", "range": "Attorney" },
+      "ASSIGNED_TO": { "domain": "Task", "range": "Person" },
+      "HAS_PHASE": { "domain": "Matter", "range": "MatterPhase" },
+      "HAS_TASK": { "domain": "Matter", "range": "Task" },
+      "HAS_SUBTASK": { "domain": "Task", "range": "Subtask" },
+      "HAS_CALENDAR_EVENT": { "domain": "Matter", "range": "CalendarEvent" },
+      "HAS_DEADLINE": { "domain": "Matter", "range": "Deadline" },
+      "HAS_COMMUNICATION": { "domain": "Matter", "range": "Communication" },
+      "HAS_NOTE": { "domain": "Matter", "range": "Note" },
+      "HAS_DOCUMENT": { "domain": "Matter", "range": "Document" },
+      "HAS_DOCUMENT_VERSION": { "domain": "Document", "range": "DocumentVersion" },
+      "BASED_ON_TEMPLATE": { "domain": "Document", "range": "Template" },
+      "INCLUDES_CLAUSE": { "domain": "Document", "range": "Clause" },
+      "HAS_CHECKLIST": { "domain": "Matter", "range": "Checklist" },
+      "HAS_CHECKLIST_ITEM": { "domain": "Checklist", "range": "ChecklistItem" },
+
+      "HAS_CASE": { "domain": "Matter", "range": "Case" },
+      "FILED_IN": { "domain": "Case", "range": "Court" },
+      "WITHIN_JURISDICTION": { "domain": "Court", "range": "Jurisdiction" },
+      "HAS_JUDGE": { "domain": "Case", "range": "Judge" },
+      "HAS_PARTY": { "domain": "Case", "range": "Party" },
+      "APPEARANCE_BY": { "domain": "Case", "range": "AttorneyAppearance" },
+      "HAS_DOCKET_ENTRY": { "domain": "Case", "range": "DocketEntry" },
+      "HAS_FILING": { "domain": "Case", "range": "Filing" },
+      "HAS_PLEADING": { "domain": "Case", "range": "Pleading" },
+      "HAS_MOTION": { "domain": "Case", "range": "Motion" },
+      "HAS_ORDER": { "domain": "Case", "range": "Order" },
+      "HAS_HEARING": { "domain": "Case", "range": "Hearing" },
+      "HAS_TRIAL": { "domain": "Case", "range": "Trial" },
+      "RESULTS_IN_VERDICT": { "domain": "Case", "range": "Verdict" },
+      "RESULTS_IN_JUDGMENT": { "domain": "Case", "range": "Judgment" },
+      "HAS_SETTLEMENT": { "domain": "Case", "range": "Settlement" },
+      "HAS_APPEAL": { "domain": "Case", "range": "Appeal" },
+      "GOVERNED_BY_RULE": { "domain": "Case", "range": "CourtRule" },
+      "HAS_SERVICE_OF_PROCESS": { "domain": "Case", "range": "ServiceOfProcess" },
+      "HAS_EVIDENCE": { "domain": "Case", "range": "EvidenceItem" },
+      "HAS_WITNESS": { "domain": "Case", "range": "Witness" },
+      "HAS_DEPOSITION": { "domain": "Case", "range": "Deposition" },
+      "HAS_TRANSCRIPT": { "domain": "Deposition", "range": "Transcript" },
+
+      "HAS_TRANSACTION": { "domain": "Matter", "range": "Transaction" },
+      "HAS_CONTRACT": { "domain": "Matter", "range": "Contract" },
+      "HAS_CONTRACT_PARTY": { "domain": "Contract", "range": "ContractParty" },
+      "HAS_OBLIGATION": { "domain": "Contract", "range": "Obligation" },
+      "HAS_NEGOTIATION_ROUND": { "domain": "Contract", "range": "NegotiationRound" },
+      "HAS_AMENDMENT": { "domain": "Contract", "range": "Amendment" },
+      "HAS_APPROVAL": { "domain": "Contract", "range": "Approval" },
+      "HAS_SIGNATURE": { "domain": "Contract", "range": "Signature" },
+      "HAS_CLOSING_ITEM": { "domain": "Transaction", "range": "ClosingChecklistItem" },
+      "MANAGED_IN_DATASITE": { "domain": "Transaction", "range": "Datasite" },
+      "HAS_REGULATORY_FILING": { "domain": "Transaction", "range": "RegulatoryFiling" },
+      "HAS_BOARD_RESOLUTION": { "domain": "Transaction", "range": "BoardResolution" },
+      "HAS_SHARE_ISSUANCE": { "domain": "Transaction", "range": "ShareIssuance" },
+
+      "HAS_IP_ASSET": { "domain": "Client", "range": "IPAsset" },
+      "HAS_PATENT": { "domain": "IPAsset", "range": "Patent" },
+      "HAS_PATENT_APPLICATION": { "domain": "IPAsset", "range": "PatentApplication" },
+      "HAS_TRADEMARK": { "domain": "IPAsset", "range": "Trademark" },
+      "HAS_TM_APPLICATION": { "domain": "IPAsset", "range": "TrademarkApplication" },
+      "HAS_COPYRIGHT": { "domain": "IPAsset", "range": "Copyright" },
+      "HAS_TRADE_SECRET": { "domain": "IPAsset", "range": "TradeSecret" },
+      "HAS_OFFICE_ACTION": { "domain": "PatentApplication", "range": "OfficeAction" },
+      "RESPONSE_TO_OFFICE_ACTION": { "domain": "OfficeResponse", "range": "OfficeAction" },
+      "HAS_MAINTENANCE_FEE": { "domain": "IPAsset", "range": "MaintenanceFee" },
+      "HAS_DOCKET_DATE": { "domain": "IPAsset", "range": "DocketDate" },
+
+      "COMPLIES_WITH": { "domain": "Policy", "range": "Regulation" },
+      "DERIVES_FROM_STATUTE": { "domain": "Regulation", "range": "Statute" },
+      "REQUIRES_CONTROL": { "domain": "ComplianceRequirement", "range": "Control" },
+      "MITIGATES": { "domain": "Control", "range": "Risk" },
+      "EVIDENCED_BY": { "domain": "Control", "range": "Audit" },
+      "HAS_FINDING": { "domain": "Audit", "range": "AuditFinding" },
+      "VIOLATES_POLICY": { "domain": "Incident", "range": "Policy" },
+
+      "APPLIES_RATE_CARD": { "domain": "Matter", "range": "RateCard" },
+      "USES_FEE_ARRANGEMENT": { "domain": "Matter", "range": "FeeArrangement" },
+      "HAS_BUDGET": { "domain": "Matter", "range": "Budget" },
+      "HAS_TIME_ENTRY": { "domain": "Matter", "range": "TimeEntry" },
+      "HAS_EXPENSE": { "domain": "Matter", "range": "Expense" },
+      "HAS_PREBILL": { "domain": "Matter", "range": "Prebill" },
+      "HAS_INVOICE": { "domain": "Matter", "range": "Invoice" },
+      "HAS_INVOICE_LINE": { "domain": "Invoice", "range": "InvoiceLine" },
+      "PAID_BY": { "domain": "Invoice", "range": "Payment" },
+      "PROCESSED_IN_TRUST": { "domain": "Payment", "range": "TrustAccount" },
+      "HAS_TRUST_TX": { "domain": "TrustAccount", "range": "TrustTransaction" },
+      "HAS_TAX_RATE": { "domain": "Invoice", "range": "TaxRate" },
+
+      "HAS_ISSUE": { "domain": "Matter", "range": "LegalIssue" },
+      "HAS_MEMO": { "domain": "LegalIssue", "range": "ResearchMemo" },
+      "HAS_CITATION": { "domain": "ResearchMemo", "range": "Citation" },
+      "REFERENCES_CASELAW": { "domain": "ResearchMemo", "range": "CaseLaw" },
+      "HAS_KNOWLEDGE_ARTICLE": { "domain": "LawFirm", "range": "KnowledgeArticle" },
+      "HAS_CLAUSE_LIBRARY": { "domain": "LawFirm", "range": "ClauseLibrary" },
+
+      "HAS_DATA_SOURCE": { "domain": "Matter", "range": "MatterDataSource" },
+      "HAS_HOLD": { "domain": "Matter", "range": "LegalHold" },
+      "HAS_PRESERVATION_NOTICE": { "domain": "LegalHold", "range": "PreservationNotice" },
+      "HAS_COLLECTION": { "domain": "Matter", "range": "Collection" },
+      "HAS_PROCESSING": { "domain": "Matter", "range": "ProcessingBatch" },
+      "HAS_REVIEW_SET": { "domain": "Matter", "range": "ReviewSet" },
+      "TAGGED_WITH": { "domain": "Document", "range": "DocumentTag" },
+      "HAS_PRODUCTION": { "domain": "Matter", "range": "Production" },
+      "HAS_LOADFILE": { "domain": "Production", "range": "LoadFile" },
+      "HAS_VOLUME": { "domain": "Production", "range": "Volume" },
+      "HAS_CHAIN_OF_CUSTODY": { "domain": "EvidenceItem", "range": "ChainOfCustody" },
+      "HAS_PRIVILEGE_LOG": { "domain": "Matter", "range": "PrivilegeLog" },
+      "SUBJECT_TO_HOLD": { "domain": "Document", "range": "LegalHold" },
+
+      "SUBMITTED_VIA": { "domain": "EfilingSubmission", "range": "CourtAccount" },
+      "PAYS_FEE": { "domain": "FilingFeePayment", "range": "Court" },
+      "RESERVES_HEARING": { "domain": "HearingReservation", "range": "Court" },
+      "HAS_SERVICE_LIST": { "domain": "Case", "range": "ServiceList" },
+
+      "HAS_DATA_CLASSIFICATION": { "domain": "Document", "range": "DataClassification" },
+      "GOVERNED_BY_ACP": { "domain": "Person", "range": "AccessControlPolicy" },
+      "HAS_PERMISSION": { "domain": "AccessControlPolicy", "range": "Permission" },
+      "AUTHENTICATES_AS": { "domain": "Person", "range": "Identity" },
+      "LOGGED_BY": { "domain": "Identity", "range": "AccessLog" },
+      "AUDITED_BY": { "domain": "LawFirm", "range": "AuditTrail" },
+      "HAS_RETENTION_RULE": { "domain": "RetentionSchedule", "range": "RetentionRule" },
+      "DISPOSED_BY": { "domain": "Document", "range": "RetentionEvent" }
+    }
+  }
+}

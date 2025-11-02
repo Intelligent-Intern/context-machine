@@ -1,0 +1,1037 @@
+{
+  "ontology": {
+    "name": "temporal_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/temporal-service#",
+    "description": "Comprehensive ontology for temporal services: timekeeping, scheduling, workflow orchestration, event-time processing, bitemporal data management, SLAs/SLOs, policies, notifications, security, and observability.",
+    "namespaces": {
+      "tsvc": "http://context-machine.org/ontology/temporal-service#",
+      "time": "http://www.w3.org/2006/time#",
+      "unit": "http://qudt.org/vocab/unit#",
+      "qudt": "http://qudt.org/schema/qudt#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "ical": "http://www.w3.org/2002/12/cal/ical#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "schema": "http://schema.org/",
+      "sched": "http://context-machine.org/ontology/temporal-service/scheduling#",
+      "event": "http://context-machine.org/ontology/temporal-service/event#",
+      "data": "http://context-machine.org/ontology/temporal-service/data#",
+      "sla": "http://context-machine.org/ontology/temporal-service/sla#",
+      "obs": "http://context-machine.org/ontology/temporal-service/observability#",
+      "sec": "http://context-machine.org/ontology/temporal-service/security#",
+      "notify": "http://context-machine.org/ontology/temporal-service/notify#",
+      "state": "http://context-machine.org/ontology/temporal-service/state#",
+      "change": "http://context-machine.org/ontology/temporal-service/change#",
+      "comply": "http://context-machine.org/ontology/temporal-service/compliance#"
+    },
+    "imports": [
+      "http://www.w3.org/2006/time#",
+      "http://www.w3.org/2002/12/cal/ical#",
+      "http://qudt.org/vocab/unit#",
+      "http://www.w3.org/ns/prov#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    ],
+    "frames": {
+      "Temporal_Service_Platform": {
+        "collections": {
+          "Core_Timekeeping": {
+            "entities": {
+              "ClockService": {
+                "properties": {
+                  "clock_id": "xsd:string",
+                  "clock_name": "xsd:string",
+                  "time_source_type": "xsd:string",
+                  "supports_monotonic": "xsd:boolean",
+                  "resolution_ns": "xsd:integer",
+                  "current_offset_ms": "xsd:integer",
+                  "max_drift_ppm": "xsd:float",
+                  "ntp_servers": "xsd:string",
+                  "ptp_profile": "xsd:string",
+                  "last_sync_time": "xsd:dateTime",
+                  "leap_second_handling": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "TimeZone": {
+                "properties": {
+                  "tz_id": "xsd:string",
+                  "iana_tz_name": "xsd:string",
+                  "utc_offset_minutes": "xsd:integer",
+                  "observes_dst": "xsd:boolean",
+                  "next_transition": "xsd:dateTime",
+                  "region": "xsd:string",
+                  "geo_hint": "geo:SpatialThing"
+                },
+                "instances": {
+                  "UTC": {
+                    "tz_id": "tz_utc",
+                    "iana_tz_name": "UTC",
+                    "utc_offset_minutes": 0,
+                    "observes_dst": false,
+                    "region": "Global"
+                  },
+                  "Europe_Berlin": {
+                    "tz_id": "tz_europe_berlin",
+                    "iana_tz_name": "Europe/Berlin",
+                    "utc_offset_minutes": 60,
+                    "observes_dst": true,
+                    "region": "EU"
+                  }
+                }
+              },
+              "CalendarSystem": {
+                "properties": {
+                  "calendar_id": "xsd:string",
+                  "calendar_name": "xsd:string",
+                  "calendar_type": "xsd:string",
+                  "epoch_description": "xsd:string",
+                  "months_in_year": "xsd:integer",
+                  "leap_year_rule": "xsd:string",
+                  "week_start_day": "xsd:string",
+                  "supports_iso_week": "xsd:boolean"
+                },
+                "instances": {
+                  "Gregorian": {
+                    "calendar_id": "cal_gregorian",
+                    "calendar_name": "Gregorian",
+                    "calendar_type": "proleptic_gregorian",
+                    "months_in_year": 12,
+                    "leap_year_rule": "divisible_by_4_except_century_not_divisible_by_400",
+                    "week_start_day": "MON",
+                    "supports_iso_week": true
+                  }
+                }
+              },
+              "TimeSource": {
+                "properties": {
+                  "source_id": "xsd:string",
+                  "source_type": "xsd:string",
+                  "stratum": "xsd:integer",
+                  "jitter_ms": "xsd:float",
+                  "reachability": "xsd:string",
+                  "last_seen": "xsd:dateTime",
+                  "authority": "xsd:string"
+                }
+              },
+              "LeapSecondEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "effective_at": "xsd:dateTime",
+                  "delta_seconds": "xsd:integer",
+                  "announcement_ref": "xsd:string"
+                }
+              },
+              "DateTimeFormat": {
+                "properties": {
+                  "format_id": "xsd:string",
+                  "pattern": "xsd:string",
+                  "locale": "xsd:string",
+                  "calendar_id": "xsd:string",
+                  "example": "xsd:string"
+                }
+              }
+            }
+          },
+          "Scheduling_Orchestration": {
+            "entities": {
+              "Schedule": {
+                "properties": {
+                  "schedule_id": "xsd:string",
+                  "schedule_name": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "application_id": "xsd:string",
+                  "timezone": "xsd:string",
+                  "calendar_id": "xsd:string",
+                  "start_window": "time:Interval",
+                  "end_window": "time:Interval",
+                  "recurrence_type": "xsd:string",
+                  "cron_expression_id": "xsd:string",
+                  "rrule_id": "xsd:string",
+                  "next_fire_time": "xsd:dateTime",
+                  "previous_fire_time": "xsd:dateTime",
+                  "misfire_policy": "xsd:string",
+                  "catchup_policy": "xsd:string",
+                  "jitter_seconds": "xsd:integer",
+                  "priority": "xsd:integer",
+                  "concurrency_limit_id": "xsd:string",
+                  "rate_limit_id": "xsd:string",
+                  "retry_policy_id": "xsd:string",
+                  "timeout_policy_id": "xsd:string",
+                  "paused": "xsd:boolean",
+                  "labels": "xsd:string"
+                }
+              },
+              "Trigger": {
+                "properties": {
+                  "trigger_id": "xsd:string",
+                  "trigger_type": "xsd:string",
+                  "schedule_id": "xsd:string",
+                  "event_source_id": "xsd:string",
+                  "condition_expression": "xsd:string",
+                  "window_id": "xsd:string",
+                  "fired_count": "xsd:integer",
+                  "last_fired_at": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "CronExpression": {
+                "properties": {
+                  "cron_id": "xsd:string",
+                  "expression": "xsd:string",
+                  "timezone": "xsd:string",
+                  "description": "xsd:string",
+                  "validated": "xsd:boolean",
+                  "next_n_fire_times": "xsd:string"
+                },
+                "instances": {
+                  "Hourly": {
+                    "cron_id": "cron_hourly",
+                    "expression": "0 * * * *",
+                    "timezone": "UTC",
+                    "description": "Top of every hour",
+                    "validated": true
+                  }
+                }
+              },
+              "RecurrenceRule": {
+                "properties": {
+                  "rrule_id": "xsd:string",
+                  "frequency": "xsd:string",
+                  "interval": "xsd:integer",
+                  "byday": "xsd:string",
+                  "bymonth": "xsd:string",
+                  "bymonthday": "xsd:string",
+                  "bysetpos": "xsd:string",
+                  "count": "xsd:integer",
+                  "until": "xsd:dateTime",
+                  "week_start": "xsd:string",
+                  "exdates": "xsd:string",
+                  "rdates": "xsd:string",
+                  "description": "xsd:string"
+                }
+              },
+              "Job": {
+                "properties": {
+                  "job_id": "xsd:string",
+                  "job_name": "xsd:string",
+                  "job_type": "xsd:string",
+                  "endpoint_url": "xsd:string",
+                  "http_method": "xsd:string",
+                  "payload_schema": "xsd:string",
+                  "headers": "xsd:string",
+                  "service_account_id": "xsd:string",
+                  "retry_policy_id": "xsd:string",
+                  "timeout_policy_id": "xsd:string",
+                  "idempotency_window_id": "xsd:string",
+                  "max_runtime_seconds": "xsd:integer",
+                  "queue_name": "xsd:string",
+                  "labels": "xsd:string",
+                  "enabled": "xsd:boolean"
+                }
+              },
+              "Workflow": {
+                "properties": {
+                  "workflow_id": "xsd:string",
+                  "workflow_name": "xsd:string",
+                  "version": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "namespace_id": "xsd:string",
+                  "entry_task_id": "xsd:string",
+                  "definition_dag": "xsd:string",
+                  "compensation_strategy": "xsd:string",
+                  "idempotency_window_id": "xsd:string",
+                  "default_retry_policy_id": "xsd:string",
+                  "default_timeout_policy_id": "xsd:string",
+                  "visibility": "xsd:string",
+                  "labels": "xsd:string"
+                }
+              },
+              "Task": {
+                "properties": {
+                  "task_id": "xsd:string",
+                  "task_name": "xsd:string",
+                  "task_type": "xsd:string",
+                  "workflow_id": "xsd:string",
+                  "dependencies": "xsd:string",
+                  "activity_id": "xsd:string",
+                  "input_mapping": "xsd:string",
+                  "output_mapping": "xsd:string",
+                  "max_attempts": "xsd:integer",
+                  "task_timeout": "xsd:duration",
+                  "heartbeat_timeout": "xsd:duration",
+                  "queue_name": "xsd:string",
+                  "priority": "xsd:integer"
+                }
+              },
+              "WorkflowRun": {
+                "properties": {
+                  "run_id": "xsd:string",
+                  "workflow_id": "xsd:string",
+                  "started_at": "xsd:dateTime",
+                  "ended_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "attempt": "xsd:integer",
+                  "input_ref": "xsd:string",
+                  "output_ref": "xsd:string",
+                  "error_code": "xsd:string",
+                  "error_message": "xsd:string",
+                  "deadline_at": "xsd:dateTime",
+                  "duration_ms": "xsd:integer",
+                  "cost_units": "xsd:float",
+                  "labels": "xsd:string"
+                }
+              },
+              "Activity": {
+                "properties": {
+                  "activity_id": "xsd:string",
+                  "activity_name": "xsd:string",
+                  "worker_queue": "xsd:string",
+                  "schedule_to_start_timeout": "xsd:duration",
+                  "start_to_close_timeout": "xsd:duration",
+                  "schedule_to_close_timeout": "xsd:duration",
+                  "heartbeat_timeout": "xsd:duration",
+                  "concurrency_limit_id": "xsd:string",
+                  "retry_policy_id": "xsd:string",
+                  "sticky_to_worker": "xsd:boolean"
+                }
+              },
+              "RetryPolicy": {
+                "properties": {
+                  "retry_policy_id": "xsd:string",
+                  "max_attempts": "xsd:integer",
+                  "initial_backoff_seconds": "xsd:integer",
+                  "max_backoff_seconds": "xsd:integer",
+                  "backoff_multiplier": "xsd:float",
+                  "jitter": "xsd:boolean",
+                  "retryable_errors": "xsd:string",
+                  "non_retryable_errors": "xsd:string"
+                }
+              },
+              "TimeoutPolicy": {
+                "properties": {
+                  "timeout_policy_id": "xsd:string",
+                  "schedule_to_start_timeout": "xsd:duration",
+                  "start_to_close_timeout": "xsd:duration",
+                  "overall_deadline_timeout": "xsd:duration",
+                  "on_timeout_action": "xsd:string"
+                }
+              },
+              "RateLimit": {
+                "properties": {
+                  "rate_limit_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "tokens_per_interval": "xsd:integer",
+                  "interval_seconds": "xsd:integer",
+                  "burst_capacity": "xsd:integer",
+                  "algorithm": "xsd:string"
+                }
+              },
+              "ConcurrencyLimit": {
+                "properties": {
+                  "concurrency_limit_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "max_concurrent": "xsd:integer",
+                  "queue_capacity": "xsd:integer",
+                  "overflow_policy": "xsd:string"
+                }
+              },
+              "IdempotencyWindow": {
+                "properties": {
+                  "idempotency_window_id": "xsd:string",
+                  "window_seconds": "xsd:integer",
+                  "key_strategy": "xsd:string",
+                  "dedup_store": "xsd:string",
+                  "on_duplicate": "xsd:string"
+                }
+              }
+            }
+          },
+          "Event_Processing": {
+            "entities": {
+              "Event": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "event_type": "xsd:string",
+                  "source": "xsd:string",
+                  "subject": "xsd:string",
+                  "schema_ref": "xsd:string",
+                  "payload_ref": "xsd:string",
+                  "event_time": "xsd:dateTime",
+                  "processing_time": "xsd:dateTime",
+                  "partition_key": "xsd:string",
+                  "sequence_number": "xsd:string",
+                  "attributes": "xsd:string"
+                }
+              },
+              "EventStream": {
+                "properties": {
+                  "stream_id": "xsd:string",
+                  "stream_name": "xsd:string",
+                  "partitions": "xsd:integer",
+                  "ordering_key": "xsd:string",
+                  "serde_format": "xsd:string",
+                  "retention_policy_id": "xsd:string",
+                  "watermark_strategy_id": "xsd:string",
+                  "out_of_order_policy_id": "xsd:string",
+                  "event_time_policy_id": "xsd:string"
+                }
+              },
+              "StreamWindow": {
+                "properties": {
+                  "window_id": "xsd:string",
+                  "window_type": "xsd:string",
+                  "size_ms": "xsd:integer",
+                  "slide_ms": "xsd:integer",
+                  "gap_ms": "xsd:integer",
+                  "allowed_lateness_ms": "xsd:integer",
+                  "accumulator": "xsd:string"
+                }
+              },
+              "WatermarkStrategy": {
+                "properties": {
+                  "watermark_strategy_id": "xsd:string",
+                  "strategy_type": "xsd:string",
+                  "max_lag_ms": "xsd:integer",
+                  "idle_partition_timeout_ms": "xsd:integer"
+                }
+              },
+              "OutOfOrderPolicy": {
+                "properties": {
+                  "out_of_order_policy_id": "xsd:string",
+                  "action": "xsd:string",
+                  "allowed_lateness_ms": "xsd:integer",
+                  "dead_letter_queue": "xsd:string"
+                }
+              },
+              "EventTimePolicy": {
+                "properties": {
+                  "event_time_policy_id": "xsd:string",
+                  "time_attribute": "xsd:string",
+                  "fallback_to_processing_time": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Temporal_Data_Management": {
+            "entities": {
+              "TimeSeries": {
+                "properties": {
+                  "timeseries_id": "xsd:string",
+                  "entity_ref": "xsd:string",
+                  "metric_name": "xsd:string",
+                  "unit": "xsd:string",
+                  "description": "xsd:string",
+                  "retention_policy_id": "xsd:string",
+                  "labels": "xsd:string"
+                }
+              },
+              "TimeSeriesPoint": {
+                "properties": {
+                  "point_id": "xsd:string",
+                  "timeseries_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "value": "xsd:float",
+                  "quality": "xsd:string"
+                }
+              },
+              "BitemporalRecord": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "entity_ref": "xsd:string",
+                  "valid_time_start": "xsd:dateTime",
+                  "valid_time_end": "xsd:dateTime",
+                  "transaction_time_start": "xsd:dateTime",
+                  "transaction_time_end": "xsd:dateTime",
+                  "version": "xsd:integer",
+                  "correction": "xsd:boolean",
+                  "payload_ref": "xsd:string"
+                }
+              },
+              "RetentionPolicy": {
+                "properties": {
+                  "retention_policy_id": "xsd:string",
+                  "hot_retention_days": "xsd:integer",
+                  "cold_retention_days": "xsd:integer",
+                  "archive_location": "xsd:string",
+                  "delete_after_days": "xsd:integer"
+                }
+              },
+              "TTLPolicy": {
+                "properties": {
+                  "ttl_policy_id": "xsd:string",
+                  "time_to_live_seconds": "xsd:integer",
+                  "on_expire_action": "xsd:string",
+                  "grace_period_seconds": "xsd:integer"
+                }
+              },
+              "Snapshot": {
+                "properties": {
+                  "snapshot_id": "xsd:string",
+                  "entity_ref": "xsd:string",
+                  "taken_at": "xsd:dateTime",
+                  "checksum": "xsd:string",
+                  "storage_uri": "xsd:string",
+                  "size_bytes": "xsd:integer",
+                  "format": "xsd:string"
+                }
+              },
+              "Checkpoint": {
+                "properties": {
+                  "checkpoint_id": "xsd:string",
+                  "stream_id": "xsd:string",
+                  "partition": "xsd:integer",
+                  "offset": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "watermark_at": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "SLA_Monitoring": {
+            "entities": {
+              "SLA": {
+                "properties": {
+                  "sla_id": "xsd:string",
+                  "sla_name": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "description": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date",
+                  "slo_ids": "xsd:string",
+                  "penalties": "xsd:string"
+                }
+              },
+              "SLO": {
+                "properties": {
+                  "slo_id": "xsd:string",
+                  "slo_name": "xsd:string",
+                  "target": "xsd:string",
+                  "time_window_days": "xsd:integer",
+                  "query_ref": "xsd:string",
+                  "objective_percentage": "xsd:float",
+                  "unit": "xsd:string",
+                  "burn_rate_threshold": "xsd:float"
+                }
+              },
+              "SLACheck": {
+                "properties": {
+                  "check_id": "xsd:string",
+                  "slo_id": "xsd:string",
+                  "evaluated_at": "xsd:dateTime",
+                  "value": "xsd:float",
+                  "status": "xsd:string",
+                  "breach_id": "xsd:string"
+                }
+              },
+              "Metric": {
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "metric_name": "xsd:string",
+                  "unit": "xsd:string",
+                  "metric_type": "xsd:string",
+                  "labels": "xsd:string",
+                  "collection_interval_seconds": "xsd:integer"
+                }
+              },
+              "Alert": {
+                "properties": {
+                  "alert_id": "xsd:string",
+                  "severity": "xsd:string",
+                  "title": "xsd:string",
+                  "message_template": "xsd:string",
+                  "channel_id": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "incident_id": "xsd:string"
+                }
+              },
+              "Incident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "started_at": "xsd:dateTime",
+                  "ended_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "root_cause": "xsd:string",
+                  "mitigation": "xsd:string",
+                  "affected_resources": "xsd:string",
+                  "postmortem_uri": "xsd:string"
+                }
+              },
+              "HealthCheck": {
+                "properties": {
+                  "healthcheck_id": "xsd:string",
+                  "target_uri": "xsd:string",
+                  "interval_seconds": "xsd:integer",
+                  "timeout_seconds": "xsd:integer",
+                  "last_status": "xsd:string",
+                  "last_checked_at": "xsd:dateTime",
+                  "policy": "xsd:string"
+                }
+              }
+            }
+          },
+          "Security_Access": {
+            "entities": {
+              "Tenant": {
+                "properties": {
+                  "tenant_id": "xsd:string",
+                  "tenant_name": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "billing_plan": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              },
+              "Namespace": {
+                "properties": {
+                  "namespace_id": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "default_timezone": "xsd:string"
+                }
+              },
+              "Application": {
+                "properties": {
+                  "application_id": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "name": "xsd:string",
+                  "owner_team": "xsd:string",
+                  "labels": "xsd:string"
+                }
+              },
+              "ServiceAccount": {
+                "properties": {
+                  "service_account_id": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role_ids": "xsd:string",
+                  "expires_at": "xsd:dateTime"
+                }
+              },
+              "APIKey": {
+                "properties": {
+                  "api_key_id": "xsd:string",
+                  "service_account_id": "xsd:string",
+                  "hash_alg": "xsd:string",
+                  "secret_hash": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "expires_at": "xsd:dateTime",
+                  "scopes": "xsd:string"
+                }
+              },
+              "Permission": {
+                "properties": {
+                  "permission_id": "xsd:string",
+                  "action": "xsd:string",
+                  "resource": "xsd:string",
+                  "condition": "xsd:string"
+                }
+              },
+              "Role": {
+                "properties": {
+                  "role_id": "xsd:string",
+                  "role_name": "xsd:string",
+                  "permissions": "xsd:string",
+                  "description": "xsd:string"
+                }
+              },
+              "AuditLog": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "actor_id": "xsd:string",
+                  "actor_type": "xsd:string",
+                  "action": "xsd:string",
+                  "target_type": "xsd:string",
+                  "target_id": "xsd:string",
+                  "ip_address": "xsd:string",
+                  "success": "xsd:boolean",
+                  "details": "xsd:string"
+                }
+              }
+            }
+          },
+          "Notification_Integration": {
+            "entities": {
+              "Channel": {
+                "properties": {
+                  "channel_id": "xsd:string",
+                  "channel_type": "xsd:string",
+                  "endpoint": "xsd:string",
+                  "auth_secret_ref": "xsd:string",
+                  "throttle_rpm": "xsd:integer",
+                  "enabled": "xsd:boolean"
+                }
+              },
+              "WebhookSubscription": {
+                "properties": {
+                  "subscription_id": "xsd:string",
+                  "url": "xsd:string",
+                  "event_types": "xsd:string",
+                  "secret": "xsd:string",
+                  "retry_policy_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Notification": {
+                "properties": {
+                  "notification_id": "xsd:string",
+                  "channel_id": "xsd:string",
+                  "template_id": "xsd:string",
+                  "payload_ref": "xsd:string",
+                  "send_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "last_error": "xsd:string"
+                }
+              },
+              "Reminder": {
+                "properties": {
+                  "reminder_id": "xsd:string",
+                  "schedule_id": "xsd:string",
+                  "offset_before_event_sec": "xsd:integer",
+                  "channel_id": "xsd:string",
+                  "message_template": "xsd:string",
+                  "enabled": "xsd:boolean"
+                }
+              },
+              "CalendarEvent": {
+                "properties": {
+                  "calendar_event_id": "xsd:string",
+                  "external_calendar_id": "xsd:string",
+                  "ics_uid": "xsd:string",
+                  "summary": "xsd:string",
+                  "description": "xsd:string",
+                  "start": "xsd:dateTime",
+                  "end": "xsd:dateTime",
+                  "timezone": "xsd:string",
+                  "location": "xsd:string",
+                  "attendees": "xsd:string",
+                  "rrule_id": "xsd:string"
+                }
+              }
+            }
+          },
+          "State_Consistency": {
+            "entities": {
+              "DurableTimer": {
+                "properties": {
+                  "timer_id": "xsd:string",
+                  "fire_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "target_ref": "xsd:string",
+                  "payload_ref": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "last_attempt_at": "xsd:dateTime",
+                  "attempts": "xsd:integer"
+                }
+              },
+              "Heartbeat": {
+                "properties": {
+                  "heartbeat_id": "xsd:string",
+                  "activity_id": "xsd:string",
+                  "worker_id": "xsd:string",
+                  "last_beat_at": "xsd:dateTime",
+                  "timeout_seconds": "xsd:integer",
+                  "details": "xsd:string"
+                }
+              },
+              "Lease": {
+                "properties": {
+                  "lease_id": "xsd:string",
+                  "resource_id": "xsd:string",
+                  "holder_id": "xsd:string",
+                  "acquired_at": "xsd:dateTime",
+                  "duration_seconds": "xsd:integer",
+                  "renewal_count": "xsd:integer",
+                  "status": "xsd:string"
+                }
+              },
+              "Lock": {
+                "properties": {
+                  "lock_id": "xsd:string",
+                  "resource_id": "xsd:string",
+                  "lock_type": "xsd:string",
+                  "fairness": "xsd:string",
+                  "ttl_seconds": "xsd:integer",
+                  "owner_id": "xsd:string"
+                }
+              },
+              "Saga": {
+                "properties": {
+                  "saga_id": "xsd:string",
+                  "workflow_run_id": "xsd:string",
+                  "state": "xsd:string",
+                  "compensation_plan": "xsd:string",
+                  "completed_steps": "xsd:integer",
+                  "failed_step": "xsd:string"
+                }
+              },
+              "CompensationAction": {
+                "properties": {
+                  "comp_action_id": "xsd:string",
+                  "saga_id": "xsd:string",
+                  "task_id": "xsd:string",
+                  "execute_after": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "DeDuplicationRecord": {
+                "properties": {
+                  "dedup_id": "xsd:string",
+                  "idempotency_window_id": "xsd:string",
+                  "idempotency_key": "xsd:string",
+                  "first_seen_at": "xsd:dateTime",
+                  "expires_at": "xsd:dateTime"
+                }
+              },
+              "DeadLetter": {
+                "properties": {
+                  "dlq_id": "xsd:string",
+                  "queue_name": "xsd:string",
+                  "event_ref": "xsd:string",
+                  "reason": "xsd:string",
+                  "count": "xsd:integer",
+                  "last_seen_at": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "Observability_Tracing": {
+            "entities": {
+              "Trace": {
+                "properties": {
+                  "trace_id": "xsd:string",
+                  "tenant_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "resource_attributes": "xsd:string"
+                }
+              },
+              "Span": {
+                "properties": {
+                  "span_id": "xsd:string",
+                  "trace_id": "xsd:string",
+                  "parent_span_id": "xsd:string",
+                  "name": "xsd:string",
+                  "kind": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "attributes": "xsd:string",
+                  "events": "xsd:string",
+                  "status_code": "xsd:string"
+                }
+              },
+              "LogEntry": {
+                "properties": {
+                  "log_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "severity": "xsd:string",
+                  "message": "xsd:string",
+                  "resource": "xsd:string",
+                  "labels": "xsd:string"
+                }
+              },
+              "MetricMeasurement": {
+                "properties": {
+                  "measurement_id": "xsd:string",
+                  "metric_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "value": "xsd:float",
+                  "labels": "xsd:string"
+                }
+              },
+              "EventCorrelation": {
+                "properties": {
+                  "correlation_id": "xsd:string",
+                  "event_ids": "xsd:string",
+                  "workflow_run_id": "xsd:string",
+                  "window_id": "xsd:string",
+                  "correlation_score": "xsd:float"
+                }
+              }
+            }
+          },
+          "Change_Management": {
+            "entities": {
+              "Migration": {
+                "properties": {
+                  "migration_id": "xsd:string",
+                  "started_at": "xsd:dateTime",
+                  "ended_at": "xsd:dateTime",
+                  "state": "xsd:string",
+                  "steps": "xsd:string",
+                  "rollback_plan": "xsd:string",
+                  "applied_by": "xsd:string"
+                }
+              },
+              "VersionedSchedule": {
+                "properties": {
+                  "versioned_schedule_id": "xsd:string",
+                  "schedule_id": "xsd:string",
+                  "version": "xsd:string",
+                  "config_snapshot_ref": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "created_by": "xsd:string",
+                  "deprecation_notice_id": "xsd:string"
+                }
+              },
+              "DeprecationNotice": {
+                "properties": {
+                  "deprecation_notice_id": "xsd:string",
+                  "resource_type": "xsd:string",
+                  "resource_id": "xsd:string",
+                  "announced_at": "xsd:dateTime",
+                  "effective_date": "xsd:dateTime",
+                  "migration_path": "xsd:string"
+                }
+              },
+              "FeatureFlag": {
+                "properties": {
+                  "flag_id": "xsd:string",
+                  "key": "xsd:string",
+                  "description": "xsd:string",
+                  "enabled": "xsd:boolean",
+                  "rollout_percentage": "xsd:float",
+                  "rules": "xsd:string",
+                  "expires_at": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "Compliance_Privacy": {
+            "entities": {
+              "DataClassification": {
+                "properties": {
+                  "classification_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "policy_ref": "xsd:string"
+                }
+              },
+              "DataRetentionRule": {
+                "properties": {
+                  "retention_rule_id": "xsd:string",
+                  "applies_to": "xsd:string",
+                  "duration_days": "xsd:integer",
+                  "legal_basis": "xsd:string",
+                  "action_after": "xsd:string"
+                }
+              },
+              "AccessRequest": {
+                "properties": {
+                  "request_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "requested_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "fulfilled_at": "xsd:dateTime"
+                }
+              },
+              "ErasureRequest": {
+                "properties": {
+                  "erasure_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "requested_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "completed_at": "xsd:dateTime",
+                  "evidence_ref": "xsd:string"
+                }
+              },
+              "PseudonymizationPolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "method": "xsd:string",
+                  "key_management_ref": "xsd:string",
+                  "reversible": "xsd:boolean"
+                }
+              },
+              "ConsentRecord": {
+                "properties": {
+                  "consent_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "purpose": "xsd:string",
+                  "granted_at": "xsd:dateTime",
+                  "revoked_at": "xsd:dateTime",
+                  "evidence_ref": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "USES_TIME_SOURCE": { "domain": "ClockService", "range": "TimeSource" },
+      "IN_TIMEZONE": { "domain": "Schedule", "range": "TimeZone" },
+      "USES_CALENDAR": { "domain": "Schedule", "range": "CalendarSystem" },
+      "HAS_CRON": { "domain": "Schedule", "range": "CronExpression" },
+      "HAS_RRULE": { "domain": "Schedule", "range": "RecurrenceRule" },
+      "TRIGGERS_JOB": { "domain": "Trigger", "range": "Job" },
+      "TRIGGERS_WORKFLOW": { "domain": "Trigger", "range": "Workflow" },
+      "HAS_TRIGGER": { "domain": "Schedule", "range": "Trigger" },
+      "HAS_RETRY_POLICY": { "domain": "Job", "range": "RetryPolicy" },
+      "HAS_TIMEOUT_POLICY": { "domain": "Job", "range": "TimeoutPolicy" },
+      "HAS_RATE_LIMIT": { "domain": "Schedule", "range": "RateLimit" },
+      "HAS_CONCURRENCY_LIMIT": { "domain": "Schedule", "range": "ConcurrencyLimit" },
+      "HAS_IDEMPOTENCY_WINDOW": { "domain": "Workflow", "range": "IdempotencyWindow" },
+      "RUNS_WORKFLOW": { "domain": "WorkflowRun", "range": "Workflow" },
+      "HAS_TASK": { "domain": "Workflow", "range": "Task" },
+      "IMPLEMENTS_ACTIVITY": { "domain": "Task", "range": "Activity" },
+      "PRODUCES_EVENT": { "domain": "WorkflowRun", "range": "Event" },
+      "CONSUMES_STREAM": { "domain": "Workflow", "range": "EventStream" },
+      "WINDOWS_STREAM": { "domain": "EventStream", "range": "StreamWindow" },
+      "HAS_WATERMARK_STRATEGY": { "domain": "EventStream", "range": "WatermarkStrategy" },
+      "HAS_OOO_POLICY": { "domain": "EventStream", "range": "OutOfOrderPolicy" },
+      "HAS_EVENT_TIME_POLICY": { "domain": "EventStream", "range": "EventTimePolicy" },
+      "HAS_TIMESERIES": { "domain": "Workflow", "range": "TimeSeries" },
+      "HAS_POINT": { "domain": "TimeSeries", "range": "TimeSeriesPoint" },
+      "HAS_RETENTION_POLICY": { "domain": "EventStream", "range": "RetentionPolicy" },
+      "HAS_TTL_POLICY": { "domain": "Job", "range": "TTLPolicy" },
+      "TAKES_SNAPSHOT": { "domain": "WorkflowRun", "range": "Snapshot" },
+      "HAS_CHECKPOINT": { "domain": "EventStream", "range": "Checkpoint" },
+      "GOVERNS_SLA": { "domain": "Tenant", "range": "SLA" },
+      "HAS_SLO": { "domain": "SLA", "range": "SLO" },
+      "CHECKS_SLA": { "domain": "SLACheck", "range": "SLO" },
+      "RAISES_ALERT": { "domain": "SLACheck", "range": "Alert" },
+      "CAUSES_INCIDENT": { "domain": "Alert", "range": "Incident" },
+      "BELONGS_TO_TENANT": { "domain": "Namespace", "range": "Tenant" },
+      "OWNS_APPLICATION": { "domain": "Tenant", "range": "Application" },
+      "SCOPED_IN_NAMESPACE": { "domain": "Application", "range": "Namespace" },
+      "RUNS_AS": { "domain": "Job", "range": "ServiceAccount" },
+      "HAS_API_KEY": { "domain": "ServiceAccount", "range": "APIKey" },
+      "GRANTS_ROLE": { "domain": "Tenant", "range": "Role" },
+      "ROLE_HAS_PERMISSION": { "domain": "Role", "range": "Permission" },
+      "LOGGED_AS": { "domain": "AuditLog", "range": "ServiceAccount" },
+      "DELIVERS_VIA_CHANNEL": { "domain": "Notification", "range": "Channel" },
+      "HAS_WEBHOOK": { "domain": "Application", "range": "WebhookSubscription" },
+      "SENDS_REMINDER": { "domain": "Schedule", "range": "Reminder" },
+      "SYNCED_WITH_CALENDAR": { "domain": "Schedule", "range": "CalendarEvent" },
+      "USES_DURABLE_TIMER": { "domain": "Workflow", "range": "DurableTimer" },
+      "HAS_HEARTBEAT": { "domain": "Activity", "range": "Heartbeat" },
+      "PROTECTS_WITH_LEASE": { "domain": "Job", "range": "Lease" },
+      "PROTECTS_WITH_LOCK": { "domain": "Workflow", "range": "Lock" },
+      "MANAGED_BY_SAGA": { "domain": "WorkflowRun", "range": "Saga" },
+      "HAS_COMPENSATION": { "domain": "Saga", "range": "CompensationAction" },
+      "RECORDED_AS_DEDUP": { "domain": "IdempotencyWindow", "range": "DeDuplicationRecord" },
+      "ROUTED_TO_DLQ": { "domain": "Event", "range": "DeadLetter" },
+      "HAS_TRACE": { "domain": "WorkflowRun", "range": "Trace" },
+      "TRACE_HAS_SPAN": { "domain": "Trace", "range": "Span" },
+      "HAS_LOG": { "domain": "WorkflowRun", "range": "LogEntry" },
+      "HAS_MEASUREMENT": { "domain": "Metric", "range": "MetricMeasurement" },
+      "CORRELATED_BY": { "domain": "Event", "range": "EventCorrelation" },
+      "MIGRATES_TO": { "domain": "VersionedSchedule", "range": "Migration" },
+      "DEPRECATES": { "domain": "DeprecationNotice", "range": "VersionedSchedule" },
+      "CONTROLLED_BY_FLAG": { "domain": "Workflow", "range": "FeatureFlag" },
+      "CLASSIFIED_AS": { "domain": "TimeSeries", "range": "DataClassification" },
+      "RETENTION_RULE_FOR": { "domain": "DataRetentionRule", "range": "TimeSeries" },
+      "SATISFIES_ACCESS_REQUEST": { "domain": "AccessRequest", "range": "AuditLog" },
+      "FULFILLS_ERASURE": { "domain": "ErasureRequest", "range": "Snapshot" },
+      "CLOCK_EMITS_LEAP_SECOND": { "domain": "ClockService", "range": "LeapSecondEvent" }
+    }
+  }
+}

@@ -1,0 +1,1310 @@
+{
+  "ontology": {
+    "name": "technical_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/technical-service#",
+    "description": "Comprehensive ontology for technical service management across ITSM and Field Service: service portfolio, incidents/problems/changes, work orders, workforce & dispatch, asset & configuration management, monitoring/events, parts & procurement, contracts/SLAs, billing, knowledge, security and compliance.",
+    "namespaces": {
+      "ts": "http://context-machine.org/ontology/technical-service#",
+      "svc": "http://context-machine.org/ontology/technical-service/service#",
+      "cust": "http://context-machine.org/ontology/technical-service/customer#",
+      "asset": "http://context-machine.org/ontology/technical-service/asset#",
+      "cfg": "http://context-machine.org/ontology/technical-service/config#",
+      "work": "http://context-machine.org/ontology/technical-service/work#",
+      "wfm": "http://context-machine.org/ontology/technical-service/workforce#",
+      "sched": "http://context-machine.org/ontology/technical-service/scheduling#",
+      "inv": "http://context-machine.org/ontology/technical-service/inventory#",
+      "proc": "http://context-machine.org/ontology/technical-service/procurement#",
+      "fin": "http://context-machine.org/ontology/technical-service/finance#",
+      "kb": "http://context-machine.org/ontology/technical-service/knowledge#",
+      "mon": "http://context-machine.org/ontology/technical-service/monitoring#",
+      "sec": "http://context-machine.org/ontology/technical-service/security#",
+      "comp": "http://context-machine.org/ontology/technical-service/compliance#",
+      "proj": "http://context-machine.org/ontology/technical-service/project#",
+      "int": "http://context-machine.org/ontology/technical-service/integration#",
+      "qual": "http://context-machine.org/ontology/technical-service/quality#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "gsp": "http://www.opengis.net/ont/geosparql#",
+      "time": "http://www.w3.org/2006/time#",
+      "qudt": "http://qudt.org/vocab/unit#",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "prov": "http://www.w3.org/ns/prov#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    ],
+    "frames": {
+      "Service_Management_System": {
+        "collections": {
+          "Service_Portfolio": {
+            "entities": {
+              "Service": {
+                "properties": {
+                  "service_id": "xsd:string",
+                  "service_name": "xsd:string",
+                  "category": "xsd:string",
+                  "sub_category": "xsd:string",
+                  "description": "xsd:string",
+                  "business_owner": "xsd:string",
+                  "technical_owner": "xsd:string",
+                  "status": "xsd:string",
+                  "criticality": "xsd:string",
+                  "tier": "xsd:string",
+                  "rto_minutes": "xsd:integer",
+                  "rpo_minutes": "xsd:integer",
+                  "uptime_target_percentage": "xsd:float",
+                  "business_hours": "xsd:string",
+                  "tags": "xsd:string",
+                  "depends_on_services": "xsd:string"
+                }
+              },
+              "ServiceOffering": {
+                "properties": {
+                  "offering_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "offering_name": "xsd:string",
+                  "delivery_channel": "xsd:string",
+                  "coverage_regions": "xsd:string",
+                  "response_time_minutes": "xsd:integer",
+                  "resolution_time_minutes": "xsd:integer",
+                  "pricing_model": "xsd:string",
+                  "base_price": "xsd:float",
+                  "included_hours_per_month": "xsd:float",
+                  "surcharge_rules": "xsd:string",
+                  "contact_methods": "xsd:string",
+                  "activation_time_days": "xsd:integer"
+                }
+              },
+              "ServicePackage": {
+                "properties": {
+                  "package_id": "xsd:string",
+                  "package_name": "xsd:string",
+                  "included_offerings": "xsd:string",
+                  "bundle_discount_percentage": "xsd:float",
+                  "contract_term_months": "xsd:integer",
+                  "auto_renew": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Customer_Management": {
+            "entities": {
+              "Customer": {
+                "properties": {
+                  "customer_id": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "trading_name": "xsd:string",
+                  "customer_type": "xsd:string",
+                  "industry": "xsd:string",
+                  "segment": "xsd:string",
+                  "billing_account": "xsd:string",
+                  "primary_contact_name": "xsd:string",
+                  "primary_contact_email": "xsd:string",
+                  "primary_contact_phone": "xsd:string",
+                  "address": "xsd:string",
+                  "country": "xsd:string",
+                  "language": "xsd:string",
+                  "timezone": "xsd:string"
+                }
+              },
+              "Site": {
+                "properties": {
+                  "site_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "site_name": "xsd:string",
+                  "address": "xsd:string",
+                  "location": "geo:Point",
+                  "site_hours": "xsd:string",
+                  "access_instructions": "xsd:string",
+                  "security_clearance_required": "xsd:boolean",
+                  "parking_info": "xsd:string",
+                  "safety_requirements": "xsd:string",
+                  "network_details": "xsd:string"
+                }
+              },
+              "Contact": {
+                "properties": {
+                  "contact_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "preferred_channel": "xsd:string"
+                }
+              }
+            }
+          },
+          "Contracts_SLAs_Entitlements": {
+            "entities": {
+              "Contract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "contract_name": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "auto_renew": "xsd:boolean",
+                  "notice_period_days": "xsd:integer",
+                  "currency": "xsd:string",
+                  "payment_terms": "xsd:string",
+                  "discount_percentage": "xsd:float",
+                  "linked_sla_id": "xsd:string",
+                  "included_offering_ids": "xsd:string"
+                }
+              },
+              "SLA": {
+                "properties": {
+                  "sla_id": "xsd:string",
+                  "sla_name": "xsd:string",
+                  "service_hours": "xsd:string",
+                  "severity_schema": "xsd:string",
+                  "response_target_minutes_sev1": "xsd:integer",
+                  "response_target_minutes_sev2": "xsd:integer",
+                  "response_target_minutes_sev3": "xsd:integer",
+                  "resolution_target_minutes_sev1": "xsd:integer",
+                  "resolution_target_minutes_sev2": "xsd:integer",
+                  "resolution_target_minutes_sev3": "xsd:integer",
+                  "uptime_target_percentage": "xsd:float",
+                  "penalties_credits": "xsd:string",
+                  "escalation_policy": "xsd:string",
+                  "measurement_period_days": "xsd:integer"
+                }
+              },
+              "Entitlement": {
+                "properties": {
+                  "entitlement_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "max_incidents_per_month": "xsd:integer",
+                  "included_hours_per_month": "xsd:float",
+                  "parts_discount_percentage": "xsd:float",
+                  "travel_included_km": "xsd:float"
+                }
+              },
+              "Subscription": {
+                "properties": {
+                  "subscription_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "plan": "xsd:string",
+                  "billing_cycle": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Knowledge_Management": {
+            "entities": {
+              "KBArticle": {
+                "properties": {
+                  "kb_id": "xsd:string",
+                  "title": "xsd:string",
+                  "summary": "xsd:string",
+                  "content": "xsd:string",
+                  "article_type": "xsd:string",
+                  "service_id": "xsd:string",
+                  "ci_type": "xsd:string",
+                  "tags": "xsd:string",
+                  "version": "xsd:string",
+                  "author": "xsd:string",
+                  "review_date": "xsd:date",
+                  "next_review_date": "xsd:date",
+                  "helpfulness_score": "xsd:float",
+                  "usage_count": "xsd:integer"
+                }
+              },
+              "Runbook": {
+                "properties": {
+                  "runbook_id": "xsd:string",
+                  "title": "xsd:string",
+                  "steps": "xsd:string",
+                  "estimated_duration_minutes": "xsd:integer",
+                  "required_skills": "xsd:string",
+                  "safety_notes": "xsd:string",
+                  "version": "xsd:string"
+                }
+              },
+              "SOP": {
+                "properties": {
+                  "sop_id": "xsd:string",
+                  "title": "xsd:string",
+                  "procedure": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "owner": "xsd:string",
+                  "compliance_mapping": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Operations_Execution": {
+        "collections": {
+          "Incident_Problem_Change": {
+            "entities": {
+              "Incident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "reported_time": "xsd:dateTime",
+                  "detection_method": "xsd:string",
+                  "severity": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "service_id": "xsd:string",
+                  "affected_ci_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "assignment_group": "xsd:string",
+                  "assigned_to": "xsd:string",
+                  "escalation_level": "xsd:integer",
+                  "workaround": "xsd:string",
+                  "sla_response_breached": "xsd:boolean",
+                  "sla_resolution_breached": "xsd:boolean",
+                  "resolved_time": "xsd:dateTime",
+                  "closure_code": "xsd:string",
+                  "user_impact_count": "xsd:integer"
+                }
+              },
+              "Problem": {
+                "properties": {
+                  "problem_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "status": "xsd:string",
+                  "known_error": "xsd:boolean",
+                  "workaround": "xsd:string",
+                  "rca_method": "xsd:string",
+                  "rca_summary": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "opened_time": "xsd:dateTime",
+                  "closed_time": "xsd:dateTime"
+                }
+              },
+              "ChangeRequest": {
+                "properties": {
+                  "change_id": "xsd:string",
+                  "change_type": "xsd:string",
+                  "category": "xsd:string",
+                  "status": "xsd:string",
+                  "requested_by": "xsd:string",
+                  "business_case": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "impact": "xsd:string",
+                  "backout_plan": "xsd:string",
+                  "cab_approval_status": "xsd:string",
+                  "scheduled_start": "xsd:dateTime",
+                  "scheduled_end": "xsd:dateTime",
+                  "actual_start": "xsd:dateTime",
+                  "actual_end": "xsd:dateTime",
+                  "success": "xsd:boolean"
+                }
+              },
+              "Release": {
+                "properties": {
+                  "release_id": "xsd:string",
+                  "version": "xsd:string",
+                  "environment": "xsd:string",
+                  "deployment_plan": "xsd:string",
+                  "status": "xsd:string",
+                  "deployed_time": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "Request_Fulfillment": {
+            "entities": {
+              "ServiceRequest": {
+                "properties": {
+                  "sr_id": "xsd:string",
+                  "requester": "xsd:string",
+                  "catalog_item_id": "xsd:string",
+                  "description": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "requested_date": "xsd:dateTime",
+                  "due_date": "xsd:date",
+                  "approval_status": "xsd:string",
+                  "fulfillment_group": "xsd:string"
+                }
+              },
+              "CatalogItem": {
+                "properties": {
+                  "item_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "description": "xsd:string",
+                  "price": "xsd:float",
+                  "lead_time_days": "xsd:integer",
+                  "required_approvals": "xsd:string",
+                  "preauthorized": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Work_Execution": {
+            "entities": {
+              "WorkOrder": {
+                "properties": {
+                  "work_order_id": "xsd:string",
+                  "type": "xsd:string",
+                  "priority": "xsd:string",
+                  "status": "xsd:string",
+                  "created_date": "xsd:dateTime",
+                  "due_date": "xsd:date",
+                  "scheduled_start": "xsd:dateTime",
+                  "scheduled_end": "xsd:dateTime",
+                  "actual_start": "xsd:dateTime",
+                  "actual_end": "xsd:dateTime",
+                  "service_request_id": "xsd:string",
+                  "incident_id": "xsd:string",
+                  "change_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "assigned_technician_id": "xsd:string",
+                  "dispatcher_id": "xsd:string",
+                  "description": "xsd:string",
+                  "checklist_id": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "permit_required": "xsd:boolean",
+                  "travel_distance_km": "xsd:float",
+                  "travel_time_minutes": "xsd:integer",
+                  "labor_hours": "xsd:float",
+                  "labor_cost": "xsd:float",
+                  "parts_cost": "xsd:float",
+                  "total_cost": "xsd:float",
+                  "outcome": "xsd:string",
+                  "customer_signature": "xsd:string",
+                  "acceptance_time": "xsd:dateTime",
+                  "satisfaction_score": "xsd:float",
+                  "follow_up_required": "xsd:boolean",
+                  "follow_up_work_order_id": "xsd:string"
+                }
+              },
+              "Task": {
+                "properties": {
+                  "task_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "sequence": "xsd:integer",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "estimated_minutes": "xsd:integer",
+                  "actual_minutes": "xsd:integer",
+                  "status": "xsd:string",
+                  "dependency_task_id": "xsd:string",
+                  "required_skills": "xsd:string",
+                  "required_tools": "xsd:string",
+                  "required_parts": "xsd:string",
+                  "approval_required": "xsd:boolean",
+                  "approval_status": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "Checklist": {
+                "properties": {
+                  "checklist_id": "xsd:string",
+                  "title": "xsd:string",
+                  "version": "xsd:string",
+                  "items": "xsd:string",
+                  "items_count": "xsd:integer",
+                  "risk_signoff_required": "xsd:boolean"
+                }
+              },
+              "TimeEntry": {
+                "properties": {
+                  "time_entry_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "technician_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "hours": "xsd:float",
+                  "billable": "xsd:boolean",
+                  "rate_per_hour": "xsd:float",
+                  "cost": "xsd:float",
+                  "notes": "xsd:string"
+                }
+              },
+              "WorkLog": {
+                "properties": {
+                  "log_id": "xsd:string",
+                  "related_id": "xsd:string",
+                  "related_type": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "author": "xsd:string",
+                  "message": "xsd:string",
+                  "visibility": "xsd:string"
+                }
+              },
+              "RiskAssessment": {
+                "properties": {
+                  "risk_assessment_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "hazards": "xsd:string",
+                  "severity": "xsd:string",
+                  "likelihood": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "controls": "xsd:string",
+                  "residual_risk": "xsd:string",
+                  "reviewer": "xsd:string",
+                  "approval_status": "xsd:string"
+                }
+              },
+              "PermitToWork": {
+                "properties": {
+                  "permit_id": "xsd:string",
+                  "permit_type": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "issuer": "xsd:string",
+                  "receiver": "xsd:string",
+                  "valid_from": "xsd:dateTime",
+                  "valid_to": "xsd:dateTime",
+                  "lockout_tagout": "xsd:boolean",
+                  "confined_space": "xsd:boolean",
+                  "hot_work": "xsd:boolean",
+                  "gas_test_required": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "Approval": {
+                "properties": {
+                  "approval_id": "xsd:string",
+                  "related_entity_type": "xsd:string",
+                  "related_entity_id": "xsd:string",
+                  "approver": "xsd:string",
+                  "requested_time": "xsd:dateTime",
+                  "decision_time": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "comment": "xsd:string"
+                }
+              }
+            }
+          },
+          "Scheduling_Dispatch": {
+            "entities": {
+              "Dispatch": {
+                "properties": {
+                  "dispatch_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "dispatcher_id": "xsd:string",
+                  "assigned_technician_id": "xsd:string",
+                  "assignment_time": "xsd:dateTime",
+                  "dispatch_time": "xsd:dateTime",
+                  "eta_time": "xsd:dateTime",
+                  "route_plan_id": "xsd:string",
+                  "travel_mode": "xsd:string",
+                  "status": "xsd:string",
+                  "acceptance_status": "xsd:string",
+                  "reject_reason": "xsd:string"
+                }
+              },
+              "RoutePlan": {
+                "properties": {
+                  "route_plan_id": "xsd:string",
+                  "start_point": "geo:Point",
+                  "end_point": "geo:Point",
+                  "waypoints": "gsp:LineString",
+                  "distance_km": "xsd:float",
+                  "estimated_travel_minutes": "xsd:integer",
+                  "traffic_model": "xsd:string",
+                  "constraints": "xsd:string"
+                }
+              },
+              "Appointment": {
+                "properties": {
+                  "appointment_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "customer_contact_id": "xsd:string",
+                  "time_window_start": "xsd:dateTime",
+                  "time_window_end": "xsd:dateTime",
+                  "scheduled_time": "xsd:dateTime",
+                  "confirmed": "xsd:boolean",
+                  "reschedule_count": "xsd:integer",
+                  "no_show": "xsd:boolean",
+                  "cancellation_reason": "xsd:string"
+                }
+              },
+              "ScheduleConstraint": {
+                "properties": {
+                  "constraint_id": "xsd:string",
+                  "type": "xsd:string",
+                  "expression": "xsd:string",
+                  "priority": "xsd:integer"
+                }
+              }
+            }
+          },
+          "Workforce_Management": {
+            "entities": {
+              "Technician": {
+                "properties": {
+                  "technician_id": "xsd:string",
+                  "name": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "role": "xsd:string",
+                  "employment_type": "xsd:string",
+                  "home_base_location": "geo:Point",
+                  "languages": "xsd:string",
+                  "skills": "xsd:string",
+                  "certifications": "xsd:string",
+                  "clearances": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "hourly_rate": "xsd:float",
+                  "overtime_eligible": "xsd:boolean",
+                  "availability_calendar": "xsd:string"
+                }
+              },
+              "Team": {
+                "properties": {
+                  "team_id": "xsd:string",
+                  "team_name": "xsd:string",
+                  "manager_id": "xsd:string",
+                  "coverage_regions": "xsd:string",
+                  "service_hours": "xsd:string",
+                  "on_call_schedule": "xsd:string",
+                  "capacity_hours_per_week": "xsd:float",
+                  "skill_matrix": "xsd:string"
+                }
+              },
+              "Skill": {
+                "properties": {
+                  "skill_id": "xsd:string",
+                  "skill_name": "xsd:string",
+                  "level_schema": "xsd:string"
+                }
+              },
+              "Certification": {
+                "properties": {
+                  "cert_id": "xsd:string",
+                  "cert_name": "xsd:string",
+                  "issuer": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date"
+                }
+              },
+              "Shift": {
+                "properties": {
+                  "shift_id": "xsd:string",
+                  "technician_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "shift_type": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Vehicle": {
+                "properties": {
+                  "vehicle_id": "xsd:string",
+                  "license_plate": "xsd:string",
+                  "make": "xsd:string",
+                  "model": "xsd:string",
+                  "year": "xsd:integer",
+                  "fuel_type": "xsd:string",
+                  "capacity_m3": "xsd:float",
+                  "mileage_km": "xsd:float",
+                  "gps_tracking": "xsd:boolean",
+                  "current_location": "geo:Point",
+                  "status": "xsd:string"
+                }
+              },
+              "Tool": {
+                "properties": {
+                  "tool_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "status": "xsd:string",
+                  "calibration_date": "xsd:date",
+                  "next_calibration_date": "xsd:date",
+                  "last_used_date": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Asset_Configuration_Management": {
+        "collections": {
+          "Asset_Inventory": {
+            "entities": {
+              "Asset": {
+                "properties": {
+                  "asset_id": "xsd:string",
+                  "asset_tag": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "category": "xsd:string",
+                  "sub_category": "xsd:string",
+                  "location": "geo:Point",
+                  "site_id": "xsd:string",
+                  "install_date": "xsd:date",
+                  "warranty_expiry": "xsd:date",
+                  "status": "xsd:string",
+                  "owner": "xsd:string",
+                  "maintenance_strategy": "xsd:string",
+                  "maintenance_interval_days": "xsd:integer",
+                  "last_service_date": "xsd:date",
+                  "next_service_date": "xsd:date",
+                  "firmware_version": "xsd:string",
+                  "ip_address": "xsd:string",
+                  "os_version": "xsd:string",
+                  "virtualized": "xsd:boolean",
+                  "host_asset_id": "xsd:string",
+                  "usage_hours": "xsd:float",
+                  "meter_name": "xsd:string"
+                }
+              },
+              "AssetModel": {
+                "properties": {
+                  "model_id": "xsd:string",
+                  "model_name": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "category": "xsd:string",
+                  "documentation_url": "xsd:string",
+                  "eol_date": "xsd:date",
+                  "recommended_maintenance": "xsd:string",
+                  "default_bom_id": "xsd:string"
+                }
+              },
+              "ConfigurationItem": {
+                "properties": {
+                  "ci_id": "xsd:string",
+                  "ci_type": "xsd:string",
+                  "service_id": "xsd:string",
+                  "environment": "xsd:string",
+                  "state": "xsd:string",
+                  "criticality": "xsd:string",
+                  "patch_level": "xsd:string",
+                  "compliance_status": "xsd:string",
+                  "relationships": "xsd:string"
+                }
+              },
+              "IoTDevice": {
+                "properties": {
+                  "device_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "protocol": "xsd:string",
+                  "telemetry_schema": "xsd:string",
+                  "sample_rate_seconds": "xsd:integer",
+                  "last_seen": "xsd:dateTime",
+                  "battery_level_percentage": "xsd:float",
+                  "imei": "xsd:string",
+                  "certificate_id": "xsd:string"
+                }
+              },
+              "MeterReading": {
+                "properties": {
+                  "meter_reading_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "metric_name": "xsd:string",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "source": "xsd:string"
+                }
+              }
+            }
+          },
+          "Monitoring_Events": {
+            "entities": {
+              "Event": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "source": "xsd:string",
+                  "category": "xsd:string",
+                  "severity": "xsd:string",
+                  "message": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "ci_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "metric_name": "xsd:string",
+                  "metric_value": "xsd:float",
+                  "unit": "xsd:string"
+                }
+              },
+              "Alert": {
+                "properties": {
+                  "alert_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "dedup_key": "xsd:string",
+                  "severity": "xsd:string",
+                  "status": "xsd:string",
+                  "trigger_rule": "xsd:string",
+                  "ack_time": "xsd:dateTime",
+                  "resolve_time": "xsd:dateTime",
+                  "assigned_group": "xsd:string",
+                  "assigned_to": "xsd:string"
+                }
+              },
+              "Metric": {
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "unit": "xsd:string",
+                  "sampling_interval_seconds": "xsd:integer",
+                  "thresholds": "xsd:string"
+                }
+              },
+              "Telemetry": {
+                "properties": {
+                  "telemetry_id": "xsd:string",
+                  "device_id": "xsd:string",
+                  "payload": "xsd:string",
+                  "ingest_time": "xsd:dateTime",
+                  "decode_status": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Inventory_Procurement_Billing": {
+        "collections": {
+          "Inventory_SpareParts": {
+            "entities": {
+              "Part": {
+                "properties": {
+                  "part_id": "xsd:string",
+                  "sku": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "unit": "xsd:string",
+                  "unit_cost": "xsd:float",
+                  "list_price": "xsd:float",
+                  "weight_kg": "xsd:float",
+                  "dimensions_lwh_cm": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "supplier_id": "xsd:string",
+                  "warranty_months": "xsd:integer",
+                  "hazard_class": "xsd:string",
+                  "reorder_point": "xsd:float",
+                  "reorder_quantity": "xsd:float",
+                  "lead_time_days": "xsd:integer",
+                  "compatibility_models": "xsd:string"
+                }
+              },
+              "InventoryLocation": {
+                "properties": {
+                  "location_id": "xsd:string",
+                  "location_type": "xsd:string",
+                  "name": "xsd:string",
+                  "address": "xsd:string",
+                  "geo_location": "geo:Point",
+                  "capacity_m3": "xsd:float",
+                  "temperature_controlled": "xsd:boolean"
+                }
+              },
+              "StockTransaction": {
+                "properties": {
+                  "transaction_id": "xsd:string",
+                  "part_id": "xsd:string",
+                  "from_location_id": "xsd:string",
+                  "to_location_id": "xsd:string",
+                  "quantity": "xsd:float",
+                  "unit": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "reason_code": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "unit_cost": "xsd:float",
+                  "lot_number": "xsd:string",
+                  "expiration_date": "xsd:date"
+                }
+              },
+              "BOM": {
+                "properties": {
+                  "bom_id": "xsd:string",
+                  "model_id": "xsd:string",
+                  "part_id": "xsd:string",
+                  "quantity_per_asset": "xsd:float",
+                  "unit": "xsd:string",
+                  "alternates": "xsd:string",
+                  "criticality": "xsd:string"
+                }
+              }
+            }
+          },
+          "Procurement_Vendors": {
+            "entities": {
+              "Supplier": {
+                "properties": {
+                  "supplier_id": "xsd:string",
+                  "name": "xsd:string",
+                  "legal_entity_id": "xsd:string",
+                  "contact_name": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "payment_terms": "xsd:string",
+                  "incoterms": "xsd:string",
+                  "lead_time_days": "xsd:integer",
+                  "on_time_delivery_percentage": "xsd:float",
+                  "rating": "xsd:string",
+                  "certifications": "xsd:string",
+                  "preferred": "xsd:boolean"
+                }
+              },
+              "PurchaseOrder": {
+                "properties": {
+                  "po_id": "xsd:string",
+                  "supplier_id": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expected_delivery_date": "xsd:date",
+                  "currency": "xsd:string",
+                  "status": "xsd:string",
+                  "line_items": "xsd:string",
+                  "subtotal": "xsd:float",
+                  "tax_amount": "xsd:float",
+                  "total_amount": "xsd:float"
+                }
+              },
+              "GoodsReceipt": {
+                "properties": {
+                  "grn_id": "xsd:string",
+                  "po_id": "xsd:string",
+                  "received_date": "xsd:date",
+                  "received_by": "xsd:string",
+                  "received_quantity": "xsd:float",
+                  "accepted_quantity": "xsd:float",
+                  "rejected_quantity": "xsd:float",
+                  "rejection_reason": "xsd:string",
+                  "inspection_notes": "xsd:string",
+                  "inventory_location_id": "xsd:string"
+                }
+              },
+              "Invoice": {
+                "properties": {
+                  "invoice_id": "xsd:string",
+                  "supplier_id": "xsd:string",
+                  "po_id": "xsd:string",
+                  "invoice_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string",
+                  "amount_net": "xsd:float",
+                  "amount_tax": "xsd:float",
+                  "amount_total": "xsd:float",
+                  "currency": "xsd:string",
+                  "paid_date": "xsd:date"
+                }
+              }
+            }
+          },
+          "Billing_Finance": {
+            "entities": {
+              "Quote": {
+                "properties": {
+                  "quote_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "valid_until": "xsd:date",
+                  "status": "xsd:string",
+                  "amount_total": "xsd:float",
+                  "currency": "xsd:string",
+                  "line_items": "xsd:string",
+                  "discount_percentage": "xsd:float"
+                }
+              },
+              "SalesOrder": {
+                "properties": {
+                  "so_id": "xsd:string",
+                  "quote_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "status": "xsd:string",
+                  "order_date": "xsd:date",
+                  "amount_total": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "Billing": {
+                "properties": {
+                  "billing_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "contract_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "charges": "xsd:string",
+                  "tax_amount": "xsd:float",
+                  "amount_due": "xsd:float",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Charge": {
+                "properties": {
+                  "charge_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "type": "xsd:string",
+                  "quantity": "xsd:float",
+                  "unit_price": "xsd:float",
+                  "discount_percentage": "xsd:float",
+                  "tax_rate_percentage": "xsd:float",
+                  "total": "xsd:float",
+                  "billable": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Risk_Compliance_Security": {
+        "collections": {
+          "Compliance_Safety": {
+            "entities": {
+              "ComplianceRequirement": {
+                "properties": {
+                  "requirement_id": "xsd:string",
+                  "framework": "xsd:string",
+                  "control_id": "xsd:string",
+                  "description": "xsd:string",
+                  "applicability": "xsd:string"
+                }
+              },
+              "Audit": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "auditor": "xsd:string",
+                  "status": "xsd:string",
+                  "findings_count": "xsd:integer"
+                }
+              },
+              "Finding": {
+                "properties": {
+                  "finding_id": "xsd:string",
+                  "audit_id": "xsd:string",
+                  "severity": "xsd:string",
+                  "description": "xsd:string",
+                  "evidence": "xsd:string",
+                  "remediation": "xsd:string",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "LicensePermit": {
+                "properties": {
+                  "license_id": "xsd:string",
+                  "type": "xsd:string",
+                  "holder": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "jurisdiction": "xsd:string"
+                }
+              },
+              "SafetyIncident": {
+                "properties": {
+                  "safety_incident_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "category": "xsd:string",
+                  "severity": "xsd:string",
+                  "injury": "xsd:boolean",
+                  "description": "xsd:string",
+                  "occurred_time": "xsd:dateTime",
+                  "reported_time": "xsd:dateTime",
+                  "root_cause": "xsd:string",
+                  "corrective_actions": "xsd:string",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Security_Management": {
+            "entities": {
+              "Vulnerability": {
+                "properties": {
+                  "vuln_id": "xsd:string",
+                  "ci_id": "xsd:string",
+                  "cve_id": "xsd:string",
+                  "cvss_score": "xsd:float",
+                  "severity": "xsd:string",
+                  "discovered_time": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "SecurityIncident": {
+                "properties": {
+                  "sec_incident_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "severity": "xsd:string",
+                  "status": "xsd:string",
+                  "detected_time": "xsd:dateTime",
+                  "contained_time": "xsd:dateTime",
+                  "eradicated_time": "xsd:dateTime",
+                  "recovered_time": "xsd:dateTime",
+                  "affected_ci_ids": "xsd:string",
+                  "ioc_indicators": "xsd:string"
+                }
+              },
+              "Patch": {
+                "properties": {
+                  "patch_id": "xsd:string",
+                  "ci_id": "xsd:string",
+                  "vendor": "xsd:string",
+                  "version": "xsd:string",
+                  "release_date": "xsd:date",
+                  "install_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Project_Service_Delivery": {
+        "collections": {
+          "Projects": {
+            "entities": {
+              "Project": {
+                "properties": {
+                  "project_id": "xsd:string",
+                  "project_name": "xsd:string",
+                  "type": "xsd:string",
+                  "status": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "manager": "xsd:string",
+                  "budget": "xsd:float",
+                  "actual_cost": "xsd:float",
+                  "customer_id": "xsd:string"
+                }
+              },
+              "Milestone": {
+                "properties": {
+                  "milestone_id": "xsd:string",
+                  "project_id": "xsd:string",
+                  "name": "xsd:string",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Deliverable": {
+                "properties": {
+                  "deliverable_id": "xsd:string",
+                  "project_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "acceptance_criteria": "xsd:string",
+                  "accepted_time": "xsd:dateTime"
+                }
+              },
+              "ResourceAllocation": {
+                "properties": {
+                  "allocation_id": "xsd:string",
+                  "project_id": "xsd:string",
+                  "technician_id": "xsd:string",
+                  "role": "xsd:string",
+                  "allocation_hours": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Integration_Quality": {
+        "collections": {
+          "Integration": {
+            "entities": {
+              "APIEndpoint": {
+                "properties": {
+                  "endpoint_id": "xsd:string",
+                  "name": "xsd:string",
+                  "url": "xsd:string",
+                  "method": "xsd:string",
+                  "auth_type": "xsd:string",
+                  "schema_ref": "xsd:string",
+                  "last_call_time": "xsd:dateTime",
+                  "last_status_code": "xsd:string",
+                  "vendor": "xsd:string"
+                }
+              },
+              "Webhook": {
+                "properties": {
+                  "webhook_id": "xsd:string",
+                  "name": "xsd:string",
+                  "target_url": "xsd:string",
+                  "event_types": "xsd:string",
+                  "secret": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Message": {
+                "properties": {
+                  "message_id": "xsd:string",
+                  "channel": "xsd:string",
+                  "payload": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "direction": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "DataMapping": {
+                "properties": {
+                  "mapping_id": "xsd:string",
+                  "source_system": "xsd:string",
+                  "target_system": "xsd:string",
+                  "mapping_spec": "xsd:string",
+                  "version": "xsd:string"
+                }
+              }
+            }
+          },
+          "Quality_CustomerFeedback": {
+            "entities": {
+              "QAReview": {
+                "properties": {
+                  "qa_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "reviewer": "xsd:string",
+                  "score": "xsd:float",
+                  "findings": "xsd:string",
+                  "actions": "xsd:string",
+                  "review_date": "xsd:date"
+                }
+              },
+              "Survey": {
+                "properties": {
+                  "survey_id": "xsd:string",
+                  "customer_id": "xsd:string",
+                  "work_order_id": "xsd:string",
+                  "nps_score": "xsd:integer",
+                  "csat_score": "xsd:float",
+                  "comments": "xsd:string",
+                  "submitted_time": "xsd:dateTime"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "SERVES_CUSTOMER": { "domain": "Service", "range": "Customer" },
+      "OFFERED_AS": { "domain": "Service", "range": "ServiceOffering" },
+      "BUNDLES_OFFERING": { "domain": "ServicePackage", "range": "ServiceOffering" },
+      "HAS_SLA": { "domain": "Contract", "range": "SLA" },
+      "ENTITLES_SERVICE": { "domain": "Entitlement", "range": "Service" },
+      "ENTITLEMENT_FOR_CUSTOMER": { "domain": "Entitlement", "range": "Customer" },
+      "SUBSCRIBES_TO": { "domain": "Subscription", "range": "Service" },
+      "SUBSCRIPTION_OF": { "domain": "Subscription", "range": "Customer" },
+
+      "LOCATED_AT": { "domain": "Asset", "range": "Site" },
+      "ASSET_OF_CUSTOMER": { "domain": "Asset", "range": "Customer" },
+      "MODEL_OF": { "domain": "AssetModel", "range": "Asset" },
+      "HAS_CI": { "domain": "Service", "range": "ConfigurationItem" },
+      "HOSTED_ON": { "domain": "ConfigurationItem", "range": "ConfigurationItem" },
+      "MONITORED_BY_DEVICE": { "domain": "Asset", "range": "IoTDevice" },
+      "HAS_METER_READING": { "domain": "Asset", "range": "MeterReading" },
+
+      "RAISED_FOR_SERVICE": { "domain": "Incident", "range": "Service" },
+      "AFFECTS_CI": { "domain": "Incident", "range": "ConfigurationItem" },
+      "AFFECTS_ASSET": { "domain": "Incident", "range": "Asset" },
+      "REPORTED_BY_CUSTOMER": { "domain": "Incident", "range": "Customer" },
+      "RELATED_PROBLEM": { "domain": "Incident", "range": "Problem" },
+      "RESOLVED_BY_WORKORDER": { "domain": "Incident", "range": "WorkOrder" },
+      "ROOT_CAUSE_OF": { "domain": "Problem", "range": "Incident" },
+      "MITIGATED_BY_CHANGE": { "domain": "Problem", "range": "ChangeRequest" },
+      "IMPLEMENTS_CHANGE": { "domain": "ChangeRequest", "range": "WorkOrder" },
+      "DELIVERED_IN_RELEASE": { "domain": "ChangeRequest", "range": "Release" },
+
+      "FULFILLS_REQUEST": { "domain": "WorkOrder", "range": "ServiceRequest" },
+      "REQUEST_FOR_ITEM": { "domain": "ServiceRequest", "range": "CatalogItem" },
+      "ASSIGNED_TO_TECHNICIAN": { "domain": "WorkOrder", "range": "Technician" },
+      "DISPATCHED_VIA": { "domain": "WorkOrder", "range": "Dispatch" },
+      "SCHEDULED_AT": { "domain": "WorkOrder", "range": "Appointment" },
+      "HAS_TASK": { "domain": "WorkOrder", "range": "Task" },
+      "HAS_CHECKLIST": { "domain": "WorkOrder", "range": "Checklist" },
+      "HAS_RISK_ASSESSMENT": { "domain": "WorkOrder", "range": "RiskAssessment" },
+      "REQUIRES_PERMIT": { "domain": "WorkOrder", "range": "PermitToWork" },
+      "LOGGED_WITH": { "domain": "WorkOrder", "range": "WorkLog" },
+      "HAS_TIME_ENTRY": { "domain": "WorkOrder", "range": "TimeEntry" },
+
+      "TEAM_MEMBER": { "domain": "Team", "range": "Technician" },
+      "USES_VEHICLE": { "domain": "Technician", "range": "Vehicle" },
+      "USES_TOOL": { "domain": "Technician", "range": "Tool" },
+      "HAS_SKILL": { "domain": "Technician", "range": "Skill" },
+      "HOLDS_CERTIFICATION": { "domain": "Technician", "range": "Certification" },
+
+      "TRIGGERS_ALERT": { "domain": "Event", "range": "Alert" },
+      "ALERT_FOR_CI": { "domain": "Alert", "range": "ConfigurationItem" },
+      "ALERT_FOR_ASSET": { "domain": "Alert", "range": "Asset" },
+      "ALERT_CREATES_WORKORDER": { "domain": "Alert", "range": "WorkOrder" },
+
+      "STORED_AT": { "domain": "Part", "range": "InventoryLocation" },
+      "CONSUMED_IN": { "domain": "StockTransaction", "range": "WorkOrder" },
+      "SUPPLIED_BY": { "domain": "Part", "range": "Supplier" },
+      "PROCURED_VIA_PO": { "domain": "Part", "range": "PurchaseOrder" },
+      "RECEIVED_AGAINST": { "domain": "GoodsReceipt", "range": "PurchaseOrder" },
+
+      "BILLS_FOR_CONTRACT": { "domain": "Billing", "range": "Contract" },
+      "CHARGE_FOR_WORKORDER": { "domain": "Charge", "range": "WorkOrder" },
+
+      "KB_FOR_SERVICE": { "domain": "KBArticle", "range": "Service" },
+      "RUNBOOK_FOR_TASK": { "domain": "Runbook", "range": "Task" },
+      "SOP_SUPPORTS_PERMIT": { "domain": "SOP", "range": "PermitToWork" },
+
+      "COMPLIANCE_MAPS_TO_SOP": { "domain": "ComplianceRequirement", "range": "SOP" },
+      "FINDING_FROM_AUDIT": { "domain": "Finding", "range": "Audit" },
+      "SAFETY_INCIDENT_ON_WORK": { "domain": "SafetyIncident", "range": "WorkOrder" },
+
+      "VULNERABILITY_ON_CI": { "domain": "Vulnerability", "range": "ConfigurationItem" },
+      "PATCH_APPLIED_TO_CI": { "domain": "Patch", "range": "ConfigurationItem" },
+      "SECURITY_INCIDENT_AFFECTS_CI": { "domain": "SecurityIncident", "range": "ConfigurationItem" },
+
+      "PROJECT_FOR_CUSTOMER": { "domain": "Project", "range": "Customer" },
+      "MILESTONE_OF_PROJECT": { "domain": "Milestone", "range": "Project" },
+      "DELIVERABLE_OF_PROJECT": { "domain": "Deliverable", "range": "Project" },
+      "ALLOCATES_RESOURCE": { "domain": "ResourceAllocation", "range": "Project" },
+
+      "INTEGRATES_WITH": { "domain": "APIEndpoint", "range": "Service" },
+      "WEBHOOK_FOR_EVENT": { "domain": "Webhook", "range": "Event" },
+
+      "QA_FOR_WORKORDER": { "domain": "QAReview", "range": "WorkOrder" },
+      "SURVEY_FOR_WORKORDER": { "domain": "Survey", "range": "WorkOrder" }
+    },
+    "reference_values": {
+      "SeverityLevel": {
+        "instances": {
+          "SEV1": { "name": "Critical", "description": "Major outage / safety impact" },
+          "SEV2": { "name": "High", "description": "Severe service degradation" },
+          "SEV3": { "name": "Medium", "description": "Partial impact / workaround exists" },
+          "SEV4": { "name": "Low", "description": "Minor impact / informational" }
+        }
+      },
+      "WorkOrderType": {
+        "instances": {
+          "BREAK_FIX": { "name": "Break/Fix" },
+          "INSTALLATION": { "name": "Installation" },
+          "PREVENTIVE_MAINT": { "name": "Preventive Maintenance" },
+          "INSPECTION": { "name": "Inspection" },
+          "CHANGE_IMPLEMENTATION": { "name": "Change Implementation" }
+        }
+      },
+      "ChangeType": {
+        "instances": {
+          "STANDARD": { "name": "Standard" },
+          "NORMAL": { "name": "Normal" },
+          "EMERGENCY": { "name": "Emergency" }
+        }
+      }
+    }
+  }
+}

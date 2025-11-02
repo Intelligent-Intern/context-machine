@@ -1,0 +1,1546 @@
+{
+  "ontology": {
+    "name": "security_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/security#",
+    "description": "Comprehensive ontology for security services across cyber & physical security, SOC/MDR/MSSP delivery, incident response & DFIR, threat intelligence, GRC & privacy, vulnerability & risk management, OT/ICS, cloud & application security, identity & access, business continuity, and service management.",
+    "namespaces": {
+      "sec": "http://context-machine.org/ontology/security#",
+      "org": "http://context-machine.org/ontology/security/organization#",
+      "asset": "http://context-machine.org/ontology/security/asset#",
+      "phys": "http://context-machine.org/ontology/security/physical#",
+      "cyber": "http://context-machine.org/ontology/security/cyber#",
+      "soc": "http://context-machine.org/ontology/security/soc#",
+      "iam": "http://context-machine.org/ontology/security/iam#",
+      "net": "http://context-machine.org/ontology/security/network#",
+      "cloud": "http://context-machine.org/ontology/security/cloud#",
+      "app": "http://context-machine.org/ontology/security/app#",
+      "data": "http://context-machine.org/ontology/security/data#",
+      "vuln": "http://context-machine.org/ontology/security/vulnerability#",
+      "risk": "http://context-machine.org/ontology/security/risk#",
+      "grc": "http://context-machine.org/ontology/security/grc#",
+      "audit": "http://context-machine.org/ontology/security/audit#",
+      "threat": "http://context-machine.org/ontology/security/threat#",
+      "intel": "http://context-machine.org/ontology/security/intel#",
+      "dfir": "http://context-machine.org/ontology/security/dfir#",
+      "incident": "http://context-machine.org/ontology/security/incident#",
+      "crypto": "http://context-machine.org/ontology/security/crypto#",
+      "pki": "http://context-machine.org/ontology/security/pki#",
+      "dlp": "http://context-machine.org/ontology/security/dlp#",
+      "privacy": "http://context-machine.org/ontology/security/privacy#",
+      "ot": "http://context-machine.org/ontology/security/ot#",
+      "iot": "http://context-machine.org/ontology/security/iot#",
+      "log": "http://context-machine.org/ontology/security/log#",
+      "metric": "http://context-machine.org/ontology/security/metric#",
+      "policy": "http://context-machine.org/ontology/security/policy#",
+      "control": "http://context-machine.org/ontology/security/control#",
+      "process": "http://context-machine.org/ontology/security/process#",
+      "person": "http://context-machine.org/ontology/security/person#",
+      "vendor": "http://context-machine.org/ontology/security/vendor#",
+      "contract": "http://context-machine.org/ontology/security/contract#",
+      "sla": "http://context-machine.org/ontology/security/sla#",
+      "ticket": "http://context-machine.org/ontology/security/ticket#",
+      "change": "http://context-machine.org/ontology/security/change#",
+      "project": "http://context-machine.org/ontology/security/project#",
+      "training": "http://context-machine.org/ontology/security/training#",
+      "bcp": "http://context-machine.org/ontology/security/bcp#",
+      "quality": "http://context-machine.org/ontology/security/quality#",
+      "finance": "http://context-machine.org/ontology/security/finance#",
+      "legal": "http://context-machine.org/ontology/security/legal#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "time": "http://www.w3.org/2006/time#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "unit": "http://qudt.org/vocab/unit#",
+      "stix": "https://oasis-open.github.io/cti/stix2.1/",
+      "attack": "https://attack.mitre.org/"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "https://oasis-open.github.io/cti/stix2.1/",
+      "https://attack.mitre.org/"
+    ],
+    "frames": {
+      "Security_Service_Management_System": {
+        "collections": {
+          "Organization_Context": {
+            "entities": {
+              "ClientOrganization": {
+                "properties": {
+                  "client_id": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "trading_name": "xsd:string",
+                  "industry": "xsd:string",
+                  "size_category": "xsd:string",
+                  "country": "xsd:string",
+                  "timezone": "xsd:string",
+                  "hq_location": "geo:SpatialThing",
+                  "domains": "xsd:string",
+                  "regulatory_scope": "xsd:string",
+                  "critical_infrastructure_sector": "xsd:string",
+                  "risk_appetite": "xsd:string",
+                  "primary_contact": "foaf:Person",
+                  "security_contact": "foaf:Person",
+                  "it_contact": "foaf:Person",
+                  "business_owner": "foaf:Person",
+                  "notes": "xsd:string",
+                  "tags": "xsd:string"
+                }
+              },
+              "ServiceProvider": {
+                "properties": {
+                  "provider_id": "xsd:string",
+                  "provider_name": "xsd:string",
+                  "mssp": "xsd:boolean",
+                  "soc_capability_level": "xsd:string",
+                  "certifications": "xsd:string",
+                  "coverage_hours": "xsd:string",
+                  "coverage_regions": "xsd:string",
+                  "contact_center": "xsd:string",
+                  "primary_sla_tier": "xsd:string",
+                  "security_clearance_requirements": "xsd:string"
+                }
+              },
+              "Contact": {
+                "properties": {
+                  "contact_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "on_call": "xsd:boolean",
+                  "pgp_key_fingerprint": "xsd:string",
+                  "time_zone": "xsd:string",
+                  "escalation_level": "xsd:integer"
+                }
+              },
+              "Location": {
+                "properties": {
+                  "location_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "address": "xsd:string",
+                  "coordinates": "geo:Point",
+                  "site_tier": "xsd:string",
+                  "has_soc": "xsd:boolean",
+                  "has_data_center": "xsd:boolean",
+                  "has_ot": "xsd:boolean"
+                }
+              },
+              "Contract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "provider_id": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "auto_renew": "xsd:boolean",
+                  "statement_of_work": "xsd:string",
+                  "service_catalog_ids": "xsd:string",
+                  "confidentiality_level": "xsd:string",
+                  "data_processing_addendum": "xsd:boolean",
+                  "pricing_model": "xsd:string",
+                  "max_liability_amount": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "SLA": {
+                "properties": {
+                  "sla_id": "xsd:string",
+                  "name": "xsd:string",
+                  "priority": "xsd:string",
+                  "alert_ttr_minutes": "xsd:integer",
+                  "incident_ttr_minutes": "xsd:integer",
+                  "response_time_minutes": "xsd:integer",
+                  "coverage_hours": "xsd:string",
+                  "notification_channels": "xsd:string",
+                  "reporting_frequency": "xsd:string",
+                  "penalties": "xsd:string"
+                }
+              },
+              "ServiceCatalog": {
+                "properties": {
+                  "catalog_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "description": "xsd:string",
+                  "service_ids": "xsd:string",
+                  "version": "xsd:string"
+                }
+              },
+              "Service": {
+                "properties": {
+                  "service_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "delivery_model": "xsd:string",
+                  "coverage": "xsd:string",
+                  "tooling_stack": "xsd:string",
+                  "inputs": "xsd:string",
+                  "outputs": "xsd:string",
+                  "kpis": "xsd:string",
+                  "risks": "xsd:string"
+                }
+              },
+              "KPI": {
+                "properties": {
+                  "kpi_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "definition": "xsd:string",
+                  "target_value": "xsd:float",
+                  "unit": "xsd:string",
+                  "measurement_window": "xsd:string",
+                  "current_value": "xsd:float",
+                  "trend": "xsd:string"
+                }
+              },
+              "ChangeRequest": {
+                "properties": {
+                  "change_id": "xsd:string",
+                  "requested_by": "xsd:string",
+                  "requested_date": "xsd:dateTime",
+                  "change_type": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "planned_start": "xsd:dateTime",
+                  "planned_end": "xsd:dateTime",
+                  "rollback_plan": "xsd:string",
+                  "approval_status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Asset_Inventory": {
+            "entities": {
+              "Asset": {
+                "properties": {
+                  "asset_id": "xsd:string",
+                  "name": "xsd:string",
+                  "asset_type": "xsd:string",
+                  "owner": "xsd:string",
+                  "custodian": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "environment": "xsd:string",
+                  "business_criticality": "xsd:string",
+                  "classification": "xsd:string",
+                  "cia_confidentiality": "xsd:string",
+                  "cia_integrity": "xsd:string",
+                  "cia_availability": "xsd:string",
+                  "internet_exposed": "xsd:boolean",
+                  "tags": "xsd:string",
+                  "lifecycle_state": "xsd:string",
+                  "last_inventory_date": "xsd:date"
+                }
+              },
+              "System": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "hostname": "xsd:string",
+                  "os_name": "xsd:string",
+                  "os_version": "xsd:string",
+                  "ip_addresses": "xsd:string",
+                  "mac_addresses": "xsd:string",
+                  "deployment_model": "xsd:string",
+                  "virtualized": "xsd:boolean",
+                  "purpose": "xsd:string",
+                  "support_end_date": "xsd:date",
+                  "patch_level": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "asset_id": "xsd:string"
+                }
+              },
+              "Application": {
+                "properties": {
+                  "app_id": "xsd:string",
+                  "name": "xsd:string",
+                  "owner_team": "xsd:string",
+                  "business_function": "xsd:string",
+                  "technology_stack": "xsd:string",
+                  "repo_url": "xsd:string",
+                  "ci_cd_pipeline": "xsd:string",
+                  "sbom_reference": "xsd:string",
+                  "data_sensitivity": "xsd:string",
+                  "internet_exposed": "xsd:boolean",
+                  "threat_model_id": "xsd:string",
+                  "asset_id": "xsd:string"
+                }
+              },
+              "DataSet": {
+                "properties": {
+                  "dataset_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "records_count": "xsd:integer",
+                  "pii": "xsd:boolean",
+                  "phi": "xsd:boolean",
+                  "pci": "xsd:boolean",
+                  "data_owner": "xsd:string",
+                  "storage_location": "xsd:string",
+                  "retention_period_days": "xsd:integer",
+                  "encryption_status": "xsd:string",
+                  "asset_id": "xsd:string"
+                }
+              },
+              "NetworkSegment": {
+                "properties": {
+                  "segment_id": "xsd:string",
+                  "name": "xsd:string",
+                  "cidr_blocks": "xsd:string",
+                  "zone": "xsd:string",
+                  "trust_level": "xsd:string",
+                  "internet_egress": "xsd:boolean",
+                  "internet_ingress": "xsd:boolean",
+                  "inspection_points": "xsd:string",
+                  "asset_ids": "xsd:string"
+                }
+              },
+              "CloudAccount": {
+                "properties": {
+                  "cloud_id": "xsd:string",
+                  "provider": "xsd:string",
+                  "account_name": "xsd:string",
+                  "account_id": "xsd:string",
+                  "org_unit": "xsd:string",
+                  "subscription_tier": "xsd:string",
+                  "region_list": "xsd:string",
+                  "security_baseline": "xsd:string",
+                  "owner": "xsd:string",
+                  "asset_id": "xsd:string"
+                }
+              },
+              "OTAsset": {
+                "properties": {
+                  "ot_asset_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "vendor": "xsd:string",
+                  "model": "xsd:string",
+                  "firmware_version": "xsd:string",
+                  "purdue_level": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "network_segment_id": "xsd:string",
+                  "safety_critical": "xsd:boolean",
+                  "asset_id": "xsd:string"
+                }
+              }
+            }
+          },
+          "Identity_Access_Management": {
+            "entities": {
+              "Identity": {
+                "properties": {
+                  "identity_id": "xsd:string",
+                  "type": "xsd:string",
+                  "display_name": "xsd:string",
+                  "email": "xsd:string",
+                  "department": "xsd:string",
+                  "manager": "xsd:string",
+                  "status": "xsd:string",
+                  "join_date": "xsd:date",
+                  "leave_date": "xsd:date",
+                  "clearance_level": "xsd:string",
+                  "on_call": "xsd:boolean"
+                }
+              },
+              "Account": {
+                "properties": {
+                  "account_id": "xsd:string",
+                  "identity_id": "xsd:string",
+                  "system_id": "xsd:string",
+                  "username": "xsd:string",
+                  "account_type": "xsd:string",
+                  "privileged": "xsd:boolean",
+                  "last_login": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "password_last_rotated": "xsd:date"
+                }
+              },
+              "Role": {
+                "properties": {
+                  "role_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "sox_in_scope": "xsd:boolean",
+                  "owner": "xsd:string"
+                }
+              },
+              "Permission": {
+                "properties": {
+                  "permission_id": "xsd:string",
+                  "name": "xsd:string",
+                  "resource": "xsd:string",
+                  "action": "xsd:string",
+                  "condition": "xsd:string"
+                }
+              },
+              "Credential": {
+                "properties": {
+                  "credential_id": "xsd:string",
+                  "type": "xsd:string",
+                  "issuer": "xsd:string",
+                  "valid_from": "xsd:dateTime",
+                  "valid_to": "xsd:dateTime",
+                  "rotation_interval_days": "xsd:integer",
+                  "stored_in": "xsd:string",
+                  "revoked": "xsd:boolean"
+                }
+              },
+              "MFADevice": {
+                "properties": {
+                  "mfa_id": "xsd:string",
+                  "identity_id": "xsd:string",
+                  "device_type": "xsd:string",
+                  "enrolled_date": "xsd:date",
+                  "last_used": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "AuthEvent": {
+                "properties": {
+                  "auth_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "account_id": "xsd:string",
+                  "source_ip": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "method": "xsd:string",
+                  "mfa_used": "xsd:boolean",
+                  "result": "xsd:string",
+                  "risk_score": "xsd:float"
+                }
+              },
+              "AccessRequest": {
+                "properties": {
+                  "request_id": "xsd:string",
+                  "identity_id": "xsd:string",
+                  "role_id": "xsd:string",
+                  "justification": "xsd:string",
+                  "requested_at": "xsd:dateTime",
+                  "approved_at": "xsd:dateTime",
+                  "approver": "xsd:string",
+                  "status": "xsd:string",
+                  "expiration_date": "xsd:date"
+                }
+              }
+            }
+          },
+          "Security_Operations": {
+            "entities": {
+              "SOC": {
+                "properties": {
+                  "soc_id": "xsd:string",
+                  "name": "xsd:string",
+                  "tier": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "coverage_hours": "xsd:string",
+                  "on_call_schedule": "xsd:string",
+                  "tooling": "xsd:string",
+                  "contact_channel": "xsd:string",
+                  "playbook_repository": "xsd:string"
+                }
+              },
+              "SIEM": {
+                "properties": {
+                  "siem_id": "xsd:string",
+                  "platform": "xsd:string",
+                  "version": "xsd:string",
+                  "deployment_model": "xsd:string",
+                  "retention_days": "xsd:integer",
+                  "ingest_rate_events_per_sec": "xsd:float",
+                  "storage_tb": "xsd:float",
+                  "use_cases": "xsd:string"
+                }
+              },
+              "SOAR": {
+                "properties": {
+                  "soar_id": "xsd:string",
+                  "platform": "xsd:string",
+                  "version": "xsd:string",
+                  "playbooks_count": "xsd:integer",
+                  "integrations": "xsd:string",
+                  "case_management": "xsd:boolean"
+                }
+              },
+              "LogSource": {
+                "properties": {
+                  "log_source_id": "xsd:string",
+                  "name": "xsd:string",
+                  "source_type": "xsd:string",
+                  "format": "xsd:string",
+                  "parser": "xsd:string",
+                  "transport": "xsd:string",
+                  "frequency": "xsd:string",
+                  "reliability_score": "xsd:float",
+                  "asset_id": "xsd:string",
+                  "cloud_id": "xsd:string"
+                }
+              },
+              "Event": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "log_source_id": "xsd:string",
+                  "category": "xsd:string",
+                  "severity": "xsd:string",
+                  "message": "xsd:string",
+                  "raw": "xsd:string",
+                  "normalized_fields": "xsd:string"
+                }
+              },
+              "DetectionRule": {
+                "properties": {
+                  "rule_id": "xsd:string",
+                  "title": "xsd:string",
+                  "logic": "xsd:string",
+                  "tactics": "xsd:string",
+                  "techniques": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "enabled": "xsd:boolean",
+                  "false_positive_rate": "xsd:float",
+                  "rule_version": "xsd:string",
+                  "owner": "xsd:string",
+                  "references": "xsd:string"
+                }
+              },
+              "Alert": {
+                "properties": {
+                  "alert_id": "xsd:string",
+                  "rule_id": "xsd:string",
+                  "event_ids": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "title": "xsd:string",
+                  "severity": "xsd:string",
+                  "confidence": "xsd:float",
+                  "status": "xsd:string",
+                  "assigned_to": "xsd:string",
+                  "notable_assets": "xsd:string",
+                  "evidence_refs": "xsd:string"
+                }
+              },
+              "Case": {
+                "properties": {
+                  "case_id": "xsd:string",
+                  "title": "xsd:string",
+                  "opened_at": "xsd:dateTime",
+                  "closed_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "priority": "xsd:string",
+                  "owner": "xsd:string",
+                  "related_alerts": "xsd:string",
+                  "tags": "xsd:string",
+                  "sla_id": "xsd:string"
+                }
+              },
+              "Playbook": {
+                "properties": {
+                  "playbook_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "steps": "xsd:string",
+                  "automation_level": "xsd:string",
+                  "mitre_tactics": "xsd:string",
+                  "raci_roles": "xsd:string",
+                  "last_reviewed": "xsd:date"
+                }
+              },
+              "Escalation": {
+                "properties": {
+                  "escalation_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "from_level": "xsd:string",
+                  "to_level": "xsd:string",
+                  "reason": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "notified_contacts": "xsd:string"
+                }
+              },
+              "CommunicationRecord": {
+                "properties": {
+                  "comm_id": "xsd:string",
+                  "channel": "xsd:string",
+                  "direction": "xsd:string",
+                  "participants": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "content": "xsd:string",
+                  "case_id": "xsd:string"
+                }
+              }
+            }
+          },
+          "Threat_Intelligence": {
+            "entities": {
+              "Indicator": {
+                "properties": {
+                  "indicator_id": "xsd:string",
+                  "type": "xsd:string",
+                  "pattern": "xsd:string",
+                  "valid_from": "xsd:dateTime",
+                  "valid_until": "xsd:dateTime",
+                  "confidence": "xsd:float",
+                  "source": "xsd:string",
+                  "tlp": "xsd:string",
+                  "tags": "xsd:string"
+                }
+              },
+              "ThreatActor": {
+                "properties": {
+                  "actor_id": "xsd:string",
+                  "name": "xsd:string",
+                  "aliases": "xsd:string",
+                  "motivations": "xsd:string",
+                  "sophistication": "xsd:string",
+                  "primary_regions": "xsd:string",
+                  "primary_sectors": "xsd:string",
+                  "capabilities": "xsd:string"
+                }
+              },
+              "Campaign": {
+                "properties": {
+                  "campaign_id": "xsd:string",
+                  "name": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "objective": "xsd:string",
+                  "associated_actors": "xsd:string",
+                  "ttp_ids": "xsd:string"
+                }
+              },
+              "TTP": {
+                "properties": {
+                  "ttp_id": "xsd:string",
+                  "tactic": "xsd:string",
+                  "technique_id": "xsd:string",
+                  "technique_name": "xsd:string",
+                  "subtechnique_id": "xsd:string",
+                  "description": "xsd:string",
+                  "detection_notes": "xsd:string",
+                  "mitigations": "xsd:string"
+                }
+              },
+              "IntelReport": {
+                "properties": {
+                  "report_id": "xsd:string",
+                  "title": "xsd:string",
+                  "published": "xsd:date",
+                  "producer": "xsd:string",
+                  "tlp": "xsd:string",
+                  "summary": "xsd:string",
+                  "confidence": "xsd:float",
+                  "related_iocs": "xsd:string",
+                  "related_ttps": "xsd:string"
+                }
+              },
+              "IntelFeed": {
+                "properties": {
+                  "feed_id": "xsd:string",
+                  "name": "xsd:string",
+                  "provider": "xsd:string",
+                  "format": "xsd:string",
+                  "source_url": "xsd:string",
+                  "poll_interval_minutes": "xsd:integer",
+                  "tlp_default": "xsd:string",
+                  "confidence_default": "xsd:float",
+                  "license": "xsd:string"
+                }
+              }
+            }
+          },
+          "Vulnerability_Management": {
+            "entities": {
+              "Vulnerability": {
+                "properties": {
+                  "vuln_id": "xsd:string",
+                  "cve_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "cvss_base_score": "xsd:float",
+                  "cvss_vector": "xsd:string",
+                  "exploit_available": "xsd:boolean",
+                  "exposure_window_days": "xsd:integer",
+                  "published_date": "xsd:date",
+                  "patch_available": "xsd:boolean",
+                  "references": "xsd:string"
+                }
+              },
+              "Finding": {
+                "properties": {
+                  "finding_id": "xsd:string",
+                  "vuln_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "system_id": "xsd:string",
+                  "app_id": "xsd:string",
+                  "discovered_at": "xsd:dateTime",
+                  "scanner_id": "xsd:string",
+                  "severity": "xsd:string",
+                  "status": "xsd:string",
+                  "evidence": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "due_date": "xsd:date"
+                }
+              },
+              "Scan": {
+                "properties": {
+                  "scan_id": "xsd:string",
+                  "scanner_id": "xsd:string",
+                  "scan_type": "xsd:string",
+                  "target_scope": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "findings_count": "xsd:integer",
+                  "errors": "xsd:string",
+                  "report_link": "xsd:string"
+                }
+              },
+              "Scanner": {
+                "properties": {
+                  "scanner_id": "xsd:string",
+                  "name": "xsd:string",
+                  "version": "xsd:string",
+                  "engine": "xsd:string",
+                  "deployment": "xsd:string",
+                  "plugin_feed_version": "xsd:string"
+                }
+              },
+              "Patch": {
+                "properties": {
+                  "patch_id": "xsd:string",
+                  "name": "xsd:string",
+                  "vendor": "xsd:string",
+                  "release_date": "xsd:date",
+                  "supersedes": "xsd:string",
+                  "reboot_required": "xsd:boolean",
+                  "kb_reference": "xsd:string"
+                }
+              },
+              "Remediation": {
+                "properties": {
+                  "remediation_id": "xsd:string",
+                  "finding_id": "xsd:string",
+                  "action": "xsd:string",
+                  "owner": "xsd:string",
+                  "planned_date": "xsd:date",
+                  "completed_date": "xsd:date",
+                  "residual_risk": "xsd:string",
+                  "evidence": "xsd:string"
+                }
+              },
+              "Exception": {
+                "properties": {
+                  "exception_id": "xsd:string",
+                  "finding_id": "xsd:string",
+                  "justification": "xsd:string",
+                  "approved_by": "xsd:string",
+                  "approved_until": "xsd:date",
+                  "compensating_controls": "xsd:string"
+                }
+              }
+            }
+          },
+          "GRC_Compliance": {
+            "entities": {
+              "Policy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "title": "xsd:string",
+                  "category": "xsd:string",
+                  "version": "xsd:string",
+                  "status": "xsd:string",
+                  "owner": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "review_date": "xsd:date",
+                  "related_controls": "xsd:string"
+                }
+              },
+              "Control": {
+                "properties": {
+                  "control_id": "xsd:string",
+                  "name": "xsd:string",
+                  "framework": "xsd:string",
+                  "requirement_id": "xsd:string",
+                  "type": "xsd:string",
+                  "implementation_status": "xsd:string",
+                  "control_owner": "xsd:string",
+                  "evidence_requirements": "xsd:string"
+                }
+              },
+              "Risk": {
+                "properties": {
+                  "risk_id": "xsd:string",
+                  "title": "xsd:string",
+                  "category": "xsd:string",
+                  "likelihood": "xsd:string",
+                  "impact": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "treatment": "xsd:string",
+                  "owner": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Assessment": {
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "scope": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "assessor": "xsd:string",
+                  "result": "xsd:string",
+                  "findings": "xsd:string"
+                }
+              },
+              "Audit": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "title": "xsd:string",
+                  "standard": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "auditor": "xsd:string",
+                  "opinion": "xsd:string",
+                  "exceptions_count": "xsd:integer",
+                  "evidence_ids": "xsd:string"
+                }
+              },
+              "Evidence": {
+                "properties": {
+                  "evidence_id": "xsd:string",
+                  "type": "xsd:string",
+                  "source_system": "xsd:string",
+                  "collected_at": "xsd:dateTime",
+                  "collected_by": "xsd:string",
+                  "hash_sha256": "xsd:string",
+                  "storage_location": "xsd:string",
+                  "retention_days": "xsd:integer"
+                }
+              },
+              "Standard": {
+                "properties": {
+                  "standard_id": "xsd:string",
+                  "name": "xsd:string",
+                  "version": "xsd:string",
+                  "publisher": "xsd:string",
+                  "scope": "xsd:string",
+                  "control_count": "xsd:integer"
+                }
+              }
+            }
+          },
+          "Security_Engineering": {
+            "entities": {
+              "SecurityControl": {
+                "properties": {
+                  "control_id": "xsd:string",
+                  "name": "xsd:string",
+                  "control_type": "xsd:string",
+                  "category": "xsd:string",
+                  "technology": "xsd:string",
+                  "vendor": "xsd:string",
+                  "version": "xsd:string",
+                  "deployment_model": "xsd:string",
+                  "coverage_scope": "xsd:string",
+                  "policy_reference": "xsd:string",
+                  "status": "xsd:string",
+                  "owner_team": "xsd:string"
+                }
+              },
+              "ControlDeployment": {
+                "properties": {
+                  "deployment_id": "xsd:string",
+                  "control_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "network_segment_id": "xsd:string",
+                  "cloud_id": "xsd:string",
+                  "mode": "xsd:string",
+                  "enabled": "xsd:boolean",
+                  "last_change": "xsd:dateTime",
+                  "health_status": "xsd:string"
+                }
+              },
+              "PKI": {
+                "properties": {
+                  "pki_id": "xsd:string",
+                  "ca_name": "xsd:string",
+                  "hierarchy_level": "xsd:string",
+                  "offline_root": "xsd:boolean",
+                  "key_size_bits": "xsd:integer",
+                  "signing_algorithm": "xsd:string",
+                  "crl_distribution_points": "xsd:string",
+                  "ocsp_url": "xsd:string"
+                }
+              },
+              "Certificate": {
+                "properties": {
+                  "cert_id": "xsd:string",
+                  "subject": "xsd:string",
+                  "issuer": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "valid_from": "xsd:dateTime",
+                  "valid_to": "xsd:dateTime",
+                  "key_usage": "xsd:string",
+                  "san": "xsd:string",
+                  "status": "xsd:string",
+                  "revocation_date": "xsd:date"
+                }
+              },
+              "Key": {
+                "properties": {
+                  "key_id": "xsd:string",
+                  "type": "xsd:string",
+                  "algorithm": "xsd:string",
+                  "length_bits": "xsd:integer",
+                  "created_at": "xsd:dateTime",
+                  "rotation_period_days": "xsd:integer",
+                  "stored_in": "xsd:string",
+                  "custodian": "xsd:string",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Application_Security": {
+            "entities": {
+              "ThreatModel": {
+                "properties": {
+                  "tm_id": "xsd:string",
+                  "app_id": "xsd:string",
+                  "methodology": "xsd:string",
+                  "data_flows": "xsd:string",
+                  "trust_boundaries": "xsd:string",
+                  "abuse_cases": "xsd:string",
+                  "mitigations": "xsd:string",
+                  "review_date": "xsd:date"
+                }
+              },
+              "CodeRepository": {
+                "properties": {
+                  "repo_id": "xsd:string",
+                  "url": "xsd:string",
+                  "scm": "xsd:string",
+                  "default_branch": "xsd:string",
+                  "owner_team": "xsd:string",
+                  "protected_branches": "xsd:string",
+                  "required_reviews": "xsd:integer"
+                }
+              },
+              "Pipeline": {
+                "properties": {
+                  "pipeline_id": "xsd:string",
+                  "app_id": "xsd:string",
+                  "stages": "xsd:string",
+                  "triggers": "xsd:string",
+                  "supply_chain_controls": "xsd:string",
+                  "signed_artifacts": "xsd:boolean",
+                  "provenance_attestation": "xsd:string"
+                }
+              },
+              "AppSecAssessment": {
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "app_id": "xsd:string",
+                  "type": "xsd:string",
+                  "performed_by": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "findings_count": "xsd:integer",
+                  "severity_breakdown": "xsd:string",
+                  "report_link": "xsd:string"
+                }
+              },
+              "SBOM": {
+                "properties": {
+                  "sbom_id": "xsd:string",
+                  "app_id": "xsd:string",
+                  "format": "xsd:string",
+                  "generator": "xsd:string",
+                  "component_count": "xsd:integer",
+                  "license_issues": "xsd:integer",
+                  "known_vulns_count": "xsd:integer",
+                  "hash_sha256": "xsd:string"
+                }
+              }
+            }
+          },
+          "Data_Protection_Privacy": {
+            "entities": {
+              "DataCategory": {
+                "properties": {
+                  "category_id": "xsd:string",
+                  "name": "xsd:string",
+                  "pii": "xsd:boolean",
+                  "special_category": "xsd:boolean",
+                  "examples": "xsd:string"
+                }
+              },
+              "ProcessingActivity": {
+                "properties": {
+                  "activity_id": "xsd:string",
+                  "name": "xsd:string",
+                  "purpose": "xsd:string",
+                  "legal_basis": "xsd:string",
+                  "controller": "xsd:string",
+                  "processor": "xsd:string",
+                  "data_categories": "xsd:string",
+                  "data_subjects": "xsd:string",
+                  "recipients": "xsd:string",
+                  "transfers": "xsd:string",
+                  "retention_days": "xsd:integer"
+                }
+              },
+              "Consent": {
+                "properties": {
+                  "consent_id": "xsd:string",
+                  "data_subject_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "valid": "xsd:boolean",
+                  "withdrawn_at": "xsd:dateTime"
+                }
+              },
+              "DPIA": {
+                "properties": {
+                  "dpia_id": "xsd:string",
+                  "activity_id": "xsd:string",
+                  "risk_summary": "xsd:string",
+                  "mitigations": "xsd:string",
+                  "residual_risk": "xsd:string",
+                  "approval_status": "xsd:string",
+                  "review_date": "xsd:date"
+                }
+              },
+              "DataBreach": {
+                "properties": {
+                  "breach_id": "xsd:string",
+                  "discovered_at": "xsd:dateTime",
+                  "reported_to_authority": "xsd:dateTime",
+                  "data_categories": "xsd:string",
+                  "affected_subjects": "xsd:integer",
+                  "notification_required": "xsd:boolean",
+                  "notification_date": "xsd:dateTime",
+                  "remediation": "xsd:string"
+                }
+              }
+            }
+          },
+          "Incident_Response_DFIR": {
+            "entities": {
+              "IRPlan": {
+                "properties": {
+                  "plan_id": "xsd:string",
+                  "name": "xsd:string",
+                  "scope": "xsd:string",
+                  "raci": "xsd:string",
+                  "playbooks": "xsd:string",
+                  "test_frequency": "xsd:string",
+                  "last_exercise_date": "xsd:date"
+                }
+              },
+              "Incident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "title": "xsd:string",
+                  "category": "xsd:string",
+                  "severity": "xsd:string",
+                  "status": "xsd:string",
+                  "detected_at": "xsd:dateTime",
+                  "contained_at": "xsd:dateTime",
+                  "eradicated_at": "xsd:dateTime",
+                  "recovered_at": "xsd:dateTime",
+                  "root_cause": "xsd:string",
+                  "impact_description": "xsd:string",
+                  "asset_ids": "xsd:string",
+                  "data_categories": "xsd:string",
+                  "cost_estimate": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "ForensicCase": {
+                "properties": {
+                  "forensic_case_id": "xsd:string",
+                  "incident_id": "xsd:string",
+                  "lead_examiner": "xsd:string",
+                  "scope": "xsd:string",
+                  "tools_used": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "EvidenceItem": {
+                "properties": {
+                  "evidence_id": "xsd:string",
+                  "type": "xsd:string",
+                  "source_asset_id": "xsd:string",
+                  "acquired_at": "xsd:dateTime",
+                  "acquired_by": "xsd:string",
+                  "hash_md5": "xsd:string",
+                  "hash_sha256": "xsd:string",
+                  "storage_location": "xsd:string",
+                  "chain_of_custody_id": "xsd:string"
+                }
+              },
+              "ChainOfCustody": {
+                "properties": {
+                  "coc_id": "xsd:string",
+                  "evidence_id": "xsd:string",
+                  "holder": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "action": "xsd:string",
+                  "signature": "xsd:string"
+                }
+              },
+              "IRAction": {
+                "properties": {
+                  "action_id": "xsd:string",
+                  "incident_id": "xsd:string",
+                  "phase": "xsd:string",
+                  "description": "xsd:string",
+                  "executed_by": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "evidence_refs": "xsd:string",
+                  "result": "xsd:string"
+                }
+              },
+              "PostIncidentReport": {
+                "properties": {
+                  "pir_id": "xsd:string",
+                  "incident_id": "xsd:string",
+                  "summary": "xsd:string",
+                  "lessons_learned": "xsd:string",
+                  "timeline": "xsd:string",
+                  "recommendations": "xsd:string",
+                  "closure_date": "xsd:date"
+                }
+              }
+            }
+          },
+          "Business_Continuity_Disaster_Recovery": {
+            "entities": {
+              "BIA": {
+                "properties": {
+                  "bia_id": "xsd:string",
+                  "business_process": "xsd:string",
+                  "owner": "xsd:string",
+                  "rto_hours": "xsd:float",
+                  "rpo_hours": "xsd:float",
+                  "criticality": "xsd:string",
+                  "dependencies": "xsd:string"
+                }
+              },
+              "BCMPlan": {
+                "properties": {
+                  "bcm_id": "xsd:string",
+                  "name": "xsd:string",
+                  "scope": "xsd:string",
+                  "invocation_criteria": "xsd:string",
+                  "contacts": "xsd:string",
+                  "test_frequency": "xsd:string",
+                  "last_test_date": "xsd:date"
+                }
+              },
+              "BackupJob": {
+                "properties": {
+                  "backup_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "backup_type": "xsd:string",
+                  "schedule": "xsd:string",
+                  "retention_days": "xsd:integer",
+                  "encryption": "xsd:string",
+                  "last_success": "xsd:dateTime",
+                  "last_failure": "xsd:dateTime"
+                }
+              },
+              "RestoreEvent": {
+                "properties": {
+                  "restore_id": "xsd:string",
+                  "backup_id": "xsd:string",
+                  "requested_by": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "success": "xsd:boolean",
+                  "data_loss_mb": "xsd:float"
+                }
+              }
+            }
+          },
+          "Physical_Security": {
+            "entities": {
+              "Site": {
+                "properties": {
+                  "site_id": "xsd:string",
+                  "name": "xsd:string",
+                  "address": "xsd:string",
+                  "coordinates": "geo:Point",
+                  "site_type": "xsd:string",
+                  "hours_of_operation": "xsd:string",
+                  "security_posture": "xsd:string",
+                  "emergency_contacts": "xsd:string"
+                }
+              },
+              "AccessControlSystem": {
+                "properties": {
+                  "acs_id": "xsd:string",
+                  "vendor": "xsd:string",
+                  "model": "xsd:string",
+                  "version": "xsd:string",
+                  "auth_methods": "xsd:string",
+                  "doors_managed": "xsd:integer",
+                  "integrated_cctv": "xsd:boolean"
+                }
+              },
+              "Door": {
+                "properties": {
+                  "door_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "type": "xsd:string",
+                  "acs_id": "xsd:string",
+                  "locked": "xsd:boolean",
+                  "last_access_event": "xsd:dateTime"
+                }
+              },
+              "Badge": {
+                "properties": {
+                  "badge_id": "xsd:string",
+                  "identity_id": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "access_levels": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Camera": {
+                "properties": {
+                  "camera_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "location_desc": "xsd:string",
+                  "resolution": "xsd:string",
+                  "recording": "xsd:boolean",
+                  "retention_days": "xsd:integer",
+                  "analytics": "xsd:string"
+                }
+              },
+              "AlarmEvent": {
+                "properties": {
+                  "alarm_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "type": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "acknowledged_by": "xsd:string",
+                  "status": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "Visitor": {
+                "properties": {
+                  "visitor_id": "xsd:string",
+                  "name": "xsd:string",
+                  "organization": "xsd:string",
+                  "host_identity_id": "xsd:string",
+                  "visit_date": "xsd:date",
+                  "purpose": "xsd:string",
+                  "badge_id": "xsd:string",
+                  "ndas_signed": "xsd:boolean"
+                }
+              },
+              "GuardPost": {
+                "properties": {
+                  "post_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "shift_hours": "xsd:string",
+                  "staffing_level": "xsd:integer",
+                  "equipment": "xsd:string"
+                }
+              },
+              "ExecutiveProtection": {
+                "properties": {
+                  "ep_id": "xsd:string",
+                  "principal": "xsd:string",
+                  "threat_level": "xsd:string",
+                  "itinerary": "xsd:string",
+                  "team_size": "xsd:integer",
+                  "vehicles": "xsd:string",
+                  "medical_support": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "OT_ICS_Security": {
+            "entities": {
+              "ICSZone": {
+                "properties": {
+                  "zone_id": "xsd:string",
+                  "name": "xsd:string",
+                  "purdue_level": "xsd:string",
+                  "description": "xsd:string",
+                  "network_segment_id": "xsd:string",
+                  "safety_instrumented": "xsd:boolean"
+                }
+              },
+              "ICSAsset": {
+                "properties": {
+                  "ics_asset_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "vendor": "xsd:string",
+                  "model": "xsd:string",
+                  "firmware_version": "xsd:string",
+                  "zone_id": "xsd:string",
+                  "serial_number": "xsd:string",
+                  "ip_address": "xsd:string"
+                }
+              },
+              "ICSService": {
+                "properties": {
+                  "service_id": "xsd:string",
+                  "name": "xsd:string",
+                  "protocol": "xsd:string",
+                  "port": "xsd:integer",
+                  "encryption": "xsd:string",
+                  "asset_id": "xsd:string"
+                }
+              }
+            }
+          },
+          "Training_Awareness": {
+            "entities": {
+              "TrainingCourse": {
+                "properties": {
+                  "course_id": "xsd:string",
+                  "title": "xsd:string",
+                  "category": "xsd:string",
+                  "duration_minutes": "xsd:integer",
+                  "mandatory": "xsd:boolean",
+                  "validity_months": "xsd:integer",
+                  "owner": "xsd:string"
+                }
+              },
+              "TrainingSession": {
+                "properties": {
+                  "session_id": "xsd:string",
+                  "course_id": "xsd:string",
+                  "scheduled_at": "xsd:dateTime",
+                  "instructor": "xsd:string",
+                  "delivery_mode": "xsd:string",
+                  "attendees": "xsd:string",
+                  "completion_rate": "xsd:float"
+                }
+              },
+              "PhishingSimulation": {
+                "properties": {
+                  "sim_id": "xsd:string",
+                  "campaign_name": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "targets": "xsd:integer",
+                  "open_rate": "xsd:float",
+                  "click_rate": "xsd:float",
+                  "report_rate": "xsd:float",
+                  "compromise_rate": "xsd:float"
+                }
+              }
+            }
+          },
+          "SupplyChain_Security": {
+            "entities": {
+              "Vendor": {
+                "properties": {
+                  "vendor_id": "xsd:string",
+                  "name": "xsd:string",
+                  "service_type": "xsd:string",
+                  "criticality": "xsd:string",
+                  "country": "xsd:string",
+                  "contact": "xsd:string",
+                  "certifications": "xsd:string",
+                  "breach_history": "xsd:string"
+                }
+              },
+              "ThirdPartyAssessment": {
+                "properties": {
+                  "tpa_id": "xsd:string",
+                  "vendor_id": "xsd:string",
+                  "framework": "xsd:string",
+                  "score": "xsd:float",
+                  "date": "xsd:date",
+                  "findings": "xsd:string",
+                  "risk_tier": "xsd:string"
+                }
+              },
+              "PentestReport": {
+                "properties": {
+                  "pentest_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "methodology": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "critical_findings": "xsd:integer",
+                  "report_link": "xsd:string"
+                }
+              },
+              "VDP": {
+                "properties": {
+                  "vdp_id": "xsd:string",
+                  "policy_url": "xsd:string",
+                  "scope": "xsd:string",
+                  "disclosure_timeline_days": "xsd:integer",
+                  "safe_harbor": "xsd:boolean",
+                  "contact_email": "xsd:string"
+                }
+              },
+              "SBOMReference": {
+                "properties": {
+                  "sbom_ref_id": "xsd:string",
+                  "vendor_id": "xsd:string",
+                  "product_name": "xsd:string",
+                  "version": "xsd:string",
+                  "hash_sha256": "xsd:string",
+                  "last_updated": "xsd:date"
+                }
+              }
+            }
+          },
+          "Finance_Billing_Reporting": {
+            "entities": {
+              "Timesheet": {
+                "properties": {
+                  "timesheet_id": "xsd:string",
+                  "person_id": "xsd:string",
+                  "date": "xsd:date",
+                  "hours_worked": "xsd:float",
+                  "activity": "xsd:string",
+                  "case_id": "xsd:string",
+                  "project_id": "xsd:string",
+                  "billable": "xsd:boolean"
+                }
+              },
+              "Billing": {
+                "properties": {
+                  "billing_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "status": "xsd:string",
+                  "invoice_id": "xsd:string"
+                }
+              },
+              "Report": {
+                "properties": {
+                  "report_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "generated_at": "xsd:dateTime",
+                  "generated_by": "xsd:string",
+                  "format": "xsd:string",
+                  "distribution_list": "xsd:string",
+                  "link": "xsd:string"
+                }
+              },
+              "MetricMeasurement": {
+                "properties": {
+                  "measurement_id": "xsd:string",
+                  "kpi_id": "xsd:string",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "source": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "HAS_CONTRACT": { "domain": "ClientOrganization", "range": "Contract" },
+      "DELIVERS_SERVICE": { "domain": "ServiceProvider", "range": "Service" },
+      "IN_CATALOG": { "domain": "Service", "range": "ServiceCatalog" },
+      "GOVERNED_BY_SLA": { "domain": "Service", "range": "SLA" },
+      "HAS_CONTACT": { "domain": "ClientOrganization", "range": "Contact" },
+      "HAS_LOCATION": { "domain": "ClientOrganization", "range": "Location" },
+      "OWNS_ASSET": { "domain": "ClientOrganization", "range": "Asset" },
+      "HOSTS_SYSTEM": { "domain": "Asset", "range": "System" },
+      "RUNS_APPLICATION": { "domain": "System", "range": "Application" },
+      "STORES_DATASET": { "domain": "Asset", "range": "DataSet" },
+      "SEGMENT_CONTAINS_ASSET": { "domain": "NetworkSegment", "range": "Asset" },
+      "CLOUD_OWNS_ASSET": { "domain": "CloudAccount", "range": "Asset" },
+      "HAS_IDENTITY": { "domain": "ClientOrganization", "range": "Identity" },
+      "IDENTITY_HAS_ACCOUNT": { "domain": "Identity", "range": "Account" },
+      "ACCOUNT_ASSIGNED_ROLE": { "domain": "Account", "range": "Role" },
+      "ROLE_HAS_PERMISSION": { "domain": "Role", "range": "Permission" },
+      "IDENTITY_HAS_MFA": { "domain": "Identity", "range": "MFADevice" },
+      "ACCOUNT_AUTHENTICATION_EVENT": { "domain": "Account", "range": "AuthEvent" },
+      "ACCESS_REQUESTS_ROLE": { "domain": "AccessRequest", "range": "Role" },
+      "SOC_OPERATES_SIEM": { "domain": "SOC", "range": "SIEM" },
+      "SOC_OPERATES_SOAR": { "domain": "SOC", "range": "SOAR" },
+      "SIEM_INGESTS_LOGSOURCE": { "domain": "SIEM", "range": "LogSource" },
+      "LOGSOURCE_OBSERVES_EVENT": { "domain": "LogSource", "range": "Event" },
+      "RULE_GENERATES_ALERT": { "domain": "DetectionRule", "range": "Alert" },
+      "ALERT_GROUPED_IN_CASE": { "domain": "Alert", "range": "Case" },
+      "CASE_EXECUTES_PLAYBOOK": { "domain": "Case", "range": "Playbook" },
+      "CASE_ESCALATES_VIA": { "domain": "Case", "range": "Escalation" },
+      "CASE_HAS_COMMUNICATION": { "domain": "Case", "range": "CommunicationRecord" },
+      "INDICATOR_RELATES_TTP": { "domain": "Indicator", "range": "TTP" },
+      "ACTOR_USES_TTP": { "domain": "ThreatActor", "range": "TTP" },
+      "CAMPAIGN_ATTRIBUTED_TO": { "domain": "Campaign", "range": "ThreatActor" },
+      "CAMPAIGN_USES_TTP": { "domain": "Campaign", "range": "TTP" },
+      "INDICATOR_PART_OF_FEED": { "domain": "Indicator", "range": "IntelFeed" },
+      "REPORT_REFERENCES_INDICATOR": { "domain": "IntelReport", "range": "Indicator" },
+      "ASSET_HAS_FINDING": { "domain": "Asset", "range": "Finding" },
+      "FINDING_OF_VULNERABILITY": { "domain": "Finding", "range": "Vulnerability" },
+      "FINDING_REMEDIATED_BY": { "domain": "Finding", "range": "Remediation" },
+      "FINDING_PATCHED_BY": { "domain": "Finding", "range": "Patch" },
+      "FINDING_EXEMPTED_BY": { "domain": "Finding", "range": "Exception" },
+      "SCAN_PRODUCES_FINDING": { "domain": "Scan", "range": "Finding" },
+      "POLICY_IMPLEMENTED_BY_CONTROL": { "domain": "Policy", "range": "Control" },
+      "CONTROL_EVIDENCED_BY": { "domain": "Control", "range": "Evidence" },
+      "RISK_MITIGATED_BY_CONTROL": { "domain": "Risk", "range": "Control" },
+      "ASSESSMENT_EVALUATES_CONTROL": { "domain": "Assessment", "range": "Control" },
+      "AUDIT_COLLECTS_EVIDENCE": { "domain": "Audit", "range": "Evidence" },
+      "STANDARD_HAS_CONTROL": { "domain": "Standard", "range": "Control" },
+      "CONTROL_DEPLOYED_ON": { "domain": "SecurityControl", "range": "ControlDeployment" },
+      "DEPLOYMENT_PROTECTS_ASSET": { "domain": "ControlDeployment", "range": "Asset" },
+      "CERT_SIGNED_BY_PKI": { "domain": "Certificate", "range": "PKI" },
+      "KEY_PROTECTS_DATASET": { "domain": "Key", "range": "DataSet" },
+      "APP_HAS_THREAT_MODEL": { "domain": "Application", "range": "ThreatModel" },
+      "APP_HOSTED_IN_PIPELINE": { "domain": "Application", "range": "Pipeline" },
+      "APP_ASSESSED_BY_APPSEC": { "domain": "Application", "range": "AppSecAssessment" },
+      "APP_HAS_SBOM": { "domain": "Application", "range": "SBOM" },
+      "PROCESSING_USES_DATACATEGORY": { "domain": "ProcessingActivity", "range": "DataCategory" },
+      "CONSENT_RELATES_PROCESSING": { "domain": "Consent", "range": "ProcessingActivity" },
+      "BREACH_IMPACTS_DATASET": { "domain": "DataBreach", "range": "DataSet" },
+      "IRPLAN_COVERS_INCIDENT": { "domain": "IRPlan", "range": "Incident" },
+      "INCIDENT_HAS_EVIDENCE": { "domain": "Incident", "range": "EvidenceItem" },
+      "EVIDENCE_TRACKED_BY_COC": { "domain": "EvidenceItem", "range": "ChainOfCustody" },
+      "INCIDENT_ACTIONED_BY": { "domain": "Incident", "range": "IRAction" },
+      "INCIDENT_SUMMARIZED_BY": { "domain": "Incident", "range": "PostIncidentReport" },
+      "BIA_INPUT_TO_BCM": { "domain": "BIA", "range": "BCMPlan" },
+      "BACKUP_PROTECTS_ASSET": { "domain": "BackupJob", "range": "Asset" },
+      "RESTORE_DERIVES_FROM_BACKUP": { "domain": "RestoreEvent", "range": "BackupJob" },
+      "SITE_EQUIPPED_WITH_ACS": { "domain": "Site", "range": "AccessControlSystem" },
+      "SITE_HAS_CAMERA": { "domain": "Site", "range": "Camera" },
+      "SITE_HAS_GUARDPOST": { "domain": "Site", "range": "GuardPost" },
+      "DOOR_CONTROLLED_BY_ACS": { "domain": "Door", "range": "AccessControlSystem" },
+      "BADGE_GRANTED_TO_IDENTITY": { "domain": "Badge", "range": "Identity" },
+      "VISITOR_HOSTED_BY_IDENTITY": { "domain": "Visitor", "range": "Identity" },
+      "ALARM_RAISED_AT_SITE": { "domain": "AlarmEvent", "range": "Site" },
+      "ICSZONE_CONTAINS_ASSET": { "domain": "ICSZone", "range": "ICSAsset" },
+      "ICSASSET_OFFERS_SERVICE": { "domain": "ICSAsset", "range": "ICSService" },
+      "TRAINING_DELIVERS_SESSION": { "domain": "TrainingCourse", "range": "TrainingSession" },
+      "PHISHING_BELONGS_TO_TRAINING": { "domain": "PhishingSimulation", "range": "TrainingCourse" },
+      "VENDOR_ASSESSED_BY_TPA": { "domain": "Vendor", "range": "ThirdPartyAssessment" },
+      "VENDOR_HAS_SBOM_REF": { "domain": "Vendor", "range": "SBOMReference" },
+      "VENDOR_SUBJECT_OF_PENTEST": { "domain": "Vendor", "range": "PentestReport" },
+      "SERVICE_TRACKED_BY_KPI": { "domain": "Service", "range": "KPI" },
+      "KPI_MEASURED_BY": { "domain": "KPI", "range": "MetricMeasurement" },
+      "BILLING_FOR_CLIENT": { "domain": "Billing", "range": "ClientOrganization" },
+      "TIMESHEET_RELATED_TO_CASE": { "domain": "Timesheet", "range": "Case" }
+    }
+  }
+}

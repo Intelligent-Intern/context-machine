@@ -1,0 +1,1147 @@
+{
+  "ontology": {
+    "name": "social_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/social-service#",
+    "description": "Comprehensive ontology for social services: intake and case management, assessments, service planning and delivery, safeguarding, benefits and payments, provider/program management, scheduling, finance, quality/outcomes, privacy/compliance, and interoperability.",
+    "namespaces": {
+      "soc": "http://context-machine.org/ontology/social-service#",
+      "client": "http://context-machine.org/ontology/social-service/client#",
+      "case": "http://context-machine.org/ontology/social-service/case#",
+      "assessment": "http://context-machine.org/ontology/social-service/assessment#",
+      "plan": "http://context-machine.org/ontology/social-service/plan#",
+      "service": "http://context-machine.org/ontology/social-service/service#",
+      "program": "http://context-machine.org/ontology/social-service/program#",
+      "provider": "http://context-machine.org/ontology/social-service/provider#",
+      "benefit": "http://context-machine.org/ontology/social-service/benefit#",
+      "legal": "http://context-machine.org/ontology/social-service/legal#",
+      "safeguard": "http://context-machine.org/ontology/social-service/safeguard#",
+      "finance": "http://context-machine.org/ontology/social-service/finance#",
+      "quality": "http://context-machine.org/ontology/social-service/quality#",
+      "privacy": "http://context-machine.org/ontology/social-service/privacy#",
+      "comms": "http://context-machine.org/ontology/social-service/communications#",
+      "schedule": "http://context-machine.org/ontology/social-service/schedule#",
+      "interop": "http://context-machine.org/ontology/social-service/interop#",
+      "ref": "http://context-machine.org/ontology/social-service/reference#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "time": "http://www.w3.org/2006/time#",
+      "qudt": "http://qudt.org/vocab/unit#",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "http://schema.org/",
+      "http://www.w3.org/2004/02/skos/core#",
+      "http://www.w3.org/2006/vcard/ns#"
+    ],
+    "frames": {
+      "Service_Delivery_System": {
+        "collections": {
+          "Client_Management": {
+            "entities": {
+              "Client": {
+                "properties": {
+                  "client_id": "xsd:string",
+                  "external_ids": "xsd:string",
+                  "first_name": "xsd:string",
+                  "last_name": "xsd:string",
+                  "full_name": "xsd:string",
+                  "date_of_birth": "xsd:date",
+                  "age_years": "xsd:integer",
+                  "gender": "xsd:string",
+                  "pronouns": "xsd:string",
+                  "marital_status": "xsd:string",
+                  "nationality": "xsd:string",
+                  "immigration_status": "xsd:string",
+                  "ethnicity": "xsd:string",
+                  "disability_status": "xsd:string",
+                  "veteran_status": "xsd:boolean",
+                  "languages": "xsd:string",
+                  "preferred_language": "xsd:string",
+                  "literacy_level": "xsd:string",
+                  "employment_status": "xsd:string",
+                  "income_monthly": "xsd:float",
+                  "currency": "xsd:string",
+                  "housing_status": "xsd:string",
+                  "homelessness_status": "xsd:string",
+                  "household_id": "xsd:string",
+                  "dependents_count": "xsd:integer",
+                  "risk_flags": "xsd:string",
+                  "vulnerability_index_score": "xsd:float",
+                  "preferred_contact_method": "xsd:string",
+                  "phone": "xsd:string",
+                  "email": "xsd:string",
+                  "address": "vcard:Address",
+                  "location": "geo:Point",
+                  "consent_for_contact": "xsd:boolean",
+                  "confidentiality_level": "xsd:string",
+                  "active_cases_count": "xsd:integer",
+                  "created_at": "xsd:dateTime",
+                  "updated_at": "xsd:dateTime"
+                }
+              },
+              "Household": {
+                "properties": {
+                  "household_id": "xsd:string",
+                  "head_client_id": "xsd:string",
+                  "address": "vcard:Address",
+                  "location": "geo:Point",
+                  "household_size": "xsd:integer",
+                  "composition": "xsd:string",
+                  "tenure_type": "xsd:string",
+                  "income_monthly": "xsd:float",
+                  "currency": "xsd:string",
+                  "poverty_index": "xsd:float",
+                  "utilities_status": "xsd:string",
+                  "created_at": "xsd:dateTime"
+                }
+              },
+              "FamilyRelationship": {
+                "properties": {
+                  "relationship_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "related_client_id": "xsd:string",
+                  "relationship_type": "xsd:string",
+                  "legal_guardianship": "xsd:boolean",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "notes": "xsd:string"
+                }
+              },
+              "IdentityDocument": {
+                "properties": {
+                  "document_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "document_type": "xsd:string",
+                  "document_number": "xsd:string",
+                  "issuing_country": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "verified": "xsd:boolean",
+                  "verification_date": "xsd:date",
+                  "document_uri": "xsd:string",
+                  "sensitivity": "xsd:string"
+                }
+              }
+            }
+          },
+          "Case_Management": {
+            "entities": {
+              "Case": {
+                "properties": {
+                  "case_id": "xsd:string",
+                  "case_number": "xsd:string",
+                  "client_id": "xsd:string",
+                  "case_type": "xsd:string",
+                  "status": "xsd:string",
+                  "priority": "xsd:string",
+                  "opened_date": "xsd:date",
+                  "closed_date": "xsd:date",
+                  "closure_reason": "xsd:string",
+                  "referral_source": "xsd:string",
+                  "presenting_issue": "xsd:string",
+                  "target_population": "xsd:string",
+                  "assigned_team_id": "xsd:string",
+                  "assigned_practitioner_id": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "confidentiality_level": "xsd:string",
+                  "last_review_date": "xsd:date",
+                  "next_review_due_date": "xsd:date",
+                  "created_by": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "updated_at": "xsd:dateTime"
+                }
+              },
+              "Intake": {
+                "properties": {
+                  "intake_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "intake_date": "xsd:date",
+                  "channel": "xsd:string",
+                  "triage_level": "xsd:string",
+                  "referral_id": "xsd:string",
+                  "initial_needs": "xsd:string",
+                  "immediate_risks": "xsd:string",
+                  "interpreter_required": "xsd:boolean",
+                  "summary": "xsd:string",
+                  "created_by": "xsd:string"
+                }
+              },
+              "Referral": {
+                "properties": {
+                  "referral_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "from_organization_id": "xsd:string",
+                  "to_organization_id": "xsd:string",
+                  "from_program_id": "xsd:string",
+                  "to_program_id": "xsd:string",
+                  "referral_reason": "xsd:string",
+                  "urgency": "xsd:string",
+                  "referral_date": "xsd:date",
+                  "response_date": "xsd:date",
+                  "status": "xsd:string",
+                  "outcome": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "CaseNote": {
+                "properties": {
+                  "note_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "author_id": "xsd:string",
+                  "note_type": "xsd:string",
+                  "channel": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "content": "xsd:string",
+                  "attachments_count": "xsd:integer",
+                  "flagged": "xsd:boolean",
+                  "sensitivity": "xsd:string"
+                }
+              },
+              "CaseAssignment": {
+                "properties": {
+                  "assignment_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "team_id": "xsd:string",
+                  "role": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "allocation_percentage": "xsd:float"
+                }
+              }
+            }
+          },
+          "Assessment_Planning": {
+            "entities": {
+              "Assessment": {
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "assessment_type": "xsd:string",
+                  "instrument_name": "xsd:string",
+                  "instrument_version": "xsd:string",
+                  "assessor_id": "xsd:string",
+                  "assessment_date": "xsd:date",
+                  "domain_scores": "xsd:string",
+                  "risk_level": "xsd:string",
+                  "protective_factors": "xsd:string",
+                  "recommendations": "xsd:string",
+                  "next_review_date": "xsd:date"
+                }
+              },
+              "RiskAssessment": {
+                "properties": {
+                  "risk_assessment_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "risk_type": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "risk_level": "xsd:string",
+                  "immediate_action_required": "xsd:boolean",
+                  "assessed_by": "xsd:string",
+                  "assessment_date": "xsd:date",
+                  "safety_plan_id": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "EligibilityDetermination": {
+                "properties": {
+                  "determination_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "benefit_type_id": "xsd:string",
+                  "rule_set": "xsd:string",
+                  "decision": "xsd:boolean",
+                  "decision_date": "xsd:date",
+                  "effective_start_date": "xsd:date",
+                  "effective_end_date": "xsd:date",
+                  "required_documents_percent": "xsd:float",
+                  "reason_code": "xsd:string",
+                  "review_date": "xsd:date"
+                }
+              },
+              "ServicePlan": {
+                "properties": {
+                  "plan_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "version": "xsd:string",
+                  "plan_status": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "review_cycle_days": "xsd:integer",
+                  "next_review_date": "xsd:date",
+                  "is_multi_agency": "xsd:boolean",
+                  "participants": "xsd:string",
+                  "risk_mitigation_actions": "xsd:string",
+                  "goals_count": "xsd:integer",
+                  "tasks_count": "xsd:integer"
+                }
+              },
+              "Goal": {
+                "properties": {
+                  "goal_id": "xsd:string",
+                  "plan_id": "xsd:string",
+                  "description": "xsd:string",
+                  "goal_type": "xsd:string",
+                  "baseline_value": "xsd:float",
+                  "target_value": "xsd:float",
+                  "unit": "xsd:string",
+                  "start_date": "xsd:date",
+                  "target_date": "xsd:date",
+                  "status": "xsd:string",
+                  "progress_value": "xsd:float",
+                  "progress_percent": "xsd:float",
+                  "outcome_measure_id": "xsd:string"
+                }
+              },
+              "Task": {
+                "properties": {
+                  "task_id": "xsd:string",
+                  "plan_id": "xsd:string",
+                  "description": "xsd:string",
+                  "assigned_to_practitioner_id": "xsd:string",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string",
+                  "priority": "xsd:string",
+                  "dependencies": "xsd:string",
+                  "required_documents": "xsd:string"
+                }
+              }
+            }
+          },
+          "Service_Execution": {
+            "entities": {
+              "ServiceEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "service_type": "xsd:string",
+                  "modality": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "duration_minutes": "xsd:integer",
+                  "location": "geo:Point",
+                  "facility_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "interpreter_used": "xsd:boolean",
+                  "participants_count": "xsd:integer",
+                  "outcomes": "xsd:string",
+                  "follow_up_actions": "xsd:string",
+                  "travel_time_minutes": "xsd:integer",
+                  "billable": "xsd:boolean",
+                  "service_code": "xsd:string"
+                }
+              },
+              "Appointment": {
+                "properties": {
+                  "appointment_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "appointment_type": "xsd:string",
+                  "scheduled_start": "xsd:dateTime",
+                  "scheduled_end": "xsd:dateTime",
+                  "location": "geo:Point",
+                  "facility_id": "xsd:string",
+                  "status": "xsd:string",
+                  "no_show": "xsd:boolean",
+                  "reschedule_count": "xsd:integer",
+                  "reminder_sent": "xsd:boolean",
+                  "created_by": "xsd:string"
+                }
+              },
+              "Authorization": {
+                "properties": {
+                  "authorization_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "funding_source_id": "xsd:string",
+                  "units_authorized": "xsd:float",
+                  "units_used": "xsd:float",
+                  "unit_type": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "service_codes": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "WaitlistRecord": {
+                "properties": {
+                  "waitlist_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "priority_score": "xsd:float",
+                  "added_date": "xsd:date",
+                  "position": "xsd:integer",
+                  "status": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              }
+            }
+          },
+          "Provider_Management": {
+            "entities": {
+              "Organization": {
+                "properties": {
+                  "organization_id": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "trading_name": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "organization_type": "xsd:string",
+                  "sector": "xsd:string",
+                  "address": "vcard:Address",
+                  "location": "geo:Point",
+                  "website": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "accreditations": "xsd:string",
+                  "languages_offered": "xsd:string",
+                  "service_categories": "xsd:string",
+                  "hours_of_operation": "xsd:string",
+                  "data_controller": "xsd:string"
+                }
+              },
+              "Team": {
+                "properties": {
+                  "team_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "team_name": "xsd:string",
+                  "description": "xsd:string",
+                  "manager_practitioner_id": "xsd:string",
+                  "capacity_cases": "xsd:integer"
+                }
+              },
+              "Practitioner": {
+                "properties": {
+                  "practitioner_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "team_id": "xsd:string",
+                  "person_name": "xsd:string",
+                  "role": "xsd:string",
+                  "credentials": "xsd:string",
+                  "license_number": "xsd:string",
+                  "license_region": "xsd:string",
+                  "employment_type": "xsd:string",
+                  "hire_date": "xsd:date",
+                  "languages": "xsd:string",
+                  "supervisor_id": "xsd:string",
+                  "caseload_current": "xsd:integer",
+                  "capacity_max": "xsd:integer",
+                  "availability_calendar_id": "xsd:string",
+                  "clearance_level": "xsd:string",
+                  "training_completed": "xsd:string"
+                }
+              },
+              "Facility": {
+                "properties": {
+                  "facility_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "facility_name": "xsd:string",
+                  "facility_type": "xsd:string",
+                  "address": "vcard:Address",
+                  "location": "geo:Point",
+                  "capacity_beds": "xsd:integer",
+                  "occupancy_beds": "xsd:integer",
+                  "accessibility_features": "xsd:string",
+                  "hours_of_operation": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "contact_email": "xsd:string"
+                }
+              }
+            }
+          },
+          "Program_Benefits": {
+            "entities": {
+              "Program": {
+                "properties": {
+                  "program_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "program_name": "xsd:string",
+                  "program_type": "xsd:string",
+                  "goals": "xsd:string",
+                  "target_population": "xsd:string",
+                  "eligibility_ruleset": "xsd:string",
+                  "capacity": "xsd:integer",
+                  "waitlist_enabled": "xsd:boolean",
+                  "service_categories": "xsd:string",
+                  "service_codes": "xsd:string",
+                  "primary_facility_id": "xsd:string",
+                  "funding_sources": "xsd:string",
+                  "kpi_set": "xsd:string",
+                  "outcome_measures": "xsd:string"
+                }
+              },
+              "BenefitType": {
+                "properties": {
+                  "benefit_type_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "description": "xsd:string",
+                  "unit": "xsd:string",
+                  "rules": "xsd:string"
+                }
+              },
+              "BenefitApplication": {
+                "properties": {
+                  "application_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "benefit_type_id": "xsd:string",
+                  "application_date": "xsd:date",
+                  "status": "xsd:string",
+                  "decision_date": "xsd:date",
+                  "amount_requested": "xsd:float",
+                  "amount_approved": "xsd:float",
+                  "currency": "xsd:string",
+                  "payment_frequency": "xsd:string",
+                  "effective_start_date": "xsd:date",
+                  "effective_end_date": "xsd:date",
+                  "payment_method": "xsd:string",
+                  "bank_details_masked": "xsd:string",
+                  "compliance_flags": "xsd:string"
+                }
+              },
+              "BenefitPayment": {
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "application_id": "xsd:string",
+                  "payment_date": "xsd:date",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "paid_by": "xsd:string",
+                  "reference": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "VerificationDocument": {
+                "properties": {
+                  "verification_id": "xsd:string",
+                  "application_id": "xsd:string",
+                  "document_type": "xsd:string",
+                  "uploaded_date": "xsd:date",
+                  "verification_status": "xsd:string",
+                  "verified_by": "xsd:string",
+                  "document_uri": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              }
+            }
+          },
+          "Scheduling": {
+            "entities": {
+              "Availability": {
+                "properties": {
+                  "availability_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "weekday": "xsd:string",
+                  "start_time": "xsd:string",
+                  "end_time": "xsd:string",
+                  "location": "geo:Point",
+                  "facility_id": "xsd:string"
+                }
+              },
+              "ScheduleBlock": {
+                "properties": {
+                  "block_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "block_type": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "Holiday": {
+                "properties": {
+                  "holiday_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "date": "xsd:date",
+                  "description": "xsd:string"
+                }
+              }
+            }
+          },
+          "Legal_Safeguarding": {
+            "entities": {
+              "IncidentReport": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "incident_date": "xsd:dateTime",
+                  "incident_type": "xsd:string",
+                  "severity": "xsd:string",
+                  "description": "xsd:string",
+                  "reporter_id": "xsd:string",
+                  "mandatory_reporting": "xsd:boolean",
+                  "reported_to_authority": "xsd:boolean",
+                  "authority_reference": "xsd:string",
+                  "actions_taken": "xsd:string",
+                  "injury_details": "xsd:string",
+                  "police_case_number": "xsd:string"
+                }
+              },
+              "SafetyPlan": {
+                "properties": {
+                  "safety_plan_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "risk_type": "xsd:string",
+                  "created_date": "xsd:date",
+                  "review_date": "xsd:date",
+                  "safety_steps": "xsd:string",
+                  "emergency_contacts": "xsd:string",
+                  "restrictions": "xsd:string",
+                  "plan_status": "xsd:string"
+                }
+              },
+              "LegalOrder": {
+                "properties": {
+                  "legal_order_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "order_type": "xsd:string",
+                  "court_name": "xsd:string",
+                  "docket_number": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "conditions": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              },
+              "Guardianship": {
+                "properties": {
+                  "guardianship_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "guardian_client_id": "xsd:string",
+                  "legal_authority_type": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "documentation_uri": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "Placement": {
+                "properties": {
+                  "placement_id": "xsd:string",
+                  "child_client_id": "xsd:string",
+                  "provider_organization_id": "xsd:string",
+                  "facility_id": "xsd:string",
+                  "placement_type": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "disruption_reason": "xsd:string",
+                  "stability_index": "xsd:float"
+                }
+              },
+              "Visitation": {
+                "properties": {
+                  "visitation_id": "xsd:string",
+                  "child_client_id": "xsd:string",
+                  "with_client_id": "xsd:string",
+                  "location": "geo:Point",
+                  "facility_id": "xsd:string",
+                  "supervised": "xsd:boolean",
+                  "frequency": "xsd:string",
+                  "compliance_status": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "AdoptionCase": {
+                "properties": {
+                  "adoption_case_id": "xsd:string",
+                  "child_client_id": "xsd:string",
+                  "adoptive_parent_client_ids": "xsd:string",
+                  "status": "xsd:string",
+                  "home_study_completed": "xsd:boolean",
+                  "court_hearing_date": "xsd:date",
+                  "finalization_date": "xsd:date",
+                  "notes": "xsd:string"
+                }
+              }
+            }
+          },
+          "Finance_Billing": {
+            "entities": {
+              "FundingSource": {
+                "properties": {
+                  "funding_source_id": "xsd:string",
+                  "name": "xsd:string",
+                  "funding_type": "xsd:string",
+                  "payer_organization_id": "xsd:string",
+                  "contract_number": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "allocated_budget": "xsd:float",
+                  "spent_to_date": "xsd:float",
+                  "currency": "xsd:string",
+                  "outcomes_targeted": "xsd:string"
+                }
+              },
+              "CostCenter": {
+                "properties": {
+                  "cost_center_id": "xsd:string",
+                  "name": "xsd:string",
+                  "fiscal_year": "xsd:string",
+                  "budget": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "Invoice": {
+                "properties": {
+                  "invoice_id": "xsd:string",
+                  "provider_organization_id": "xsd:string",
+                  "funding_source_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "invoice_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string",
+                  "service_units": "xsd:float",
+                  "adjustments": "xsd:float",
+                  "notes": "xsd:string"
+                }
+              },
+              "TimeEntry": {
+                "properties": {
+                  "time_entry_id": "xsd:string",
+                  "practitioner_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "date": "xsd:date",
+                  "hours": "xsd:float",
+                  "service_code": "xsd:string",
+                  "billable": "xsd:boolean",
+                  "notes": "xsd:string"
+                }
+              }
+            }
+          },
+          "Quality_Reporting": {
+            "entities": {
+              "OutcomeMeasure": {
+                "properties": {
+                  "outcome_measure_id": "xsd:string",
+                  "name": "xsd:string",
+                  "domain": "xsd:string",
+                  "description": "xsd:string",
+                  "unit": "xsd:string",
+                  "baseline_value": "xsd:float",
+                  "target_value": "xsd:float",
+                  "measurement_date": "xsd:date",
+                  "value": "xsd:float",
+                  "data_source": "xsd:string",
+                  "case_id": "xsd:string",
+                  "program_id": "xsd:string"
+                }
+              },
+              "KPI": {
+                "properties": {
+                  "kpi_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "numerator": "xsd:float",
+                  "denominator": "xsd:float",
+                  "value": "xsd:float",
+                  "time_period": "xsd:string",
+                  "target": "xsd:float",
+                  "program_id": "xsd:string"
+                }
+              },
+              "Survey": {
+                "properties": {
+                  "survey_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "instrument_name": "xsd:string",
+                  "instrument_version": "xsd:string",
+                  "survey_date": "xsd:date",
+                  "score": "xsd:float",
+                  "free_text": "xsd:string",
+                  "language": "xsd:string"
+                }
+              },
+              "AuditRecord": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "audit_type": "xsd:string",
+                  "audit_date": "xsd:date",
+                  "auditor": "xsd:string",
+                  "scope": "xsd:string",
+                  "findings": "xsd:string",
+                  "severity": "xsd:string",
+                  "corrective_actions": "xsd:string",
+                  "due_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Community_Engagement": {
+            "entities": {
+              "ResourceDirectoryEntry": {
+                "properties": {
+                  "resource_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "service_category": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "address": "vcard:Address",
+                  "location": "geo:Point",
+                  "contact_phone": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "hours_of_operation": "xsd:string",
+                  "eligibility_summary": "xsd:string",
+                  "languages_offered": "xsd:string",
+                  "website": "xsd:string"
+                }
+              },
+              "Volunteer": {
+                "properties": {
+                  "volunteer_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "name": "xsd:string",
+                  "skills": "xsd:string",
+                  "background_check_status": "xsd:string",
+                  "available_hours_per_week": "xsd:float",
+                  "contact_phone": "xsd:string",
+                  "contact_email": "xsd:string"
+                }
+              },
+              "CommunityEvent": {
+                "properties": {
+                  "community_event_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "address": "vcard:Address",
+                  "location": "geo:Point",
+                  "capacity": "xsd:integer",
+                  "registration_required": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Data_Privacy_Security": {
+            "entities": {
+              "ConsentRecord": {
+                "properties": {
+                  "consent_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "consent_type": "xsd:string",
+                  "scope": "xsd:string",
+                  "data_sharing_partners": "xsd:string",
+                  "legal_basis": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "withdrawn": "xsd:boolean",
+                  "withdrawn_date": "xsd:date",
+                  "digital_signature_hash": "xsd:string",
+                  "ip_address": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              },
+              "DataSharingAgreement": {
+                "properties": {
+                  "dsa_id": "xsd:string",
+                  "title": "xsd:string",
+                  "parties_organization_ids": "xsd:string",
+                  "purpose": "xsd:string",
+                  "legal_basis": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "security_measures": "xsd:string",
+                  "breach_notification_requirements": "xsd:string",
+                  "dpa_reference": "xsd:string",
+                  "document_uri": "xsd:string"
+                }
+              },
+              "AccessLog": {
+                "properties": {
+                  "access_log_id": "xsd:string",
+                  "user_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "purpose_of_access": "xsd:string",
+                  "action": "xsd:string",
+                  "role": "xsd:string",
+                  "auth_method": "xsd:string",
+                  "ip_address": "xsd:string",
+                  "result": "xsd:string"
+                }
+              },
+              "PrivacyIncident": {
+                "properties": {
+                  "privacy_incident_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "incident_date": "xsd:date",
+                  "incident_type": "xsd:string",
+                  "severity": "xsd:string",
+                  "affected_records_count": "xsd:integer",
+                  "notification_sent": "xsd:boolean",
+                  "regulator_reference": "xsd:string",
+                  "summary": "xsd:string"
+                }
+              },
+              "Document": {
+                "properties": {
+                  "document_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "document_type": "xsd:string",
+                  "title": "xsd:string",
+                  "uploaded_by": "xsd:string",
+                  "uploaded_at": "xsd:dateTime",
+                  "uri": "xsd:string",
+                  "checksum": "xsd:string",
+                  "sensitivity": "xsd:string",
+                  "retention_policy_id": "xsd:string"
+                }
+              },
+              "DataRetentionPolicy": {
+                "properties": {
+                  "retention_policy_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "record_category": "xsd:string",
+                  "retention_period_months": "xsd:integer",
+                  "disposition_action": "xsd:string",
+                  "legal_basis": "xsd:string"
+                }
+              }
+            }
+          },
+          "Communications": {
+            "entities": {
+              "CommunicationLog": {
+                "properties": {
+                  "communication_id": "xsd:string",
+                  "case_id": "xsd:string",
+                  "client_id": "xsd:string",
+                  "channel": "xsd:string",
+                  "direction": "xsd:string",
+                  "from": "xsd:string",
+                  "to": "xsd:string",
+                  "subject": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "content_summary": "xsd:string",
+                  "attachments_count": "xsd:integer"
+                }
+              },
+              "MessageTemplate": {
+                "properties": {
+                  "template_id": "xsd:string",
+                  "name": "xsd:string",
+                  "channel": "xsd:string",
+                  "language": "xsd:string",
+                  "subject": "xsd:string",
+                  "body": "xsd:string",
+                  "enabled": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Interoperability": {
+            "entities": {
+              "IdentifierSystem": {
+                "properties": {
+                  "identifier_system_id": "xsd:string",
+                  "name": "xsd:string",
+                  "namespace_uri": "xsd:string",
+                  "pattern": "xsd:string",
+                  "check_digit": "xsd:boolean"
+                }
+              },
+              "CodeSystem": {
+                "properties": {
+                  "code_system_id": "xsd:string",
+                  "name": "xsd:string",
+                  "version": "xsd:string",
+                  "base_uri": "xsd:string",
+                  "publisher": "xsd:string"
+                }
+              },
+              "Mapping": {
+                "properties": {
+                  "mapping_id": "xsd:string",
+                  "source_system_id": "xsd:string",
+                  "source_code": "xsd:string",
+                  "target_system_id": "xsd:string",
+                  "target_code": "xsd:string",
+                  "equivalence": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "APIEndpoint": {
+                "properties": {
+                  "api_endpoint_id": "xsd:string",
+                  "organization_id": "xsd:string",
+                  "name": "xsd:string",
+                  "base_url": "xsd:string",
+                  "authentication": "xsd:string",
+                  "security_profile": "xsd:string",
+                  "formats_supported": "xsd:string"
+                }
+              },
+              "EventSubscription": {
+                "properties": {
+                  "subscription_id": "xsd:string",
+                  "topic": "xsd:string",
+                  "endpoint_url": "xsd:string",
+                  "format": "xsd:string",
+                  "secret": "xsd:string",
+                  "active": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Reference_Data": {
+            "entities": {
+              "CodeList": {
+                "properties": {
+                  "codelist_id": "xsd:string",
+                  "name": "xsd:string",
+                  "description": "xsd:string",
+                  "codes": "xsd:string"
+                },
+                "instances": {
+                  "ServiceCategories": {
+                    "name": "ServiceCategories",
+                    "description": "High-level service categories",
+                    "codes": "case_management;housing_first;shelter;counseling;mental_health;substance_use;domestic_violence;youth_services;elder_care;disability_support;immigration_support;employment_assistance;food_security;family_support;legal_aid;transportation;education_training"
+                  },
+                  "RiskTypes": {
+                    "name": "RiskTypes",
+                    "description": "Common safeguarding risk types",
+                    "codes": "self_harm;suicide;violence;neglect;abuse_physical;abuse_psychological;abuse_sexual;exploitation;trafficking;homelessness;child_safeguarding;substance_misuse;financial_abuse"
+                  },
+                  "HousingStatus": {
+                    "name": "HousingStatus",
+                    "description": "Typical housing situations",
+                    "codes": "stably_housed;temporarily_housed;sofa_surfing;emergency_shelter;transitional_housing;unsheltered;institutional;unknown"
+                  },
+                  "AppointmentStatus": {
+                    "name": "AppointmentStatus",
+                    "description": "Statuses for appointments",
+                    "codes": "scheduled;confirmed;completed;cancelled;no_show;rescheduled"
+                  },
+                  "CaseStatus": {
+                    "name": "CaseStatus",
+                    "description": "Case lifecycle states",
+                    "codes": "intake;active;on_hold;transferred;closed;reopened"
+                  },
+                  "ConsentTypes": {
+                    "name": "ConsentTypes",
+                    "description": "Types of consent",
+                    "codes": "general;data_sharing;photo_video;research;marketing;information_release"
+                  },
+                  "BenefitCategories": {
+                    "name": "BenefitCategories",
+                    "description": "Benefit types",
+                    "codes": "cash;voucher;in_kind;service_unit;rent_subsidy;utility_assistance;food_benefit;transport_pass"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "BELONGS_TO_HOUSEHOLD": { "domain": "Client", "range": "Household" },
+      "HAS_HOUSEHOLD_MEMBER": { "domain": "Household", "range": "Client" },
+
+      "CLIENT_HAS_ID_DOCUMENT": { "domain": "Client", "range": "IdentityDocument" },
+      "CLIENT_HAS_CASE": { "domain": "Client", "range": "Case" },
+      "CASE_HAS_INTAKE": { "domain": "Case", "range": "Intake" },
+      "CASE_HAS_NOTE": { "domain": "Case", "range": "CaseNote" },
+      "CASE_HAS_REFERRAL": { "domain": "Case", "range": "Referral" },
+      "CASE_HAS_ASSESSMENT": { "domain": "Case", "range": "Assessment" },
+      "CASE_HAS_RISK_ASSESSMENT": { "domain": "Case", "range": "RiskAssessment" },
+      "CASE_HAS_PLAN": { "domain": "Case", "range": "ServicePlan" },
+      "PLAN_HAS_GOAL": { "domain": "ServicePlan", "range": "Goal" },
+      "PLAN_HAS_TASK": { "domain": "ServicePlan", "range": "Task" },
+      "CASE_HAS_EVENT": { "domain": "Case", "range": "ServiceEvent" },
+      "APPOINTMENT_FOR_CASE": { "domain": "Appointment", "range": "Case" },
+
+      "ASSIGNED_TO_PRACTITIONER": { "domain": "Case", "range": "Practitioner" },
+      "ASSIGNMENT_FOR_CASE": { "domain": "CaseAssignment", "range": "Case" },
+      "ASSIGNMENT_TO_PRACTITIONER": { "domain": "CaseAssignment", "range": "Practitioner" },
+      "PRACTITIONER_IN_TEAM": { "domain": "Practitioner", "range": "Team" },
+      "TEAM_IN_ORGANIZATION": { "domain": "Team", "range": "Organization" },
+
+      "RUNS_PROGRAM": { "domain": "Organization", "range": "Program" },
+      "PROGRAM_FUNDED_BY": { "domain": "Program", "range": "FundingSource" },
+      "PROGRAM_DELIVERED_AT": { "domain": "Program", "range": "Facility" },
+      "PROGRAM_HAS_WAITLIST": { "domain": "Program", "range": "WaitlistRecord" },
+
+      "CLIENT_HAS_APPOINTMENT": { "domain": "Client", "range": "Appointment" },
+      "APPOINTMENT_WITH_PRACTITIONER": { "domain": "Appointment", "range": "Practitioner" },
+      "APPOINTMENT_AT_FACILITY": { "domain": "Appointment", "range": "Facility" },
+
+      "AUTHORIZATION_FOR_PROGRAM": { "domain": "Authorization", "range": "Program" },
+      "AUTHORIZATION_FOR_CASE": { "domain": "Authorization", "range": "Case" },
+      "AUTHORIZATION_FUNDED_BY": { "domain": "Authorization", "range": "FundingSource" },
+
+      "CLIENT_HAS_BENEFIT_APPLICATION": { "domain": "Client", "range": "BenefitApplication" },
+      "APPLICATION_FOR_PROGRAM": { "domain": "BenefitApplication", "range": "Program" },
+      "APPLICATION_FOR_BENEFIT": { "domain": "BenefitApplication", "range": "BenefitType" },
+      "APPLICATION_HAS_PAYMENT": { "domain": "BenefitApplication", "range": "BenefitPayment" },
+      "APPLICATION_HAS_VERIFICATION": { "domain": "BenefitApplication", "range": "VerificationDocument" },
+
+      "CASE_HAS_INCIDENT": { "domain": "Case", "range": "IncidentReport" },
+      "CLIENT_HAS_INCIDENT": { "domain": "Client", "range": "IncidentReport" },
+      "CASE_HAS_SAFETY_PLAN": { "domain": "Case", "range": "SafetyPlan" },
+      "CLIENT_HAS_LEGAL_ORDER": { "domain": "Client", "range": "LegalOrder" },
+      "CLIENT_HAS_GUARDIANSHIP": { "domain": "Client", "range": "Guardianship" },
+      "PLACEMENT_FOR_CLIENT": { "domain": "Placement", "range": "Client" },
+      "PLACEMENT_AT_FACILITY": { "domain": "Placement", "range": "Facility" },
+      "VISITATION_FOR_CLIENT": { "domain": "Visitation", "range": "Client" },
+      "ADOPTION_FOR_CLIENT": { "domain": "AdoptionCase", "range": "Client" },
+
+      "INVOICE_FOR_ORGANIZATION": { "domain": "Invoice", "range": "Organization" },
+      "INVOICE_FOR_FUNDING_SOURCE": { "domain": "Invoice", "range": "FundingSource" },
+      "TIMESHEET_BY_PRACTITIONER": { "domain": "TimeEntry", "range": "Practitioner" },
+      "TIMEENTRY_FOR_CASE": { "domain": "TimeEntry", "range": "Case" },
+      "TIMEENTRY_FOR_PROGRAM": { "domain": "TimeEntry", "range": "Program" },
+
+      "PROGRAM_HAS_OUTCOME_MEASURE": { "domain": "Program", "range": "OutcomeMeasure" },
+      "CASE_HAS_OUTCOME_MEASURE": { "domain": "Case", "range": "OutcomeMeasure" },
+      "PROGRAM_TRACKS_KPI": { "domain": "Program", "range": "KPI" },
+      "ORGANIZATION_HAS_AUDIT": { "domain": "Organization", "range": "AuditRecord" },
+
+      "CLIENT_HAS_CONSENT": { "domain": "Client", "range": "ConsentRecord" },
+      "DSA_PARTY": { "domain": "DataSharingAgreement", "range": "Organization" },
+      "ACCESS_LOG_FOR_CLIENT": { "domain": "AccessLog", "range": "Client" },
+      "PRIVACY_INCIDENT_AT_ORG": { "domain": "PrivacyIncident", "range": "Organization" },
+      "DOCUMENT_FOR_CASE": { "domain": "Document", "range": "Case" },
+      "DOCUMENT_FOR_CLIENT": { "domain": "Document", "range": "Client" },
+
+      "COMMUNICATION_FOR_CASE": { "domain": "CommunicationLog", "range": "Case" },
+      "COMMUNICATION_WITH_CLIENT": { "domain": "CommunicationLog", "range": "Client" },
+
+      "RESOURCE_FOR_PROGRAM": { "domain": "ResourceDirectoryEntry", "range": "Program" }
+    }
+  }
+}

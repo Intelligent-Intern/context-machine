@@ -1,0 +1,162 @@
+{
+  "ontology": {
+    "name": "coding_universal",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/universal#",
+    "description": "Universal ontology schema shared across all domains — the foundational context model for the Context Machine.",
+    "imports": [
+      "http://www.w3.org/2000/01/rdf-schema#",
+      "http://www.w3.org/2002/07/owl#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#"
+    ],
+
+    "frames": {
+      "Entity_Model": {
+        "collections": {
+          "Universal_Entity": {
+            "entities": {
+              "Thing": {
+                "description": "Base entity class for everything represented in the system.",
+                "properties": {
+                  "uri": "xsd:anyURI",
+                  "label": "xsd:string",
+                  "description": "xsd:string"
+                }
+              },
+              "Agent": {
+                "description": "An actor that performs actions (human, organization, or system).",
+                "properties": {
+                  "agent_id": "xsd:string",
+                  "agent_type": "xsd:string"
+                }
+              },
+              "Event": {
+                "description": "Something that happens at a point or interval in time.",
+                "properties": {
+                  "timestamp": "xsd:dateTime",
+                  "location": "geo:SpatialThing"
+                }
+              },
+              "Process": {
+                "description": "A sequence of activities that transform inputs into outputs.",
+                "properties": {
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "Observation": {
+                "description": "A measured or observed value within any domain.",
+                "properties": {
+                  "value": "xsd:anyType",
+                  "unit": "qudt:Unit",
+                  "confidence": "xsd:float",
+                  "time": "xsd:dateTime"
+                }
+              },
+              "Document": {
+                "description": "Any ingested or generated data artifact (file, message, stream).",
+                "properties": {
+                  "file_name": "xsd:string",
+                  "mime_type": "xsd:string",
+                  "checksum": "xsd:string",
+                  "size_bytes": "xsd:integer"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Relation_Model": {
+        "collections": {
+          "Universal_Relations": {
+            "entities": {
+              "Relation": {
+                "description": "Base relation type connecting two entities.",
+                "properties": {
+                  "relation_type": "xsd:string",
+                  "confidence": "xsd:float"
+                }
+              },
+              "Containment": {
+                "description": "Hierarchical inclusion relation (contains / within).",
+                "properties": {
+                  "kind": "xsd:string"
+                }
+              },
+              "Causality": {
+                "description": "Indicates that one event or process causes another.",
+                "properties": {
+                  "strength": "xsd:float"
+                }
+              },
+              "Similarity": {
+                "description": "Expresses semantic or structural similarity between entities.",
+                "properties": {
+                  "metric": "xsd:string",
+                  "distance": "xsd:float"
+                }
+              },
+              "Temporal": {
+                "description": "Relates entities or events in time.",
+                "properties": {
+                  "relation": "xsd:string",
+                  "interval": "xsd:duration"
+                }
+              },
+              "Spatial": {
+                "description": "Relates entities in space.",
+                "properties": {
+                  "relation": "xsd:string",
+                  "distance_m": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Provenance_Model": {
+        "collections": {
+          "Provenance": {
+            "entities": {
+              "Source": {
+                "properties": {
+                  "source_id": "xsd:string",
+                  "source_type": "xsd:string",
+                  "uri": "xsd:anyURI"
+                }
+              },
+              "ExtractionMethod": {
+                "properties": {
+                  "method_name": "xsd:string",
+                  "version": "xsd:string"
+                }
+              },
+              "Confidence": {
+                "properties": {
+                  "score": "xsd:float",
+                  "explanation": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "CONTAINS": {"domain": "Thing", "range": "Thing"},
+      "WITHIN": {"domain": "Thing", "range": "Thing"},
+      "CAUSES": {"domain": "Event", "range": "Event"},
+      "SIMILAR_TO": {"domain": "Thing", "range": "Thing"},
+      "TEMPORALLY_RELATED_TO": {"domain": "Event", "range": "Event"},
+      "SPATIALLY_RELATED_TO": {"domain": "Thing", "range": "Thing"},
+      "HAS_PROVENANCE": {"domain": "Thing", "range": "Source"},
+      "HAS_CONFIDENCE": {"domain": "Thing", "range": "Confidence"}
+    }
+  }
+}

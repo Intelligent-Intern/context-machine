@@ -1,0 +1,1417 @@
+{
+  "ontology": {
+    "name": "energy_ontology",
+    "version": "2.0.0",
+    "namespace": "http://context-machine.org/ontology/energy#",
+    "description": "Comprehensive ontology for energy systems covering renewable energy, fossil fuels, nuclear power, grid infrastructure, energy storage, efficiency systems, and smart energy technologies.",
+    "namespaces": {
+      "energy": "http://context-machine.org/ontology/energy#",
+      "renewable": "http://context-machine.org/ontology/energy/renewable#",
+      "fossil": "http://context-machine.org/ontology/energy/fossil#",
+      "nuclear": "http://context-machine.org/ontology/energy/nuclear#",
+      "grid": "http://context-machine.org/ontology/energy/grid#",
+      "storage": "http://context-machine.org/ontology/energy/storage#",
+      "efficiency": "http://context-machine.org/ontology/energy/efficiency#",
+      "smart": "http://context-machine.org/ontology/energy/smart#",
+      "transmission": "http://context-machine.org/ontology/energy/transmission#",
+      "distribution": "http://context-machine.org/ontology/energy/distribution#",
+      "generation": "http://context-machine.org/ontology/energy/generation#",
+      "consumption": "http://context-machine.org/ontology/energy/consumption#",
+      "market": "http://context-machine.org/ontology/energy/market#",
+      "policy": "http://context-machine.org/ontology/energy/policy#",
+      "carbon": "http://context-machine.org/ontology/energy/carbon#",
+      "sustainability": "http://context-machine.org/ontology/energy/sustainability#",
+      "monitoring": "http://context-machine.org/ontology/energy/monitoring#",
+      "control": "http://context-machine.org/ontology/energy/control#",
+      "maintenance": "http://context-machine.org/ontology/energy/maintenance#",
+      "safety": "http://context-machine.org/ontology/energy/safety#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    ],
+    "frames": {
+      "Renewable_Energy_Systems": {
+        "collections": {
+          "Solar_Energy": {
+            "entities": {
+              "SolarPanel": {
+                "properties": {
+                  "panel_id": "xsd:string",
+                  "panel_type": "xsd:string",
+                  "technology": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "rated_power_watts": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "cell_type": "xsd:string",
+                  "module_area_m2": "xsd:float",
+                  "weight_kg": "xsd:float",
+                  "voltage_v": "xsd:float",
+                  "current_a": "xsd:float",
+                  "temperature_coefficient": "xsd:float",
+                  "degradation_rate": "xsd:float",
+                  "warranty_years": "xsd:integer",
+                  "installation_date": "xsd:date",
+                  "orientation_degrees": "xsd:float",
+                  "tilt_angle_degrees": "xsd:float",
+                  "shading_factor": "xsd:float",
+                  "location": "geo:Point",
+                  "maintenance_schedule": "xsd:string",
+                  "performance_ratio": "xsd:float",
+                  "energy_yield_kwh": "xsd:float",
+                  "carbon_footprint_kg": "xsd:float",
+                  "cost_per_watt": "xsd:float",
+                  "payback_period_years": "xsd:float",
+                  "lifespan_years": "xsd:integer",
+                  "recycling_potential": "xsd:float",
+                  "certification": "xsd:string",
+                  "operating_temperature_range": "xsd:string",
+                  "humidity_tolerance": "xsd:float",
+                  "wind_load_rating": "xsd:float",
+                  "snow_load_rating": "xsd:float",
+                  "fire_safety_rating": "xsd:string"
+                }
+              },
+              "WindTurbine": {
+                "properties": {
+                  "turbine_id": "xsd:string",
+                  "turbine_type": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "rated_power_mw": "xsd:float",
+                  "rotor_diameter_m": "xsd:float",
+                  "hub_height_m": "xsd:float",
+                  "blade_count": "xsd:integer",
+                  "blade_length_m": "xsd:float",
+                  "blade_material": "xsd:string",
+                  "cut_in_speed_ms": "xsd:float",
+                  "rated_wind_speed_ms": "xsd:float",
+                  "cut_out_speed_ms": "xsd:float",
+                  "survival_wind_speed_ms": "xsd:float",
+                  "power_curve": "xsd:string",
+                  "capacity_factor": "xsd:float",
+                  "annual_energy_production_mwh": "xsd:float",
+                  "noise_level_db": "xsd:float",
+                  "shadow_flicker_hours": "xsd:float",
+                  "foundation_type": "xsd:string",
+                  "grid_connection_voltage": "xsd:float",
+                  "transformer_rating": "xsd:float",
+                  "control_system": "xsd:string",
+                  "pitch_control": "xsd:boolean",
+                  "yaw_system": "xsd:string",
+                  "brake_system": "xsd:string",
+                  "monitoring_system": "xsd:string",
+                  "maintenance_access": "xsd:string",
+                  "environmental_impact": "xsd:string",
+                  "bird_wildlife_impact": "xsd:string",
+                  "visual_impact_rating": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "operation_cost_annual": "xsd:float",
+                  "decommissioning_plan": "xsd:string"
+                }
+              },
+              "HydroelectricPlant": {
+                "properties": {
+                  "plant_id": "xsd:string",
+                  "plant_name": "xsd:string",
+                  "plant_type": "xsd:string",
+                  "capacity_mw": "xsd:float",
+                  "dam_height_m": "xsd:float",
+                  "reservoir_capacity_m3": "xsd:float",
+                  "catchment_area_km2": "xsd:float",
+                  "head_height_m": "xsd:float",
+                  "flow_rate_m3s": "xsd:float",
+                  "turbine_count": "xsd:integer",
+                  "turbine_type": "xsd:string",
+                  "generator_count": "xsd:integer",
+                  "efficiency_percentage": "xsd:float",
+                  "annual_generation_gwh": "xsd:float",
+                  "capacity_factor": "xsd:float",
+                  "water_usage_m3": "xsd:float",
+                  "environmental_flow_m3s": "xsd:float",
+                  "fish_passage": "xsd:boolean",
+                  "sediment_management": "xsd:string",
+                  "flood_control_capacity": "xsd:float",
+                  "recreation_facilities": "xsd:boolean",
+                  "navigation_locks": "xsd:boolean",
+                  "water_quality_impact": "xsd:string",
+                  "ecosystem_impact": "xsd:string",
+                  "community_displacement": "xsd:integer",
+                  "construction_cost": "xsd:float",
+                  "operation_cost_annual": "xsd:float",
+                  "lifespan_years": "xsd:integer",
+                  "decommissioning_cost": "xsd:float",
+                  "carbon_emissions_avoided": "xsd:float",
+                  "grid_stability_services": "xsd:string"
+                }
+              }
+            }
+          },
+          "Energy_Storage": {
+            "entities": {
+              "BatterySystem": {
+                "properties": {
+                  "battery_id": "xsd:string",
+                  "battery_type": "xsd:string",
+                  "chemistry": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "capacity_kwh": "xsd:float",
+                  "power_rating_kw": "xsd:float",
+                  "voltage_v": "xsd:float",
+                  "current_rating_a": "xsd:float",
+                  "energy_density_whkg": "xsd:float",
+                  "power_density_wkg": "xsd:float",
+                  "round_trip_efficiency": "xsd:float",
+                  "cycle_life": "xsd:integer",
+                  "depth_of_discharge": "xsd:float",
+                  "charge_rate_c": "xsd:float",
+                  "discharge_rate_c": "xsd:float",
+                  "operating_temperature_range": "xsd:string",
+                  "self_discharge_rate": "xsd:float",
+                  "calendar_life_years": "xsd:integer",
+                  "safety_rating": "xsd:string",
+                  "thermal_management": "xsd:string",
+                  "fire_suppression": "xsd:string",
+                  "monitoring_system": "xsd:string",
+                  "state_of_charge": "xsd:float",
+                  "state_of_health": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "replacement_cost": "xsd:float",
+                  "recycling_value": "xsd:float",
+                  "environmental_impact": "xsd:string",
+                  "grid_services": "xsd:string",
+                  "response_time_ms": "xsd:float",
+                  "standby_losses": "xsd:float"
+                }
+              },
+              "PumpedHydroStorage": {
+                "properties": {
+                  "facility_id": "xsd:string",
+                  "facility_name": "xsd:string",
+                  "capacity_mwh": "xsd:float",
+                  "power_rating_mw": "xsd:float",
+                  "upper_reservoir_capacity": "xsd:float",
+                  "lower_reservoir_capacity": "xsd:float",
+                  "head_height_m": "xsd:float",
+                  "pump_turbine_count": "xsd:integer",
+                  "pump_efficiency": "xsd:float",
+                  "turbine_efficiency": "xsd:float",
+                  "round_trip_efficiency": "xsd:float",
+                  "ramp_rate_mw_min": "xsd:float",
+                  "start_time_minutes": "xsd:float",
+                  "minimum_generation_mw": "xsd:float",
+                  "maximum_generation_mw": "xsd:float",
+                  "pumping_power_mw": "xsd:float",
+                  "water_usage_m3_mwh": "xsd:float",
+                  "evaporation_losses": "xsd:float",
+                  "environmental_impact": "xsd:string",
+                  "land_use_hectares": "xsd:float",
+                  "construction_time_years": "xsd:float",
+                  "construction_cost": "xsd:float",
+                  "operation_cost_annual": "xsd:float",
+                  "lifespan_years": "xsd:integer",
+                  "grid_stability_services": "xsd:string",
+                  "black_start_capability": "xsd:boolean",
+                  "frequency_regulation": "xsd:boolean",
+                  "spinning_reserve": "xsd:boolean",
+                  "load_following": "xsd:boolean"
+                }
+              },
+              "CompressedAirStorage": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "system_type": "xsd:string",
+                  "capacity_mwh": "xsd:float",
+                  "power_rating_mw": "xsd:float",
+                  "storage_pressure_bar": "xsd:float",
+                  "cavern_volume_m3": "xsd:float",
+                  "cavern_depth_m": "xsd:float",
+                  "compressor_stages": "xsd:integer",
+                  "compressor_efficiency": "xsd:float",
+                  "expander_efficiency": "xsd:float",
+                  "round_trip_efficiency": "xsd:float",
+                  "heat_recovery": "xsd:boolean",
+                  "thermal_storage": "xsd:boolean",
+                  "fuel_requirement": "xsd:string",
+                  "emissions_kg_mwh": "xsd:float",
+                  "water_cooling": "xsd:boolean",
+                  "noise_level_db": "xsd:float",
+                  "safety_systems": "xsd:string",
+                  "geological_requirements": "xsd:string",
+                  "environmental_impact": "xsd:string",
+                  "construction_cost": "xsd:float",
+                  "operation_cost_mwh": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "lifespan_years": "xsd:integer",
+                  "response_time_minutes": "xsd:float",
+                  "minimum_load_mw": "xsd:float",
+                  "ramp_rate_mw_min": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Fossil_Fuel_Systems": {
+        "collections": {
+          "Coal_Power": {
+            "entities": {
+              "CoalPlant": {
+                "properties": {
+                  "plant_id": "xsd:string",
+                  "plant_name": "xsd:string",
+                  "plant_type": "xsd:string",
+                  "capacity_mw": "xsd:float",
+                  "unit_count": "xsd:integer",
+                  "boiler_type": "xsd:string",
+                  "combustion_technology": "xsd:string",
+                  "coal_type": "xsd:string",
+                  "coal_consumption_tons_day": "xsd:float",
+                  "heat_rate_btu_kwh": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "capacity_factor": "xsd:float",
+                  "annual_generation_gwh": "xsd:float",
+                  "co2_emissions_tons_year": "xsd:float",
+                  "so2_emissions_tons_year": "xsd:float",
+                  "nox_emissions_tons_year": "xsd:float",
+                  "particulate_emissions": "xsd:float",
+                  "mercury_emissions_kg_year": "xsd:float",
+                  "ash_production_tons_year": "xsd:float",
+                  "water_consumption_m3_mwh": "xsd:float",
+                  "cooling_system": "xsd:string",
+                  "stack_height_m": "xsd:float",
+                  "pollution_control": "xsd:string",
+                  "scrubber_efficiency": "xsd:float",
+                  "baghouse_efficiency": "xsd:float",
+                  "scr_efficiency": "xsd:float",
+                  "carbon_capture": "xsd:boolean",
+                  "capture_rate_percentage": "xsd:float",
+                  "storage_method": "xsd:string",
+                  "fuel_cost_mwh": "xsd:float",
+                  "operation_cost_mwh": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "environmental_compliance": "xsd:string",
+                  "retirement_date": "xsd:date",
+                  "decommissioning_cost": "xsd:float",
+                  "land_use_hectares": "xsd:float",
+                  "employment_count": "xsd:integer"
+                }
+              },
+              "NaturalGasPlant": {
+                "properties": {
+                  "plant_id": "xsd:string",
+                  "plant_name": "xsd:string",
+                  "plant_type": "xsd:string",
+                  "technology": "xsd:string",
+                  "capacity_mw": "xsd:float",
+                  "turbine_count": "xsd:integer",
+                  "turbine_manufacturer": "xsd:string",
+                  "turbine_model": "xsd:string",
+                  "combined_cycle": "xsd:boolean",
+                  "heat_recovery_steam_generator": "xsd:boolean",
+                  "steam_turbine_capacity": "xsd:float",
+                  "gas_consumption_mmcf_day": "xsd:float",
+                  "heat_rate_btu_kwh": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "capacity_factor": "xsd:float",
+                  "annual_generation_gwh": "xsd:float",
+                  "ramp_rate_mw_min": "xsd:float",
+                  "minimum_load_mw": "xsd:float",
+                  "start_time_minutes": "xsd:float",
+                  "co2_emissions_tons_mwh": "xsd:float",
+                  "nox_emissions_ppm": "xsd:float",
+                  "co_emissions_ppm": "xsd:float",
+                  "water_consumption_m3_mwh": "xsd:float",
+                  "cooling_system": "xsd:string",
+                  "noise_level_db": "xsd:float",
+                  "fuel_supply_pipeline": "xsd:string",
+                  "gas_pressure_bar": "xsd:float",
+                  "fuel_treatment": "xsd:string",
+                  "emissions_control": "xsd:string",
+                  "scr_system": "xsd:boolean",
+                  "co_catalyst": "xsd:boolean",
+                  "fuel_cost_mmbtu": "xsd:float",
+                  "operation_cost_mwh": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "grid_services": "xsd:string",
+                  "peaking_capability": "xsd:boolean",
+                  "load_following": "xsd:boolean",
+                  "frequency_regulation": "xsd:boolean",
+                  "spinning_reserve": "xsd:boolean"
+                }
+              },
+              "OilPlant": {
+                "properties": {
+                  "plant_id": "xsd:string",
+                  "plant_name": "xsd:string",
+                  "fuel_type": "xsd:string",
+                  "capacity_mw": "xsd:float",
+                  "engine_type": "xsd:string",
+                  "unit_count": "xsd:integer",
+                  "fuel_consumption_barrels_mwh": "xsd:float",
+                  "heat_rate_btu_kwh": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "capacity_factor": "xsd:float",
+                  "annual_generation_gwh": "xsd:float",
+                  "co2_emissions_tons_mwh": "xsd:float",
+                  "so2_emissions_tons_year": "xsd:float",
+                  "nox_emissions_tons_year": "xsd:float",
+                  "particulate_emissions": "xsd:float",
+                  "fuel_storage_capacity": "xsd:float",
+                  "fuel_delivery_method": "xsd:string",
+                  "water_consumption_m3_mwh": "xsd:float",
+                  "cooling_system": "xsd:string",
+                  "emissions_control": "xsd:string",
+                  "fuel_cost_barrel": "xsd:float",
+                  "operation_cost_mwh": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "environmental_impact": "xsd:string",
+                  "spill_prevention": "xsd:string",
+                  "waste_management": "xsd:string",
+                  "retirement_plan": "xsd:string",
+                  "grid_connection": "xsd:string",
+                  "backup_power": "xsd:boolean",
+                  "emergency_response": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Nuclear_Power_Systems": {
+        "collections": {
+          "Nuclear_Reactors": {
+            "entities": {
+              "NuclearReactor": {
+                "properties": {
+                  "reactor_id": "xsd:string",
+                  "reactor_name": "xsd:string",
+                  "reactor_type": "xsd:string",
+                  "technology": "xsd:string",
+                  "generation": "xsd:string",
+                  "vendor": "xsd:string",
+                  "capacity_mw_thermal": "xsd:float",
+                  "capacity_mw_electric": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "fuel_type": "xsd:string",
+                  "enrichment_percentage": "xsd:float",
+                  "fuel_assembly_count": "xsd:integer",
+                  "fuel_cycle_months": "xsd:integer",
+                  "burnup_mwd_ton": "xsd:float",
+                  "coolant_type": "xsd:string",
+                  "moderator_type": "xsd:string",
+                  "control_rod_material": "xsd:string",
+                  "containment_type": "xsd:string",
+                  "safety_systems": "xsd:string",
+                  "emergency_core_cooling": "xsd:string",
+                  "passive_safety": "xsd:boolean",
+                  "core_catcher": "xsd:boolean",
+                  "double_containment": "xsd:boolean",
+                  "operating_pressure_bar": "xsd:float",
+                  "operating_temperature_c": "xsd:float",
+                  "capacity_factor": "xsd:float",
+                  "annual_generation_gwh": "xsd:float",
+                  "load_following_capability": "xsd:boolean",
+                  "refueling_outage_days": "xsd:integer",
+                  "planned_outage_days": "xsd:integer",
+                  "unplanned_outage_rate": "xsd:float",
+                  "scram_rate_year": "xsd:float",
+                  "radioactive_waste_m3_year": "xsd:float",
+                  "spent_fuel_storage": "xsd:string",
+                  "waste_management_plan": "xsd:string",
+                  "decommissioning_fund": "xsd:float",
+                  "construction_cost": "xsd:float",
+                  "operation_cost_mwh": "xsd:float",
+                  "fuel_cost_mwh": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "security_measures": "xsd:string",
+                  "emergency_planning_zone": "xsd:float",
+                  "evacuation_plan": "xsd:string",
+                  "regulatory_oversight": "xsd:string",
+                  "license_expiry": "xsd:date",
+                  "license_renewal": "xsd:boolean",
+                  "design_life_years": "xsd:integer",
+                  "extended_operation": "xsd:boolean"
+                }
+              },
+              "SmallModularReactor": {
+                "properties": {
+                  "smr_id": "xsd:string",
+                  "smr_name": "xsd:string",
+                  "design_type": "xsd:string",
+                  "vendor": "xsd:string",
+                  "capacity_mw": "xsd:float",
+                  "module_count": "xsd:integer",
+                  "factory_built": "xsd:boolean",
+                  "modular_construction": "xsd:boolean",
+                  "passive_safety": "xsd:boolean",
+                  "walk_away_safe": "xsd:boolean",
+                  "underground_deployment": "xsd:boolean",
+                  "integral_design": "xsd:boolean",
+                  "natural_circulation": "xsd:boolean",
+                  "fuel_type": "xsd:string",
+                  "fuel_cycle_years": "xsd:float",
+                  "refueling_frequency": "xsd:string",
+                  "load_following": "xsd:boolean",
+                  "black_start_capability": "xsd:boolean",
+                  "grid_stability_services": "xsd:string",
+                  "deployment_timeline": "xsd:string",
+                  "licensing_status": "xsd:string",
+                  "certification_progress": "xsd:string",
+                  "construction_time_months": "xsd:integer",
+                  "capital_cost_per_kw": "xsd:float",
+                  "operation_cost_mwh": "xsd:float",
+                  "maintenance_requirements": "xsd:string",
+                  "staffing_requirements": "xsd:integer",
+                  "remote_monitoring": "xsd:boolean",
+                  "cybersecurity_features": "xsd:string",
+                  "proliferation_resistance": "xsd:string",
+                  "waste_minimization": "xsd:boolean",
+                  "decommissioning_plan": "xsd:string"
+                }
+              }
+            }
+          },
+          "Nuclear_Fuel_Cycle": {
+            "entities": {
+              "UraniumMining": {
+                "properties": {
+                  "mine_id": "xsd:string",
+                  "mine_name": "xsd:string",
+                  "mining_method": "xsd:string",
+                  "ore_grade_percentage": "xsd:float",
+                  "production_tons_year": "xsd:float",
+                  "reserves_tons": "xsd:float",
+                  "extraction_cost_kg": "xsd:float",
+                  "environmental_impact": "xsd:string",
+                  "water_usage_m3_ton": "xsd:float",
+                  "energy_consumption_kwh_kg": "xsd:float",
+                  "co2_emissions_kg_kg": "xsd:float",
+                  "waste_rock_tons": "xsd:float",
+                  "tailings_management": "xsd:string",
+                  "radiation_monitoring": "xsd:string",
+                  "worker_safety": "xsd:string",
+                  "community_impact": "xsd:string",
+                  "rehabilitation_plan": "xsd:string",
+                  "closure_cost": "xsd:float",
+                  "regulatory_compliance": "xsd:string"
+                }
+              },
+              "EnrichmentFacility": {
+                "properties": {
+                  "facility_id": "xsd:string",
+                  "facility_name": "xsd:string",
+                  "enrichment_method": "xsd:string",
+                  "capacity_swu_year": "xsd:float",
+                  "feed_material": "xsd:string",
+                  "product_enrichment": "xsd:float",
+                  "tails_enrichment": "xsd:float",
+                  "energy_consumption_kwh_swu": "xsd:float",
+                  "separative_work_units": "xsd:float",
+                  "cascade_stages": "xsd:integer",
+                  "centrifuge_count": "xsd:integer",
+                  "operating_cost_swu": "xsd:float",
+                  "security_measures": "xsd:string",
+                  "safeguards_monitoring": "xsd:string",
+                  "material_accounting": "xsd:string",
+                  "waste_management": "xsd:string",
+                  "decommissioning_plan": "xsd:string"
+                }
+              },
+              "SpentFuelStorage": {
+                "properties": {
+                  "storage_id": "xsd:string",
+                  "storage_type": "xsd:string",
+                  "capacity_tons": "xsd:float",
+                  "current_inventory": "xsd:float",
+                  "cooling_method": "xsd:string",
+                  "storage_medium": "xsd:string",
+                  "containment_system": "xsd:string",
+                  "monitoring_system": "xsd:string",
+                  "heat_removal_kw": "xsd:float",
+                  "radiation_shielding": "xsd:string",
+                  "criticality_control": "xsd:string",
+                  "security_measures": "xsd:string",
+                  "transportation_readiness": "xsd:boolean",
+                  "interim_storage": "xsd:boolean",
+                  "final_disposal": "xsd:boolean",
+                  "storage_cost_annual": "xsd:float",
+                  "maintenance_requirements": "xsd:string",
+                  "license_duration": "xsd:integer",
+                  "environmental_monitoring": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Grid_Infrastructure": {
+        "collections": {
+          "Transmission_System": {
+            "entities": {
+              "TransmissionLine": {
+                "properties": {
+                  "line_id": "xsd:string",
+                  "line_name": "xsd:string",
+                  "voltage_kv": "xsd:float",
+                  "length_km": "xsd:float",
+                  "conductor_type": "xsd:string",
+                  "conductor_size": "xsd:string",
+                  "circuit_count": "xsd:integer",
+                  "capacity_mva": "xsd:float",
+                  "thermal_rating": "xsd:float",
+                  "impedance_ohms": "xsd:float",
+                  "reactance_ohms": "xsd:float",
+                  "resistance_ohms": "xsd:float",
+                  "tower_type": "xsd:string",
+                  "tower_count": "xsd:integer",
+                  "right_of_way_width": "xsd:float",
+                  "ground_clearance_m": "xsd:float",
+                  "insulation_type": "xsd:string",
+                  "lightning_protection": "xsd:string",
+                  "grounding_system": "xsd:string",
+                  "monitoring_system": "xsd:string",
+                  "scada_integration": "xsd:boolean",
+                  "pmu_installed": "xsd:boolean",
+                  "dynamic_rating": "xsd:boolean",
+                  "weather_monitoring": "xsd:boolean",
+                  "construction_cost": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "reliability_index": "xsd:float",
+                  "outage_frequency": "xsd:float",
+                  "repair_time_hours": "xsd:float",
+                  "environmental_impact": "xsd:string",
+                  "land_use_hectares": "xsd:float",
+                  "visual_impact": "xsd:string",
+                  "electromagnetic_field": "xsd:float",
+                  "noise_level_db": "xsd:float",
+                  "bird_protection": "xsd:string",
+                  "vegetation_management": "xsd:string"
+                }
+              },
+              "Substation": {
+                "properties": {
+                  "substation_id": "xsd:string",
+                  "substation_name": "xsd:string",
+                  "substation_type": "xsd:string",
+                  "voltage_levels": "xsd:string",
+                  "capacity_mva": "xsd:float",
+                  "transformer_count": "xsd:integer",
+                  "bus_configuration": "xsd:string",
+                  "switchgear_type": "xsd:string",
+                  "protection_system": "xsd:string",
+                  "control_system": "xsd:string",
+                  "scada_system": "xsd:string",
+                  "communication_system": "xsd:string",
+                  "metering_system": "xsd:string",
+                  "power_quality_monitoring": "xsd:boolean",
+                  "fault_recording": "xsd:boolean",
+                  "sequence_of_events": "xsd:boolean",
+                  "automatic_switching": "xsd:boolean",
+                  "load_tap_changer": "xsd:boolean",
+                  "reactive_power_control": "xsd:string",
+                  "voltage_regulation": "xsd:string",
+                  "harmonic_filtering": "xsd:boolean",
+                  "grounding_system": "xsd:string",
+                  "lightning_protection": "xsd:string",
+                  "fire_protection": "xsd:string",
+                  "security_system": "xsd:string",
+                  "environmental_controls": "xsd:string",
+                  "noise_mitigation": "xsd:string",
+                  "oil_containment": "xsd:boolean",
+                  "spare_equipment": "xsd:string",
+                  "maintenance_facilities": "xsd:string",
+                  "construction_cost": "xsd:float",
+                  "operation_cost_annual": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "reliability_metrics": "xsd:string",
+                  "availability_percentage": "xsd:float"
+                }
+              },
+              "PowerTransformer": {
+                "properties": {
+                  "transformer_id": "xsd:string",
+                  "transformer_type": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "rating_mva": "xsd:float",
+                  "primary_voltage_kv": "xsd:float",
+                  "secondary_voltage_kv": "xsd:float",
+                  "tertiary_voltage_kv": "xsd:float",
+                  "winding_configuration": "xsd:string",
+                  "cooling_type": "xsd:string",
+                  "insulation_type": "xsd:string",
+                  "impedance_percentage": "xsd:float",
+                  "losses_kw": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "tap_changer_type": "xsd:string",
+                  "tap_range_percentage": "xsd:float",
+                  "tap_steps": "xsd:integer",
+                  "load_tap_changer": "xsd:boolean",
+                  "parallel_operation": "xsd:boolean",
+                  "overload_capability": "xsd:float",
+                  "short_circuit_withstand": "xsd:float",
+                  "bushing_type": "xsd:string",
+                  "protection_relays": "xsd:string",
+                  "monitoring_system": "xsd:string",
+                  "dissolved_gas_analysis": "xsd:boolean",
+                  "temperature_monitoring": "xsd:boolean",
+                  "partial_discharge_monitoring": "xsd:boolean",
+                  "oil_quality_monitoring": "xsd:boolean",
+                  "maintenance_schedule": "xsd:string",
+                  "expected_life_years": "xsd:integer",
+                  "installation_cost": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "replacement_cost": "xsd:float",
+                  "environmental_impact": "xsd:string"
+                }
+              }
+            }
+          },
+          "Distribution_System": {
+            "entities": {
+              "DistributionFeeder": {
+                "properties": {
+                  "feeder_id": "xsd:string",
+                  "feeder_name": "xsd:string",
+                  "voltage_kv": "xsd:float",
+                  "length_km": "xsd:float",
+                  "conductor_type": "xsd:string",
+                  "configuration": "xsd:string",
+                  "customer_count": "xsd:integer",
+                  "peak_load_mw": "xsd:float",
+                  "load_factor": "xsd:float",
+                  "power_factor": "xsd:float",
+                  "voltage_regulation": "xsd:string",
+                  "capacitor_banks": "xsd:integer",
+                  "voltage_regulators": "xsd:integer",
+                  "reclosers": "xsd:integer",
+                  "sectionalizers": "xsd:integer",
+                  "fuses": "xsd:integer",
+                  "switches": "xsd:integer",
+                  "protection_coordination": "xsd:string",
+                  "fault_indicators": "xsd:integer",
+                  "scada_coverage": "xsd:float",
+                  "smart_meters": "xsd:integer",
+                  "distributed_generation": "xsd:float",
+                  "energy_storage": "xsd:float",
+                  "electric_vehicle_chargers": "xsd:integer",
+                  "reliability_index": "xsd:float",
+                  "saidi_minutes": "xsd:float",
+                  "saifi_interruptions": "xsd:float",
+                  "caidi_minutes": "xsd:float",
+                  "tree_trimming_cycle": "xsd:integer",
+                  "underground_percentage": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "upgrade_requirements": "xsd:string",
+                  "hosting_capacity": "xsd:float",
+                  "power_quality_issues": "xsd:string"
+                }
+              },
+              "SmartMeter": {
+                "properties": {
+                  "meter_id": "xsd:string",
+                  "meter_type": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "accuracy_class": "xsd:string",
+                  "voltage_rating": "xsd:float",
+                  "current_rating": "xsd:float",
+                  "communication_protocol": "xsd:string",
+                  "communication_frequency": "xsd:string",
+                  "data_collection_interval": "xsd:integer",
+                  "remote_disconnect": "xsd:boolean",
+                  "load_control": "xsd:boolean",
+                  "power_quality_monitoring": "xsd:boolean",
+                  "outage_detection": "xsd:boolean",
+                  "tamper_detection": "xsd:boolean",
+                  "time_of_use_capability": "xsd:boolean",
+                  "demand_response": "xsd:boolean",
+                  "net_metering": "xsd:boolean",
+                  "bidirectional_metering": "xsd:boolean",
+                  "data_storage_days": "xsd:integer",
+                  "display_type": "xsd:string",
+                  "customer_interface": "xsd:string",
+                  "cybersecurity_features": "xsd:string",
+                  "encryption_level": "xsd:string",
+                  "firmware_update": "xsd:boolean",
+                  "battery_backup": "xsd:boolean",
+                  "operating_temperature": "xsd:string",
+                  "environmental_rating": "xsd:string",
+                  "installation_cost": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "expected_life_years": "xsd:integer",
+                  "data_privacy": "xsd:string",
+                  "customer_benefits": "xsd:string"
+                }
+              },
+              "DistributionTransformer": {
+                "properties": {
+                  "transformer_id": "xsd:string",
+                  "transformer_type": "xsd:string",
+                  "rating_kva": "xsd:float",
+                  "primary_voltage": "xsd:float",
+                  "secondary_voltage": "xsd:float",
+                  "phase_count": "xsd:integer",
+                  "winding_material": "xsd:string",
+                  "core_material": "xsd:string",
+                  "cooling_type": "xsd:string",
+                  "insulation_type": "xsd:string",
+                  "impedance_percentage": "xsd:float",
+                  "no_load_losses": "xsd:float",
+                  "load_losses": "xsd:float",
+                  "efficiency_percentage": "xsd:float",
+                  "tap_changer": "xsd:boolean",
+                  "tap_positions": "xsd:integer",
+                  "overload_capability": "xsd:float",
+                  "short_circuit_withstand": "xsd:float",
+                  "lightning_arrester": "xsd:boolean",
+                  "surge_protection": "xsd:string",
+                  "monitoring_capability": "xsd:string",
+                  "load_monitoring": "xsd:boolean",
+                  "temperature_monitoring": "xsd:boolean",
+                  "oil_level_monitoring": "xsd:boolean",
+                  "bushing_monitoring": "xsd:boolean",
+                  "installation_type": "xsd:string",
+                  "environmental_protection": "xsd:string",
+                  "noise_level_db": "xsd:float",
+                  "maintenance_schedule": "xsd:string",
+                  "expected_life_years": "xsd:integer",
+                  "replacement_cost": "xsd:float",
+                  "energy_efficiency_rating": "xsd:string",
+                  "environmental_impact": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Energy_Efficiency_Systems": {
+        "collections": {
+          "Building_Efficiency": {
+            "entities": {
+              "EnergyManagementSystem": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "system_name": "xsd:string",
+                  "building_type": "xsd:string",
+                  "floor_area_m2": "xsd:float",
+                  "occupancy_count": "xsd:integer",
+                  "hvac_control": "xsd:boolean",
+                  "lighting_control": "xsd:boolean",
+                  "plug_load_control": "xsd:boolean",
+                  "renewable_integration": "xsd:boolean",
+                  "energy_storage_integration": "xsd:boolean",
+                  "demand_response": "xsd:boolean",
+                  "load_forecasting": "xsd:boolean",
+                  "occupancy_sensing": "xsd:boolean",
+                  "daylight_harvesting": "xsd:boolean",
+                  "automated_shading": "xsd:boolean",
+                  "zone_control": "xsd:integer",
+                  "sensor_count": "xsd:integer",
+                  "control_points": "xsd:integer",
+                  "communication_protocol": "xsd:string",
+                  "data_analytics": "xsd:boolean",
+                  "machine_learning": "xsd:boolean",
+                  "predictive_maintenance": "xsd:boolean",
+                  "fault_detection": "xsd:boolean",
+                  "energy_baseline_kwh": "xsd:float",
+                  "energy_savings_percentage": "xsd:float",
+                  "peak_demand_reduction": "xsd:float",
+                  "comfort_improvement": "xsd:string",
+                  "payback_period_years": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "operation_savings_annual": "xsd:float",
+                  "maintenance_cost_annual": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float",
+                  "certification_level": "xsd:string",
+                  "user_interface": "xsd:string",
+                  "mobile_app": "xsd:boolean",
+                  "cloud_connectivity": "xsd:boolean",
+                  "cybersecurity_features": "xsd:string"
+                }
+              },
+              "LEDLightingSystem": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "fixture_count": "xsd:integer",
+                  "total_wattage": "xsd:float",
+                  "luminous_efficacy_lm_w": "xsd:float",
+                  "color_temperature_k": "xsd:integer",
+                  "color_rendering_index": "xsd:float",
+                  "dimming_capability": "xsd:boolean",
+                  "occupancy_sensors": "xsd:integer",
+                  "daylight_sensors": "xsd:integer",
+                  "wireless_control": "xsd:boolean",
+                  "scheduling_capability": "xsd:boolean",
+                  "energy_monitoring": "xsd:boolean",
+                  "maintenance_alerts": "xsd:boolean",
+                  "lifespan_hours": "xsd:integer",
+                  "warranty_years": "xsd:integer",
+                  "energy_savings_percentage": "xsd:float",
+                  "maintenance_reduction": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "energy_cost_savings_annual": "xsd:float",
+                  "maintenance_cost_savings": "xsd:float",
+                  "payback_period_years": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float",
+                  "light_quality_improvement": "xsd:string",
+                  "flicker_free": "xsd:boolean",
+                  "instant_on": "xsd:boolean",
+                  "heat_reduction": "xsd:float",
+                  "mercury_free": "xsd:boolean",
+                  "recyclability": "xsd:string",
+                  "smart_grid_integration": "xsd:boolean"
+                }
+              },
+              "HVACOptimization": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "hvac_type": "xsd:string",
+                  "capacity_tons": "xsd:float",
+                  "efficiency_rating": "xsd:string",
+                  "variable_speed_drives": "xsd:boolean",
+                  "economizer_control": "xsd:boolean",
+                  "demand_controlled_ventilation": "xsd:boolean",
+                  "thermal_energy_storage": "xsd:boolean",
+                  "heat_recovery": "xsd:boolean",
+                  "zone_control": "xsd:integer",
+                  "temperature_sensors": "xsd:integer",
+                  "humidity_sensors": "xsd:integer",
+                  "co2_sensors": "xsd:integer",
+                  "occupancy_sensors": "xsd:integer",
+                  "predictive_control": "xsd:boolean",
+                  "weather_compensation": "xsd:boolean",
+                  "load_forecasting": "xsd:boolean",
+                  "fault_detection_diagnostics": "xsd:boolean",
+                  "commissioning_level": "xsd:string",
+                  "retro_commissioning": "xsd:boolean",
+                  "energy_baseline_kwh": "xsd:float",
+                  "energy_savings_percentage": "xsd:float",
+                  "peak_demand_reduction": "xsd:float",
+                  "comfort_improvement": "xsd:string",
+                  "indoor_air_quality": "xsd:string",
+                  "maintenance_optimization": "xsd:string",
+                  "equipment_life_extension": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "energy_savings_annual": "xsd:float",
+                  "maintenance_savings_annual": "xsd:float",
+                  "payback_period_years": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float"
+                }
+              }
+            }
+          },
+          "Industrial_Efficiency": {
+            "entities": {
+              "MotorDriveSystem": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "motor_count": "xsd:integer",
+                  "total_horsepower": "xsd:float",
+                  "motor_efficiency": "xsd:float",
+                  "variable_frequency_drives": "xsd:integer",
+                  "load_factor": "xsd:float",
+                  "operating_hours_annual": "xsd:float",
+                  "energy_consumption_kwh": "xsd:float",
+                  "power_factor": "xsd:float",
+                  "harmonic_distortion": "xsd:float",
+                  "soft_starters": "xsd:integer",
+                  "premium_efficiency_motors": "xsd:integer",
+                  "right_sizing_analysis": "xsd:boolean",
+                  "maintenance_optimization": "xsd:string",
+                  "condition_monitoring": "xsd:boolean",
+                  "vibration_monitoring": "xsd:boolean",
+                  "thermal_monitoring": "xsd:boolean",
+                  "current_signature_analysis": "xsd:boolean",
+                  "predictive_maintenance": "xsd:boolean",
+                  "energy_savings_percentage": "xsd:float",
+                  "demand_reduction_kw": "xsd:float",
+                  "power_quality_improvement": "xsd:string",
+                  "process_optimization": "xsd:string",
+                  "equipment_life_extension": "xsd:float",
+                  "maintenance_cost_reduction": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "energy_savings_annual": "xsd:float",
+                  "maintenance_savings_annual": "xsd:float",
+                  "payback_period_years": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float"
+                }
+              },
+              "CompressedAirSystem": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "compressor_count": "xsd:integer",
+                  "total_capacity_cfm": "xsd:float",
+                  "operating_pressure_psi": "xsd:float",
+                  "compressor_efficiency": "xsd:float",
+                  "variable_speed_drives": "xsd:integer",
+                  "load_unload_control": "xsd:boolean",
+                  "modulation_control": "xsd:boolean",
+                  "sequencing_control": "xsd:boolean",
+                  "pressure_optimization": "xsd:boolean",
+                  "leak_detection_program": "xsd:boolean",
+                  "leak_rate_percentage": "xsd:float",
+                  "air_treatment": "xsd:string",
+                  "storage_capacity_gallons": "xsd:float",
+                  "distribution_system": "xsd:string",
+                  "pressure_drop_psi": "xsd:float",
+                  "demand_analysis": "xsd:boolean",
+                  "right_sizing": "xsd:boolean",
+                  "heat_recovery": "xsd:boolean",
+                  "energy_monitoring": "xsd:boolean",
+                  "flow_monitoring": "xsd:boolean",
+                  "pressure_monitoring": "xsd:boolean",
+                  "dewpoint_monitoring": "xsd:boolean",
+                  "maintenance_optimization": "xsd:string",
+                  "filter_optimization": "xsd:string",
+                  "energy_baseline_kwh": "xsd:float",
+                  "energy_savings_percentage": "xsd:float",
+                  "compressed_air_cost_annual": "xsd:float",
+                  "maintenance_cost_reduction": "xsd:float",
+                  "productivity_improvement": "xsd:string",
+                  "air_quality_improvement": "xsd:string",
+                  "installation_cost": "xsd:float",
+                  "energy_savings_annual": "xsd:float",
+                  "payback_period_years": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float"
+                }
+              },
+              "WasteHeatRecovery": {
+                "properties": {
+                  "system_id": "xsd:string",
+                  "heat_source": "xsd:string",
+                  "source_temperature_c": "xsd:float",
+                  "heat_recovery_rate_kw": "xsd:float",
+                  "recovery_efficiency": "xsd:float",
+                  "heat_exchanger_type": "xsd:string",
+                  "heat_exchanger_area": "xsd:float",
+                  "working_fluid": "xsd:string",
+                  "heat_sink": "xsd:string",
+                  "sink_temperature_c": "xsd:float",
+                  "temperature_difference": "xsd:float",
+                  "heat_recovery_application": "xsd:string",
+                  "preheating_capability": "xsd:boolean",
+                  "steam_generation": "xsd:boolean",
+                  "electricity_generation": "xsd:boolean",
+                  "space_heating": "xsd:boolean",
+                  "process_heating": "xsd:boolean",
+                  "water_heating": "xsd:boolean",
+                  "absorption_cooling": "xsd:boolean",
+                  "thermal_storage": "xsd:boolean",
+                  "control_system": "xsd:string",
+                  "monitoring_system": "xsd:string",
+                  "maintenance_requirements": "xsd:string",
+                  "fouling_potential": "xsd:string",
+                  "corrosion_protection": "xsd:string",
+                  "safety_systems": "xsd:string",
+                  "environmental_benefits": "xsd:string",
+                  "energy_savings_percentage": "xsd:float",
+                  "fuel_savings_annual": "xsd:float",
+                  "electricity_savings_annual": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "operation_savings_annual": "xsd:float",
+                  "payback_period_years": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Smart_Energy_Technologies": {
+        "collections": {
+          "Smart_Grid": {
+            "entities": {
+              "SmartGridSystem": {
+                "properties": {
+                  "grid_id": "xsd:string",
+                  "grid_name": "xsd:string",
+                  "coverage_area_km2": "xsd:float",
+                  "customer_count": "xsd:integer",
+                  "peak_demand_mw": "xsd:float",
+                  "renewable_penetration": "xsd:float",
+                  "distributed_generation_mw": "xsd:float",
+                  "energy_storage_mwh": "xsd:float",
+                  "electric_vehicle_integration": "xsd:boolean",
+                  "demand_response_capability": "xsd:float",
+                  "smart_meter_penetration": "xsd:float",
+                  "advanced_metering_infrastructure": "xsd:boolean",
+                  "distribution_automation": "xsd:boolean",
+                  "outage_management_system": "xsd:boolean",
+                  "volt_var_optimization": "xsd:boolean",
+                  "fault_location_isolation": "xsd:boolean",
+                  "self_healing_capability": "xsd:boolean",
+                  "microgrid_integration": "xsd:integer",
+                  "virtual_power_plants": "xsd:integer",
+                  "peer_to_peer_trading": "xsd:boolean",
+                  "blockchain_integration": "xsd:boolean",
+                  "artificial_intelligence": "xsd:boolean",
+                  "machine_learning": "xsd:boolean",
+                  "predictive_analytics": "xsd:boolean",
+                  "real_time_pricing": "xsd:boolean",
+                  "time_of_use_rates": "xsd:boolean",
+                  "dynamic_pricing": "xsd:boolean",
+                  "cybersecurity_framework": "xsd:string",
+                  "data_privacy_protection": "xsd:string",
+                  "interoperability_standards": "xsd:string",
+                  "communication_infrastructure": "xsd:string",
+                  "fiber_optic_coverage": "xsd:float",
+                  "wireless_coverage": "xsd:float",
+                  "reliability_improvement": "xsd:float",
+                  "efficiency_improvement": "xsd:float",
+                  "carbon_reduction_percentage": "xsd:float",
+                  "customer_satisfaction": "xsd:float",
+                  "investment_cost": "xsd:float",
+                  "operational_savings_annual": "xsd:float",
+                  "payback_period_years": "xsd:float"
+                }
+              },
+              "EnergyManagementPlatform": {
+                "properties": {
+                  "platform_id": "xsd:string",
+                  "platform_name": "xsd:string",
+                  "deployment_model": "xsd:string",
+                  "user_count": "xsd:integer",
+                  "device_connectivity": "xsd:integer",
+                  "data_points_monitored": "xsd:integer",
+                  "real_time_monitoring": "xsd:boolean",
+                  "historical_data_storage": "xsd:string",
+                  "data_analytics_capability": "xsd:string",
+                  "machine_learning_algorithms": "xsd:string",
+                  "predictive_modeling": "xsd:boolean",
+                  "anomaly_detection": "xsd:boolean",
+                  "automated_optimization": "xsd:boolean",
+                  "demand_forecasting": "xsd:boolean",
+                  "load_balancing": "xsd:boolean",
+                  "peak_shaving": "xsd:boolean",
+                  "load_shifting": "xsd:boolean",
+                  "energy_arbitrage": "xsd:boolean",
+                  "renewable_integration": "xsd:boolean",
+                  "storage_optimization": "xsd:boolean",
+                  "grid_services_participation": "xsd:boolean",
+                  "carbon_tracking": "xsd:boolean",
+                  "sustainability_reporting": "xsd:boolean",
+                  "cost_optimization": "xsd:boolean",
+                  "bill_management": "xsd:boolean",
+                  "tariff_analysis": "xsd:boolean",
+                  "contract_optimization": "xsd:boolean",
+                  "risk_management": "xsd:boolean",
+                  "compliance_monitoring": "xsd:boolean",
+                  "alert_notification": "xsd:boolean",
+                  "mobile_application": "xsd:boolean",
+                  "web_dashboard": "xsd:boolean",
+                  "api_integration": "xsd:boolean",
+                  "third_party_integration": "xsd:string",
+                  "cybersecurity_features": "xsd:string",
+                  "data_encryption": "xsd:string",
+                  "user_access_control": "xsd:string",
+                  "audit_trail": "xsd:boolean",
+                  "scalability": "xsd:string",
+                  "availability_percentage": "xsd:float",
+                  "response_time_ms": "xsd:float",
+                  "energy_savings_percentage": "xsd:float",
+                  "cost_savings_percentage": "xsd:float",
+                  "carbon_reduction_tons": "xsd:float",
+                  "roi_percentage": "xsd:float"
+                }
+              },
+              "VirtualPowerPlant": {
+                "properties": {
+                  "vpp_id": "xsd:string",
+                  "vpp_name": "xsd:string",
+                  "aggregated_capacity_mw": "xsd:float",
+                  "resource_count": "xsd:integer",
+                  "resource_types": "xsd:string",
+                  "distributed_generation_mw": "xsd:float",
+                  "energy_storage_mwh": "xsd:float",
+                  "demand_response_mw": "xsd:float",
+                  "controllable_loads_mw": "xsd:float",
+                  "geographic_coverage": "xsd:string",
+                  "control_algorithm": "xsd:string",
+                  "optimization_objective": "xsd:string",
+                  "market_participation": "xsd:string",
+                  "bidding_strategy": "xsd:string",
+                  "forecasting_accuracy": "xsd:float",
+                  "response_time_seconds": "xsd:float",
+                  "availability_percentage": "xsd:float",
+                  "revenue_sharing_model": "xsd:string",
+                  "communication_protocol": "xsd:string",
+                  "cybersecurity_level": "xsd:string",
+                  "regulatory_compliance": "xsd:string",
+                  "environmental_benefit": "xsd:string",
+                  "carbon_reduction_tons": "xsd:float",
+                  "grid_stability_contribution": "xsd:string",
+                  "economic_value_annual": "xsd:float"
+                }
+              },
+              "MicrogridController": {
+                "properties": {
+                  "controller_id": "xsd:string",
+                  "microgrid_name": "xsd:string",
+                  "capacity_mw": "xsd:float",
+                  "generation_sources": "xsd:string",
+                  "storage_capacity_mwh": "xsd:float",
+                  "load_types": "xsd:string",
+                  "islanding_capability": "xsd:boolean",
+                  "grid_connected_mode": "xsd:boolean",
+                  "seamless_transition": "xsd:boolean",
+                  "black_start_capability": "xsd:boolean",
+                  "load_prioritization": "xsd:string",
+                  "energy_management_strategy": "xsd:string",
+                  "optimization_algorithm": "xsd:string",
+                  "real_time_control": "xsd:boolean",
+                  "predictive_control": "xsd:boolean",
+                  "weather_integration": "xsd:boolean",
+                  "demand_forecasting": "xsd:boolean",
+                  "generation_forecasting": "xsd:boolean",
+                  "market_integration": "xsd:boolean",
+                  "peer_to_peer_trading": "xsd:boolean",
+                  "resilience_metrics": "xsd:string",
+                  "reliability_improvement": "xsd:float",
+                  "cost_savings_percentage": "xsd:float",
+                  "carbon_footprint_reduction": "xsd:float",
+                  "energy_independence": "xsd:float",
+                  "installation_cost": "xsd:float",
+                  "operation_savings_annual": "xsd:float",
+                  "payback_period_years": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "GENERATES_POWER": {
+        "domain": "renewable:SolarPanel",
+        "range": "energy:ElectricalEnergy"
+      },
+      "STORES_ENERGY": {
+        "domain": "storage:BatterySystem",
+        "range": "energy:ElectricalEnergy"
+      },
+      "TRANSMITS_POWER": {
+        "domain": "grid:TransmissionLine",
+        "range": "energy:ElectricalEnergy"
+      },
+      "DISTRIBUTES_POWER": {
+        "domain": "grid:DistributionFeeder",
+        "range": "energy:ElectricalEnergy"
+      },
+      "TRANSFORMS_VOLTAGE": {
+        "domain": "grid:PowerTransformer",
+        "range": "energy:ElectricalEnergy"
+      },
+      "CONSUMES_FUEL": {
+        "domain": "fossil:CoalPlant",
+        "range": "fossil:Coal"
+      },
+      "PRODUCES_WASTE": {
+        "domain": "nuclear:NuclearReactor",
+        "range": "nuclear:RadioactiveWaste"
+      },
+      "MONITORS_CONSUMPTION": {
+        "domain": "grid:SmartMeter",
+        "range": "consumption:EnergyUsage"
+      },
+      "CONTROLS_LOAD": {
+        "domain": "efficiency:EnergyManagementSystem",
+        "range": "consumption:ElectricalLoad"
+      },
+      "OPTIMIZES_EFFICIENCY": {
+        "domain": "efficiency:HVACOptimization",
+        "range": "efficiency:EnergyEfficiency"
+      },
+      "RECOVERS_HEAT": {
+        "domain": "efficiency:WasteHeatRecovery",
+        "range": "energy:ThermalEnergy"
+      },
+      "INTEGRATES_RENEWABLE": {
+        "domain": "smart:SmartGridSystem",
+        "range": "renewable:RenewableEnergy"
+      },
+      "MANAGES_GRID": {
+        "domain": "smart:EnergyManagementPlatform",
+        "range": "grid:ElectricalGrid"
+      },
+      "CONNECTS_TO_GRID": {
+        "domain": "renewable:WindTurbine",
+        "range": "grid:ElectricalGrid"
+      },
+      "SUPPLIES_POWER": {
+        "domain": "generation:PowerPlant",
+        "range": "grid:ElectricalGrid"
+      },
+      "REGULATES_VOLTAGE": {
+        "domain": "grid:VoltageRegulator",
+        "range": "grid:Voltage"
+      },
+      "PROTECTS_SYSTEM": {
+        "domain": "grid:ProtectionRelay",
+        "range": "grid:ElectricalSystem"
+      },
+      "FORECASTS_DEMAND": {
+        "domain": "smart:LoadForecasting",
+        "range": "consumption:EnergyDemand"
+      },
+      "PARTICIPATES_IN_MARKET": {
+        "domain": "generation:PowerPlant",
+        "range": "market:EnergyMarket"
+      },
+      "REDUCES_EMISSIONS": {
+        "domain": "renewable:RenewableEnergy",
+        "range": "carbon:CarbonEmissions"
+      },
+      "IMPROVES_RELIABILITY": {
+        "domain": "grid:RedundantSystem",
+        "range": "grid:SystemReliability"
+      },
+      "ENHANCES_SECURITY": {
+        "domain": "smart:CybersecuritySystem",
+        "range": "grid:GridSecurity"
+      },
+      "ENABLES_TRADING": {
+        "domain": "smart:BlockchainPlatform",
+        "range": "market:EnergyTrading"
+      },
+      "PROVIDES_BACKUP": {
+        "domain": "storage:EnergyStorage",
+        "range": "grid:BackupPower"
+      },
+      "MAINTAINS_STABILITY": {
+        "domain": "grid:GridStabilizer",
+        "range": "grid:SystemStability"
+      },
+      "COORDINATES_OPERATION": {
+        "domain": "smart:GridOperator",
+        "range": "grid:GridOperation"
+      },
+      "BALANCES_LOAD": {
+        "domain": "smart:LoadBalancer",
+        "range": "grid:LoadBalance"
+      },
+      "MANAGES_PEAK": {
+        "domain": "efficiency:PeakShaving",
+        "range": "consumption:PeakDemand"
+      },
+      "SHIFTS_LOAD": {
+        "domain": "smart:LoadShifting",
+        "range": "consumption:LoadProfile"
+      },
+      "ARBITRAGES_ENERGY": {
+        "domain": "storage:EnergyArbitrage",
+        "range": "market:EnergyPrice"
+      },
+      "PROVIDES_ANCILLARY": {
+        "domain": "generation:AncillaryServices",
+        "range": "grid:GridServices"
+      },
+      "RESPONDS_TO_DEMAND": {
+        "domain": "smart:DemandResponse",
+        "range": "consumption:DemandSignal"
+      },
+      "INTEGRATES_STORAGE": {
+        "domain": "grid:StorageIntegration",
+        "range": "storage:EnergyStorage"
+      },
+      "ENABLES_MICROGRID": {
+        "domain": "smart:MicrogridController",
+        "range": "grid:Microgrid"
+      },
+      "FACILITATES_P2P": {
+        "domain": "smart:P2PTradingPlatform",
+        "range": "market:PeerToPeerTrading"
+      },
+      "OPTIMIZES_DISPATCH": {
+        "domain": "smart:DispatchOptimizer",
+        "range": "generation:PowerDispatch"
+      },
+      "PREDICTS_GENERATION": {
+        "domain": "smart:GenerationForecasting",
+        "range": "renewable:PowerOutput"
+      },
+      "MANAGES_CONGESTION": {
+        "domain": "grid:CongestionManagement",
+        "range": "transmission:TransmissionCongestion"
+      },
+      "COORDINATES_PROTECTION": {
+        "domain": "grid:ProtectionCoordination",
+        "range": "grid:SystemProtection"
+      },
+      "MAINTAINS_POWER_QUALITY": {
+        "domain": "grid:PowerQualitySystem",
+        "range": "grid:PowerQuality"
+      },
+      "SUPPORTS_BLACK_START": {
+        "domain": "generation:BlackStartCapability",
+        "range": "grid:SystemRestoration"
+      },
+      "PROVIDES_FREQUENCY_REGULATION": {
+        "domain": "storage:FrequencyRegulation",
+        "range": "grid:SystemFrequency"
+      },
+      "OFFERS_SPINNING_RESERVE": {
+        "domain": "generation:SpinningReserve",
+        "range": "grid:ReserveCapacity"
+      },
+      "ENABLES_LOAD_FOLLOWING": {
+        "domain": "generation:LoadFollowing",
+        "range": "grid:LoadTracking"
+      },
+      "MANAGES_REACTIVE_POWER": {
+        "domain": "grid:ReactivePowerControl",
+        "range": "grid:ReactivePower"
+      },
+      "CONTROLS_VOLTAGE": {
+        "domain": "grid:VoltageControl",
+        "range": "grid:VoltageLevel"
+      },
+      "ISOLATES_FAULTS": {
+        "domain": "grid:FaultIsolation",
+        "range": "grid:SystemFault"
+      },
+      "RESTORES_SERVICE": {
+        "domain": "grid:ServiceRestoration",
+        "range": "grid:PowerRestoration"
+      },
+      "MONITORS_CONDITION": {
+        "domain": "maintenance:ConditionMonitoring",
+        "range": "maintenance:EquipmentCondition"
+      },
+      "SCHEDULES_MAINTENANCE": {
+        "domain": "maintenance:MaintenanceScheduler",
+        "range": "maintenance:MaintenancePlan"
+      },
+      "PREDICTS_FAILURE": {
+        "domain": "maintenance:PredictiveMaintenance",
+        "range": "maintenance:FailurePrediction"
+      },
+      "ENSURES_SAFETY": {
+        "domain": "safety:SafetySystem",
+        "range": "safety:OperationalSafety"
+      },
+      "COMPLIES_WITH_REGULATION": {
+        "domain": "policy:RegulatoryCompliance",
+        "range": "policy:EnergyRegulation"
+      },
+      "TRACKS_CARBON": {
+        "domain": "carbon:CarbonTracking",
+        "range": "carbon:CarbonFootprint"
+      },
+      "PROMOTES_SUSTAINABILITY": {
+        "domain": "sustainability:SustainabilityProgram",
+        "range": "sustainability:EnvironmentalBenefit"
+      }
+    }
+  }
+}

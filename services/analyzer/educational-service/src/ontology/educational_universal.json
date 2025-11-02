@@ -1,0 +1,295 @@
+{
+  "ontology": {
+    "name": "educational_universal",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/universal#",
+    "description": "Universal ontology for educational processes, learning activities, and academic structures. Serves as the shared backbone across all education-related domains.",
+
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.w3.org/2006/time#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/vocab/aiiso/schema#"
+    ],
+
+    "frames": {
+      "Educational_Structure": {
+        "collections": {
+          "Core_Entities": {
+            "entities": {
+              "Institution": {
+                "description": "An educational organization providing learning services.",
+                "properties": {
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "founded": "xsd:date"
+                }
+              },
+              "Department": {
+                "description": "Academic unit within an educational institution.",
+                "properties": {
+                  "dept_id": "xsd:string",
+                  "name": "xsd:string",
+                  "chair": "xsd:string"
+                }
+              },
+              "Program": {
+                "description": "Structured sequence of courses leading to a degree or certificate.",
+                "properties": {
+                  "program_id": "xsd:string",
+                  "title": "xsd:string",
+                  "degree_type": "xsd:string"
+                }
+              },
+              "Student": {
+                "description": "Person enrolled in educational programs or courses.",
+                "properties": {
+                  "student_id": "xsd:string",
+                  "name": "xsd:string",
+                  "enrollment_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Faculty": {
+                "description": "Academic staff member responsible for teaching and research.",
+                "properties": {
+                  "faculty_id": "xsd:string",
+                  "name": "xsd:string",
+                  "rank": "xsd:string",
+                  "specialization": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Learning_Process_Model": {
+        "collections": {
+          "Learning_Elements": {
+            "entities": {
+              "Course": {
+                "description": "A unit of teaching that typically lasts one academic term.",
+                "properties": {
+                  "course_id": "xsd:string",
+                  "title": "xsd:string",
+                  "credits": "xsd:integer",
+                  "level": "xsd:string"
+                }
+              },
+              "Lesson": {
+                "description": "Individual instructional session within a course.",
+                "properties": {
+                  "lesson_id": "xsd:string",
+                  "topic": "xsd:string",
+                  "duration": "xsd:integer"
+                }
+              },
+              "Assignment": {
+                "description": "Task given to students to complete outside of class.",
+                "properties": {
+                  "assignment_id": "xsd:string",
+                  "title": "xsd:string",
+                  "due_date": "xsd:date",
+                  "points": "xsd:integer"
+                }
+              },
+              "Assessment": {
+                "description": "Method of evaluating student learning and progress.",
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "type": "xsd:string",
+                  "weight": "xsd:float"
+                }
+              },
+              "LearningResource": {
+                "description": "Material or tool used to support learning.",
+                "properties": {
+                  "resource_id": "xsd:string",
+                  "type": "xsd:string",
+                  "format": "xsd:string",
+                  "url": "xsd:anyURI"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Academic_Performance_Model": {
+        "collections": {
+          "Performance_Tracking": {
+            "entities": {
+              "Grade": {
+                "description": "Evaluation score assigned to student work.",
+                "properties": {
+                  "grade_id": "xsd:string",
+                  "value": "xsd:string",
+                  "points": "xsd:float",
+                  "date_assigned": "xsd:date"
+                }
+              },
+              "Transcript": {
+                "description": "Official record of a student's academic performance.",
+                "properties": {
+                  "transcript_id": "xsd:string",
+                  "student_id": "xsd:string",
+                  "gpa": "xsd:float",
+                  "credits_earned": "xsd:integer"
+                }
+              },
+              "Degree": {
+                "description": "Academic qualification awarded upon program completion.",
+                "properties": {
+                  "degree_id": "xsd:string",
+                  "title": "xsd:string",
+                  "level": "xsd:string",
+                  "date_conferred": "xsd:date"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Educational_Technology_Model": {
+        "collections": {
+          "Technology_Tools": {
+            "entities": {
+              "LMS": {
+                "description": "Learning Management System for course delivery and management.",
+                "properties": {
+                  "lms_id": "xsd:string",
+                  "name": "xsd:string",
+                  "version": "xsd:string",
+                  "vendor": "xsd:string"
+                }
+              },
+              "DigitalContent": {
+                "description": "Electronic educational materials and resources.",
+                "properties": {
+                  "content_id": "xsd:string",
+                  "title": "xsd:string",
+                  "format": "xsd:string",
+                  "size": "xsd:string"
+                }
+              },
+              "OnlineTool": {
+                "description": "Web-based application supporting educational activities.",
+                "properties": {
+                  "tool_id": "xsd:string",
+                  "name": "xsd:string",
+                  "purpose": "xsd:string",
+                  "url": "xsd:anyURI"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Research_Model": {
+        "collections": {
+          "Research_Activities": {
+            "entities": {
+              "ResearchProject": {
+                "description": "Systematic investigation to establish facts or reach new conclusions.",
+                "properties": {
+                  "project_id": "xsd:string",
+                  "title": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "funding": "xsd:float"
+                }
+              },
+              "Publication": {
+                "description": "Academic work published in journals, conferences, or books.",
+                "properties": {
+                  "publication_id": "xsd:string",
+                  "title": "xsd:string",
+                  "type": "xsd:string",
+                  "publication_date": "xsd:date"
+                }
+              },
+              "Grant": {
+                "description": "Financial award for research or educational activities.",
+                "properties": {
+                  "grant_id": "xsd:string",
+                  "title": "xsd:string",
+                  "amount": "xsd:float",
+                  "funding_agency": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Administrative_Model": {
+        "collections": {
+          "Administrative_Processes": {
+            "entities": {
+              "Enrollment": {
+                "description": "Process of registering students for courses or programs.",
+                "properties": {
+                  "enrollment_id": "xsd:string",
+                  "semester": "xsd:string",
+                  "status": "xsd:string",
+                  "date": "xsd:date"
+                }
+              },
+              "Schedule": {
+                "description": "Timetable of classes and academic activities.",
+                "properties": {
+                  "schedule_id": "xsd:string",
+                  "term": "xsd:string",
+                  "year": "xsd:integer"
+                }
+              },
+              "Policy": {
+                "description": "Rule or guideline governing academic or administrative processes.",
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "title": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "category": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "BELONGS_TO": {"domain": "Student", "range": "Institution"},
+      "EMPLOYED_BY": {"domain": "Faculty", "range": "Institution"},
+      "OFFERS": {"domain": "Institution", "range": "Program"},
+      "PART_OF": {"domain": "Department", "range": "Institution"},
+      "TEACHES": {"domain": "Faculty", "range": "Course"},
+      "ENROLLED_IN": {"domain": "Student", "range": "Course"},
+      "REQUIRES": {"domain": "Program", "range": "Course"},
+      "INCLUDES": {"domain": "Course", "range": "Lesson"},
+      "ASSIGNED_IN": {"domain": "Assignment", "range": "Course"},
+      "COMPLETES": {"domain": "Student", "range": "Assignment"},
+      "ASSESSED_BY": {"domain": "Student", "range": "Assessment"},
+      "RECEIVES": {"domain": "Student", "range": "Grade"},
+      "USES": {"domain": "Course", "range": "LearningResource"},
+      "DELIVERED_THROUGH": {"domain": "Course", "range": "LMS"},
+      "CONTAINS": {"domain": "LMS", "range": "DigitalContent"},
+      "SUPPORTS": {"domain": "OnlineTool", "range": "Course"},
+      "CONDUCTS": {"domain": "Faculty", "range": "ResearchProject"},
+      "PUBLISHES": {"domain": "Faculty", "range": "Publication"},
+      "AWARDED": {"domain": "Faculty", "range": "Grant"},
+      "PARTICIPATES_IN": {"domain": "Student", "range": "ResearchProject"},
+      "MANAGES": {"domain": "Institution", "range": "Enrollment"},
+      "FOLLOWS": {"domain": "Course", "range": "Schedule"},
+      "GOVERNED_BY": {"domain": "Institution", "range": "Policy"},
+      "EARNS": {"domain": "Student", "range": "Degree"},
+      "RECORDS": {"domain": "Transcript", "range": "Grade"}
+    }
+  }
+}

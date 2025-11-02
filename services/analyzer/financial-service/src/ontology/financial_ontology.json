@@ -1,0 +1,1232 @@
+{
+  "ontology": {
+    "name": "financial_ontology",
+    "version": "2.0.0",
+    "namespace": "http://context-machine.org/ontology/finance#",
+    "description": "Comprehensive ontology for financial systems, banking operations, investment markets, regulatory frameworks, fintech innovations, risk management, insurance products, and financial analytics.",
+    "namespaces": {
+      "fin": "http://context-machine.org/ontology/finance#",
+      "bank": "http://context-machine.org/ontology/finance/banking#",
+      "invest": "http://context-machine.org/ontology/finance/investment#",
+      "market": "http://context-machine.org/ontology/finance/market#",
+      "reg": "http://context-machine.org/ontology/finance/regulation#",
+      "fintech": "http://context-machine.org/ontology/finance/fintech#",
+      "risk": "http://context-machine.org/ontology/finance/risk#",
+      "insurance": "http://context-machine.org/ontology/finance/insurance#",
+      "payment": "http://context-machine.org/ontology/finance/payment#",
+      "credit": "http://context-machine.org/ontology/finance/credit#",
+      "trading": "http://context-machine.org/ontology/finance/trading#",
+      "wealth": "http://context-machine.org/ontology/finance/wealth#",
+      "corporate": "http://context-machine.org/ontology/finance/corporate#",
+      "retail": "http://context-machine.org/ontology/finance/retail#",
+      "crypto": "http://context-machine.org/ontology/finance/crypto#",
+      "forex": "http://context-machine.org/ontology/finance/forex#",
+      "derivatives": "http://context-machine.org/ontology/finance/derivatives#",
+      "compliance": "http://context-machine.org/ontology/finance/compliance#",
+      "audit": "http://context-machine.org/ontology/finance/audit#",
+      "analytics": "http://context-machine.org/ontology/finance/analytics#",
+      "reporting": "http://context-machine.org/ontology/finance/reporting#",
+      "tax": "http://context-machine.org/ontology/finance/tax#",
+      "accounting": "http://context-machine.org/ontology/finance/accounting#",
+      "treasury": "http://context-machine.org/ontology/finance/treasury#",
+      "esg": "http://context-machine.org/ontology/finance/esg#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.w3.org/2006/time#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.omg.org/spec/BPMN/20100524/MODEL",
+      "http://purl.org/goodrelations/v1#",
+      "http://www.w3.org/2004/02/skos/core#"
+    ],
+    "alignments": {
+      "FinancialInstitution": "gr:BusinessEntity",
+      "BankAccount": "gr:PaymentMethod",
+      "Transaction": "gr:PaymentChargeSpecification",
+      "Currency": "gr:PriceSpecification",
+      "Investment": "gr:Offering",
+      "Security": "gr:ProductOrService",
+      "Portfolio": "gr:Bundle",
+      "Market": "gr:Location",
+      "Regulation": "skos:Concept",
+      "RiskAssessment": "prov:Activity"
+    },
+
+    "frames": {
+      "Banking_Systems": {
+        "collections": {
+          "Financial_Institutions": {
+            "entities": {
+              "FinancialInstitution": {
+                "properties": {
+                  "institution_id": "xsd:string",
+                  "institution_name": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "institution_type": "xsd:string",
+                  "charter_type": "xsd:string",
+                  "regulatory_status": "xsd:string",
+                  "primary_regulator": "xsd:string",
+                  "secondary_regulators": "xsd:string",
+                  "license_number": "xsd:string",
+                  "license_expiry": "xsd:date",
+                  "establishment_date": "xsd:date",
+                  "headquarters_location": "xsd:string",
+                  "operational_countries": "xsd:string",
+                  "total_assets": "xsd:float",
+                  "total_liabilities": "xsd:float",
+                  "shareholders_equity": "xsd:float",
+                  "tier_1_capital": "xsd:float",
+                  "tier_2_capital": "xsd:float",
+                  "capital_adequacy_ratio": "xsd:float",
+                  "leverage_ratio": "xsd:float",
+                  "liquidity_coverage_ratio": "xsd:float",
+                  "net_stable_funding_ratio": "xsd:float",
+                  "return_on_assets": "xsd:float",
+                  "return_on_equity": "xsd:float",
+                  "net_interest_margin": "xsd:float",
+                  "cost_income_ratio": "xsd:float",
+                  "loan_loss_provision": "xsd:float",
+                  "non_performing_loans": "xsd:float",
+                  "credit_rating": "xsd:string",
+                  "rating_agency": "xsd:string",
+                  "rating_outlook": "xsd:string",
+                  "systemic_importance": "xsd:string",
+                  "stress_test_results": "xsd:string",
+                  "branch_count": "xsd:integer",
+                  "atm_count": "xsd:integer",
+                  "employee_count": "xsd:integer",
+                  "customer_count": "xsd:integer",
+                  "digital_banking_users": "xsd:integer",
+                  "mobile_app_downloads": "xsd:integer",
+                  "cybersecurity_rating": "xsd:string",
+                  "esg_score": "xsd:float",
+                  "sustainability_initiatives": "xsd:string",
+                  "community_investment": "xsd:float",
+                  "diversity_metrics": "xsd:string",
+                  "governance_structure": "xsd:string",
+                  "board_composition": "xsd:string",
+                  "executive_compensation": "xsd:float",
+                  "audit_firm": "xsd:string",
+                  "last_audit_date": "xsd:date",
+                  "regulatory_violations": "xsd:string",
+                  "fines_penalties": "xsd:float",
+                  "market_capitalization": "xsd:float",
+                  "stock_symbol": "xsd:string",
+                  "exchange_listing": "xsd:string",
+                  "dividend_yield": "xsd:float",
+                  "price_to_book": "xsd:float",
+                  "price_to_earnings": "xsd:float"
+                }
+              },
+              "BankAccount": {
+                "properties": {
+                  "account_id": "xsd:string",
+                  "account_number": "xsd:string",
+                  "account_type": "xsd:string",
+                  "account_subtype": "xsd:string",
+                  "account_name": "xsd:string",
+                  "account_holder_id": "xsd:string",
+                  "account_holder_name": "xsd:string",
+                  "account_holder_type": "xsd:string",
+                  "joint_account": "xsd:boolean",
+                  "co_signers": "xsd:string",
+                  "opening_date": "xsd:date",
+                  "closing_date": "xsd:date",
+                  "account_status": "xsd:string",
+                  "currency_code": "xsd:string",
+                  "current_balance": "xsd:float",
+                  "available_balance": "xsd:float",
+                  "pending_balance": "xsd:float",
+                  "overdraft_limit": "xsd:float",
+                  "overdraft_protection": "xsd:boolean",
+                  "minimum_balance": "xsd:float",
+                  "maximum_balance": "xsd:float",
+                  "interest_rate": "xsd:float",
+                  "interest_calculation_method": "xsd:string",
+                  "compounding_frequency": "xsd:string",
+                  "last_interest_payment": "xsd:date",
+                  "annual_percentage_yield": "xsd:float",
+                  "monthly_maintenance_fee": "xsd:float",
+                  "transaction_fees": "xsd:string",
+                  "fee_waiver_conditions": "xsd:string",
+                  "statement_frequency": "xsd:string",
+                  "statement_delivery_method": "xsd:string",
+                  "online_banking_enabled": "xsd:boolean",
+                  "mobile_banking_enabled": "xsd:boolean",
+                  "debit_card_linked": "xsd:boolean",
+                  "check_writing_privileges": "xsd:boolean",
+                  "wire_transfer_enabled": "xsd:boolean",
+                  "ach_enabled": "xsd:boolean",
+                  "direct_deposit_enabled": "xsd:boolean",
+                  "automatic_payments": "xsd:string",
+                  "transaction_limits": "xsd:string",
+                  "daily_withdrawal_limit": "xsd:float",
+                  "monthly_transaction_limit": "xsd:integer",
+                  "fraud_monitoring": "xsd:boolean",
+                  "security_features": "xsd:string",
+                  "beneficiaries": "xsd:string",
+                  "power_of_attorney": "xsd:string",
+                  "trust_account": "xsd:boolean",
+                  "escrow_account": "xsd:boolean",
+                  "regulatory_reporting": "xsd:string",
+                  "tax_reporting": "xsd:string",
+                  "kyc_status": "xsd:string",
+                  "aml_risk_rating": "xsd:string",
+                  "last_kyc_update": "xsd:date",
+                  "dormancy_period": "xsd:integer",
+                  "escheatment_date": "xsd:date",
+                  "relationship_manager": "xsd:string",
+                  "branch_code": "xsd:string",
+                  "routing_number": "xsd:string",
+                  "swift_code": "xsd:string",
+                  "iban": "xsd:string"
+                }
+              }
+            }
+          },
+          "Payment_Systems": {
+            "entities": {
+              "PaymentMethod": {
+                "properties": {
+                  "payment_method_id": "xsd:string",
+                  "method_type": "xsd:string",
+                  "method_subtype": "xsd:string",
+                  "provider_name": "xsd:string",
+                  "provider_id": "xsd:string",
+                  "network_type": "xsd:string",
+                  "processing_network": "xsd:string",
+                  "settlement_network": "xsd:string",
+                  "supported_currencies": "xsd:string",
+                  "geographic_coverage": "xsd:string",
+                  "transaction_speed": "xsd:string",
+                  "settlement_time": "xsd:string",
+                  "processing_fees": "xsd:string",
+                  "interchange_fees": "xsd:string",
+                  "merchant_fees": "xsd:string",
+                  "consumer_fees": "xsd:string",
+                  "transaction_limits": "xsd:string",
+                  "daily_limits": "xsd:float",
+                  "monthly_limits": "xsd:float",
+                  "annual_limits": "xsd:float",
+                  "security_features": "xsd:string",
+                  "encryption_standards": "xsd:string",
+                  "authentication_methods": "xsd:string",
+                  "fraud_detection": "xsd:string",
+                  "chargeback_protection": "xsd:boolean",
+                  "dispute_resolution": "xsd:string",
+                  "regulatory_compliance": "xsd:string",
+                  "pci_compliance": "xsd:boolean",
+                  "gdpr_compliance": "xsd:boolean",
+                  "kyc_requirements": "xsd:string",
+                  "aml_monitoring": "xsd:boolean",
+                  "cross_border_capability": "xsd:boolean",
+                  "multi_currency_support": "xsd:boolean",
+                  "real_time_processing": "xsd:boolean",
+                  "batch_processing": "xsd:boolean",
+                  "api_integration": "xsd:boolean",
+                  "webhook_support": "xsd:boolean",
+                  "sdk_availability": "xsd:string",
+                  "documentation_quality": "xsd:string",
+                  "developer_support": "xsd:string",
+                  "sandbox_environment": "xsd:boolean",
+                  "testing_tools": "xsd:string",
+                  "uptime_guarantee": "xsd:float",
+                  "sla_terms": "xsd:string",
+                  "customer_support": "xsd:string",
+                  "support_hours": "xsd:string",
+                  "support_languages": "xsd:string",
+                  "onboarding_process": "xsd:string",
+                  "setup_time": "xsd:string",
+                  "integration_complexity": "xsd:string",
+                  "merchant_onboarding": "xsd:string",
+                  "consumer_onboarding": "xsd:string",
+                  "mobile_app_support": "xsd:boolean",
+                  "web_interface": "xsd:boolean",
+                  "pos_integration": "xsd:boolean",
+                  "ecommerce_plugins": "xsd:string",
+                  "marketplace_support": "xsd:string",
+                  "subscription_billing": "xsd:boolean",
+                  "recurring_payments": "xsd:boolean",
+                  "installment_payments": "xsd:boolean",
+                  "escrow_services": "xsd:boolean",
+                  "split_payments": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Investment_Markets": {
+        "collections": {
+          "Securities_Trading": {
+            "entities": {
+              "Security": {
+                "properties": {
+                  "security_id": "xsd:string",
+                  "isin": "xsd:string",
+                  "cusip": "xsd:string",
+                  "ticker_symbol": "xsd:string",
+                  "security_name": "xsd:string",
+                  "security_type": "xsd:string",
+                  "asset_class": "xsd:string",
+                  "sub_asset_class": "xsd:string",
+                  "issuer_name": "xsd:string",
+                  "issuer_id": "xsd:string",
+                  "issuer_type": "xsd:string",
+                  "issuer_country": "xsd:string",
+                  "issuer_sector": "xsd:string",
+                  "issuer_industry": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "maturity_date": "xsd:date",
+                  "expiration_date": "xsd:date",
+                  "settlement_date": "xsd:date",
+                  "face_value": "xsd:float",
+                  "par_value": "xsd:float",
+                  "issue_price": "xsd:float",
+                  "current_price": "xsd:float",
+                  "market_value": "xsd:float",
+                  "book_value": "xsd:float",
+                  "intrinsic_value": "xsd:float",
+                  "fair_value": "xsd:float",
+                  "coupon_rate": "xsd:float",
+                  "dividend_rate": "xsd:float",
+                  "yield_to_maturity": "xsd:float",
+                  "current_yield": "xsd:float",
+                  "dividend_yield": "xsd:float",
+                  "earnings_yield": "xsd:float",
+                  "price_earnings_ratio": "xsd:float",
+                  "price_to_book": "xsd:float",
+                  "price_to_sales": "xsd:float",
+                  "enterprise_value": "xsd:float",
+                  "market_capitalization": "xsd:float",
+                  "shares_outstanding": "xsd:integer",
+                  "float_shares": "xsd:integer",
+                  "volume_traded": "xsd:integer",
+                  "average_volume": "xsd:integer",
+                  "bid_price": "xsd:float",
+                  "ask_price": "xsd:float",
+                  "bid_ask_spread": "xsd:float",
+                  "day_high": "xsd:float",
+                  "day_low": "xsd:float",
+                  "week_52_high": "xsd:float",
+                  "week_52_low": "xsd:float",
+                  "volatility": "xsd:float",
+                  "beta": "xsd:float",
+                  "correlation": "xsd:float",
+                  "sharpe_ratio": "xsd:float",
+                  "alpha": "xsd:float",
+                  "tracking_error": "xsd:float",
+                  "information_ratio": "xsd:float",
+                  "credit_rating": "xsd:string",
+                  "rating_agency": "xsd:string",
+                  "rating_outlook": "xsd:string",
+                  "default_probability": "xsd:float",
+                  "recovery_rate": "xsd:float",
+                  "duration": "xsd:float",
+                  "modified_duration": "xsd:float",
+                  "convexity": "xsd:float",
+                  "option_adjusted_spread": "xsd:float",
+                  "z_spread": "xsd:float"
+                }
+              },
+              "Portfolio": {
+                "properties": {
+                  "portfolio_id": "xsd:string",
+                  "portfolio_name": "xsd:string",
+                  "portfolio_type": "xsd:string",
+                  "investment_strategy": "xsd:string",
+                  "investment_objective": "xsd:string",
+                  "risk_profile": "xsd:string",
+                  "benchmark_index": "xsd:string",
+                  "portfolio_manager": "xsd:string",
+                  "management_company": "xsd:string",
+                  "inception_date": "xsd:date",
+                  "base_currency": "xsd:string",
+                  "total_assets": "xsd:float",
+                  "net_asset_value": "xsd:float",
+                  "market_value": "xsd:float",
+                  "cash_position": "xsd:float",
+                  "invested_amount": "xsd:float",
+                  "unrealized_gains": "xsd:float",
+                  "realized_gains": "xsd:float",
+                  "total_return": "xsd:float",
+                  "annualized_return": "xsd:float",
+                  "ytd_return": "xsd:float",
+                  "mtd_return": "xsd:float",
+                  "qtd_return": "xsd:float",
+                  "one_year_return": "xsd:float",
+                  "three_year_return": "xsd:float",
+                  "five_year_return": "xsd:float",
+                  "since_inception_return": "xsd:float",
+                  "volatility": "xsd:float",
+                  "sharpe_ratio": "xsd:float",
+                  "sortino_ratio": "xsd:float",
+                  "calmar_ratio": "xsd:float",
+                  "maximum_drawdown": "xsd:float",
+                  "value_at_risk": "xsd:float",
+                  "conditional_var": "xsd:float",
+                  "beta": "xsd:float",
+                  "alpha": "xsd:float",
+                  "tracking_error": "xsd:float",
+                  "information_ratio": "xsd:float",
+                  "treynor_ratio": "xsd:float",
+                  "jensen_alpha": "xsd:float",
+                  "asset_allocation": "xsd:string",
+                  "sector_allocation": "xsd:string",
+                  "geographic_allocation": "xsd:string",
+                  "currency_allocation": "xsd:string",
+                  "top_holdings": "xsd:string",
+                  "number_of_holdings": "xsd:integer",
+                  "concentration_ratio": "xsd:float",
+                  "turnover_ratio": "xsd:float",
+                  "expense_ratio": "xsd:float",
+                  "management_fee": "xsd:float",
+                  "performance_fee": "xsd:float",
+                  "transaction_costs": "xsd:float",
+                  "dividend_income": "xsd:float",
+                  "interest_income": "xsd:float",
+                  "capital_gains": "xsd:float",
+                  "tax_efficiency": "xsd:float",
+                  "esg_score": "xsd:float",
+                  "sustainability_rating": "xsd:string"
+                }
+              }
+            }
+          },
+          "Market_Infrastructure": {
+            "entities": {
+              "Exchange": {
+                "properties": {
+                  "exchange_id": "xsd:string",
+                  "exchange_name": "xsd:string",
+                  "exchange_code": "xsd:string",
+                  "mic_code": "xsd:string",
+                  "country": "xsd:string",
+                  "city": "xsd:string",
+                  "time_zone": "xsd:string",
+                  "establishment_date": "xsd:date",
+                  "ownership_structure": "xsd:string",
+                  "regulatory_authority": "xsd:string",
+                  "license_type": "xsd:string",
+                  "operating_hours": "xsd:string",
+                  "trading_sessions": "xsd:string",
+                  "settlement_cycle": "xsd:string",
+                  "clearing_house": "xsd:string",
+                  "depository": "xsd:string",
+                  "market_capitalization": "xsd:float",
+                  "daily_volume": "xsd:float",
+                  "annual_volume": "xsd:float",
+                  "number_of_listings": "xsd:integer",
+                  "number_of_members": "xsd:integer",
+                  "trading_technology": "xsd:string",
+                  "matching_engine": "xsd:string",
+                  "order_types": "xsd:string",
+                  "circuit_breakers": "xsd:string",
+                  "market_makers": "xsd:string",
+                  "liquidity_providers": "xsd:string",
+                  "tick_size": "xsd:float",
+                  "lot_size": "xsd:integer",
+                  "position_limits": "xsd:string",
+                  "margin_requirements": "xsd:string",
+                  "collateral_requirements": "xsd:string",
+                  "risk_management": "xsd:string",
+                  "surveillance_systems": "xsd:string",
+                  "market_data_feeds": "xsd:string",
+                  "connectivity_options": "xsd:string",
+                  "colocation_services": "xsd:boolean",
+                  "cross_trading": "xsd:boolean",
+                  "dark_pools": "xsd:boolean",
+                  "algorithmic_trading": "xsd:boolean",
+                  "high_frequency_trading": "xsd:boolean",
+                  "market_making_programs": "xsd:string",
+                  "listing_requirements": "xsd:string",
+                  "listing_fees": "xsd:string",
+                  "trading_fees": "xsd:string",
+                  "clearing_fees": "xsd:string",
+                  "settlement_fees": "xsd:string",
+                  "market_data_fees": "xsd:string",
+                  "membership_fees": "xsd:string",
+                  "technology_fees": "xsd:string",
+                  "regulatory_fees": "xsd:string",
+                  "indices": "xsd:string",
+                  "benchmark_products": "xsd:string",
+                  "derivatives_trading": "xsd:boolean",
+                  "commodity_trading": "xsd:boolean",
+                  "currency_trading": "xsd:boolean",
+                  "fixed_income_trading": "xsd:boolean",
+                  "equity_trading": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Risk_Management": {
+        "collections": {
+          "Risk_Assessment": {
+            "entities": {
+              "RiskFactor": {
+                "properties": {
+                  "risk_id": "xsd:string",
+                  "risk_name": "xsd:string",
+                  "risk_type": "xsd:string",
+                  "risk_category": "xsd:string",
+                  "risk_subcategory": "xsd:string",
+                  "risk_description": "xsd:string",
+                  "risk_source": "xsd:string",
+                  "risk_driver": "xsd:string",
+                  "probability": "xsd:float",
+                  "impact_severity": "xsd:string",
+                  "impact_magnitude": "xsd:float",
+                  "expected_loss": "xsd:float",
+                  "unexpected_loss": "xsd:float",
+                  "value_at_risk": "xsd:float",
+                  "conditional_var": "xsd:float",
+                  "stress_test_result": "xsd:float",
+                  "scenario_analysis": "xsd:string",
+                  "monte_carlo_simulation": "xsd:string",
+                  "historical_simulation": "xsd:string",
+                  "parametric_method": "xsd:string",
+                  "confidence_level": "xsd:float",
+                  "time_horizon": "xsd:string",
+                  "frequency": "xsd:string",
+                  "correlation": "xsd:float",
+                  "concentration": "xsd:float",
+                  "diversification": "xsd:float",
+                  "hedging_effectiveness": "xsd:float",
+                  "mitigation_strategies": "xsd:string",
+                  "control_measures": "xsd:string",
+                  "monitoring_indicators": "xsd:string",
+                  "early_warning_signals": "xsd:string",
+                  "escalation_procedures": "xsd:string",
+                  "contingency_plans": "xsd:string",
+                  "recovery_procedures": "xsd:string",
+                  "business_continuity": "xsd:string",
+                  "regulatory_capital": "xsd:float",
+                  "economic_capital": "xsd:float",
+                  "risk_adjusted_return": "xsd:float",
+                  "raroc": "xsd:float",
+                  "rorac": "xsd:float",
+                  "risk_appetite": "xsd:string",
+                  "risk_tolerance": "xsd:string",
+                  "risk_limits": "xsd:string",
+                  "limit_utilization": "xsd:float",
+                  "limit_breaches": "xsd:string",
+                  "exception_reporting": "xsd:string",
+                  "risk_reporting": "xsd:string",
+                  "governance_framework": "xsd:string",
+                  "risk_committee": "xsd:string",
+                  "risk_officer": "xsd:string",
+                  "risk_culture": "xsd:string",
+                  "training_programs": "xsd:string",
+                  "awareness_campaigns": "xsd:string",
+                  "risk_technology": "xsd:string",
+                  "risk_systems": "xsd:string",
+                  "data_quality": "xsd:string",
+                  "model_validation": "xsd:string",
+                  "backtesting_results": "xsd:string",
+                  "benchmark_comparison": "xsd:string",
+                  "peer_analysis": "xsd:string",
+                  "industry_standards": "xsd:string",
+                  "regulatory_requirements": "xsd:string",
+                  "compliance_status": "xsd:string",
+                  "audit_findings": "xsd:string",
+                  "remediation_actions": "xsd:string"
+                }
+              }
+            }
+          },
+          "Credit_Risk": {
+            "entities": {
+              "CreditExposure": {
+                "properties": {
+                  "exposure_id": "xsd:string",
+                  "counterparty_id": "xsd:string",
+                  "counterparty_name": "xsd:string",
+                  "counterparty_type": "xsd:string",
+                  "counterparty_rating": "xsd:string",
+                  "internal_rating": "xsd:string",
+                  "external_rating": "xsd:string",
+                  "rating_agency": "xsd:string",
+                  "probability_of_default": "xsd:float",
+                  "loss_given_default": "xsd:float",
+                  "exposure_at_default": "xsd:float",
+                  "expected_loss": "xsd:float",
+                  "unexpected_loss": "xsd:float",
+                  "economic_capital": "xsd:float",
+                  "regulatory_capital": "xsd:float",
+                  "risk_weight": "xsd:float",
+                  "credit_conversion_factor": "xsd:float",
+                  "maturity": "xsd:float",
+                  "effective_maturity": "xsd:float",
+                  "facility_type": "xsd:string",
+                  "product_type": "xsd:string",
+                  "collateral_type": "xsd:string",
+                  "collateral_value": "xsd:float",
+                  "loan_to_value": "xsd:float",
+                  "guarantee_amount": "xsd:float",
+                  "guarantor_rating": "xsd:string",
+                  "netting_agreement": "xsd:boolean",
+                  "master_agreement": "xsd:string",
+                  "credit_support_annex": "xsd:boolean",
+                  "margin_requirements": "xsd:float",
+                  "threshold_amount": "xsd:float",
+                  "minimum_transfer_amount": "xsd:float",
+                  "independent_amount": "xsd:float",
+                  "variation_margin": "xsd:float",
+                  "initial_margin": "xsd:float",
+                  "wrong_way_risk": "xsd:boolean",
+                  "concentration_risk": "xsd:float",
+                  "country_risk": "xsd:string",
+                  "sector_risk": "xsd:string",
+                  "currency_risk": "xsd:string",
+                  "settlement_risk": "xsd:float",
+                  "pre_settlement_risk": "xsd:float",
+                  "replacement_cost": "xsd:float",
+                  "potential_future_exposure": "xsd:float",
+                  "current_exposure": "xsd:float",
+                  "peak_exposure": "xsd:float",
+                  "expected_exposure": "xsd:float",
+                  "exposure_profile": "xsd:string",
+                  "stress_exposure": "xsd:float",
+                  "migration_risk": "xsd:float",
+                  "default_correlation": "xsd:float",
+                  "recovery_correlation": "xsd:float",
+                  "vintage": "xsd:string",
+                  "origination_date": "xsd:date",
+                  "last_review_date": "xsd:date",
+                  "next_review_date": "xsd:date",
+                  "watch_list": "xsd:boolean",
+                  "problem_asset": "xsd:boolean",
+                  "restructured": "xsd:boolean",
+                  "impaired": "xsd:boolean",
+                  "provision_amount": "xsd:float",
+                  "write_off_amount": "xsd:float",
+                  "recovery_amount": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Regulatory_Compliance": {
+        "collections": {
+          "Regulatory_Framework": {
+            "entities": {
+              "Regulation": {
+                "properties": {
+                  "regulation_id": "xsd:string",
+                  "regulation_name": "xsd:string",
+                  "regulation_code": "xsd:string",
+                  "regulatory_authority": "xsd:string",
+                  "jurisdiction": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "implementation_date": "xsd:date",
+                  "sunset_date": "xsd:date",
+                  "regulation_type": "xsd:string",
+                  "regulation_category": "xsd:string",
+                  "scope": "xsd:string",
+                  "applicability": "xsd:string",
+                  "covered_entities": "xsd:string",
+                  "exemptions": "xsd:string",
+                  "thresholds": "xsd:string",
+                  "requirements": "xsd:string",
+                  "obligations": "xsd:string",
+                  "prohibitions": "xsd:string",
+                  "reporting_requirements": "xsd:string",
+                  "disclosure_requirements": "xsd:string",
+                  "capital_requirements": "xsd:string",
+                  "liquidity_requirements": "xsd:string",
+                  "leverage_requirements": "xsd:string",
+                  "risk_management_requirements": "xsd:string",
+                  "governance_requirements": "xsd:string",
+                  "conduct_requirements": "xsd:string",
+                  "consumer_protection": "xsd:string",
+                  "market_integrity": "xsd:string",
+                  "systemic_risk": "xsd:string",
+                  "macroprudential": "xsd:string",
+                  "microprudential": "xsd:string",
+                  "stress_testing": "xsd:string",
+                  "resolution_planning": "xsd:string",
+                  "recovery_planning": "xsd:string",
+                  "living_wills": "xsd:string",
+                  "bail_in_requirements": "xsd:string",
+                  "deposit_insurance": "xsd:string",
+                  "investor_protection": "xsd:string",
+                  "market_abuse": "xsd:string",
+                  "insider_trading": "xsd:string",
+                  "market_manipulation": "xsd:string",
+                  "best_execution": "xsd:string",
+                  "client_asset_protection": "xsd:string",
+                  "conflicts_of_interest": "xsd:string",
+                  "remuneration": "xsd:string",
+                  "outsourcing": "xsd:string",
+                  "operational_resilience": "xsd:string",
+                  "cybersecurity": "xsd:string",
+                  "data_protection": "xsd:string",
+                  "privacy": "xsd:string",
+                  "anti_money_laundering": "xsd:string",
+                  "counter_terrorist_financing": "xsd:string",
+                  "sanctions": "xsd:string",
+                  "know_your_customer": "xsd:string",
+                  "customer_due_diligence": "xsd:string",
+                  "enhanced_due_diligence": "xsd:string",
+                  "suspicious_activity_reporting": "xsd:string",
+                  "currency_transaction_reporting": "xsd:string",
+                  "cross_border_reporting": "xsd:string",
+                  "tax_reporting": "xsd:string",
+                  "fatca": "xsd:string",
+                  "crs": "xsd:string",
+                  "penalties": "xsd:string",
+                  "enforcement_actions": "xsd:string",
+                  "supervisory_measures": "xsd:string",
+                  "remedial_actions": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Fintech_Innovation": {
+        "collections": {
+          "Digital_Finance": {
+            "entities": {
+              "FintechSolution": {
+                "properties": {
+                  "solution_id": "xsd:string",
+                  "solution_name": "xsd:string",
+                  "provider_name": "xsd:string",
+                  "solution_type": "xsd:string",
+                  "solution_category": "xsd:string",
+                  "target_market": "xsd:string",
+                  "customer_segment": "xsd:string",
+                  "use_case": "xsd:string",
+                  "value_proposition": "xsd:string",
+                  "business_model": "xsd:string",
+                  "revenue_model": "xsd:string",
+                  "pricing_model": "xsd:string",
+                  "technology_stack": "xsd:string",
+                  "platform_type": "xsd:string",
+                  "deployment_model": "xsd:string",
+                  "cloud_provider": "xsd:string",
+                  "api_architecture": "xsd:string",
+                  "integration_methods": "xsd:string",
+                  "data_sources": "xsd:string",
+                  "data_processing": "xsd:string",
+                  "analytics_capabilities": "xsd:string",
+                  "machine_learning": "xsd:boolean",
+                  "artificial_intelligence": "xsd:boolean",
+                  "blockchain_technology": "xsd:boolean",
+                  "smart_contracts": "xsd:boolean",
+                  "distributed_ledger": "xsd:boolean",
+                  "cryptocurrency_support": "xsd:boolean",
+                  "digital_wallet": "xsd:boolean",
+                  "mobile_app": "xsd:boolean",
+                  "web_platform": "xsd:boolean",
+                  "user_interface": "xsd:string",
+                  "user_experience": "xsd:string",
+                  "accessibility": "xsd:string",
+                  "multi_language": "xsd:boolean",
+                  "multi_currency": "xsd:boolean",
+                  "real_time_processing": "xsd:boolean",
+                  "batch_processing": "xsd:boolean",
+                  "scalability": "xsd:string",
+                  "performance": "xsd:string",
+                  "availability": "xsd:float",
+                  "reliability": "xsd:string",
+                  "security_features": "xsd:string",
+                  "encryption": "xsd:string",
+                  "authentication": "xsd:string",
+                  "authorization": "xsd:string",
+                  "fraud_detection": "xsd:string",
+                  "risk_management": "xsd:string",
+                  "compliance_features": "xsd:string",
+                  "regulatory_approval": "xsd:string",
+                  "licensing": "xsd:string",
+                  "partnerships": "xsd:string",
+                  "integrations": "xsd:string",
+                  "third_party_services": "xsd:string",
+                  "customer_onboarding": "xsd:string",
+                  "kyc_process": "xsd:string",
+                  "aml_monitoring": "xsd:string",
+                  "customer_support": "xsd:string",
+                  "documentation": "xsd:string",
+                  "training": "xsd:string",
+                  "implementation_time": "xsd:string",
+                  "total_cost_ownership": "xsd:float",
+                  "roi_metrics": "xsd:string",
+                  "success_metrics": "xsd:string",
+                  "market_adoption": "xsd:string",
+                  "competitive_advantage": "xsd:string",
+                  "innovation_level": "xsd:string",
+                  "disruption_potential": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Insurance_Products": {
+        "collections": {
+          "Insurance_Coverage": {
+            "entities": {
+              "InsurancePolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "policy_number": "xsd:string",
+                  "policy_type": "xsd:string",
+                  "product_line": "xsd:string",
+                  "coverage_type": "xsd:string",
+                  "insurer_name": "xsd:string",
+                  "insurer_id": "xsd:string",
+                  "policyholder_id": "xsd:string",
+                  "policyholder_name": "xsd:string",
+                  "beneficiaries": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "expiration_date": "xsd:date",
+                  "policy_term": "xsd:string",
+                  "renewal_date": "xsd:date",
+                  "cancellation_date": "xsd:date",
+                  "policy_status": "xsd:string",
+                  "coverage_amount": "xsd:float",
+                  "sum_insured": "xsd:float",
+                  "policy_limit": "xsd:float",
+                  "deductible": "xsd:float",
+                  "co_insurance": "xsd:float",
+                  "co_payment": "xsd:float",
+                  "premium_amount": "xsd:float",
+                  "annual_premium": "xsd:float",
+                  "premium_frequency": "xsd:string",
+                  "payment_method": "xsd:string",
+                  "premium_due_date": "xsd:date",
+                  "grace_period": "xsd:integer",
+                  "lapse_date": "xsd:date",
+                  "reinstatement_date": "xsd:date",
+                  "underwriting_class": "xsd:string",
+                  "risk_rating": "xsd:string",
+                  "risk_factors": "xsd:string",
+                  "exclusions": "xsd:string",
+                  "conditions": "xsd:string",
+                  "endorsements": "xsd:string",
+                  "riders": "xsd:string",
+                  "claims_history": "xsd:string",
+                  "loss_ratio": "xsd:float",
+                  "claims_frequency": "xsd:float",
+                  "claims_severity": "xsd:float",
+                  "reserves": "xsd:float",
+                  "incurred_but_not_reported": "xsd:float",
+                  "reinsurance": "xsd:string",
+                  "ceded_premium": "xsd:float",
+                  "retention_limit": "xsd:float",
+                  "catastrophe_coverage": "xsd:boolean",
+                  "aggregate_limit": "xsd:float",
+                  "per_occurrence_limit": "xsd:float",
+                  "territory": "xsd:string",
+                  "jurisdiction": "xsd:string",
+                  "regulatory_requirements": "xsd:string",
+                  "solvency_requirements": "xsd:string",
+                  "capital_requirements": "xsd:string",
+                  "actuarial_assumptions": "xsd:string",
+                  "mortality_tables": "xsd:string",
+                  "morbidity_tables": "xsd:string",
+                  "interest_rates": "xsd:float",
+                  "discount_rate": "xsd:float",
+                  "cash_value": "xsd:float",
+                  "surrender_value": "xsd:float",
+                  "loan_value": "xsd:float",
+                  "dividend_rate": "xsd:float",
+                  "bonus_rate": "xsd:float",
+                  "profit_sharing": "xsd:float",
+                  "investment_options": "xsd:string",
+                  "unit_linked": "xsd:boolean",
+                  "guaranteed_benefits": "xsd:string",
+                  "variable_benefits": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Financial_Analytics": {
+        "collections": {
+          "Analytics_Tools": {
+            "entities": {
+              "AnalyticsModel": {
+                "properties": {
+                  "model_id": "xsd:string",
+                  "model_name": "xsd:string",
+                  "model_type": "xsd:string",
+                  "algorithm_type": "xsd:string",
+                  "methodology": "xsd:string",
+                  "purpose": "xsd:string",
+                  "target_variable": "xsd:string",
+                  "input_variables": "xsd:string",
+                  "data_sources": "xsd:string",
+                  "training_dataset": "xsd:string",
+                  "validation_dataset": "xsd:string",
+                  "test_dataset": "xsd:string",
+                  "sample_size": "xsd:integer",
+                  "training_period": "xsd:string",
+                  "validation_period": "xsd:string",
+                  "model_accuracy": "xsd:float",
+                  "precision": "xsd:float",
+                  "recall": "xsd:float",
+                  "f1_score": "xsd:float",
+                  "auc_roc": "xsd:float",
+                  "r_squared": "xsd:float",
+                  "mean_squared_error": "xsd:float",
+                  "root_mean_squared_error": "xsd:float",
+                  "mean_absolute_error": "xsd:float",
+                  "cross_validation_score": "xsd:float",
+                  "overfitting_indicator": "xsd:float",
+                  "feature_importance": "xsd:string",
+                  "hyperparameters": "xsd:string",
+                  "optimization_method": "xsd:string",
+                  "regularization": "xsd:string",
+                  "ensemble_method": "xsd:string",
+                  "model_complexity": "xsd:string",
+                  "interpretability": "xsd:string",
+                  "explainability": "xsd:string",
+                  "bias_detection": "xsd:string",
+                  "fairness_metrics": "xsd:string",
+                  "model_governance": "xsd:string",
+                  "version_control": "xsd:string",
+                  "deployment_date": "xsd:date",
+                  "last_retrain_date": "xsd:date",
+                  "next_review_date": "xsd:date",
+                  "model_drift": "xsd:float",
+                  "performance_degradation": "xsd:float",
+                  "monitoring_metrics": "xsd:string",
+                  "alert_thresholds": "xsd:string",
+                  "model_owner": "xsd:string",
+                  "model_developer": "xsd:string",
+                  "business_stakeholder": "xsd:string",
+                  "regulatory_approval": "xsd:string",
+                  "model_documentation": "xsd:string",
+                  "technical_documentation": "xsd:string",
+                  "user_guide": "xsd:string",
+                  "change_log": "xsd:string",
+                  "risk_assessment": "xsd:string",
+                  "impact_analysis": "xsd:string",
+                  "rollback_plan": "xsd:string",
+                  "disaster_recovery": "xsd:string",
+                  "business_continuity": "xsd:string",
+                  "data_lineage": "xsd:string",
+                  "data_quality_checks": "xsd:string",
+                  "data_privacy": "xsd:string",
+                  "data_security": "xsd:string",
+                  "access_controls": "xsd:string",
+                  "audit_trail": "xsd:string",
+                  "compliance_requirements": "xsd:string",
+                  "ethical_considerations": "xsd:string",
+                  "environmental_impact": "xsd:string",
+                  "computational_resources": "xsd:string",
+                  "infrastructure_requirements": "xsd:string",
+                  "scalability": "xsd:string",
+                  "performance_benchmarks": "xsd:string",
+                  "cost_benefit_analysis": "xsd:string",
+                  "roi_calculation": "xsd:float",
+                  "business_value": "xsd:string",
+                  "competitive_advantage": "xsd:string",
+                  "market_differentiation": "xsd:string",
+                  "innovation_level": "xsd:string",
+                  "technology_maturity": "xsd:string",
+                  "adoption_rate": "xsd:float",
+                  "user_satisfaction": "xsd:float",
+                  "feedback_incorporation": "xsd:string",
+                  "continuous_improvement": "xsd:string",
+                  "future_enhancements": "xsd:string",
+                  "roadmap": "xsd:string",
+                  "strategic_alignment": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": [
+      {
+        "relation": "fin:operates",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:BankAccount",
+        "properties": {
+          "relationship_type": "operational",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:processes",
+        "domain": "fin:PaymentMethod",
+        "range": "fin:Transaction",
+        "properties": {
+          "relationship_type": "functional",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:trades_on",
+        "domain": "fin:Security",
+        "range": "fin:Exchange",
+        "properties": {
+          "relationship_type": "locational",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:contains",
+        "domain": "fin:Portfolio",
+        "range": "fin:Security",
+        "properties": {
+          "relationship_type": "compositional",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:exposes_to",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:RiskFactor",
+        "properties": {
+          "relationship_type": "risk_based",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:subject_to",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:Regulation",
+        "properties": {
+          "relationship_type": "regulatory",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:implements",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:FintechSolution",
+        "properties": {
+          "relationship_type": "technological",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:underwrites",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:InsurancePolicy",
+        "properties": {
+          "relationship_type": "contractual",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:manages_risk",
+        "domain": "fin:Portfolio",
+        "range": "fin:RiskFactor",
+        "properties": {
+          "relationship_type": "risk_management",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:complies_with",
+        "domain": "fin:FintechSolution",
+        "range": "fin:Regulation",
+        "properties": {
+          "relationship_type": "compliance",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:settles_through",
+        "domain": "fin:Exchange",
+        "range": "fin:PaymentMethod",
+        "properties": {
+          "relationship_type": "operational",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:hedges",
+        "domain": "fin:Portfolio",
+        "range": "fin:Security",
+        "properties": {
+          "relationship_type": "risk_mitigation",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:covers",
+        "domain": "fin:InsurancePolicy",
+        "range": "fin:RiskFactor",
+        "properties": {
+          "relationship_type": "coverage",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:rates",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:CreditExposure",
+        "properties": {
+          "relationship_type": "assessment",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:benchmarks_against",
+        "domain": "fin:Portfolio",
+        "range": "fin:Exchange",
+        "properties": {
+          "relationship_type": "performance",
+          "cardinality": "many_to_one"
+        }
+      },
+      {
+        "relation": "fin:integrates_with",
+        "domain": "fin:FintechSolution",
+        "range": "fin:PaymentMethod",
+        "properties": {
+          "relationship_type": "technological",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:reinsures",
+        "domain": "fin:InsurancePolicy",
+        "range": "fin:FinancialInstitution",
+        "properties": {
+          "relationship_type": "risk_transfer",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:correlates_with",
+        "domain": "fin:Security",
+        "range": "fin:Security",
+        "properties": {
+          "relationship_type": "statistical",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:enforces",
+        "domain": "fin:Regulation",
+        "range": "fin:FinancialInstitution",
+        "properties": {
+          "relationship_type": "regulatory",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:mitigates",
+        "domain": "fin:FintechSolution",
+        "range": "fin:RiskFactor",
+        "properties": {
+          "relationship_type": "risk_reduction",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:diversifies",
+        "domain": "fin:Portfolio",
+        "range": "fin:RiskFactor",
+        "properties": {
+          "relationship_type": "risk_distribution",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:clears_through",
+        "domain": "fin:Security",
+        "range": "fin:FinancialInstitution",
+        "properties": {
+          "relationship_type": "operational",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:prices",
+        "domain": "fin:Exchange",
+        "range": "fin:Security",
+        "properties": {
+          "relationship_type": "valuation",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:monitors",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:CreditExposure",
+        "properties": {
+          "relationship_type": "surveillance",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:innovates_through",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:FintechSolution",
+        "properties": {
+          "relationship_type": "innovation",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:analyzes_with",
+        "domain": "fin:FinancialInstitution",
+        "range": "fin:AnalyticsModel",
+        "properties": {
+          "relationship_type": "analytical",
+          "cardinality": "one_to_many"
+        }
+      },
+      {
+        "relation": "fin:predicts",
+        "domain": "fin:AnalyticsModel",
+        "range": "fin:RiskFactor",
+        "properties": {
+          "relationship_type": "predictive",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:optimizes",
+        "domain": "fin:AnalyticsModel",
+        "range": "fin:Portfolio",
+        "properties": {
+          "relationship_type": "optimization",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:validates",
+        "domain": "fin:AnalyticsModel",
+        "range": "fin:CreditExposure",
+        "properties": {
+          "relationship_type": "validation",
+          "cardinality": "many_to_many"
+        }
+      },
+      {
+        "relation": "fin:scores",
+        "domain": "fin:AnalyticsModel",
+        "range": "fin:Security",
+        "properties": {
+          "relationship_type": "scoring",
+          "cardinality": "many_to_many"
+        }
+      }
+    ]
+  }
+}

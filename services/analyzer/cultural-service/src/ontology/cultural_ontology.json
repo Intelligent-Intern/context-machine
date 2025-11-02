@@ -1,0 +1,1330 @@
+{
+  "ontology": {
+    "name": "cultural_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/cultural#",
+    "description": "Comprehensive ontology for cultural institutions and services: collections, exhibitions, performing arts, events, education, audience engagement, digital assets, rights & licensing, funding, conservation, heritage management, accessibility, sustainability.",
+    "namespaces": {
+      "cult": "http://context-machine.org/ontology/cultural#",
+      "venue": "http://context-machine.org/ontology/cultural/venue#",
+      "coll": "http://context-machine.org/ontology/cultural/collection#",
+      "event": "http://context-machine.org/ontology/cultural/event#",
+      "edu": "http://context-machine.org/ontology/cultural/education#",
+      "rights": "http://context-machine.org/ontology/cultural/rights#",
+      "digit": "http://context-machine.org/ontology/cultural/digitization#",
+      "crm": "http://www.cidoc-crm.org/cidoc-crm/",
+      "crmgeo": "http://www.ics.forth.gr/isl/CRMgeo/",
+      "lido": "http://www.lido-schema.org/",
+      "iiif": "http://iiif.io/api/presentation/3#",
+      "edm": "http://www.europeana.eu/schemas/edm/",
+      "premis": "http://www.loc.gov/premis/rdf/v3#",
+      "eac": "http://eac.staatsbibliothek-berlin.de/schema/cpf#",
+      "ead": "http://www.loc.gov/ead/",
+      "ore": "http://www.openarchives.org/ore/terms/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "schema": "http://schema.org/",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "dcterms": "http://purl.org/dc/terms/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "time": "http://www.w3.org/2006/time#",
+      "geo": "http://www.opengis.net/ont/geosparql#",
+      "wgs": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "qudt": "http://qudt.org/vocab/unit#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://purl.org/dc/terms/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "http://www.cidoc-crm.org/cidoc-crm/"
+    ],
+    "frames": {
+      "Cultural_Service_System": {
+        "collections": {
+          "Organizational_Entities": {
+            "entities": {
+              "Institution": {
+                "properties": {
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "institution_type": "xsd:string",
+                  "governance": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "tax_id": "xsd:string",
+                  "description": "xsd:string",
+                  "languages": "xsd:string",
+                  "timezone": "xsd:string",
+                  "website": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "address": "xsd:string",
+                  "location": "geo:Point",
+                  "annual_visitors": "xsd:integer",
+                  "collection_size": "xsd:integer",
+                  "staff_count": "xsd:integer",
+                  "volunteer_count": "xsd:integer",
+                  "accessibility_policy": "xsd:string",
+                  "sustainability_policy": "xsd:string",
+                  "data_protection_policy": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "updated_at": "xsd:dateTime"
+                }
+              },
+              "Department": {
+                "properties": {
+                  "department_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "department_type": "xsd:string",
+                  "head_of_department": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "budget_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "staff_count": "xsd:integer"
+                }
+              },
+              "StaffMember": {
+                "properties": {
+                  "staff_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "employment_type": "xsd:string",
+                  "license_or_certificate": "xsd:string",
+                  "languages": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "orcid": "xsd:string",
+                  "is_active": "xsd:boolean"
+                }
+              },
+              "Volunteer": {
+                "properties": {
+                  "volunteer_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "roles": "xsd:string",
+                  "background_check_status": "xsd:string",
+                  "training_completed_at": "xsd:date",
+                  "hours_logged": "xsd:float",
+                  "is_active": "xsd:boolean"
+                }
+              },
+              "PartnerOrganization": {
+                "properties": {
+                  "partner_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "website": "xsd:string",
+                  "contact": "xsd:string",
+                  "agreement_ref": "xsd:string"
+                }
+              },
+              "PatronAccount": {
+                "properties": {
+                  "account_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "full_name": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "home_country": "xsd:string",
+                  "preferred_language": "xsd:string",
+                  "accessibility_needs": "xsd:string",
+                  "marketing_consent": "xsd:boolean",
+                  "created_at": "xsd:dateTime"
+                }
+              },
+              "MembershipProgram": {
+                "properties": {
+                  "program_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "tiers": "xsd:string",
+                  "benefits": "xsd:string",
+                  "annual_fee": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "Member": {
+                "properties": {
+                  "member_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "account_id": "xsd:string",
+                  "tier": "xsd:string",
+                  "join_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Agent": {
+                "properties": {
+                  "agent_id": "xsd:string",
+                  "agent_type": "xsd:string",
+                  "preferred_name": "xsd:string",
+                  "alternate_names": "xsd:string",
+                  "birth_date": "xsd:date",
+                  "death_date": "xsd:date",
+                  "nationality": "xsd:string",
+                  "orcid": "xsd:string",
+                  "isni": "xsd:string",
+                  "ulan_id": "xsd:string",
+                  "wikidata_qid": "xsd:string",
+                  "website": "xsd:string"
+                }
+              }
+            }
+          },
+          "Venues_Spaces_Facilities": {
+            "entities": {
+              "Venue": {
+                "properties": {
+                  "venue_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "venue_name": "xsd:string",
+                  "venue_type": "xsd:string",
+                  "description": "xsd:string",
+                  "address": "xsd:string",
+                  "location": "geo:Point",
+                  "geometry": "geo:Polygon",
+                  "capacity_total": "xsd:integer",
+                  "seat_count": "xsd:integer",
+                  "standing_capacity": "xsd:integer",
+                  "fire_code_capacity": "xsd:integer",
+                  "amenities": "xsd:string",
+                  "evacuation_plan_ref": "xsd:string",
+                  "accessibility_features": "xsd:string"
+                }
+              },
+              "Space": {
+                "properties": {
+                  "space_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "name": "xsd:string",
+                  "space_type": "xsd:string",
+                  "floor": "xsd:string",
+                  "area_m2": "xsd:float",
+                  "height_m": "xsd:float",
+                  "climate_control": "xsd:boolean",
+                  "temp_setpoint_c": "xsd:float",
+                  "rh_setpoint_pct": "xsd:float",
+                  "light_control": "xsd:boolean",
+                  "security_level": "xsd:string",
+                  "load_bearing_kg_m2": "xsd:float",
+                  "is_public": "xsd:boolean"
+                }
+              },
+              "SeatMap": {
+                "properties": {
+                  "seatmap_id": "xsd:string",
+                  "space_id": "xsd:string",
+                  "sections": "xsd:string",
+                  "rows": "xsd:string",
+                  "seats": "xsd:string",
+                  "wheelchair_locations": "xsd:string",
+                  "capacity": "xsd:integer",
+                  "schema_version": "xsd:string"
+                }
+              },
+              "OpeningHours": {
+                "properties": {
+                  "hours_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "monday": "xsd:string",
+                  "tuesday": "xsd:string",
+                  "wednesday": "xsd:string",
+                  "thursday": "xsd:string",
+                  "friday": "xsd:string",
+                  "saturday": "xsd:string",
+                  "sunday": "xsd:string",
+                  "special_dates": "xsd:string",
+                  "timezone": "xsd:string"
+                }
+              },
+              "Facility": {
+                "properties": {
+                  "facility_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "facility_type": "xsd:string",
+                  "name": "xsd:string",
+                  "status": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "AccessibilityFeature": {
+                "properties": {
+                  "feature_id": "xsd:string",
+                  "name": "xsd:string",
+                  "feature_type": "xsd:string",
+                  "description": "xsd:string",
+                  "available_on_request": "xsd:boolean"
+                },
+                "instances": {
+                  "Wheelchair_Access": { "name": "Wheelchair Access", "feature_type": "mobility" },
+                  "Hearing_Loop": { "name": "Hearing Loop", "feature_type": "hearing" },
+                  "Sign_Language": { "name": "Sign Language Interpretation", "feature_type": "communication" },
+                  "Audio_Description": { "name": "Audio Description", "feature_type": "vision" }
+                }
+              },
+              "VisitorService": {
+                "properties": {
+                  "service_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "name": "xsd:string",
+                  "service_type": "xsd:string",
+                  "description": "xsd:string",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Collections_Objects_Digitization": {
+            "entities": {
+              "Collection": {
+                "properties": {
+                  "collection_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "title": "xsd:string",
+                  "collection_type": "xsd:string",
+                  "scope_note": "xsd:string",
+                  "owner": "xsd:string",
+                  "coverage_spatial": "xsd:string",
+                  "coverage_temporal": "xsd:string",
+                  "object_count": "xsd:integer",
+                  "management_policy": "xsd:string"
+                }
+              },
+              "Accession": {
+                "properties": {
+                  "accession_id": "xsd:string",
+                  "accession_number": "xsd:string",
+                  "object_id": "xsd:string",
+                  "accession_date": "xsd:date",
+                  "acquisition_method": "xsd:string",
+                  "source_party": "xsd:string",
+                  "price_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "legal_title_acquired": "xsd:boolean",
+                  "notes": "xsd:string"
+                }
+              },
+              "CollectionObject": {
+                "properties": {
+                  "object_id": "xsd:string",
+                  "collection_id": "xsd:string",
+                  "accession_number": "xsd:string",
+                  "title": "xsd:string",
+                  "object_type": "xsd:string",
+                  "classification": "xsd:string",
+                  "creator_agent_id": "xsd:string",
+                  "culture": "xsd:string",
+                  "period": "xsd:string",
+                  "production_date": "xsd:string",
+                  "materials": "xsd:string",
+                  "techniques": "xsd:string",
+                  "dimensions": "xsd:string",
+                  "weight_kg": "xsd:float",
+                  "inscriptions": "xsd:string",
+                  "marks": "xsd:string",
+                  "subject_keywords": "xsd:string",
+                  "description": "xsd:string",
+                  "current_location_space_id": "xsd:string",
+                  "storage_location": "xsd:string",
+                  "inventory_status": "xsd:string",
+                  "on_display": "xsd:boolean",
+                  "valuation_amount": "xsd:float",
+                  "valuation_currency": "xsd:string",
+                  "insurance_policy_id": "xsd:string",
+                  "rights_status": "xsd:string",
+                  "license_id": "xsd:string",
+                  "doi": "xsd:string",
+                  "catalogue_reference": "xsd:string"
+                }
+              },
+              "ProvenanceRecord": {
+                "properties": {
+                  "provenance_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "sequence": "xsd:integer",
+                  "from_party": "xsd:string",
+                  "to_party": "xsd:string",
+                  "transfer_method": "xsd:string",
+                  "date_from": "xsd:date",
+                  "date_to": "xsd:date",
+                  "place": "xsd:string",
+                  "source_document_ref": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "ConditionReport": {
+                "properties": {
+                  "condition_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "report_date": "xsd:date",
+                  "assessed_by": "xsd:string",
+                  "overall_condition": "xsd:string",
+                  "issues": "xsd:string",
+                  "risk_score": "xsd:float",
+                  "attachments_ref": "xsd:string",
+                  "recommendations": "xsd:string"
+                }
+              },
+              "ConservationTreatment": {
+                "properties": {
+                  "treatment_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "treatment_type": "xsd:string",
+                  "materials_used": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "performed_by": "xsd:string",
+                  "hours_spent": "xsd:float",
+                  "cost_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "before_photos_ref": "xsd:string",
+                  "after_photos_ref": "xsd:string",
+                  "outcome": "xsd:string"
+                }
+              },
+              "Loan": {
+                "properties": {
+                  "loan_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "loan_type": "xsd:string",
+                  "lender_or_borrower": "xsd:string",
+                  "purpose": "xsd:string",
+                  "agreement_number": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "renewal_option": "xsd:string",
+                  "insurance_policy_id": "xsd:string",
+                  "courier_required": "xsd:boolean",
+                  "transport_plan_ref": "xsd:string",
+                  "crate_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Exhibition": {
+                "properties": {
+                  "exhibition_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "title": "xsd:string",
+                  "theme": "xsd:string",
+                  "curator": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "space_ids": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "ticketed": "xsd:boolean",
+                  "budget_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "sponsors": "xsd:string",
+                  "expected_visitors": "xsd:integer",
+                  "actual_visitors": "xsd:integer",
+                  "status": "xsd:string"
+                }
+              },
+              "ExhibitItem": {
+                "properties": {
+                  "exhibit_item_id": "xsd:string",
+                  "exhibition_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "label_text": "xsd:string",
+                  "label_language": "xsd:string",
+                  "display_case": "xsd:string",
+                  "mount_type": "xsd:string",
+                  "lighting_lux": "xsd:float",
+                  "temperature_c": "xsd:float",
+                  "rh_percent": "xsd:float",
+                  "security_level": "xsd:string",
+                  "image_asset_id": "xsd:string"
+                }
+              },
+              "DigitalAsset": {
+                "properties": {
+                  "asset_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "title": "xsd:string",
+                  "asset_type": "xsd:string",
+                  "creator_agent_id": "xsd:string",
+                  "source": "xsd:string",
+                  "iiif_manifest_url": "xsd:string",
+                  "edm_webResource": "xsd:string",
+                  "rights_statement_id": "xsd:string",
+                  "license_id": "xsd:string",
+                  "representative": "xsd:boolean",
+                  "access_level": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "derivative_of_asset_id": "xsd:string"
+                }
+              },
+              "MediaFile": {
+                "properties": {
+                  "file_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "uri": "xsd:string",
+                  "mimetype": "xsd:string",
+                  "size_bytes": "xsd:integer",
+                  "checksum_sha256": "xsd:string",
+                  "width_px": "xsd:integer",
+                  "height_px": "xsd:integer",
+                  "duration_s": "xsd:float",
+                  "bitrate_kbps": "xsd:float",
+                  "bit_depth": "xsd:integer",
+                  "color_profile": "xsd:string",
+                  "exif_json": "xsd:string",
+                  "xmp_json": "xsd:string",
+                  "storage_class": "xsd:string",
+                  "fixity_last_checked": "xsd:date"
+                }
+              },
+              "DigitizationSession": {
+                "properties": {
+                  "session_id": "xsd:string",
+                  "object_id": "xsd:string",
+                  "equipment": "xsd:string",
+                  "operator_id": "xsd:string",
+                  "date": "xsd:date",
+                  "resolution_dpi": "xsd:integer",
+                  "bit_depth": "xsd:integer",
+                  "file_format": "xsd:string",
+                  "light_source": "xsd:string",
+                  "color_checker": "xsd:string",
+                  "workflow_notes": "xsd:string",
+                  "premis_event_id": "xsd:string"
+                }
+              },
+              "RightsStatement": {
+                "properties": {
+                  "rights_id": "xsd:string",
+                  "label": "xsd:string",
+                  "statement_url": "xsd:string",
+                  "copyright_holder": "xsd:string",
+                  "copyright_status": "xsd:string",
+                  "credit_line": "xsd:string",
+                  "expiry_date": "xsd:date",
+                  "access_terms": "xsd:string"
+                }
+              },
+              "License": {
+                "properties": {
+                  "license_id": "xsd:string",
+                  "name": "xsd:string",
+                  "url": "xsd:string",
+                  "terms": "xsd:string",
+                  "code": "xsd:string"
+                },
+                "instances": {
+                  "CC0_1_0": { "name": "CC0 1.0", "url": "https://creativecommons.org/publicdomain/zero/1.0/", "code": "CC0" },
+                  "CC_BY_4_0": { "name": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/", "code": "CC-BY-4.0" },
+                  "CC_BY_SA_4_0": { "name": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "code": "CC-BY-SA-4.0" },
+                  "All_Rights_Reserved": { "name": "All Rights Reserved", "url": "", "code": "ARR" }
+                }
+              }
+            }
+          },
+          "Programs_Events_Performances": {
+            "entities": {
+              "Program": {
+                "properties": {
+                  "program_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "title": "xsd:string",
+                  "program_type": "xsd:string",
+                  "season_id": "xsd:string",
+                  "objective": "xsd:string",
+                  "target_audience": "xsd:string",
+                  "kpi_targets": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Event": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "program_id": "xsd:string",
+                  "title": "xsd:string",
+                  "event_format": "xsd:string",
+                  "category": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "space_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "timezone": "xsd:string",
+                  "language": "xsd:string",
+                  "capacity": "xsd:integer",
+                  "age_restriction": "xsd:string",
+                  "streaming_url": "xsd:string",
+                  "recording_asset_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Performance": {
+                "properties": {
+                  "performance_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "performing_group": "xsd:string",
+                  "director": "xsd:string",
+                  "cast_list": "xsd:string",
+                  "duration_min": "xsd:integer",
+                  "intermission_min": "xsd:integer",
+                  "is_rehearsal": "xsd:boolean"
+                }
+              },
+              "Workshop": {
+                "properties": {
+                  "workshop_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "instructor": "xsd:string",
+                  "materials_required": "xsd:string",
+                  "capacity": "xsd:integer",
+                  "level": "xsd:string"
+                }
+              },
+              "Tour": {
+                "properties": {
+                  "tour_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "route_description": "xsd:string",
+                  "languages": "xsd:string",
+                  "guide_name": "xsd:string",
+                  "headset_available": "xsd:boolean",
+                  "max_group_size": "xsd:integer"
+                }
+              },
+              "Screening": {
+                "properties": {
+                  "screening_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "film_title": "xsd:string",
+                  "rating": "xsd:string",
+                  "duration_min": "xsd:integer",
+                  "subtitles": "xsd:boolean",
+                  "audio_description": "xsd:boolean"
+                }
+              },
+              "Festival": {
+                "properties": {
+                  "festival_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "title": "xsd:string",
+                  "edition_number": "xsd:integer",
+                  "year": "xsd:integer",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "venue_ids": "xsd:string",
+                  "budget_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "sponsors": "xsd:string"
+                }
+              },
+              "Season": {
+                "properties": {
+                  "season_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "title": "xsd:string",
+                  "year": "xsd:integer",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "theme": "xsd:string"
+                }
+              },
+              "ScheduleSlot": {
+                "properties": {
+                  "slot_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "space_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "setup_buffer_min": "xsd:integer",
+                  "breakdown_buffer_min": "xsd:integer"
+                }
+              },
+              "TicketingProduct": {
+                "properties": {
+                  "product_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "product_type": "xsd:string",
+                  "price": "xsd:float",
+                  "currency": "xsd:string",
+                  "validity_rule": "xsd:string",
+                  "membership_required": "xsd:boolean",
+                  "tax_rate_pct": "xsd:float",
+                  "bundle_items": "xsd:string",
+                  "max_per_order": "xsd:integer"
+                }
+              },
+              "Reservation": {
+                "properties": {
+                  "reservation_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "account_id": "xsd:string",
+                  "quantity": "xsd:integer",
+                  "created_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "notes": "xsd:string",
+                  "special_needs": "xsd:string"
+                }
+              },
+              "Ticket": {
+                "properties": {
+                  "ticket_id": "xsd:string",
+                  "product_id": "xsd:string",
+                  "reservation_id": "xsd:string",
+                  "seat_label": "xsd:string",
+                  "qr_hash": "xsd:string",
+                  "issued_at": "xsd:dateTime",
+                  "valid_for_date": "xsd:date",
+                  "status": "xsd:string",
+                  "holder_account_id": "xsd:string",
+                  "entry_time": "xsd:dateTime"
+                }
+              },
+              "CheckInEvent": {
+                "properties": {
+                  "checkin_id": "xsd:string",
+                  "ticket_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "gate": "xsd:string",
+                  "staff_id": "xsd:string",
+                  "result": "xsd:string"
+                }
+              },
+              "Queue": {
+                "properties": {
+                  "queue_id": "xsd:string",
+                  "event_id": "xsd:string",
+                  "space_id": "xsd:string",
+                  "expected_wait_min": "xsd:integer",
+                  "live_count": "xsd:integer",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Education_Outreach": {
+            "entities": {
+              "Curriculum": {
+                "properties": {
+                  "curriculum_id": "xsd:string",
+                  "title": "xsd:string",
+                  "education_level": "xsd:string",
+                  "standards_alignment": "xsd:string",
+                  "learning_outcomes": "xsd:string"
+                }
+              },
+              "Course": {
+                "properties": {
+                  "course_id": "xsd:string",
+                  "curriculum_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "duration_hours": "xsd:float",
+                  "target_audience": "xsd:string"
+                }
+              },
+              "Session": {
+                "properties": {
+                  "session_id": "xsd:string",
+                  "course_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "instructor": "xsd:string",
+                  "space_id": "xsd:string",
+                  "capacity": "xsd:integer"
+                }
+              },
+              "LearningResource": {
+                "properties": {
+                  "resource_id": "xsd:string",
+                  "title": "xsd:string",
+                  "resource_type": "xsd:string",
+                  "url": "xsd:string",
+                  "license_id": "xsd:string",
+                  "language": "xsd:string",
+                  "duration_min": "xsd:integer"
+                }
+              },
+              "Enrollment": {
+                "properties": {
+                  "enrollment_id": "xsd:string",
+                  "session_id": "xsd:string",
+                  "account_id": "xsd:string",
+                  "enrolled_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "certificate_issued": "xsd:boolean"
+                }
+              },
+              "Survey": {
+                "properties": {
+                  "survey_id": "xsd:string",
+                  "title": "xsd:string",
+                  "scope": "xsd:string",
+                  "questions_json": "xsd:string"
+                }
+              },
+              "SurveyResponse": {
+                "properties": {
+                  "response_id": "xsd:string",
+                  "survey_id": "xsd:string",
+                  "account_id": "xsd:string",
+                  "submitted_at": "xsd:dateTime",
+                  "answers_json": "xsd:string",
+                  "nps_score": "xsd:integer"
+                }
+              },
+              "EngagementMetric": {
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "channel": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "impressions": "xsd:integer",
+                  "clicks": "xsd:integer",
+                  "conversions": "xsd:integer",
+                  "attendance": "xsd:integer"
+                }
+              }
+            }
+          },
+          "Funding_Finance_Development": {
+            "entities": {
+              "Grant": {
+                "properties": {
+                  "grant_id": "xsd:string",
+                  "funder": "xsd:string",
+                  "program_name": "xsd:string",
+                  "award_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "award_date": "xsd:date",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "reporting_requirements": "xsd:string",
+                  "project_ref": "xsd:string"
+                }
+              },
+              "Sponsorship": {
+                "properties": {
+                  "sponsorship_id": "xsd:string",
+                  "sponsor": "xsd:string",
+                  "agreement_ref": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "benefits": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date"
+                }
+              },
+              "Donation": {
+                "properties": {
+                  "donation_id": "xsd:string",
+                  "donor": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "date": "xsd:date",
+                  "restricted_fund": "xsd:string",
+                  "purpose": "xsd:string",
+                  "receipt_number": "xsd:string"
+                }
+              },
+              "FundraisingCampaign": {
+                "properties": {
+                  "campaign_id": "xsd:string",
+                  "title": "xsd:string",
+                  "goal_amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "BudgetLine": {
+                "properties": {
+                  "budgetline_id": "xsd:string",
+                  "department_id": "xsd:string",
+                  "category": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date"
+                }
+              },
+              "Invoice": {
+                "properties": {
+                  "invoice_id": "xsd:string",
+                  "vendor": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "due_date": "xsd:date",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "status": "xsd:string",
+                  "cost_center": "xsd:string",
+                  "project_ref": "xsd:string"
+                }
+              },
+              "Contract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "parties": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "scope": "xsd:string",
+                  "pricing_model": "xsd:string",
+                  "termination_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Digital_Presence_Discovery": {
+            "entities": {
+              "Website": {
+                "properties": {
+                  "site_id": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "base_url": "xsd:string",
+                  "cms": "xsd:string",
+                  "language_default": "xsd:string",
+                  "search_index_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "APIEndpoint": {
+                "properties": {
+                  "api_id": "xsd:string",
+                  "base_url": "xsd:string",
+                  "standards": "xsd:string",
+                  "auth_method": "xsd:string",
+                  "scopes": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "SearchIndex": {
+                "properties": {
+                  "index_id": "xsd:string",
+                  "name": "xsd:string",
+                  "updated_at": "xsd:dateTime",
+                  "document_count": "xsd:integer",
+                  "schema_version": "xsd:string"
+                }
+              },
+              "CollectionPortal": {
+                "properties": {
+                  "portal_id": "xsd:string",
+                  "title": "xsd:string",
+                  "url": "xsd:string",
+                  "edm_dataset_ref": "xsd:string",
+                  "iiif_enabled": "xsd:boolean"
+                }
+              },
+              "IIIFManifest": {
+                "properties": {
+                  "manifest_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "url": "xsd:string",
+                  "version": "xsd:string",
+                  "label": "xsd:string",
+                  "thumb_url": "xsd:string"
+                }
+              },
+              "UsageAnalytics": {
+                "properties": {
+                  "analytics_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "pageviews": "xsd:integer",
+                  "sessions": "xsd:integer",
+                  "avg_session_duration_s": "xsd:float",
+                  "downloads": "xsd:integer"
+                }
+              },
+              "SocialPost": {
+                "properties": {
+                  "post_id": "xsd:string",
+                  "platform": "xsd:string",
+                  "url": "xsd:string",
+                  "posted_at": "xsd:dateTime",
+                  "author": "xsd:string",
+                  "message": "xsd:string",
+                  "impressions": "xsd:integer",
+                  "engagements": "xsd:integer"
+                }
+              }
+            }
+          },
+          "Security_Compliance_Risk": {
+            "entities": {
+              "Policy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "title": "xsd:string",
+                  "policy_type": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date",
+                  "owner_department_id": "xsd:string",
+                  "document_url": "xsd:string"
+                }
+              },
+              "Permit": {
+                "properties": {
+                  "permit_id": "xsd:string",
+                  "permit_type": "xsd:string",
+                  "holder_id": "xsd:string",
+                  "valid_from": "xsd:date",
+                  "valid_to": "xsd:date",
+                  "conditions": "xsd:string"
+                }
+              },
+              "InsurancePolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "holder_id": "xsd:string",
+                  "provider": "xsd:string",
+                  "coverage": "xsd:string",
+                  "premium": "xsd:float",
+                  "deductible": "xsd:float",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "RiskAssessment": {
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "date": "xsd:date",
+                  "assessor": "xsd:string",
+                  "risk_matrix_json": "xsd:string",
+                  "residual_risk_level": "xsd:string"
+                }
+              },
+              "SecurityIncident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "location": "geo:Point",
+                  "classification": "xsd:string",
+                  "description": "xsd:string",
+                  "persons_involved": "xsd:string",
+                  "property_damage_amount": "xsd:float",
+                  "actions_taken": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "DataProcessingRecord": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "processing_activity": "xsd:string",
+                  "lawful_basis": "xsd:string",
+                  "retention_days": "xsd:integer",
+                  "data_subject_categories": "xsd:string",
+                  "dpo_contact": "xsd:string"
+                }
+              },
+              "AccessControlPolicy": {
+                "properties": {
+                  "acp_id": "xsd:string",
+                  "roles": "xsd:string",
+                  "permissions": "xsd:string",
+                  "resources": "xsd:string"
+                }
+              }
+            }
+          },
+          "Sustainability_Accessibility": {
+            "entities": {
+              "EnergyUsage": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "electricity_kwh": "xsd:float",
+                  "gas_kwh": "xsd:float",
+                  "heating_oil_l": "xsd:float",
+                  "renewables_pct": "xsd:float",
+                  "cost": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "WaterUsage": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "volume_m3": "xsd:float",
+                  "cost": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "WasteRecord": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "waste_total_kg": "xsd:float",
+                  "recycled_kg": "xsd:float",
+                  "hazardous_kg": "xsd:float"
+                }
+              },
+              "CarbonFootprint": {
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "methodology": "xsd:string",
+                  "total_emissions_kg_co2e": "xsd:float",
+                  "uncertainty_pct": "xsd:float",
+                  "assessment_date": "xsd:date",
+                  "verifier": "xsd:string",
+                  "verification_status": "xsd:string"
+                }
+              },
+              "AccessibilityAudit": {
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "date": "xsd:date",
+                  "auditor": "xsd:string",
+                  "findings": "xsd:string",
+                  "compliance_level": "xsd:string",
+                  "actions_required": "xsd:string"
+                }
+              },
+              "AssistiveService": {
+                "properties": {
+                  "assist_id": "xsd:string",
+                  "venue_id": "xsd:string",
+                  "service_name": "xsd:string",
+                  "availability": "xsd:string",
+                  "booking_required": "xsd:boolean",
+                  "contact": "xsd:string"
+                }
+              }
+            }
+          },
+          "Heritage_Sites_Monitoring": {
+            "entities": {
+              "HeritageSite": {
+                "properties": {
+                  "site_id": "xsd:string",
+                  "name": "xsd:string",
+                  "designation": "xsd:string",
+                  "inscription_year": "xsd:integer",
+                  "location": "geo:Point",
+                  "geometry": "geo:Polygon",
+                  "statement_of_significance": "xsd:string",
+                  "management_plan_ref": "xsd:string",
+                  "responsible_authority": "xsd:string"
+                }
+              },
+              "SiteFeature": {
+                "properties": {
+                  "feature_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "name": "xsd:string",
+                  "feature_type": "xsd:string",
+                  "geometry": "geo:Polygon",
+                  "condition": "xsd:string"
+                }
+              },
+              "MonitoringObservation": {
+                "properties": {
+                  "observation_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "observer": "xsd:string",
+                  "parameter": "xsd:string",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "notes": "xsd:string"
+                }
+              },
+              "RiskMitigationAction": {
+                "properties": {
+                  "action_id": "xsd:string",
+                  "site_id": "xsd:string",
+                  "risk_type": "xsd:string",
+                  "action_description": "xsd:string",
+                  "priority": "xsd:string",
+                  "planned_date": "xsd:date",
+                  "completed_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Research_Publications": {
+            "entities": {
+              "ResearchProject": {
+                "properties": {
+                  "project_id": "xsd:string",
+                  "title": "xsd:string",
+                  "principal_investigator": "xsd:string",
+                  "institution_id": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "funding_ref": "xsd:string",
+                  "abstract": "xsd:string",
+                  "keywords": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Publication": {
+                "properties": {
+                  "publication_id": "xsd:string",
+                  "project_id": "xsd:string",
+                  "title": "xsd:string",
+                  "authors": "xsd:string",
+                  "doi": "xsd:string",
+                  "publisher": "xsd:string",
+                  "publication_date": "xsd:date",
+                  "url": "xsd:string",
+                  "license_id": "xsd:string",
+                  "type": "xsd:string"
+                }
+              },
+              "Citation": {
+                "properties": {
+                  "citation_id": "xsd:string",
+                  "publication_id": "xsd:string",
+                  "cited_work": "xsd:string",
+                  "doi": "xsd:string",
+                  "format": "xsd:string"
+                }
+              },
+              "Dataset": {
+                "properties": {
+                  "dataset_id": "xsd:string",
+                  "project_id": "xsd:string",
+                  "title": "xsd:string",
+                  "description": "xsd:string",
+                  "repository_id": "xsd:string",
+                  "url": "xsd:string",
+                  "license_id": "xsd:string",
+                  "version": "xsd:string",
+                  "created_at": "xsd:dateTime"
+                }
+              },
+              "Repository": {
+                "properties": {
+                  "repository_id": "xsd:string",
+                  "name": "xsd:string",
+                  "base_url": "xsd:string",
+                  "pid_scheme": "xsd:string",
+                  "api_endpoint": "xsd:string"
+                }
+              },
+              "ORCIDIdentity": {
+                "properties": {
+                  "orcid_id": "xsd:string",
+                  "agent_id": "xsd:string",
+                  "profile_url": "xsd:string",
+                  "verified": "xsd:boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "HAS_DEPARTMENT": { "domain": "Institution", "range": "Department" },
+      "EMPLOYS": { "domain": "Institution", "range": "StaffMember" },
+      "HAS_VOLUNTEER": { "domain": "Institution", "range": "Volunteer" },
+      "PARTNERS_WITH": { "domain": "Institution", "range": "PartnerOrganization" },
+      "HAS_VENUE": { "domain": "Institution", "range": "Venue" },
+      "HAS_SPACE": { "domain": "Venue", "range": "Space" },
+      "HAS_OPENING_HOURS": { "domain": "Venue", "range": "OpeningHours" },
+      "HAS_SEATMAP": { "domain": "Space", "range": "SeatMap" },
+      "OFFERS_VISITOR_SERVICE": { "domain": "Venue", "range": "VisitorService" },
+      "HAS_ACCESSIBILITY_FEATURE": { "domain": "Venue", "range": "AccessibilityFeature" },
+      "MANAGES_COLLECTION": { "domain": "Institution", "range": "Collection" },
+      "HAS_OBJECT": { "domain": "Collection", "range": "CollectionObject" },
+      "ACCESSION_FOR": { "domain": "Accession", "range": "CollectionObject" },
+      "HAS_PROVENANCE": { "domain": "CollectionObject", "range": "ProvenanceRecord" },
+      "HAS_CONDITION_REPORT": { "domain": "CollectionObject", "range": "ConditionReport" },
+      "HAS_TREATMENT": { "domain": "CollectionObject", "range": "ConservationTreatment" },
+      "HAS_LOAN": { "domain": "CollectionObject", "range": "Loan" },
+      "DISPLAYED_IN": { "domain": "CollectionObject", "range": "Exhibition" },
+      "HAS_EXHIBIT_ITEM": { "domain": "Exhibition", "range": "ExhibitItem" },
+      "DIGITAL_REPRESENTATION": { "domain": "CollectionObject", "range": "DigitalAsset" },
+      "HAS_MEDIA_FILE": { "domain": "DigitalAsset", "range": "MediaFile" },
+      "HAS_DIGITIZATION_SESSION": { "domain": "CollectionObject", "range": "DigitizationSession" },
+      "HAS_RIGHTS_STATEMENT": { "domain": "DigitalAsset", "range": "RightsStatement" },
+      "HAS_LICENSE": { "domain": "DigitalAsset", "range": "License" },
+      "CREATED_BY": { "domain": "CollectionObject", "range": "Agent" },
+      "CURATED_BY": { "domain": "Exhibition", "range": "StaffMember" },
+      "ORGANIZES_PROGRAM": { "domain": "Institution", "range": "Program" },
+      "PART_OF_PROGRAM": { "domain": "Event", "range": "Program" },
+      "HOSTS_EVENT": { "domain": "Venue", "range": "Event" },
+      "SCHEDULED_IN": { "domain": "Event", "range": "Space" },
+      "HAS_PERFORMANCE": { "domain": "Event", "range": "Performance" },
+      "HAS_WORKSHOP": { "domain": "Event", "range": "Workshop" },
+      "HAS_TOUR": { "domain": "Event", "range": "Tour" },
+      "HAS_SCREENING": { "domain": "Event", "range": "Screening" },
+      "PART_OF_SEASON": { "domain": "Program", "range": "Season" },
+      "HAS_SCHEDULE_SLOT": { "domain": "Event", "range": "ScheduleSlot" },
+      "SELLS_TICKET_PRODUCT": { "domain": "Institution", "range": "TicketingProduct" },
+      "HAS_RESERVATION": { "domain": "PatronAccount", "range": "Reservation" },
+      "RESERVATION_FOR_EVENT": { "domain": "Reservation", "range": "Event" },
+      "ISSUES_TICKET": { "domain": "Reservation", "range": "Ticket" },
+      "CHECKED_IN_BY": { "domain": "Ticket", "range": "CheckInEvent" },
+      "QUEUED_AT": { "domain": "Event", "range": "Queue" },
+      "HAS_CURRICULUM": { "domain": "Institution", "range": "Curriculum" },
+      "HAS_COURSE": { "domain": "Curriculum", "range": "Course" },
+      "HAS_SESSION": { "domain": "Course", "range": "Session" },
+      "HAS_RESOURCE": { "domain": "Course", "range": "LearningResource" },
+      "ENROLLED_IN": { "domain": "PatronAccount", "range": "Enrollment" },
+      "RUNS_SURVEY": { "domain": "Institution", "range": "Survey" },
+      "HAS_RESPONSE": { "domain": "Survey", "range": "SurveyResponse" },
+      "TRACKS_ENGAGEMENT": { "domain": "Program", "range": "EngagementMetric" },
+      "FUNDED_BY_GRANT": { "domain": "Program", "range": "Grant" },
+      "SPONSORED_BY": { "domain": "Exhibition", "range": "Sponsorship" },
+      "RECEIVED_DONATION": { "domain": "Institution", "range": "Donation" },
+      "HAS_BUDGET_LINE": { "domain": "Department", "range": "BudgetLine" },
+      "HAS_INVOICE": { "domain": "Institution", "range": "Invoice" },
+      "BOUND_BY_CONTRACT": { "domain": "Institution", "range": "Contract" },
+      "PUBLISHED_ON_WEBSITE": { "domain": "Institution", "range": "Website" },
+      "EXPOSES_API": { "domain": "Institution", "range": "APIEndpoint" },
+      "INDEXED_IN": { "domain": "Website", "range": "SearchIndex" },
+      "PUBLISHED_IN_PORTAL": { "domain": "Collection", "range": "CollectionPortal" },
+      "HAS_MANIFEST": { "domain": "DigitalAsset", "range": "IIIFManifest" },
+      "MEASURED_BY_ANALYTICS": { "domain": "Website", "range": "UsageAnalytics" },
+      "POSTED_AS": { "domain": "Program", "range": "SocialPost" },
+      "HAS_POLICY": { "domain": "Institution", "range": "Policy" },
+      "HAS_PERMIT": { "domain": "Institution", "range": "Permit" },
+      "COVERED_BY_INSURANCE": { "domain": "CollectionObject", "range": "InsurancePolicy" },
+      "ASSESSED_RISK": { "domain": "Venue", "range": "RiskAssessment" },
+      "HAS_SECURITY_INCIDENT": { "domain": "Venue", "range": "SecurityIncident" },
+      "PROCESSES_DATA": { "domain": "Institution", "range": "DataProcessingRecord" },
+      "CONTROLS_ACCESS_VIA": { "domain": "Institution", "range": "AccessControlPolicy" },
+      "HAS_ENERGY_USAGE": { "domain": "Venue", "range": "EnergyUsage" },
+      "HAS_WATER_USAGE": { "domain": "Venue", "range": "WaterUsage" },
+      "HAS_WASTE_RECORD": { "domain": "Venue", "range": "WasteRecord" },
+      "HAS_CARBON_FOOTPRINT": { "domain": "Institution", "range": "CarbonFootprint" },
+      "HAS_ACCESSIBILITY_AUDIT": { "domain": "Venue", "range": "AccessibilityAudit" },
+      "OFFERS_ASSISTIVE_SERVICE": { "domain": "Venue", "range": "AssistiveService" },
+      "MANAGES_HERITAGE_SITE": { "domain": "Institution", "range": "HeritageSite" },
+      "HAS_SITE_FEATURE": { "domain": "HeritageSite", "range": "SiteFeature" },
+      "HAS_MONITORING_OBSERVATION": { "domain": "HeritageSite", "range": "MonitoringObservation" },
+      "HAS_RISK_MITIGATION": { "domain": "HeritageSite", "range": "RiskMitigationAction" },
+      "HAS_RESEARCH_PROJECT": { "domain": "Institution", "range": "ResearchProject" },
+      "PUBLISHED_AS": { "domain": "ResearchProject", "range": "Publication" },
+      "CITES": { "domain": "Publication", "range": "Citation" },
+      "DATASET_OF": { "domain": "Dataset", "range": "ResearchProject" },
+      "HOSTED_IN_REPOSITORY": { "domain": "Dataset", "range": "Repository" },
+      "IDENTIFIED_BY_ORCID": { "domain": "Agent", "range": "ORCIDIdentity" }
+    }
+  }
+}

@@ -1,0 +1,1268 @@
+{
+    "ontology": {
+        "name": "scientifical_service_ontology",
+        "version": "1.0.0",
+        "namespace": "http://context-machine.org/ontology/scientifical-service#",
+        "description": "Comprehensive ontology for scientific services: R&D projects, laboratory operations, assays & experiments, samples & inventory, computational analysis, data management (FAIR), quality/compliance (GLP/GCLP/ISO 17025/GxP), biosafety/ethics, clinical & animal research support, procurement/assets, customer contracts/SLA, reporting/publication, sustainability and security.",
+        "namespaces": {
+            "sci": "http://context-machine.org/ontology/scientifical-service#",
+            "org": "http://context-machine.org/ontology/scientifical-service/org#",
+            "proj": "http://context-machine.org/ontology/scientifical-service/project#",
+            "lab": "http://context-machine.org/ontology/scientifical-service/lab#",
+            "inst": "http://context-machine.org/ontology/scientifical-service/instrument#",
+            "method": "http://context-machine.org/ontology/scientifical-service/method#",
+            "exp": "http://context-machine.org/ontology/scientifical-service/experiment#",
+            "assay": "http://context-machine.org/ontology/scientifical-service/assay#",
+            "sample": "http://context-machine.org/ontology/scientifical-service/sample#",
+            "chem": "http://context-machine.org/ontology/scientifical-service/chem#",
+            "inv": "http://context-machine.org/ontology/scientifical-service/inventory#",
+            "coc": "http://context-machine.org/ontology/scientifical-service/chainofcustody#",
+            "data": "http://context-machine.org/ontology/scientifical-service/data#",
+            "prov": "http://www.w3.org/ns/prov#",
+            "time": "http://www.w3.org/2006/time#",
+            "qudt": "http://qudt.org/vocab/unit#",
+            "dct": "http://purl.org/dc/terms/",
+            "foaf": "http://xmlns.com/foaf/0.1/",
+            "schema": "http://schema.org/",
+            "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+            "obi": "http://purl.obolibrary.org/obo/obi.owl#",
+            "sio": "https://semanticscience.org/resource/",
+            "chebi": "http://purl.obolibrary.org/obo/CHEBI_",
+            "edam": "http://edamontology.org/",
+            "uo": "http://purl.obolibrary.org/obo/UO_",
+            "ro": "http://purl.obolibrary.org/obo/RO_",
+            "sosa": "http://www.w3.org/ns/sosa/",
+            "dcat": "http://www.w3.org/ns/dcat#",
+            "clin": "http://context-machine.org/ontology/scientifical-service/clinical#",
+            "iacuc": "http://context-machine.org/ontology/scientifical-service/animal#",
+            "qms": "http://context-machine.org/ontology/scientifical-service/qms#",
+            "sop": "http://context-machine.org/ontology/scientifical-service/sop#",
+            "qa": "http://context-machine.org/ontology/scientifical-service/qa#",
+            "sec": "http://context-machine.org/ontology/scientifical-service/security#",
+            "comp": "http://context-machine.org/ontology/scientifical-service/compute#",
+            "wf": "http://context-machine.org/ontology/scientifical-service/workflow#",
+            "ml": "http://context-machine.org/ontology/scientifical-service/ml#",
+            "ip": "http://context-machine.org/ontology/scientifical-service/ip#",
+            "pub": "http://context-machine.org/ontology/scientifical-service/publication#",
+            "grant": "http://context-machine.org/ontology/scientifical-service/grant#",
+            "cust": "http://context-machine.org/ontology/scientifical-service/customer#",
+            "sale": "http://context-machine.org/ontology/scientifical-service/sales#",
+            "fin": "http://context-machine.org/ontology/scientifical-service/finance#",
+            "proc": "http://context-machine.org/ontology/scientifical-service/procurement#",
+            "asset": "http://context-machine.org/ontology/scientifical-service/asset#",
+            "esg": "http://context-machine.org/ontology/scientifical-service/esg#",
+            "lic": "http://context-machine.org/ontology/scientifical-service/license#"
+        },
+        "imports": [
+            "http://www.w3.org/ns/prov#",
+            "http://www.w3.org/2006/time#",
+            "http://qudt.org/vocab/unit#",
+            "http://purl.org/dc/terms/",
+            "http://xmlns.com/foaf/0.1/",
+            "http://www.w3.org/2003/01/geo/wgs84_pos#",
+            "http://schema.org/",
+            "http://www.w3.org/ns/sosa/",
+            "http://www.w3.org/ns/dcat#",
+            "http://purl.obolibrary.org/obo/obi.owl",
+            "http://edamontology.org/",
+            "https://semanticscience.org/ontology/sio.owl"
+        ],
+        "frames": {
+            "Service_Business_System": {
+                "collections": {
+                    "Organization_and_Customers": {
+                        "entities": {
+                            "ServiceProvider": {
+                                "properties": {
+                                    "provider_id": "xsd:string",
+                                    "legal_name": "xsd:string",
+                                    "trade_name": "xsd:string",
+                                    "ror_id": "xsd:string",
+                                    "tax_id": "xsd:string",
+                                    "address": "xsd:string",
+                                    "location": "geo:Point",
+                                    "phone": "xsd:string",
+                                    "email": "xsd:string",
+                                    "website": "xsd:string",
+                                    "accreditations": "xsd:string",
+                                    "quality_standards": "xsd:string",
+                                    "primary_domains": "xsd:string"
+                                }
+                            },
+                            "Customer": {
+                                "properties": {
+                                    "customer_id": "xsd:string",
+                                    "organization_name": "xsd:string",
+                                    "contact_person": "xsd:string",
+                                    "orcid": "xsd:string",
+                                    "email": "xsd:string",
+                                    "billing_address": "xsd:string",
+                                    "shipping_address": "xsd:string",
+                                    "industry": "xsd:string",
+                                    "nda_in_place": "xsd:boolean",
+                                    "data_sharing_agreement": "xsd:boolean",
+                                    "risk_tier": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Commercials_and_Contracts": {
+                        "entities": {
+                            "ServiceCatalogItem": {
+                                "properties": {
+                                    "catalog_id": "xsd:string",
+                                    "service_code": "xsd:string",
+                                    "service_name": "xsd:string",
+                                    "category": "xsd:string",
+                                    "description": "xsd:string",
+                                    "turnaround_days": "xsd:integer",
+                                    "unit_price": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "sla_level": "xsd:string",
+                                    "required_inputs": "xsd:string",
+                                    "deliverables": "xsd:string"
+                                }
+                            },
+                            "Quote": {
+                                "properties": {
+                                    "quote_id": "xsd:string",
+                                    "customer_id": "xsd:string",
+                                    "issue_date": "xsd:date",
+                                    "valid_until": "xsd:date",
+                                    "items": "xsd:string",
+                                    "total_amount": "xsd:float",
+                                    "currency": "xsd:string",
+                                    "discount_percentage": "xsd:float",
+                                    "notes": "xsd:string",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "Contract": {
+                                "properties": {
+                                    "contract_id": "xsd:string",
+                                    "customer_id": "xsd:string",
+                                    "effective_date": "xsd:date",
+                                    "end_date": "xsd:date",
+                                    "scope_of_work": "xsd:string",
+                                    "sla": "xsd:string",
+                                    "ip_terms": "xsd:string",
+                                    "confidentiality_terms": "xsd:string",
+                                    "payment_terms": "xsd:string",
+                                    "governing_law": "xsd:string",
+                                    "change_control_process": "xsd:string",
+                                    "signature_date": "xsd:date"
+                                }
+                            },
+                            "WorkOrder": {
+                                "properties": {
+                                    "workorder_id": "xsd:string",
+                                    "contract_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "issue_date": "xsd:date",
+                                    "priority": "xsd:string",
+                                    "requested_by": "xsd:string",
+                                    "assigned_to": "xsd:string",
+                                    "required_by_date": "xsd:date",
+                                    "status": "xsd:string",
+                                    "notes": "xsd:string"
+                                }
+                            },
+                            "Invoice": {
+                                "properties": {
+                                    "invoice_id": "xsd:string",
+                                    "contract_id": "xsd:string",
+                                    "issue_date": "xsd:date",
+                                    "due_date": "xsd:date",
+                                    "amount": "xsd:float",
+                                    "currency": "xsd:string",
+                                    "cost_center": "xsd:string",
+                                    "po_number": "xsd:string",
+                                    "status": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Project_Portfolio_System": {
+                "collections": {
+                    "Projects_and_Planning": {
+                        "entities": {
+                            "Project": {
+                                "properties": {
+                                    "project_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "abstract": "xsd:string",
+                                    "customer_id": "xsd:string",
+                                    "principal_investigator": "xsd:string",
+                                    "project_manager": "xsd:string",
+                                    "start_date": "xsd:date",
+                                    "end_date": "xsd:date",
+                                    "budget_total": "xsd:float",
+                                    "status": "xsd:string",
+                                    "risk_level": "xsd:string",
+                                    "sponsor_grant_id": "xsd:string",
+                                    "contract_id": "xsd:string",
+                                    "data_management_plan": "xsd:string"
+                                }
+                            },
+                            "WorkPackage": {
+                                "properties": {
+                                    "wp_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "description": "xsd:string",
+                                    "lead": "xsd:string",
+                                    "start_date": "xsd:date",
+                                    "end_date": "xsd:date",
+                                    "budget": "xsd:float",
+                                    "status": "xsd:string",
+                                    "dependencies": "xsd:string"
+                                }
+                            },
+                            "Milestone": {
+                                "properties": {
+                                    "milestone_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "due_date": "xsd:date",
+                                    "completion_date": "xsd:date",
+                                    "status": "xsd:string",
+                                    "acceptance_criteria": "xsd:string"
+                                }
+                            },
+                            "Deliverable": {
+                                "properties": {
+                                    "deliverable_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "type": "xsd:string",
+                                    "due_date": "xsd:date",
+                                    "status": "xsd:string",
+                                    "associated_dataset_id": "xsd:string",
+                                    "doi": "xsd:string",
+                                    "license": "xsd:string"
+                                }
+                            },
+                            "Risk": {
+                                "properties": {
+                                    "risk_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "category": "xsd:string",
+                                    "description": "xsd:string",
+                                    "likelihood": "xsd:float",
+                                    "impact": "xsd:float",
+                                    "mitigation": "xsd:string",
+                                    "owner": "xsd:string",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "ChangeRequest": {
+                                "properties": {
+                                    "cr_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "raised_by": "xsd:string",
+                                    "date_raised": "xsd:date",
+                                    "change_summary": "xsd:string",
+                                    "impact_analysis": "xsd:string",
+                                    "decision": "xsd:string",
+                                    "decision_date": "xsd:date"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Laboratory_Operations_System": {
+                "collections": {
+                    "Facilities_and_Equipment": {
+                        "entities": {
+                            "Laboratory": {
+                                "properties": {
+                                    "lab_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "location": "geo:Point",
+                                    "address": "xsd:string",
+                                    "biosafety_level": "xsd:string",
+                                    "temperature_controlled": "xsd:boolean",
+                                    "humidity_controlled": "xsd:boolean",
+                                    "access_restriction_level": "xsd:string",
+                                    "manager": "xsd:string"
+                                }
+                            },
+                            "Instrument": {
+                                "properties": {
+                                    "instrument_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "instrument_type": "xsd:string",
+                                    "manufacturer": "xsd:string",
+                                    "model": "xsd:string",
+                                    "serial_number": "xsd:string",
+                                    "installation_date": "xsd:date",
+                                    "last_calibration_date": "xsd:date",
+                                    "calibration_due_date": "xsd:date",
+                                    "status": "xsd:string",
+                                    "software_version": "xsd:string",
+                                    "location": "geo:Point",
+                                    "asset_tag": "xsd:string",
+                                    "power_consumption_w": "xsd:float",
+                                    "network_id": "xsd:string"
+                                }
+                            },
+                            "CalibrationRecord": {
+                                "properties": {
+                                    "calibration_id": "xsd:string",
+                                    "instrument_id": "xsd:string",
+                                    "date": "xsd:date",
+                                    "standard_used": "xsd:string",
+                                    "method_reference": "xsd:string",
+                                    "as_found_status": "xsd:string",
+                                    "as_left_status": "xsd:string",
+                                    "uncertainty": "xsd:float",
+                                    "certificate_file": "xsd:string",
+                                    "technician": "xsd:string"
+                                }
+                            },
+                            "MaintenanceRecord": {
+                                "properties": {
+                                    "maintenance_id": "xsd:string",
+                                    "instrument_id": "xsd:string",
+                                    "date": "xsd:date",
+                                    "type": "xsd:string",
+                                    "finding": "xsd:string",
+                                    "action": "xsd:string",
+                                    "downtime_hours": "xsd:float",
+                                    "vendor_ticket": "xsd:string",
+                                    "cost": "xsd:float"
+                                }
+                            },
+                            "Method": {
+                                "properties": {
+                                    "method_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "discipline": "xsd:string",
+                                    "reference_standard": "xsd:string",
+                                    "version": "xsd:string",
+                                    "sop_id": "xsd:string",
+                                    "validation_status": "xsd:string",
+                                    "limits_of_detection": "xsd:string",
+                                    "limits_of_quantitation": "xsd:string",
+                                    "precision": "xsd:string",
+                                    "accuracy": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Inventory_and_Safety": {
+                        "entities": {
+                            "Reagent": {
+                                "properties": {
+                                    "reagent_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "cas_number": "xsd:string",
+                                    "chebi_id": "xsd:string",
+                                    "supplier": "xsd:string",
+                                    "catalog_number": "xsd:string",
+                                    "lot_number": "xsd:string",
+                                    "purity_percentage": "xsd:float",
+                                    "expiry_date": "xsd:date",
+                                    "storage_temperature_c": "xsd:float",
+                                    "hazard_class": "xsd:string",
+                                    "sds_url": "xsd:string"
+                                }
+                            },
+                            "InventoryItem": {
+                                "properties": {
+                                    "item_id": "xsd:string",
+                                    "item_type": "xsd:string",
+                                    "name": "xsd:string",
+                                    "barcode": "xsd:string",
+                                    "location": "xsd:string",
+                                    "quantity": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "min_level": "xsd:float",
+                                    "max_level": "xsd:float",
+                                    "owner": "xsd:string"
+                                }
+                            },
+                            "WasteRecord": {
+                                "properties": {
+                                    "waste_id": "xsd:string",
+                                    "lab_id": "xsd:string",
+                                    "waste_type": "xsd:string",
+                                    "hazard_class": "xsd:string",
+                                    "quantity": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "container_type": "xsd:string",
+                                    "collection_date": "xsd:date",
+                                    "disposal_vendor": "xsd:string",
+                                    "manifest_number": "xsd:string"
+                                }
+                            },
+                            "TrainingRecord": {
+                                "properties": {
+                                    "training_id": "xsd:string",
+                                    "person_id": "xsd:string",
+                                    "course_name": "xsd:string",
+                                    "provider": "xsd:string",
+                                    "completion_date": "xsd:date",
+                                    "valid_until": "xsd:date",
+                                    "competencies": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Samples_and_Assays_System": {
+                "collections": {
+                    "Samples_and_Custody": {
+                        "entities": {
+                            "Sample": {
+                                "properties": {
+                                    "sample_id": "xsd:string",
+                                    "external_id": "xsd:string",
+                                    "sample_type": "xsd:string",
+                                    "matrix": "xsd:string",
+                                    "collection_date": "xsd:date",
+                                    "received_date": "xsd:date",
+                                    "volume": "xsd:float",
+                                    "mass": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "container_type": "xsd:string",
+                                    "storage_location": "xsd:string",
+                                    "storage_temperature_c": "xsd:float",
+                                    "hazard_flag": "xsd:boolean",
+                                    "anonymization_code": "xsd:string",
+                                    "consent_id": "xsd:string"
+                                }
+                            },
+                            "Aliquot": {
+                                "properties": {
+                                    "aliquot_id": "xsd:string",
+                                    "sample_id": "xsd:string",
+                                    "volume": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "concentration": "xsd:float",
+                                    "concentration_unit": "xsd:string",
+                                    "creation_date": "xsd:date",
+                                    "location": "xsd:string",
+                                    "barcode": "xsd:string"
+                                }
+                            },
+                            "ChainOfCustodyEvent": {
+                                "properties": {
+                                    "coc_event_id": "xsd:string",
+                                    "sample_or_aliquot_id": "xsd:string",
+                                    "timestamp": "xsd:dateTime",
+                                    "from_person": "xsd:string",
+                                    "to_person": "xsd:string",
+                                    "from_location": "xsd:string",
+                                    "to_location": "xsd:string",
+                                    "condition": "xsd:string",
+                                    "seal_intact": "xsd:boolean",
+                                    "notes": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Assays_and_Experiments": {
+                        "entities": {
+                            "Assay": {
+                                "properties": {
+                                    "assay_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "category": "xsd:string",
+                                    "method_id": "xsd:string",
+                                    "instrument_id": "xsd:string",
+                                    "validation_level": "xsd:string",
+                                    "limit_of_detection": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "throughput_per_day": "xsd:integer"
+                                },
+                                "instances": {
+                                    "LCMS_Metabolomics": {
+                                        "name": "LC-MS Metabolomics",
+                                        "category": "omics",
+                                        "unit": "xsd:string"
+                                    },
+                                    "qPCR_GeneExpression": {
+                                        "name": "qPCR Gene Expression",
+                                        "category": "molecular",
+                                        "unit": "Cq"
+                                    },
+                                    "NGS_RNASeq": {
+                                        "name": "RNA-Seq",
+                                        "category": "sequencing",
+                                        "unit": "reads"
+                                    }
+                                }
+                            },
+                            "Experiment": {
+                                "properties": {
+                                    "experiment_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "assay_id": "xsd:string",
+                                    "method_version": "xsd:string",
+                                    "objective": "xsd:string",
+                                    "operator": "xsd:string",
+                                    "start_time": "xsd:dateTime",
+                                    "end_time": "xsd:dateTime",
+                                    "environment_conditions": "xsd:string",
+                                    "sop_id": "xsd:string",
+                                    "deviation_flag": "xsd:boolean",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "Run": {
+                                "properties": {
+                                    "run_id": "xsd:string",
+                                    "experiment_id": "xsd:string",
+                                    "instrument_id": "xsd:string",
+                                    "batch_id": "xsd:string",
+                                    "queue_position": "xsd:integer",
+                                    "start_time": "xsd:dateTime",
+                                    "end_time": "xsd:dateTime",
+                                    "run_parameters": "xsd:string",
+                                    "raw_data_package": "xsd:string",
+                                    "qc_status": "xsd:string"
+                                }
+                            },
+                            "ControlMaterial": {
+                                "properties": {
+                                    "control_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "lot_number": "xsd:string",
+                                    "type": "xsd:string",
+                                    "target_value": "xsd:float",
+                                    "tolerance": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "expiry_date": "xsd:date",
+                                    "storage_temp_c": "xsd:float"
+                                }
+                            },
+                            "QCResult": {
+                                "properties": {
+                                    "qc_id": "xsd:string",
+                                    "run_id": "xsd:string",
+                                    "control_id": "xsd:string",
+                                    "measured_value": "xsd:float",
+                                    "unit": "xsd:string",
+                                    "z_score": "xsd:float",
+                                    "westgard_rule_violations": "xsd:string",
+                                    "pass_fail": "xsd:string",
+                                    "comment": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Data_and_Computation_System": {
+                "collections": {
+                    "Data_Management_and_FAIR": {
+                        "entities": {
+                            "Dataset": {
+                                "properties": {
+                                    "dataset_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "description": "xsd:string",
+                                    "creator": "xsd:string",
+                                    "created_time": "xsd:dateTime",
+                                    "associated_project_id": "xsd:string",
+                                    "associated_experiment_id": "xsd:string",
+                                    "format": "xsd:string",
+                                    "size_bytes": "xsd:integer",
+                                    "checksum": "xsd:string",
+                                    "license": "xsd:string",
+                                    "access_level": "xsd:string",
+                                    "doi": "xsd:string",
+                                    "dcat_catalog": "xsd:string",
+                                    "fair_score": "xsd:float"
+                                }
+                            },
+                            "DataFile": {
+                                "properties": {
+                                    "file_id": "xsd:string",
+                                    "dataset_id": "xsd:string",
+                                    "path": "xsd:string",
+                                    "media_type": "xsd:string",
+                                    "byte_size": "xsd:integer",
+                                    "checksum": "xsd:string",
+                                    "created_time": "xsd:dateTime",
+                                    "provenance": "xsd:string",
+                                    "encryption": "xsd:string"
+                                }
+                            },
+                            "ProvenanceRecord": {
+                                "properties": {
+                                    "prov_id": "xsd:string",
+                                    "entity_id": "xsd:string",
+                                    "activity_id": "xsd:string",
+                                    "agent_id": "xsd:string",
+                                    "startedAtTime": "xsd:dateTime",
+                                    "endedAtTime": "xsd:dateTime",
+                                    "used": "xsd:string",
+                                    "generated": "xsd:string"
+                                }
+                            },
+                            "MetadataRecord": {
+                                "properties": {
+                                    "meta_id": "xsd:string",
+                                    "entity_id": "xsd:string",
+                                    "schema": "xsd:string",
+                                    "key": "xsd:string",
+                                    "value": "xsd:string",
+                                    "unit": "xsd:string",
+                                    "confidence": "xsd:float"
+                                }
+                            }
+                        }
+                    },
+                    "Compute_Workflows_and_ML": {
+                        "entities": {
+                            "SoftwareTool": {
+                                "properties": {
+                                    "tool_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "version": "xsd:string",
+                                    "vendor": "xsd:string",
+                                    "license": "xsd:string",
+                                    "edam_operation": "xsd:string",
+                                    "edam_topic": "xsd:string",
+                                    "container_image": "xsd:string"
+                                }
+                            },
+                            "Workflow": {
+                                "properties": {
+                                    "workflow_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "language": "xsd:string",
+                                    "version": "xsd:string",
+                                    "steps": "xsd:string",
+                                    "repository_url": "xsd:string",
+                                    "hash": "xsd:string",
+                                    "parameters_schema": "xsd:string"
+                                }
+                            },
+                            "ComputeJob": {
+                                "properties": {
+                                    "job_id": "xsd:string",
+                                    "workflow_id": "xsd:string",
+                                    "input_dataset_id": "xsd:string",
+                                    "output_dataset_id": "xsd:string",
+                                    "compute_backend": "xsd:string",
+                                    "cpu_hours": "xsd:float",
+                                    "gpu_hours": "xsd:float",
+                                    "memory_gb": "xsd:float",
+                                    "runtime_seconds": "xsd:integer",
+                                    "status": "xsd:string",
+                                    "log_path": "xsd:string",
+                                    "exit_code": "xsd:integer"
+                                }
+                            },
+                            "MLModel": {
+                                "properties": {
+                                    "model_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "framework": "xsd:string",
+                                    "version": "xsd:string",
+                                    "training_dataset_id": "xsd:string",
+                                    "metrics": "xsd:string",
+                                    "hyperparameters": "xsd:string",
+                                    "artifact_path": "xsd:string",
+                                    "explainability_report": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Quality_and_Compliance_System": {
+                "collections": {
+                    "QMS_and_GxP": {
+                        "entities": {
+                            "SOP": {
+                                "properties": {
+                                    "sop_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "version": "xsd:string",
+                                    "effective_date": "xsd:date",
+                                    "review_date": "xsd:date",
+                                    "owner": "xsd:string",
+                                    "controlled_copy": "xsd:boolean",
+                                    "document_url": "xsd:string"
+                                }
+                            },
+                            "Deviation": {
+                                "properties": {
+                                    "deviation_id": "xsd:string",
+                                    "date": "xsd:date",
+                                    "process_id": "xsd:string",
+                                    "description": "xsd:string",
+                                    "impact": "xsd:string",
+                                    "root_cause": "xsd:string",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "CAPA": {
+                                "properties": {
+                                    "capa_id": "xsd:string",
+                                    "related_deviation_id": "xsd:string",
+                                    "type": "xsd:string",
+                                    "action_owner": "xsd:string",
+                                    "due_date": "xsd:date",
+                                    "closure_date": "xsd:date",
+                                    "effectiveness_check": "xsd:string",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "Audit": {
+                                "properties": {
+                                    "audit_id": "xsd:string",
+                                    "scope": "xsd:string",
+                                    "auditor": "xsd:string",
+                                    "date": "xsd:date",
+                                    "findings": "xsd:string",
+                                    "severity": "xsd:string",
+                                    "recommendations": "xsd:string"
+                                }
+                            },
+                            "Accreditation": {
+                                "properties": {
+                                    "accreditation_id": "xsd:string",
+                                    "standard": "xsd:string",
+                                    "scope": "xsd:string",
+                                    "issuing_body": "xsd:string",
+                                    "certificate_number": "xsd:string",
+                                    "issue_date": "xsd:date",
+                                    "expiry_date": "xsd:date",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "ElectronicSignature": {
+                                "properties": {
+                                    "esign_id": "xsd:string",
+                                    "signer_id": "xsd:string",
+                                    "timestamp": "xsd:dateTime",
+                                    "purpose": "xsd:string",
+                                    "hash": "xsd:string",
+                                    "ip_address": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Ethics_Biosafety_and_ClinicalSupport_System": {
+                "collections": {
+                    "Ethics_and_Biosafety": {
+                        "entities": {
+                            "EthicsApproval": {
+                                "properties": {
+                                    "ethics_id": "xsd:string",
+                                    "committee_name": "xsd:string",
+                                    "approval_number": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "approval_date": "xsd:date",
+                                    "expiry_date": "xsd:date",
+                                    "conditions": "xsd:string"
+                                }
+                            },
+                            "BiosafetyAssessment": {
+                                "properties": {
+                                    "bio_id": "xsd:string",
+                                    "lab_id": "xsd:string",
+                                    "agent": "xsd:string",
+                                    "risk_group": "xsd:string",
+                                    "containment_level": "xsd:string",
+                                    "ppe_requirements": "xsd:string",
+                                    "decontamination_method": "xsd:string",
+                                    "waste_route": "xsd:string"
+                                }
+                            },
+                            "ConsentRecord": {
+                                "properties": {
+                                    "consent_id": "xsd:string",
+                                    "participant_code": "xsd:string",
+                                    "study_id": "xsd:string",
+                                    "consent_date": "xsd:date",
+                                    "scope": "xsd:string",
+                                    "withdrawn": "xsd:boolean",
+                                    "data_use_restrictions": "xsd:string"
+                                }
+                            }
+                        }
+                    },
+                    "Clinical_and_Animal_Support": {
+                        "entities": {
+                            "ClinicalStudy": {
+                                "properties": {
+                                    "study_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "phase": "xsd:string",
+                                    "registry_id": "xsd:string",
+                                    "sponsor": "xsd:string",
+                                    "protocol_version": "xsd:string",
+                                    "start_date": "xsd:date",
+                                    "end_date": "xsd:date",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "CRFEntry": {
+                                "properties": {
+                                    "crf_id": "xsd:string",
+                                    "study_id": "xsd:string",
+                                    "visit_code": "xsd:string",
+                                    "participant_code": "xsd:string",
+                                    "measurements": "xsd:string",
+                                    "timestamp": "xsd:dateTime",
+                                    "source_data_verified": "xsd:boolean"
+                                }
+                            },
+                            "IACUCProtocol": {
+                                "properties": {
+                                    "protocol_id": "xsd:string",
+                                    "species": "xsd:string",
+                                    "justification": "xsd:string",
+                                    "approval_date": "xsd:date",
+                                    "expiry_date": "xsd:date",
+                                    "housing": "xsd:string",
+                                    "humane_endpoints": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Procurement_Assets_and_Finance_System": {
+                "collections": {
+                    "Procurement_and_Assets": {
+                        "entities": {
+                            "PurchaseOrder": {
+                                "properties": {
+                                    "po_id": "xsd:string",
+                                    "supplier": "xsd:string",
+                                    "order_date": "xsd:date",
+                                    "expected_delivery_date": "xsd:date",
+                                    "items": "xsd:string",
+                                    "total_amount": "xsd:float",
+                                    "currency": "xsd:string",
+                                    "status": "xsd:string",
+                                    "requested_by": "xsd:string",
+                                    "project_id": "xsd:string"
+                                }
+                            },
+                            "Asset": {
+                                "properties": {
+                                    "asset_id": "xsd:string",
+                                    "name": "xsd:string",
+                                    "category": "xsd:string",
+                                    "acquisition_date": "xsd:date",
+                                    "cost": "xsd:float",
+                                    "depreciation_method": "xsd:string",
+                                    "owner": "xsd:string",
+                                    "location": "xsd:string",
+                                    "status": "xsd:string"
+                                }
+                            },
+                            "CostRecord": {
+                                "properties": {
+                                    "cost_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "category": "xsd:string",
+                                    "amount": "xsd:float",
+                                    "currency": "xsd:string",
+                                    "date": "xsd:date",
+                                    "gl_code": "xsd:string",
+                                    "description": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Reporting_Publication_and_IP_System": {
+                "collections": {
+                    "Reports_Publications_and_IP": {
+                        "entities": {
+                            "ServiceReport": {
+                                "properties": {
+                                    "report_id": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "issue_date": "xsd:date",
+                                    "prepared_by": "xsd:string",
+                                    "approved_by": "xsd:string",
+                                    "summary": "xsd:string",
+                                    "result_dataset_id": "xsd:string",
+                                    "conclusions": "xsd:string",
+                                    "recommendations": "xsd:string",
+                                    "esign_id": "xsd:string"
+                                }
+                            },
+                            "Publication": {
+                                "properties": {
+                                    "pub_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "journal": "xsd:string",
+                                    "doi": "xsd:string",
+                                    "publication_date": "xsd:date",
+                                    "authors": "xsd:string",
+                                    "acknowledgements": "xsd:string",
+                                    "associated_project_id": "xsd:string",
+                                    "dataset_doi": "xsd:string",
+                                    "open_access": "xsd:boolean"
+                                }
+                            },
+                            "InventionDisclosure": {
+                                "properties": {
+                                    "disclosure_id": "xsd:string",
+                                    "title": "xsd:string",
+                                    "inventors": "xsd:string",
+                                    "date_filed": "xsd:date",
+                                    "summary": "xsd:string",
+                                    "prior_art_notes": "xsd:string",
+                                    "project_id": "xsd:string",
+                                    "confidential": "xsd:boolean"
+                                }
+                            },
+                            "Patent": {
+                                "properties": {
+                                    "patent_id": "xsd:string",
+                                    "application_number": "xsd:string",
+                                    "jurisdiction": "xsd:string",
+                                    "filing_date": "xsd:date",
+                                    "grant_date": "xsd:date",
+                                    "status": "xsd:string",
+                                    "assignee": "xsd:string",
+                                    "ipc_codes": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Sustainability_and_ESG_System": {
+                "collections": {
+                    "ESG_and_ResourceUse": {
+                        "entities": {
+                            "EnergyUse": {
+                                "properties": {
+                                    "energy_id": "xsd:string",
+                                    "lab_id": "xsd:string",
+                                    "period_start": "xsd:date",
+                                    "period_end": "xsd:date",
+                                    "electricity_kwh": "xsd:float",
+                                    "gas_kwh": "xsd:float",
+                                    "renewables_percentage": "xsd:float"
+                                }
+                            },
+                            "WaterUse": {
+                                "properties": {
+                                    "water_id": "xsd:string",
+                                    "lab_id": "xsd:string",
+                                    "period_start": "xsd:date",
+                                    "period_end": "xsd:date",
+                                    "consumption_m3": "xsd:float",
+                                    "recycled_percentage": "xsd:float"
+                                }
+                            },
+                            "CarbonFootprint": {
+                                "properties": {
+                                    "assessment_id": "xsd:string",
+                                    "period_start": "xsd:date",
+                                    "period_end": "xsd:date",
+                                    "scope1_kgco2e": "xsd:float",
+                                    "scope2_kgco2e": "xsd:float",
+                                    "scope3_kgco2e": "xsd:float",
+                                    "methodology": "xsd:string",
+                                    "verification_status": "xsd:string"
+                                }
+                            },
+                            "SafetyIncident": {
+                                "properties": {
+                                    "incident_id": "xsd:string",
+                                    "lab_id": "xsd:string",
+                                    "date": "xsd:date",
+                                    "category": "xsd:string",
+                                    "severity": "xsd:string",
+                                    "description": "xsd:string",
+                                    "injury": "xsd:boolean",
+                                    "lost_time_days": "xsd:float",
+                                    "capa_id": "xsd:string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "relations": {
+            "PROVIDER_SERVES_CUSTOMER": {
+                "domain": "ServiceProvider",
+                "range": "Customer"
+            },
+            "CUSTOMER_HAS_CONTRACT": {
+                "domain": "Customer",
+                "range": "Contract"
+            },
+            "CONTRACT_HAS_WORKORDER": {
+                "domain": "Contract",
+                "range": "WorkOrder"
+            },
+            "WORKORDER_LINKS_PROJECT": {
+                "domain": "WorkOrder",
+                "range": "Project"
+            },
+            "PROJECT_HAS_WORKPACKAGE": {
+                "domain": "Project",
+                "range": "WorkPackage"
+            },
+            "PROJECT_HAS_MILESTONE": {
+                "domain": "Project",
+                "range": "Milestone"
+            },
+            "PROJECT_HAS_DELIVERABLE": {
+                "domain": "Project",
+                "range": "Deliverable"
+            },
+            "PROJECT_HAS_RISK": {
+                "domain": "Project",
+                "range": "Risk"
+            },
+            "PROJECT_HAS_CHANGE_REQUEST": {
+                "domain": "Project",
+                "range": "ChangeRequest"
+            },
+            "PROJECT_RUNS_IN_LAB": {
+                "domain": "Project",
+                "range": "Laboratory"
+            },
+            "LAB_HAS_INSTRUMENT": {
+                "domain": "Laboratory",
+                "range": "Instrument"
+            },
+            "INSTRUMENT_HAS_CALIBRATION": {
+                "domain": "Instrument",
+                "range": "CalibrationRecord"
+            },
+            "INSTRUMENT_HAS_MAINTENANCE": {
+                "domain": "Instrument",
+                "range": "MaintenanceRecord"
+            },
+            "METHOD_REFERENCES_SOP": {
+                "domain": "Method",
+                "range": "SOP"
+            },
+            "METHOD_VALIDATED_BY": {
+                "domain": "Method",
+                "range": "Accreditation"
+            },
+            "PROJECT_HAS_SAMPLE": {
+                "domain": "Project",
+                "range": "Sample"
+            },
+            "SAMPLE_HAS_ALIQUOT": {
+                "domain": "Sample",
+                "range": "Aliquot"
+            },
+            "SAMPLE_HAS_COC_EVENT": {
+                "domain": "Sample",
+                "range": "ChainOfCustodyEvent"
+            },
+            "ALIQUOT_HAS_COC_EVENT": {
+                "domain": "Aliquot",
+                "range": "ChainOfCustodyEvent"
+            },
+            "PROJECT_USES_ASSAY": {
+                "domain": "Project",
+                "range": "Assay"
+            },
+            "ASSAY_IMPLEMENTED_BY_METHOD": {
+                "domain": "Assay",
+                "range": "Method"
+            },
+            "ASSAY_RUNS_ON_INSTRUMENT": {
+                "domain": "Assay",
+                "range": "Instrument"
+            },
+            "ASSAY_HAS_EXPERIMENT": {
+                "domain": "Assay",
+                "range": "Experiment"
+            },
+            "EXPERIMENT_HAS_RUN": {
+                "domain": "Experiment",
+                "range": "Run"
+            },
+            "RUN_HAS_QCRESULT": {
+                "domain": "Run",
+                "range": "QCResult"
+            },
+            "RUN_USED_CONTROL": {
+                "domain": "Run",
+                "range": "ControlMaterial"
+            },
+            "RUN_CONSUMED_ALIQUOT": {
+                "domain": "Run",
+                "range": "Aliquot"
+            },
+            "RUN_GENERATED_DATASET": {
+                "domain": "Run",
+                "range": "Dataset"
+            },
+            "EXPERIMENT_GENERATED_DATASET": {
+                "domain": "Experiment",
+                "range": "Dataset"
+            },
+            "DATASET_HAS_FILE": {
+                "domain": "Dataset",
+                "range": "DataFile"
+            },
+            "DATASET_HAS_METADATA": {
+                "domain": "Dataset",
+                "range": "MetadataRecord"
+            },
+            "ENTITY_HAS_PROVENANCE": {
+                "domain": "Dataset",
+                "range": "ProvenanceRecord"
+            },
+            "WORKFLOW_USES_TOOL": {
+                "domain": "Workflow",
+                "range": "SoftwareTool"
+            },
+            "JOB_EXECUTES_WORKFLOW": {
+                "domain": "ComputeJob",
+                "range": "Workflow"
+            },
+            "JOB_USED_DATASET": {
+                "domain": "ComputeJob",
+                "range": "Dataset"
+            },
+            "JOB_PRODUCED_DATASET": {
+                "domain": "ComputeJob",
+                "range": "Dataset"
+            },
+            "MODEL_TRAINED_ON_DATASET": {
+                "domain": "MLModel",
+                "range": "Dataset"
+            },
+            "SOP_SIGNED_BY_ESIGN": {
+                "domain": "SOP",
+                "range": "ElectronicSignature"
+            },
+            "REPORT_SIGNED_BY_ESIGN": {
+                "domain": "ServiceReport",
+                "range": "ElectronicSignature"
+            },
+            "DEVIATION_LINKED_CAPA": {
+                "domain": "Deviation",
+                "range": "CAPA"
+            },
+            "AUDIT_RAISED_CAPA": {
+                "domain": "Audit",
+                "range": "CAPA"
+            },
+            "LAB_HAS_ACCREDITATION": {
+                "domain": "Laboratory",
+                "range": "Accreditation"
+            },
+            "PROJECT_HAS_ETHICS": {
+                "domain": "Project",
+                "range": "EthicsApproval"
+            },
+            "PROJECT_HAS_BIOSAFETY": {
+                "domain": "Project",
+                "range": "BiosafetyAssessment"
+            },
+            "SAMPLE_LINKS_CONSENT": {
+                "domain": "Sample",
+                "range": "ConsentRecord"
+            },
+            "STUDY_HAS_CRF": {
+                "domain": "ClinicalStudy",
+                "range": "CRFEntry"
+            },
+            "STUDY_PROVIDES_SAMPLE": {
+                "domain": "ClinicalStudy",
+                "range": "Sample"
+            },
+            "IACUC_SUPPORTS_PROJECT": {
+                "domain": "IACUCProtocol",
+                "range": "Project"
+            },
+            "PO_PURCHASES_REAGENT": {
+                "domain": "PurchaseOrder",
+                "range": "Reagent"
+            },
+            "PO_PURCHASES_ASSET": {
+                "domain": "PurchaseOrder",
+                "range": "Asset"
+            },
+            "ASSET_LOCATED_IN_LAB": {
+                "domain": "Asset",
+                "range": "Laboratory"
+            },
+            "PROJECT_HAS_COST": {
+                "domain": "Project",
+                "range": "CostRecord"
+            },
+            "PROJECT_HAS_SERVICE_REPORT": {
+                "domain": "Project",
+                "range": "ServiceReport"
+            },
+            "PROJECT_HAS_PUBLICATION": {
+                "domain": "Project",
+                "range": "Publication"
+            },
+            "PROJECT_HAS_DISCLOSURE": {
+                "domain": "Project",
+                "range": "InventionDisclosure"
+            },
+            "DISCLOSURE_LEADS_PATENT": {
+                "domain": "InventionDisclosure",
+                "range": "Patent"
+            },
+            "LAB_HAS_ENERGY_USE": {
+                "domain": "Laboratory",
+                "range": "EnergyUse"
+            },
+            "LAB_HAS_WATER_USE": {
+                "domain": "Laboratory",
+                "range": "WaterUse"
+            },
+            "PROVIDER_HAS_CARBON_FOOTPRINT": {
+                "domain": "ServiceProvider",
+                "range": "CarbonFootprint"
+            },
+            "LAB_REPORTED_INCIDENT": {
+                "domain": "Laboratory",
+                "range": "SafetyIncident"
+            },
+            "QUOTE_RELATES_CONTRACT": {
+                "domain": "Quote",
+                "range": "Contract"
+            },
+            "INVOICE_BILLS_CONTRACT": {
+                "domain": "Invoice",
+                "range": "Contract"
+            },
+            "CONTRACT_COVERS_PROJECT": {
+                "domain": "Contract",
+                "range": "Project"
+            },
+            "TRAINING_REQUIRED_FOR_METHOD": {
+                "domain": "TrainingRecord",
+                "range": "Method"
+            },
+            "PERSON_OPERATES_INSTRUMENT": {
+                "domain": "foaf:Person",
+                "range": "Instrument"
+            },
+            "PERSON_PERFORMS_EXPERIMENT": {
+                "domain": "foaf:Person",
+                "range": "Experiment"
+            }
+        }
+    }
+}

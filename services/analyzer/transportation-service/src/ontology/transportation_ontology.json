@@ -1,0 +1,1259 @@
+{
+  "ontology": {
+    "name": "transportation_service_ontology",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/transport#",
+    "description": "Comprehensive ontology for multimodal transportation services covering passenger mobility, freight & logistics, fleet & operations, ticketing & booking, telematics & IoT, safety & compliance, planning & optimization, and sustainability.",
+    "namespaces": {
+      "trans": "http://context-machine.org/ontology/transport#",
+      "infra": "http://context-machine.org/ontology/transport/infrastructure#",
+      "fleet": "http://context-machine.org/ontology/transport/fleet#",
+      "ops": "http://context-machine.org/ontology/transport/operations#",
+      "sched": "http://context-machine.org/ontology/transport/schedule#",
+      "pax": "http://context-machine.org/ontology/transport/passenger#",
+      "freight": "http://context-machine.org/ontology/transport/freight#",
+      "asset": "http://context-machine.org/ontology/transport/asset#",
+      "sensor": "http://context-machine.org/ontology/transport/sensor#",
+      "maint": "http://context-machine.org/ontology/transport/maintenance#",
+      "safety": "http://context-machine.org/ontology/transport/safety#",
+      "compliance": "http://context-machine.org/ontology/transport/compliance#",
+      "env": "http://context-machine.org/ontology/transport/environment#",
+      "carbon": "http://context-machine.org/ontology/transport/carbon#",
+      "plan": "http://context-machine.org/ontology/transport/planning#",
+      "contract": "http://context-machine.org/ontology/transport/contract#",
+      "payment": "http://context-machine.org/ontology/transport/payment#",
+      "data": "http://context-machine.org/ontology/transport/data#",
+      "gis": "http://context-machine.org/ontology/gis#",
+      "geo": "http://www.opengis.net/ont/geosparql#",
+      "wgs": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "time": "http://www.w3.org/2006/time#",
+      "qudt": "http://qudt.org/vocab/unit#",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "sosa": "http://www.w3.org/ns/sosa/",
+      "ssn": "http://www.w3.org/ns/ssn/",
+      "gtfs": "http://vocab.gtfs.org/terms#",
+      "gbfs": "https://w3id.org/gbfs#",
+      "tomp": "https://w3id.org/tomp#",
+      "schema": "http://schema.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://www.w3.org/2006/time#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://xmlns.com/foaf/0.1/",
+      "http://www.w3.org/ns/prov#",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#",
+      "http://www.w3.org/ns/sosa/",
+      "http://www.w3.org/ns/ssn/",
+      "http://vocab.gtfs.org/terms#"
+    ],
+    "frames": {
+      "Transportation_Service_System": {
+        "collections": {
+          "Organizational_Entities": {
+            "entities": {
+              "Agency": {
+                "properties": {
+                  "agency_id": "xsd:string",
+                  "agency_name": "xsd:string",
+                  "legal_name": "xsd:string",
+                  "registration_number": "xsd:string",
+                  "tax_id": "xsd:string",
+                  "timezone": "xsd:string",
+                  "languages": "xsd:string",
+                  "website": "xsd:string",
+                  "contact_email": "xsd:string",
+                  "contact_phone": "xsd:string",
+                  "address": "xsd:string",
+                  "operating_regions": "xsd:string",
+                  "modes_supported": "xsd:string",
+                  "insurance_coverage": "xsd:string",
+                  "safety_rating": "xsd:string",
+                  "sustainability_policy": "xsd:string",
+                  "created_at": "xsd:dateTime",
+                  "updated_at": "xsd:dateTime"
+                }
+              },
+              "Operator": {
+                "properties": {
+                  "operator_id": "xsd:string",
+                  "operator_name": "xsd:string",
+                  "agency_id": "xsd:string",
+                  "operator_type": "xsd:string",
+                  "certifications": "xsd:string",
+                  "permit_numbers": "xsd:string",
+                  "operational_status": "xsd:string"
+                }
+              },
+              "StaffMember": {
+                "properties": {
+                  "staff_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "license_number": "xsd:string",
+                  "license_class": "xsd:string",
+                  "license_expiry": "xsd:date",
+                  "training_certifications": "xsd:string",
+                  "hours_of_service_quota_h": "xsd:float",
+                  "contact": "xsd:string",
+                  "employer_id": "xsd:string",
+                  "home_base_depot_id": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "CustomerAccount": {
+                "properties": {
+                  "account_id": "xsd:string",
+                  "account_type": "xsd:string",
+                  "name": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "billing_address": "xsd:string",
+                  "preferred_language": "xsd:string",
+                  "loyalty_tier": "xsd:string",
+                  "payment_token_ref": "xsd:string",
+                  "gdpr_consent": "xsd:boolean",
+                  "created_at": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "Infrastructure_Network": {
+            "entities": {
+              "StopPoint": {
+                "properties": {
+                  "stop_id": "xsd:string",
+                  "stop_code": "xsd:string",
+                  "stop_name": "xsd:string",
+                  "stop_type": "xsd:string",
+                  "location": "geo:Point",
+                  "zone_id": "xsd:string",
+                  "platform_code": "xsd:string",
+                  "wheelchair_accessible": "xsd:boolean",
+                  "shelter": "xsd:boolean",
+                  "amenities": "xsd:string",
+                  "parent_station_id": "xsd:string",
+                  "real_time_display": "xsd:boolean"
+                }
+              },
+              "Station": {
+                "properties": {
+                  "station_id": "xsd:string",
+                  "station_name": "xsd:string",
+                  "location": "geo:Point",
+                  "geometry": "geo:Polygon",
+                  "entrances_count": "xsd:integer",
+                  "platforms_count": "xsd:integer",
+                  "parking_capacity": "xsd:integer",
+                  "bike_parking": "xsd:integer",
+                  "ev_charging_points": "xsd:integer",
+                  "accessibility_features": "xsd:string"
+                }
+              },
+              "Platform": {
+                "properties": {
+                  "platform_id": "xsd:string",
+                  "station_id": "xsd:string",
+                  "platform_code": "xsd:string",
+                  "length_meters": "xsd:float",
+                  "height_meters": "xsd:float",
+                  "assigned_routes": "xsd:string"
+                }
+              },
+              "Depot": {
+                "properties": {
+                  "depot_id": "xsd:string",
+                  "depot_name": "xsd:string",
+                  "location": "geo:Point",
+                  "geometry": "geo:Polygon",
+                  "capacity_vehicles": "xsd:integer",
+                  "fuel_types_available": "xsd:string",
+                  "charging_capacity_kw": "xsd:float",
+                  "maintenance_facility": "xsd:boolean"
+                }
+              },
+              "Terminal": {
+                "properties": {
+                  "terminal_id": "xsd:string",
+                  "terminal_name": "xsd:string",
+                  "terminal_type": "xsd:string",
+                  "location": "geo:Point",
+                  "gates_count": "xsd:integer",
+                  "berths_count": "xsd:integer"
+                }
+              },
+              "RoadSegment": {
+                "properties": {
+                  "segment_id": "xsd:string",
+                  "name": "xsd:string",
+                  "road_class": "xsd:string",
+                  "lanes": "xsd:integer",
+                  "speed_limit_kmh": "xsd:float",
+                  "toll": "xsd:boolean",
+                  "height_restriction_m": "xsd:float",
+                  "weight_limit_kg": "xsd:float",
+                  "surface_type": "xsd:string",
+                  "length_km": "xsd:float",
+                  "geometry": "geo:LineString"
+                }
+              },
+              "RailSegment": {
+                "properties": {
+                  "segment_id": "xsd:string",
+                  "name": "xsd:string",
+                  "gauge_mm": "xsd:float",
+                  "electrification": "xsd:string",
+                  "max_speed_kmh": "xsd:float",
+                  "length_km": "xsd:float",
+                  "geometry": "geo:LineString"
+                }
+              },
+              "Runway": {
+                "properties": {
+                  "runway_id": "xsd:string",
+                  "airport_code": "xsd:string",
+                  "designation": "xsd:string",
+                  "length_m": "xsd:float",
+                  "width_m": "xsd:float",
+                  "surface_type": "xsd:string",
+                  "ils_category": "xsd:string",
+                  "location": "geo:Point"
+                }
+              },
+              "SeaLaneSegment": {
+                "properties": {
+                  "segment_id": "xsd:string",
+                  "name": "xsd:string",
+                  "depth_m": "xsd:float",
+                  "navaids": "xsd:string",
+                  "traffic_separation_scheme": "xsd:boolean",
+                  "geometry": "geo:LineString"
+                }
+              },
+              "ParkingFacility": {
+                "properties": {
+                  "parking_id": "xsd:string",
+                  "name": "xsd:string",
+                  "location": "geo:Point",
+                  "spaces_total": "xsd:integer",
+                  "ev_spaces": "xsd:integer",
+                  "height_clearance_m": "xsd:float",
+                  "payment_methods": "xsd:string"
+                }
+              },
+              "ChargingStation": {
+                "properties": {
+                  "station_id": "xsd:string",
+                  "operator_id": "xsd:string",
+                  "location": "geo:Point",
+                  "connectors": "xsd:string",
+                  "max_power_kw": "xsd:float",
+                  "dynamic_pricing": "xsd:boolean",
+                  "status": "xsd:string"
+                }
+              },
+              "FuelStation": {
+                "properties": {
+                  "station_id": "xsd:string",
+                  "location": "geo:Point",
+                  "fuel_types": "xsd:string",
+                  "nozzle_count": "xsd:integer",
+                  "flow_rate_l_min": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "Warehouse": {
+                "properties": {
+                  "warehouse_id": "xsd:string",
+                  "name": "xsd:string",
+                  "location": "geo:Point",
+                  "geometry": "geo:Polygon",
+                  "capacity_m3": "xsd:float",
+                  "docks_count": "xsd:integer",
+                  "temperature_control": "xsd:boolean",
+                  "automation_level": "xsd:string"
+                }
+              }
+            }
+          },
+          "Fleet_Assets": {
+            "entities": {
+              "Vehicle": {
+                "properties": {
+                  "vehicle_id": "xsd:string",
+                  "vehicle_type_id": "xsd:string",
+                  "vin_or_unique_id": "xsd:string",
+                  "plate_or_tail_or_imo": "xsd:string",
+                  "make": "xsd:string",
+                  "model": "xsd:string",
+                  "year": "xsd:integer",
+                  "color": "xsd:string",
+                  "length_m": "xsd:float",
+                  "width_m": "xsd:float",
+                  "height_m": "xsd:float",
+                  "gross_weight_kg": "xsd:float",
+                  "payload_capacity_kg": "xsd:float",
+                  "cargo_volume_m3": "xsd:float",
+                  "seat_capacity": "xsd:integer",
+                  "standing_capacity": "xsd:integer",
+                  "wheelchair_spaces": "xsd:integer",
+                  "door_count": "xsd:integer",
+                  "fuel_type": "xsd:string",
+                  "emission_standard": "xsd:string",
+                  "engine_power_kw": "xsd:float",
+                  "battery_capacity_kwh": "xsd:float",
+                  "range_km": "xsd:float",
+                  "consumption_l_per_100km": "xsd:float",
+                  "consumption_kwh_per_km": "xsd:float",
+                  "odometer_km": "xsd:float",
+                  "total_hours": "xsd:float",
+                  "telematics_device_id": "xsd:string",
+                  "current_location": "geo:Point",
+                  "assigned_depot_id": "xsd:string",
+                  "operational_status": "xsd:string"
+                }
+              },
+              "VehicleType": {
+                "properties": {
+                  "vehicle_type_id": "xsd:string",
+                  "class": "xsd:string",
+                  "subclass": "xsd:string",
+                  "mode": "xsd:string",
+                  "description": "xsd:string"
+                },
+                "instances": {
+                  "Bus_Standard": { "class": "bus", "subclass": "standard", "mode": "road", "description": "12m city bus" },
+                  "Bus_Articulated": { "class": "bus", "subclass": "articulated", "mode": "road", "description": "18m BRT bus" },
+                  "Coach": { "class": "bus", "subclass": "coach", "mode": "road", "description": "Intercity coach" },
+                  "Tram": { "class": "rail", "subclass": "tram", "mode": "rail", "description": "Streetcar/LRT" },
+                  "MetroCar": { "class": "rail", "subclass": "metro", "mode": "rail", "description": "Urban metro car" },
+                  "TrainSet_EMU": { "class": "rail", "subclass": "emu", "mode": "rail", "description": "Electric multiple unit" },
+                  "Locomotive": { "class": "rail", "subclass": "locomotive", "mode": "rail", "description": "Passenger/freight locomotive" },
+                  "Freight_Wagon": { "class": "rail", "subclass": "wagon", "mode": "rail", "description": "Box/Flat/Tanker" },
+                  "Truck_HD": { "class": "truck", "subclass": "heavy_duty", "mode": "road", "description": "Articulated tractor" },
+                  "Truck_LCV": { "class": "truck", "subclass": "light_commercial", "mode": "road", "description": "Van/3.5t" },
+                  "Taxi": { "class": "car", "subclass": "taxi", "mode": "road", "description": "Metered/ride-hail" },
+                  "Bike": { "class": "micro", "subclass": "bike", "mode": "active", "description": "Bicycle" },
+                  "EBike": { "class": "micro", "subclass": "ebike", "mode": "active", "description": "Electric bike" },
+                  "Scooter": { "class": "micro", "subclass": "escooter", "mode": "active", "description": "Standing e-scooter" },
+                  "Ferry": { "class": "vessel", "subclass": "ferry", "mode": "water", "description": "Passenger/vehicle ferry" },
+                  "Container_Ship": { "class": "vessel", "subclass": "container", "mode": "water", "description": "TEU container ship" },
+                  "Barge": { "class": "vessel", "subclass": "inland_barge", "mode": "water", "description": "Inland waterway barge" },
+                  "Aircraft_Jet": { "class": "aircraft", "subclass": "jet", "mode": "air", "description": "Narrow/Wide-body" },
+                  "Helicopter": { "class": "aircraft", "subclass": "helicopter", "mode": "air", "description": "VTOL rotorcraft" },
+                  "UAV_Cargo": { "class": "aircraft", "subclass": "uav", "mode": "air", "description": "Cargo drone" },
+                  "Trailer_Semi": { "class": "trailer", "subclass": "semi", "mode": "road", "description": "Semi-trailer" },
+                  "Chassis_Container": { "class": "trailer", "subclass": "container_chassis", "mode": "road", "description": "ISO container chassis" }
+                }
+              },
+              "LoadUnit": {
+                "properties": {
+                  "unit_id": "xsd:string",
+                  "unit_type": "xsd:string",
+                  "iso_code": "xsd:string",
+                  "tare_weight_kg": "xsd:float",
+                  "max_gross_weight_kg": "xsd:float",
+                  "dimensions_m": "xsd:string",
+                  "rfid_tag": "xsd:string",
+                  "seal_number": "xsd:string"
+                }
+              }
+            }
+          },
+          "Operations_And_Scheduling": {
+            "entities": {
+              "Service": {
+                "properties": {
+                  "service_id": "xsd:string",
+                  "agency_id": "xsd:string",
+                  "mode": "xsd:string",
+                  "service_name": "xsd:string",
+                  "description": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date",
+                  "operating_days": "xsd:string",
+                  "service_area": "geo:Polygon",
+                  "headway_min": "xsd:float",
+                  "reliability_target_pct": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "Route": {
+                "properties": {
+                  "route_id": "xsd:string",
+                  "agency_id": "xsd:string",
+                  "route_short_name": "xsd:string",
+                  "route_long_name": "xsd:string",
+                  "route_type": "xsd:string",
+                  "color_hex": "xsd:string",
+                  "text_color_hex": "xsd:string",
+                  "geometry": "geo:LineString"
+                }
+              },
+              "Trip": {
+                "properties": {
+                  "trip_id": "xsd:string",
+                  "route_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "direction_id": "xsd:integer",
+                  "shape_id": "xsd:string",
+                  "block_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "planned_start_time": "xsd:dateTime",
+                  "planned_end_time": "xsd:dateTime",
+                  "actual_start_time": "xsd:dateTime",
+                  "actual_end_time": "xsd:dateTime",
+                  "on_time_performance_pct": "xsd:float",
+                  "occupancy_level_pct": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "StopTime": {
+                "properties": {
+                  "stoptime_id": "xsd:string",
+                  "trip_id": "xsd:string",
+                  "stop_id": "xsd:string",
+                  "arrival_time": "xsd:dateTime",
+                  "departure_time": "xsd:dateTime",
+                  "pickup_type": "xsd:string",
+                  "dropoff_type": "xsd:string",
+                  "timepoint": "xsd:boolean",
+                  "stop_sequence": "xsd:integer",
+                  "dwell_time_seconds": "xsd:integer"
+                }
+              },
+              "Assignment": {
+                "properties": {
+                  "assignment_id": "xsd:string",
+                  "trip_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "driver_id": "xsd:string",
+                  "dispatcher_id": "xsd:string",
+                  "assigned_at": "xsd:dateTime",
+                  "status": "xsd:string"
+                }
+              },
+              "Duty": {
+                "properties": {
+                  "duty_id": "xsd:string",
+                  "driver_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "break_minutes": "xsd:integer",
+                  "total_minutes": "xsd:integer",
+                  "compliance_ok": "xsd:boolean"
+                }
+              },
+              "Calendar": {
+                "properties": {
+                  "calendar_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "monday": "xsd:boolean",
+                  "tuesday": "xsd:boolean",
+                  "wednesday": "xsd:boolean",
+                  "thursday": "xsd:boolean",
+                  "friday": "xsd:boolean",
+                  "saturday": "xsd:boolean",
+                  "sunday": "xsd:boolean",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date"
+                }
+              },
+              "CalendarException": {
+                "properties": {
+                  "exception_id": "xsd:string",
+                  "service_id": "xsd:string",
+                  "date": "xsd:date",
+                  "exception_type": "xsd:string",
+                  "reason": "xsd:string"
+                }
+              },
+              "Interchange": {
+                "properties": {
+                  "interchange_id": "xsd:string",
+                  "from_trip_id": "xsd:string",
+                  "to_trip_id": "xsd:string",
+                  "min_transfer_time_sec": "xsd:integer",
+                  "preferred_transfer": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Passenger_Ticketing_Booking": {
+            "entities": {
+              "PassengerAccount": {
+                "properties": {
+                  "account_id": "xsd:string",
+                  "customer_account_id": "xsd:string",
+                  "full_name": "xsd:string",
+                  "email": "xsd:string",
+                  "phone": "xsd:string",
+                  "preferences": "xsd:string",
+                  "reduced_fare_eligibility": "xsd:string",
+                  "verified_id": "xsd:boolean"
+                }
+              },
+              "Reservation": {
+                "properties": {
+                  "reservation_id": "xsd:string",
+                  "account_id": "xsd:string",
+                  "trip_id": "xsd:string",
+                  "origin_stop_id": "xsd:string",
+                  "destination_stop_id": "xsd:string",
+                  "seat_assignment": "xsd:string",
+                  "class_of_service": "xsd:string",
+                  "status": "xsd:string",
+                  "payment_id": "xsd:string",
+                  "created_at": "xsd:dateTime"
+                }
+              },
+              "Ticket": {
+                "properties": {
+                  "ticket_id": "xsd:string",
+                  "product_id": "xsd:string",
+                  "reservation_id": "xsd:string",
+                  "media_type": "xsd:string",
+                  "qr_token_hash": "xsd:string",
+                  "issued_at": "xsd:dateTime",
+                  "valid_from": "xsd:dateTime",
+                  "valid_until": "xsd:dateTime",
+                  "zone_ids": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "FareProduct": {
+                "properties": {
+                  "product_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "price": "xsd:float",
+                  "currency": "xsd:string",
+                  "zones_applicable": "xsd:string",
+                  "transfer_rules": "xsd:string",
+                  "concessions": "xsd:string"
+                }
+              },
+              "ValidationEvent": {
+                "properties": {
+                  "validation_id": "xsd:string",
+                  "ticket_id": "xsd:string",
+                  "validator_device_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "stop_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "result": "xsd:string"
+                }
+              },
+              "FareTransaction": {
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "account_id": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "method": "xsd:string",
+                  "status": "xsd:string",
+                  "authorized_at": "xsd:dateTime",
+                  "captured_at": "xsd:dateTime",
+                  "refund_id": "xsd:string"
+                }
+              }
+            }
+          },
+          "Freight_Logistics": {
+            "entities": {
+              "Shipment": {
+                "properties": {
+                  "shipment_id": "xsd:string",
+                  "booking_id": "xsd:string",
+                  "shipper_account_id": "xsd:string",
+                  "consignee_account_id": "xsd:string",
+                  "origin_location": "geo:Point",
+                  "destination_location": "geo:Point",
+                  "requested_pickup_time": "xsd:dateTime",
+                  "requested_delivery_time": "xsd:dateTime",
+                  "goods_description": "xsd:string",
+                  "hs_code": "xsd:string",
+                  "pieces_count": "xsd:integer",
+                  "total_weight_kg": "xsd:float",
+                  "total_volume_m3": "xsd:float",
+                  "temperature_controlled": "xsd:boolean",
+                  "target_temperature_c": "xsd:float",
+                  "incoterms": "xsd:string",
+                  "service_level": "xsd:string",
+                  "insurance_value": "xsd:float",
+                  "currency": "xsd:string",
+                  "customs_status": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Consignment": {
+                "properties": {
+                  "consignment_id": "xsd:string",
+                  "shipment_id": "xsd:string",
+                  "load_unit_ids": "xsd:string",
+                  "weight_kg": "xsd:float",
+                  "volume_m3": "xsd:float",
+                  "hazmat": "xsd:boolean",
+                  "hazmat_class": "xsd:string",
+                  "un_number": "xsd:string"
+                }
+              },
+              "Package": {
+                "properties": {
+                  "package_id": "xsd:string",
+                  "consignment_id": "xsd:string",
+                  "barcode": "xsd:string",
+                  "packaging_type": "xsd:string",
+                  "weight_kg": "xsd:float",
+                  "length_m": "xsd:float",
+                  "width_m": "xsd:float",
+                  "height_m": "xsd:float",
+                  "declared_value": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "Waybill": {
+                "properties": {
+                  "waybill_id": "xsd:string",
+                  "waybill_type": "xsd:string",
+                  "issuer": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "shipment_id": "xsd:string",
+                  "carrier_id": "xsd:string",
+                  "contract_terms": "xsd:string"
+                }
+              },
+              "BillOfLading": {
+                "properties": {
+                  "bol_id": "xsd:string",
+                  "issuer": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "vessel_imo": "xsd:string",
+                  "voyage_number": "xsd:string",
+                  "shipment_id": "xsd:string",
+                  "place_of_receipt": "xsd:string",
+                  "port_of_loading": "xsd:string",
+                  "port_of_discharge": "xsd:string",
+                  "place_of_delivery": "xsd:string"
+                }
+              },
+              "PickupOrder": {
+                "properties": {
+                  "pickup_id": "xsd:string",
+                  "shipment_id": "xsd:string",
+                  "address": "xsd:string",
+                  "window_start": "xsd:dateTime",
+                  "window_end": "xsd:dateTime",
+                  "contact": "xsd:string",
+                  "instructions": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "DeliveryOrder": {
+                "properties": {
+                  "delivery_id": "xsd:string",
+                  "shipment_id": "xsd:string",
+                  "address": "xsd:string",
+                  "window_start": "xsd:dateTime",
+                  "window_end": "xsd:dateTime",
+                  "contact": "xsd:string",
+                  "instructions": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "ProofOfDelivery": {
+                "properties": {
+                  "pod_id": "xsd:string",
+                  "delivery_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "receiver_name": "xsd:string",
+                  "signature_hash": "xsd:string",
+                  "photos_hash": "xsd:string",
+                  "exceptions": "xsd:string"
+                }
+              },
+              "TrackingEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "shipment_id": "xsd:string",
+                  "consignment_id": "xsd:string",
+                  "load_unit_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "event_type": "xsd:string",
+                  "status_code": "xsd:string",
+                  "description": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "location": "geo:Point",
+                  "geofence_id": "xsd:string"
+                }
+              },
+              "CustomsDeclaration": {
+                "properties": {
+                  "declaration_id": "xsd:string",
+                  "shipment_id": "xsd:string",
+                  "goods_value": "xsd:float",
+                  "currency": "xsd:string",
+                  "duty_amount": "xsd:float",
+                  "vat_amount": "xsd:float",
+                  "documents": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "LoadingPlan": {
+                "properties": {
+                  "plan_id": "xsd:string",
+                  "vehicle_or_vessel_id": "xsd:string",
+                  "sequence": "xsd:string",
+                  "weight_distribution_ok": "xsd:boolean",
+                  "stowage_positions": "xsd:string",
+                  "dangerous_goods_segregation_ok": "xsd:boolean"
+                }
+              }
+            }
+          },
+          "Telemetry_IoT_Monitoring": {
+            "entities": {
+              "Device": {
+                "properties": {
+                  "device_id": "xsd:string",
+                  "device_type": "xsd:string",
+                  "manufacturer": "xsd:string",
+                  "model": "xsd:string",
+                  "firmware_version": "xsd:string",
+                  "installed_on_asset_id": "xsd:string",
+                  "installation_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Sensor": {
+                "properties": {
+                  "sensor_id": "xsd:string",
+                  "device_id": "xsd:string",
+                  "observed_property": "xsd:string",
+                  "unit": "xsd:string",
+                  "accuracy": "xsd:float",
+                  "calibration_date": "xsd:date",
+                  "sampling_interval_s": "xsd:integer"
+                }
+              },
+              "VehicleTelemetry": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "trip_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "location": "geo:Point",
+                  "speed_kmh": "xsd:float",
+                  "heading_deg": "xsd:float",
+                  "odometer_km": "xsd:float",
+                  "fuel_level_pct": "xsd:float",
+                  "state_of_charge_pct": "xsd:float",
+                  "engine_rpm": "xsd:float",
+                  "coolant_temp_c": "xsd:float",
+                  "ambient_temp_c": "xsd:float",
+                  "accel_m_s2": "xsd:float",
+                  "harsh_brake": "xsd:boolean",
+                  "idling": "xsd:boolean",
+                  "dtc_codes": "xsd:string",
+                  "event_flags": "xsd:string"
+                }
+              },
+              "TachographRecord": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "driver_id": "xsd:string",
+                  "start_time": "xsd:dateTime",
+                  "end_time": "xsd:dateTime",
+                  "driving_minutes": "xsd:integer",
+                  "rest_minutes": "xsd:integer",
+                  "work_minutes": "xsd:integer",
+                  "compliance_ok": "xsd:boolean"
+                }
+              },
+              "Geofence": {
+                "properties": {
+                  "geofence_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "polygon": "geo:Polygon",
+                  "enter_trigger": "xsd:boolean",
+                  "exit_trigger": "xsd:boolean"
+                }
+              },
+              "Alert": {
+                "properties": {
+                  "alert_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "alert_type": "xsd:string",
+                  "severity": "xsd:string",
+                  "triggered_at": "xsd:dateTime",
+                  "acknowledged": "xsd:boolean",
+                  "message": "xsd:string"
+                }
+              }
+            }
+          },
+          "Maintenance_Asset_Management": {
+            "entities": {
+              "WorkOrder": {
+                "properties": {
+                  "workorder_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "type": "xsd:string",
+                  "priority": "xsd:string",
+                  "request_date": "xsd:date",
+                  "scheduled_date": "xsd:date",
+                  "completed_date": "xsd:date",
+                  "downtime_hours": "xsd:float",
+                  "labor_cost": "xsd:float",
+                  "parts_cost": "xsd:float",
+                  "total_cost": "xsd:float",
+                  "status": "xsd:string"
+                }
+              },
+              "MaintenanceEvent": {
+                "properties": {
+                  "event_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "event_type": "xsd:string",
+                  "service_provider": "xsd:string",
+                  "meter_reading_km": "xsd:float",
+                  "notes": "xsd:string",
+                  "timestamp": "xsd:dateTime"
+                }
+              },
+              "InspectionRecord": {
+                "properties": {
+                  "inspection_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "checklist_id": "xsd:string",
+                  "result": "xsd:string",
+                  "defects_found": "xsd:string",
+                  "inspector_id": "xsd:string",
+                  "timestamp": "xsd:dateTime"
+                }
+              },
+              "ServicePlan": {
+                "properties": {
+                  "plan_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "interval_km": "xsd:float",
+                  "interval_days": "xsd:integer",
+                  "tasks": "xsd:string"
+                }
+              },
+              "SparePart": {
+                "properties": {
+                  "part_number": "xsd:string",
+                  "description": "xsd:string",
+                  "quantity_on_hand": "xsd:integer",
+                  "reorder_level": "xsd:integer",
+                  "unit_cost": "xsd:float",
+                  "supplier": "xsd:string"
+                }
+              },
+              "OdometerReading": {
+                "properties": {
+                  "reading_id": "xsd:string",
+                  "asset_id": "xsd:string",
+                  "reading_km": "xsd:float",
+                  "timestamp": "xsd:dateTime"
+                }
+              }
+            }
+          },
+          "Safety_Compliance_Risk": {
+            "entities": {
+              "Incident": {
+                "properties": {
+                  "incident_id": "xsd:string",
+                  "incident_type": "xsd:string",
+                  "classification": "xsd:string",
+                  "description": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "location": "geo:Point",
+                  "vehicles_involved": "xsd:string",
+                  "injuries_count": "xsd:integer",
+                  "fatalities_count": "xsd:integer",
+                  "property_damage_amount": "xsd:float",
+                  "root_cause": "xsd:string",
+                  "corrective_actions": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Violation": {
+                "properties": {
+                  "violation_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "driver_id": "xsd:string",
+                  "type": "xsd:string",
+                  "severity": "xsd:string",
+                  "fine_amount": "xsd:float",
+                  "points": "xsd:integer",
+                  "timestamp": "xsd:dateTime",
+                  "location": "geo:Point",
+                  "resolved": "xsd:boolean"
+                }
+              },
+              "Inspection": {
+                "properties": {
+                  "inspection_id": "xsd:string",
+                  "subject_id": "xsd:string",
+                  "subject_type": "xsd:string",
+                  "authority": "xsd:string",
+                  "date": "xsd:date",
+                  "result": "xsd:string",
+                  "issues": "xsd:string"
+                }
+              },
+              "Certification": {
+                "properties": {
+                  "certificate_id": "xsd:string",
+                  "holder_id": "xsd:string",
+                  "holder_type": "xsd:string",
+                  "certificate_type": "xsd:string",
+                  "issuer": "xsd:string",
+                  "issue_date": "xsd:date",
+                  "expiry_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              },
+              "Permit": {
+                "properties": {
+                  "permit_id": "xsd:string",
+                  "permit_type": "xsd:string",
+                  "holder_id": "xsd:string",
+                  "valid_from": "xsd:date",
+                  "valid_to": "xsd:date",
+                  "conditions": "xsd:string"
+                }
+              },
+              "InsurancePolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "holder_id": "xsd:string",
+                  "provider": "xsd:string",
+                  "coverage": "xsd:string",
+                  "premium": "xsd:float",
+                  "deductible": "xsd:float",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "Claim": {
+                "properties": {
+                  "claim_id": "xsd:string",
+                  "policy_id": "xsd:string",
+                  "incident_id": "xsd:string",
+                  "amount_claimed": "xsd:float",
+                  "amount_paid": "xsd:float",
+                  "status": "xsd:string",
+                  "filed_date": "xsd:date"
+                }
+              }
+            }
+          },
+          "Planning_Optimization_Contracts": {
+            "entities": {
+              "DemandForecast": {
+                "properties": {
+                  "forecast_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "horizon_start": "xsd:date",
+                  "horizon_end": "xsd:date",
+                  "resolution_minutes": "xsd:integer",
+                  "method": "xsd:string",
+                  "accuracy_mape_pct": "xsd:float"
+                }
+              },
+              "RoutePlan": {
+                "properties": {
+                  "plan_id": "xsd:string",
+                  "solver": "xsd:string",
+                  "objective": "xsd:string",
+                  "constraints": "xsd:string",
+                  "stops_order": "xsd:string",
+                  "vehicles_used": "xsd:string",
+                  "total_distance_km": "xsd:float",
+                  "total_time_min": "xsd:float",
+                  "cost_estimate": "xsd:float",
+                  "co2e_kg_estimate": "xsd:float",
+                  "created_at": "xsd:dateTime"
+                }
+              },
+              "OptimizationRun": {
+                "properties": {
+                  "run_id": "xsd:string",
+                  "plan_id": "xsd:string",
+                  "started_at": "xsd:dateTime",
+                  "ended_at": "xsd:dateTime",
+                  "status": "xsd:string",
+                  "best_solution_id": "xsd:string",
+                  "iterations": "xsd:integer"
+                }
+              },
+              "KPI": {
+                "properties": {
+                  "kpi_id": "xsd:string",
+                  "name": "xsd:string",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "period_start": "xsd:date",
+                  "period_end": "xsd:date",
+                  "scope": "xsd:string"
+                }
+              },
+              "SLA": {
+                "properties": {
+                  "sla_id": "xsd:string",
+                  "customer_account_id": "xsd:string",
+                  "metrics": "xsd:string",
+                  "penalty_rules": "xsd:string",
+                  "effective_from": "xsd:date",
+                  "effective_to": "xsd:date"
+                }
+              },
+              "Contract": {
+                "properties": {
+                  "contract_id": "xsd:string",
+                  "parties": "xsd:string",
+                  "effective_date": "xsd:date",
+                  "service_scope": "xsd:string",
+                  "pricing_model": "xsd:string",
+                  "termination_date": "xsd:date",
+                  "status": "xsd:string"
+                }
+              }
+            }
+          },
+          "Sustainability_Environmental": {
+            "entities": {
+              "EmissionRecord": {
+                "properties": {
+                  "emission_id": "xsd:string",
+                  "scope": "xsd:string",
+                  "methodology": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "trip_id": "xsd:string",
+                  "distance_km": "xsd:float",
+                  "load_tonnes": "xsd:float",
+                  "passenger_km": "xsd:float",
+                  "fuel_liters": "xsd:float",
+                  "energy_kwh": "xsd:float",
+                  "co2e_kg": "xsd:float",
+                  "nox_g": "xsd:float",
+                  "pm_g": "xsd:float",
+                  "ch4_g": "xsd:float",
+                  "n2o_g": "xsd:float",
+                  "ef_source": "xsd:string",
+                  "period_start": "xsd:dateTime",
+                  "period_end": "xsd:dateTime"
+                }
+              },
+              "CarbonFootprint": {
+                "properties": {
+                  "assessment_id": "xsd:string",
+                  "assessment_date": "xsd:date",
+                  "scope": "xsd:string",
+                  "functional_unit": "xsd:string",
+                  "system_boundary": "xsd:string",
+                  "total_emissions_kg_co2e": "xsd:float",
+                  "uncertainty_pct": "xsd:float",
+                  "verification_status": "xsd:string",
+                  "verifier": "xsd:string"
+                }
+              },
+              "FuelTransaction": {
+                "properties": {
+                  "txn_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "station_id": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "fuel_type": "xsd:string",
+                  "volume_liters": "xsd:float",
+                  "unit_price": "xsd:float",
+                  "total_cost": "xsd:float",
+                  "currency": "xsd:string"
+                }
+              },
+              "ChargingSession": {
+                "properties": {
+                  "session_id": "xsd:string",
+                  "vehicle_id": "xsd:string",
+                  "station_id": "xsd:string",
+                  "connector_id": "xsd:string",
+                  "started_at": "xsd:dateTime",
+                  "ended_at": "xsd:dateTime",
+                  "energy_kwh": "xsd:float",
+                  "max_power_kw": "xsd:float",
+                  "cost": "xsd:float",
+                  "currency": "xsd:string",
+                  "tariff_id": "xsd:string"
+                }
+              },
+              "SustainabilityMetric": {
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "metric_name": "xsd:string",
+                  "measurement_date": "xsd:date",
+                  "value": "xsd:float",
+                  "unit": "xsd:string",
+                  "baseline_value": "xsd:float",
+                  "target_value": "xsd:float",
+                  "improvement_pct": "xsd:float",
+                  "reporting_standard": "xsd:string"
+                }
+              }
+            }
+          },
+          "Data_Integration_and_APIs": {
+            "entities": {
+              "GTFSFeed": {
+                "properties": {
+                  "feed_id": "xsd:string",
+                  "publisher": "xsd:string",
+                  "url": "xsd:string",
+                  "version": "xsd:string",
+                  "downloaded_at": "xsd:dateTime",
+                  "valid_from": "xsd:date",
+                  "valid_to": "xsd:date",
+                  "sha256": "xsd:string",
+                  "license": "xsd:string"
+                }
+              },
+              "GTFSRealtimeFeed": {
+                "properties": {
+                  "feed_id": "xsd:string",
+                  "url": "xsd:string",
+                  "entity_types": "xsd:string",
+                  "last_refresh_at": "xsd:dateTime",
+                  "ttl_seconds": "xsd:integer"
+                }
+              },
+              "GBFSFeed": {
+                "properties": {
+                  "feed_id": "xsd:string",
+                  "system_id": "xsd:string",
+                  "operator_name": "xsd:string",
+                  "url": "xsd:string",
+                  "version": "xsd:string",
+                  "last_updated": "xsd:dateTime"
+                }
+              },
+              "TOMP_Endpoint": {
+                "properties": {
+                  "endpoint_id": "xsd:string",
+                  "base_url": "xsd:string",
+                  "capabilities": "xsd:string",
+                  "auth_method": "xsd:string",
+                  "scopes": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "DataLicense": {
+                "properties": {
+                  "license_id": "xsd:string",
+                  "name": "xsd:string",
+                  "url": "xsd:string",
+                  "terms": "xsd:string"
+                }
+              }
+            }
+          },
+          "Security_Privacy": {
+            "entities": {
+              "AccessControlPolicy": {
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "roles": "xsd:string",
+                  "permissions": "xsd:string",
+                  "resources": "xsd:string"
+                }
+              },
+              "DataProcessingRecord": {
+                "properties": {
+                  "record_id": "xsd:string",
+                  "processing_activity": "xsd:string",
+                  "lawful_basis": "xsd:string",
+                  "retention_days": "xsd:integer",
+                  "data_subject_categories": "xsd:string",
+                  "dpo_contact": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "OPERATED_BY": { "domain": "Service", "range": "Agency" },
+      "HAS_ROUTE": { "domain": "Service", "range": "Route" },
+      "HAS_TRIP": { "domain": "Route", "range": "Trip" },
+      "HAS_STOP_TIME": { "domain": "Trip", "range": "StopTime" },
+      "SERVES_STOP": { "domain": "Route", "range": "StopPoint" },
+      "HAS_PLATFORM": { "domain": "Station", "range": "Platform" },
+      "PARENT_STATION": { "domain": "StopPoint", "range": "Station" },
+      "ASSIGNED_TO_DEPOT": { "domain": "Vehicle", "range": "Depot" },
+      "USES_CHARGING_STATION": { "domain": "Vehicle", "range": "ChargingStation" },
+      "REFUELED_AT": { "domain": "Vehicle", "range": "FuelStation" },
+      "ASSIGNED_VEHICLE": { "domain": "Trip", "range": "Vehicle" },
+      "ASSIGNED_DRIVER": { "domain": "Assignment", "range": "StaffMember" },
+      "HAS_ASSIGNMENT": { "domain": "Trip", "range": "Assignment" },
+      "HAS_DUTY": { "domain": "StaffMember", "range": "Duty" },
+      "TRACKED_BY_DEVICE": { "domain": "Vehicle", "range": "Device" },
+      "HAS_SENSOR": { "domain": "Device", "range": "Sensor" },
+      "OBSERVED_BY": { "domain": "VehicleTelemetry", "range": "Sensor" },
+      "IN_GEOFENCE": { "domain": "TrackingEvent", "range": "Geofence" },
+      "GENERATED_ALERT": { "domain": "VehicleTelemetry", "range": "Alert" },
+      "HAS_WORKORDER": { "domain": "Vehicle", "range": "WorkOrder" },
+      "HAS_INSPECTION": { "domain": "Vehicle", "range": "InspectionRecord" },
+      "FOLLOWS_SERVICE_PLAN": { "domain": "Vehicle", "range": "ServicePlan" },
+      "HAS_ODOMETER_READING": { "domain": "Vehicle", "range": "OdometerReading" },
+      "SUBJECT_OF_INSPECTION": { "domain": "Inspection", "range": "Vehicle" },
+      "HAS_CERTIFICATION": { "domain": "Vehicle", "range": "Certification" },
+      "HAS_PERMIT": { "domain": "Vehicle", "range": "Permit" },
+      "COVERED_BY_POLICY": { "domain": "Vehicle", "range": "InsurancePolicy" },
+      "RESULTED_IN_CLAIM": { "domain": "Incident", "range": "Claim" },
+      "HAS_KPI": { "domain": "Service", "range": "KPI" },
+      "HAS_SLA": { "domain": "CustomerAccount", "range": "SLA" },
+      "BOUND_BY_CONTRACT": { "domain": "Agency", "range": "Contract" },
+      "HAS_FORECAST": { "domain": "Service", "range": "DemandForecast" },
+      "HAS_ROUTE_PLAN": { "domain": "Service", "range": "RoutePlan" },
+      "GENERATED_IN_RUN": { "domain": "RoutePlan", "range": "OptimizationRun" },
+      "HAS_EMISSION_RECORD": { "domain": "Trip", "range": "EmissionRecord" },
+      "HAS_CARBON_FOOTPRINT": { "domain": "Agency", "range": "CarbonFootprint" },
+      "HAS_FUEL_TXN": { "domain": "Vehicle", "range": "FuelTransaction" },
+      "HAS_CHARGING_SESSION": { "domain": "Vehicle", "range": "ChargingSession" },
+      "HAS_SUSTAINABILITY_METRIC": { "domain": "Agency", "range": "SustainabilityMetric" },
+      "HAS_GTFS_FEED": { "domain": "Agency", "range": "GTFSFeed" },
+      "HAS_GTFS_RT_FEED": { "domain": "Agency", "range": "GTFSRealtimeFeed" },
+      "HAS_GBFS_FEED": { "domain": "Agency", "range": "GBFSFeed" },
+      "HAS_TOMP_ENDPOINT": { "domain": "Agency", "range": "TOMP_Endpoint" },
+      "HAS_DATA_LICENSE": { "domain": "Agency", "range": "DataLicense" },
+      "BOOKED_BY": { "domain": "Reservation", "range": "PassengerAccount" },
+      "ISSUED_TICKET": { "domain": "Reservation", "range": "Ticket" },
+      "VALIDATED_BY": { "domain": "Ticket", "range": "ValidationEvent" },
+      "PAID_BY": { "domain": "FareTransaction", "range": "PassengerAccount" },
+      "HAS_FARE_PRODUCT": { "domain": "Ticket", "range": "FareProduct" },
+      "FULFILLED_BY_TRIP": { "domain": "Reservation", "range": "Trip" },
+      "CARRIED_ON_VEHICLE": { "domain": "Shipment", "range": "Vehicle" },
+      "HAS_CONSIGNMENT": { "domain": "Shipment", "range": "Consignment" },
+      "HAS_PACKAGE": { "domain": "Consignment", "range": "Package" },
+      "PACKED_IN": { "domain": "Package", "range": "LoadUnit" },
+      "DOCUMENTED_BY_WAYBILL": { "domain": "Shipment", "range": "Waybill" },
+      "DOCUMENTED_BY_BOL": { "domain": "Shipment", "range": "BillOfLading" },
+      "HAS_PICKUP": { "domain": "Shipment", "range": "PickupOrder" },
+      "HAS_DELIVERY": { "domain": "Shipment", "range": "DeliveryOrder" },
+      "HAS_POD": { "domain": "DeliveryOrder", "range": "ProofOfDelivery" },
+      "HAS_TRACKING_EVENT": { "domain": "Shipment", "range": "TrackingEvent" },
+      "HAS_CUSTOMS_DECLARATION": { "domain": "Shipment", "range": "CustomsDeclaration" },
+      "EXECUTED_BY_OPERATOR": { "domain": "Trip", "range": "Operator" }
+    }
+  }
+}

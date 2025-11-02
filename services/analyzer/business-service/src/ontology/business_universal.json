@@ -1,0 +1,230 @@
+{
+  "ontology": {
+    "name": "business_universal",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/universal#",
+    "description": "Universal ontology for business processes, transactions, and organizational structures. Serves as the shared backbone across all business-related domains.",
+
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.omg.org/spec/BPMN/20100524/MODEL",
+      "http://www.w3.org/2006/time#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://qudt.org/vocab/unit#"
+    ],
+
+    "frames": {
+      "Organizational_Structure": {
+        "collections": {
+          "Core_Entities": {
+            "entities": {
+              "Organization": {
+                "description": "A company, institution, or any structured business entity.",
+                "properties": {
+                  "org_id": "xsd:string",
+                  "name": "xsd:string",
+                  "industry": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "founded": "xsd:date"
+                }
+              },
+              "Department": {
+                "description": "Functional unit within an organization.",
+                "properties": {
+                  "dept_id": "xsd:string",
+                  "name": "xsd:string",
+                  "manager": "xsd:string"
+                }
+              },
+              "Role": {
+                "description": "Job or position assigned to an employee or system actor.",
+                "properties": {
+                  "role_id": "xsd:string",
+                  "title": "xsd:string",
+                  "responsibility": "xsd:string"
+                }
+              },
+              "Employee": {
+                "description": "Person or agent working within an organization.",
+                "properties": {
+                  "employee_id": "xsd:string",
+                  "name": "xsd:string",
+                  "position": "xsd:string",
+                  "hire_date": "xsd:date",
+                  "reports_to": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Business_Process_Model": {
+        "collections": {
+          "Process_Elements": {
+            "entities": {
+              "BusinessProcess": {
+                "description": "A set of structured activities designed to produce a specific service or product.",
+                "properties": {
+                  "process_id": "xsd:string",
+                  "name": "xsd:string",
+                  "owner": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Activity": {
+                "description": "Atomic step in a business process.",
+                "properties": {
+                  "activity_id": "xsd:string",
+                  "label": "xsd:string",
+                  "type": "xsd:string"
+                }
+              },
+              "Event": {
+                "description": "Trigger or outcome of a process or activity.",
+                "properties": {
+                  "event_id": "xsd:string",
+                  "event_type": "xsd:string",
+                  "timestamp": "xsd:dateTime"
+                }
+              },
+              "Gateway": {
+                "description": "Decision or merge point controlling process flow.",
+                "properties": {
+                  "gateway_id": "xsd:string",
+                  "gateway_type": "xsd:string"
+                }
+              },
+              "Artifact": {
+                "description": "Data, document, or object used within a process.",
+                "properties": {
+                  "artifact_id": "xsd:string",
+                  "artifact_type": "xsd:string",
+                  "uri": "xsd:anyURI"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Transaction_Model": {
+        "collections": {
+          "Commerce": {
+            "entities": {
+              "Order": {
+                "description": "An agreement for exchange of goods or services.",
+                "properties": {
+                  "order_id": "xsd:string",
+                  "buyer": "xsd:string",
+                  "seller": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "order_date": "xsd:date"
+                }
+              },
+              "Invoice": {
+                "description": "Billing document associated with an order.",
+                "properties": {
+                  "invoice_id": "xsd:string",
+                  "order_id": "xsd:string",
+                  "due_date": "xsd:date",
+                  "amount_due": "xsd:float"
+                }
+              },
+              "Payment": {
+                "description": "A financial transaction fulfilling an obligation.",
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "method": "xsd:string",
+                  "amount": "xsd:float",
+                  "timestamp": "xsd:dateTime"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Performance_Model": {
+        "collections": {
+          "Metrics": {
+            "entities": {
+              "KPI": {
+                "description": "Key performance indicator measuring business goals.",
+                "properties": {
+                  "kpi_id": "xsd:string",
+                  "name": "xsd:string",
+                  "unit": "xsd:string",
+                  "target_value": "xsd:float",
+                  "current_value": "xsd:float"
+                }
+              },
+              "Report": {
+                "description": "A business report aggregating metrics and performance indicators.",
+                "properties": {
+                  "report_id": "xsd:string",
+                  "period": "xsd:string",
+                  "author": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Governance_Model": {
+        "collections": {
+          "Policies_and_Compliance": {
+            "entities": {
+              "Policy": {
+                "description": "A rule or guideline that governs behavior or operations.",
+                "properties": {
+                  "policy_id": "xsd:string",
+                  "category": "xsd:string",
+                  "effective_date": "xsd:date"
+                }
+              },
+              "Regulation": {
+                "description": "External legal or governmental requirement.",
+                "properties": {
+                  "regulation_id": "xsd:string",
+                  "jurisdiction": "xsd:string",
+                  "summary": "xsd:string"
+                }
+              },
+              "Audit": {
+                "description": "Assessment or verification process for compliance.",
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "auditor": "xsd:string",
+                  "date": "xsd:date",
+                  "finding": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "WORKS_FOR": {"domain": "Employee", "range": "Organization"},
+      "MEMBER_OF": {"domain": "Employee", "range": "Department"},
+      "HAS_ROLE": {"domain": "Employee", "range": "Role"},
+      "OWNS_PROCESS": {"domain": "Organization", "range": "BusinessProcess"},
+      "TRIGGERS_EVENT": {"domain": "Activity", "range": "Event"},
+      "USES_ARTIFACT": {"domain": "Activity", "range": "Artifact"},
+      "FLOWS_TO": {"domain": "Activity", "range": "Activity"},
+      "CONTAINS_GATEWAY": {"domain": "BusinessProcess", "range": "Gateway"},
+      "CREATES_ORDER": {"domain": "Activity", "range": "Order"},
+      "GENERATES_INVOICE": {"domain": "Order", "range": "Invoice"},
+      "PAID_BY": {"domain": "Invoice", "range": "Payment"},
+      "HAS_KPI": {"domain": "Organization", "range": "KPI"},
+      "INCLUDES_REPORT": {"domain": "Organization", "range": "Report"},
+      "REGULATED_BY": {"domain": "Organization", "range": "Regulation"},
+      "ENFORCED_BY": {"domain": "Policy", "range": "Audit"},
+      "EVALUATED_BY": {"domain": "KPI", "range": "Report"}
+    }
+  }
+}

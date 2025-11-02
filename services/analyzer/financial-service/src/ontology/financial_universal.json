@@ -1,0 +1,299 @@
+{
+  "ontology": {
+    "name": "financial_universal",
+    "version": "1.0.0",
+    "namespace": "http://context-machine.org/ontology/universal#",
+    "description": "Universal ontology for financial processes, transactions, and market structures. Serves as the shared backbone across all finance-related domains.",
+
+    "imports": [
+      "http://context-machine.org/ontology/universal#",
+      "http://www.w3.org/2006/time#",
+      "http://www.opengis.net/ont/geosparql#",
+      "http://qudt.org/vocab/unit#",
+      "http://purl.org/goodrelations/v1#"
+    ],
+
+    "frames": {
+      "Financial_Structure": {
+        "collections": {
+          "Core_Entities": {
+            "entities": {
+              "Institution": {
+                "description": "A financial organization providing banking, investment, or insurance services.",
+                "properties": {
+                  "institution_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "location": "geo:SpatialThing",
+                  "established": "xsd:date"
+                }
+              },
+              "Account": {
+                "description": "Financial record maintained by an institution for a customer.",
+                "properties": {
+                  "account_id": "xsd:string",
+                  "account_number": "xsd:string",
+                  "type": "xsd:string",
+                  "balance": "xsd:float"
+                }
+              },
+              "Customer": {
+                "description": "Individual or entity that uses financial services.",
+                "properties": {
+                  "customer_id": "xsd:string",
+                  "name": "xsd:string",
+                  "type": "xsd:string",
+                  "registration_date": "xsd:date"
+                }
+              },
+              "Product": {
+                "description": "Financial service or instrument offered by institutions.",
+                "properties": {
+                  "product_id": "xsd:string",
+                  "name": "xsd:string",
+                  "category": "xsd:string",
+                  "description": "xsd:string"
+                }
+              },
+              "Agent": {
+                "description": "Representative or intermediary in financial transactions.",
+                "properties": {
+                  "agent_id": "xsd:string",
+                  "name": "xsd:string",
+                  "role": "xsd:string",
+                  "license": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Transaction_Process_Model": {
+        "collections": {
+          "Transaction_Elements": {
+            "entities": {
+              "Transaction": {
+                "description": "Exchange of money, goods, or services between parties.",
+                "properties": {
+                  "transaction_id": "xsd:string",
+                  "amount": "xsd:float",
+                  "currency": "xsd:string",
+                  "timestamp": "xsd:dateTime"
+                }
+              },
+              "Payment": {
+                "description": "Transfer of money from one party to another.",
+                "properties": {
+                  "payment_id": "xsd:string",
+                  "method": "xsd:string",
+                  "status": "xsd:string",
+                  "processing_time": "xsd:duration"
+                }
+              },
+              "Transfer": {
+                "description": "Movement of funds between accounts or institutions.",
+                "properties": {
+                  "transfer_id": "xsd:string",
+                  "source": "xsd:string",
+                  "destination": "xsd:string",
+                  "type": "xsd:string"
+                }
+              },
+              "Settlement": {
+                "description": "Final completion of a financial transaction.",
+                "properties": {
+                  "settlement_id": "xsd:string",
+                  "date": "xsd:date",
+                  "method": "xsd:string",
+                  "status": "xsd:string"
+                }
+              },
+              "Authorization": {
+                "description": "Approval process for financial transactions.",
+                "properties": {
+                  "auth_id": "xsd:string",
+                  "result": "xsd:string",
+                  "timestamp": "xsd:dateTime",
+                  "method": "xsd:string"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Investment_Performance_Model": {
+        "collections": {
+          "Performance_Tracking": {
+            "entities": {
+              "Position": {
+                "description": "Holding of a particular security or asset.",
+                "properties": {
+                  "position_id": "xsd:string",
+                  "quantity": "xsd:float",
+                  "market_value": "xsd:float",
+                  "cost_basis": "xsd:float"
+                }
+              },
+              "Return": {
+                "description": "Gain or loss on an investment over a period.",
+                "properties": {
+                  "return_id": "xsd:string",
+                  "period": "xsd:string",
+                  "percentage": "xsd:float",
+                  "absolute": "xsd:float"
+                }
+              },
+              "Valuation": {
+                "description": "Assessment of the worth of an asset or portfolio.",
+                "properties": {
+                  "valuation_id": "xsd:string",
+                  "date": "xsd:date",
+                  "method": "xsd:string",
+                  "value": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Risk_Management_Model": {
+        "collections": {
+          "Risk_Tools": {
+            "entities": {
+              "RiskMetric": {
+                "description": "Quantitative measure of financial risk exposure.",
+                "properties": {
+                  "metric_id": "xsd:string",
+                  "name": "xsd:string",
+                  "value": "xsd:float",
+                  "calculation_date": "xsd:date"
+                }
+              },
+              "Limit": {
+                "description": "Boundary or constraint on risk exposure or trading activity.",
+                "properties": {
+                  "limit_id": "xsd:string",
+                  "type": "xsd:string",
+                  "threshold": "xsd:float",
+                  "current_usage": "xsd:float"
+                }
+              },
+              "Hedge": {
+                "description": "Investment position intended to offset potential losses.",
+                "properties": {
+                  "hedge_id": "xsd:string",
+                  "strategy": "xsd:string",
+                  "effectiveness": "xsd:float",
+                  "cost": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Regulatory_Model": {
+        "collections": {
+          "Compliance_Activities": {
+            "entities": {
+              "Report": {
+                "description": "Formal document submitted to regulatory authorities.",
+                "properties": {
+                  "report_id": "xsd:string",
+                  "type": "xsd:string",
+                  "submission_date": "xsd:date",
+                  "period": "xsd:string"
+                }
+              },
+              "Audit": {
+                "description": "Systematic examination of financial records and processes.",
+                "properties": {
+                  "audit_id": "xsd:string",
+                  "auditor": "xsd:string",
+                  "start_date": "xsd:date",
+                  "end_date": "xsd:date"
+                }
+              },
+              "Violation": {
+                "description": "Breach of regulatory requirements or internal policies.",
+                "properties": {
+                  "violation_id": "xsd:string",
+                  "type": "xsd:string",
+                  "severity": "xsd:string",
+                  "penalty": "xsd:float"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "Market_Model": {
+        "collections": {
+          "Market_Processes": {
+            "entities": {
+              "Order": {
+                "description": "Instruction to buy or sell a financial instrument.",
+                "properties": {
+                  "order_id": "xsd:string",
+                  "side": "xsd:string",
+                  "quantity": "xsd:float",
+                  "price": "xsd:float"
+                }
+              },
+              "Trade": {
+                "description": "Executed transaction between buyer and seller.",
+                "properties": {
+                  "trade_id": "xsd:string",
+                  "execution_time": "xsd:dateTime",
+                  "price": "xsd:float",
+                  "volume": "xsd:float"
+                }
+              },
+              "Quote": {
+                "description": "Current bid and ask prices for a financial instrument.",
+                "properties": {
+                  "quote_id": "xsd:string",
+                  "bid": "xsd:float",
+                  "ask": "xsd:float",
+                  "timestamp": "xsd:dateTime"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "relations": {
+      "MAINTAINS": {"domain": "Institution", "range": "Account"},
+      "OWNS": {"domain": "Customer", "range": "Account"},
+      "OFFERS": {"domain": "Institution", "range": "Product"},
+      "USES": {"domain": "Customer", "range": "Product"},
+      "REPRESENTS": {"domain": "Agent", "range": "Customer"},
+      "PROCESSES": {"domain": "Institution", "range": "Transaction"},
+      "INITIATES": {"domain": "Customer", "range": "Transaction"},
+      "INCLUDES": {"domain": "Transaction", "range": "Payment"},
+      "INVOLVES": {"domain": "Payment", "range": "Transfer"},
+      "COMPLETES": {"domain": "Transfer", "range": "Settlement"},
+      "REQUIRES": {"domain": "Transaction", "range": "Authorization"},
+      "HOLDS": {"domain": "Account", "range": "Position"},
+      "GENERATES": {"domain": "Position", "range": "Return"},
+      "SUBJECT_TO": {"domain": "Position", "range": "Valuation"},
+      "MEASURES": {"domain": "RiskMetric", "range": "Position"},
+      "CONSTRAINS": {"domain": "Limit", "range": "Position"},
+      "PROTECTS": {"domain": "Hedge", "range": "Position"},
+      "SUBMITS": {"domain": "Institution", "range": "Report"},
+      "CONDUCTS": {"domain": "Institution", "range": "Audit"},
+      "IDENTIFIES": {"domain": "Audit", "range": "Violation"},
+      "PLACES": {"domain": "Customer", "range": "Order"},
+      "EXECUTES": {"domain": "Institution", "range": "Order"},
+      "RESULTS_IN": {"domain": "Order", "range": "Trade"},
+      "PROVIDES": {"domain": "Institution", "range": "Quote"},
+      "REFERENCES": {"domain": "Order", "range": "Quote"}
+    }
+  }
+}
